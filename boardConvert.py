@@ -6,7 +6,7 @@ import time
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
 print("Stating at "+timestr)
-path = '01/'
+path = 'Data/20181218natsukaze_self/01'
 output = open("9x9binary.txt", 'w+')
 
 board_size = 9
