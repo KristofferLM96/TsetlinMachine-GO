@@ -57,6 +57,7 @@ def TM(_clauses, _T, _s, _epochs):
 
         start_testing = time()
         result = 100 * ((tm.predict(X_test) == Y_test).mean())
+        results.append(result)
         stop_testing = time()
 
         print("#%d Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (
