@@ -1,12 +1,13 @@
 from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
+# from pyTsetlinMachine.tm import MultiClassTsetlinMachine
 import numpy as np
 from time import time
 
 # Parameters
 split_ratio = 0.9
 epochs = 50
-clauses = 10000
-T = 80
+clauses = 1000
+T = 8000
 s = 27
 
 print("epochs = ", epochs)
@@ -22,39 +23,52 @@ Y_test = np.array([])
 path = "Data/Binary/9x9Natsukaze_binary.txt"
 
 
-def loading_data(_data, _clauses, _T, _s, _epochs):
+def loading_data(_clauses, _T, _s, _epochs):
+    print("Loading data.. ")
     global X_train
     global Y_train
-    X_train = _data[int(len(data)*split_ratio):, 0:-1]
-    Y_train = _data[:int(len(data)*split_ratio), -1]
-
     global X_test
     global Y_test
-    X_test = _data[int(len(data)*split_ratio):, 0:-1]
-    Y_test = _data[:int(len(data)*split_ratio), -1]
+    data = np.loadtxt(path, delimiter=",")
+    X_train = data[int(len(data) * split_ratio):, 0:-1]
+    Y_train = data[int(len(data) * split_ratio):, -1]
+    X_test = data[:int(len(data) * split_ratio), 0:-1]
+    Y_test = data[:int(len(data) * split_ratio), -1]
+    print(".. data loaded.", "\n")
 
-    return TM(_clauses, _T, _s, epochs)
+    return TM(_clauses, _T, _s, _epochs)
 
 
 def TM(_clauses, _T, _s, _epochs):
+    global X_train
+    global Y_train
+    global X_test
+    global Y_test
     print("Creating MultiClass Tsetlin Machine.")
     tm = MultiClassTsetlinMachine(_clauses, _T, _s, boost_true_positive_feedback=0, weighted_clauses=True)
     print("Starting TM with weighted clauses..")
     print("\nAccuracy over ", _epochs, " epochs:\n")
+    results = []
+    total_results = 0
     for i in range(_epochs):
-        start = time()
+        start_training = time()
         tm.fit(X_train, Y_train, epochs=1, incremental=True)
-        stop = time()
-        result = 100 * (tm.predict(X_test) == Y_test).mean()
-        print("#%d Accuracy: %.2f%% (%.2fs)" % (i + 1, result, stop - start))
+        stop_training = time()
 
-    mean_accuracy = 100 * (tm.predict(X_test) == Y_test).mean()
-    print("Mean Accuracy:", mean_accuracy)
-    print("Finished running.. \n")
+        start_testing = time()
+        result = 100 * ((tm.predict(X_test) == Y_test).mean())
+        stop_testing = time()
+
+        print("#%d Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (
+            i + 1, result, stop_training - start_training, stop_testing - start_testing))
+
+    for _result in range(len(results)):
+        total_results = total_results + _result
+
+    mean_accuracy = total_results / len(results) * 100
 
     return mean_accuracy
 
 
-data = np.loadtxt(path, delimiter=",")
-score = loading_data(data, clauses, T, s, epochs)
+score = loading_data(clauses, T, s, epochs)
 print(score)
