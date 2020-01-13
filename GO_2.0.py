@@ -4,7 +4,7 @@ import time
 import gomill.boards
 
 game = open("Data/20181218natsukaze_self/01/20180709_0621_00934.sgf", 'r')
-path = 'Data/20181218natsukaze_self/01'
+path = 'Data/20181218natsukaze_self'
 game_line = game.readlines()
 output_path = "Data/Binary/9x9Natsukaze_binary.txt"
 board_size = 9
@@ -160,8 +160,8 @@ def main(input, _board):
 
 counter = 1
 output = open(output_path, 'w+')
-total_files = len(glob.glob(os.path.join(path, '*.sgf')))
-for infile in glob.glob(os.path.join(path, '*.sgf')):
+total_files = len(glob.glob(os.path.join(path+"/*", '*.sgf')))
+for infile in glob.glob(os.path.join(path+"/*", '*.sgf')):
     start_time = time.time()
     end_board = []
     game_board = gomill.boards.Board(board_size)
@@ -174,7 +174,8 @@ for infile in glob.glob(os.path.join(path, '*.sgf')):
     print("Converting file", counter, "out of", total_files, "files. .................. ",
           round((counter / total_files * 100), 2), "% ..................",
           round((time.time() - start_time) * 1000, 2), "ms")
+    file.close()
 output.close()
 timestr = time.strftime("%Y%-m%/d--%H-%M-%S")
 print("Stopping at " + timestr, "\n")
-print("It took ", print(time.time() - time_start), "seconds")
+print("It took ", (time.time() - time_start) / 60, "minutes")
