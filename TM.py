@@ -66,10 +66,10 @@ def TM(_clauses, _T, _s, _epochs):
     for _result in range(len(results)):
         total_results = total_results + _result
 
-    mean_accuracy = total_results / len(results) * 100
+    mean_accuracy = total_results / len(results)
 
     return mean_accuracy
 
 
 score = loading_data(clauses, T, s, epochs)
-print(score)
+print("Mean_Accuracy: ", round(score, 2))
