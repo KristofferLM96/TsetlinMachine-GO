@@ -4,7 +4,7 @@ import Go
 import time
 
 
-timestr = time.strftime("%Y%m%d-%H%M%S")
+timestr = time.strftime("%Y%-m%/d--%H-%M-%S")
 print("Stating at "+timestr)
 path = 'Data/20181218natsukaze_self/01'
 output = open("9x9binary.txt", 'w+')
@@ -83,7 +83,7 @@ def convert(input):
     for i in range(len(input)):
         for j in range(len(input)):
             if input[i][j] == 'x':
-                wo_bit = w_bit + '1,'
+                w_bit = w_bit + '1,'
                 b_bit = b_bit + '0,'
             elif input[i][j] == 'o':
                 b_bit = b_bit + '1,'
