@@ -1,29 +1,33 @@
 import csv
-gowin = open("GoWin9x9.txt",'w')
-goloss = open("GoLoss9x9.txt",'w')
-godraw = open("GoDraw9x9.txt",'w')
 
-def convert(input):
+win = open("Data/Results-Split/9x9Natsukaze_win.txt", 'w')
+loss = open("Data/Results-Split/9x9Natsukaze_loss.txt", 'w')
+draw = open("Data/Results-Split/9x9Natsukaze_draw.txt", 'w')
+
+
+def convert(_input):
     rows = ''
-    i=0
-    while i < len(input)-1:
-        rows =rows+ input[i]+","
-        i+=1
-    if input[len(input)-1] == "1":
+    i = 0
+    while i < len(_input)-1:
+        rows = rows + _input[i]+","
+        i += 1
+    if _input[len(_input) - 1] == "1":
         rows = rows + "1\n"
-        gowin.write(rows)
-    elif input[len(input)-1] == "0":
+        win.write(rows)
+    elif _input[len(_input) - 1] == "0":
         rows = rows + "0\n"
-        goloss.write(rows)
+        loss.write(rows)
     else:
         rows = rows + "2\n"
-        godraw.write(rows)
+        draw.write(rows)
 
-with open("9x9binary.txt", newline='') as File:
-    reader =csv.reader(File)
+
+with open("Data/Binary/9x9Natsukaze_binary.txt", newline='') as file:
+    reader = csv.reader(file)
     for row in reader:
         convert(row)
-File.close()
-gowin.close()
-goloss.close()
-godraw.close()
+
+file.close()
+win.close()
+loss.close()
+draw.close()
