@@ -25,13 +25,13 @@ path = "Data/Binary/9x9Natsukaze_binary.txt"
 def loading_data(_data, _clauses, _T, _s, _epochs):
     global X_train
     global Y_train
-    X_train = _data[split_ratio:, 0:-1]
-    Y_train = _data[:split_ratio, -1]
+    X_train = _data[int(len(data)*split_ratio):, 0:-1]
+    Y_train = _data[:int(len(data)*split_ratio), -1]
 
     global X_test
     global Y_test
-    X_test = _data[split_ratio:, 0:-1]
-    Y_test = _data[:split_ratio, -1]
+    X_test = _data[int(len(data)*split_ratio):, 0:-1]
+    Y_test = _data[:int(len(data)*split_ratio), -1]
 
     return TM(_clauses, _T, _s, epochs)
 
