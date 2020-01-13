@@ -187,8 +187,8 @@ def capture(w_or_b):
     global b_groups
     global w_groups
     global gsf
-    global restore_b
-    global restore_w
+    #global restore_b
+    #global restore_w
     global edited
     if w_or_b == 'b':
         groups = w_groups
@@ -210,12 +210,8 @@ def capture(w_or_b):
         for element in gperm(group):
             if gsf[element[1]][element[0]] != other_player:
                 safe = 1
+
         if safe != 1:
-            edited = 1
-            if w_or_b == 'b':
-                restore_w.append(group)
-            else:
-                restore_b.append(group)
             groups.remove(group)
 
     # Sets gsf given the new captures
@@ -238,16 +234,16 @@ def goodmove():
     global gsc
     global gsp
     global gsf
-    if readable(gsf) not in gscache:
-        gsp = []
-        gsc = []
-        for element in gsf:
-            gsp.append(element)
-            gsc.append(element)
-        gscache += readable(gsf)
-        return 1
-    else:
-        return 0
+    #if readable(gsf) not in gscache:
+    gsp = []
+    gsc = []
+    for element in gsf:
+        gsp.append(element)
+        gsc.append(element)
+    gscache += readable(gsf)
+    #return 1
+    #else:
+    #return 0
 
 
 # Checks if any groups contain the same point;
@@ -264,7 +260,7 @@ def concat(w_or_b):
         groups = non_groups
     i = 0
     # current_groups and previous_groups are used to compare the number
-    # of groups before this nest of whiles to the number after.  If
+    # of groups before this nest of whiles to the number after. If
     # The number is the same, then nothing needed to be concatinated,
     # and we can move on.  If the number is different, two groups
     # were concatinated, and we need to run through this nest again
@@ -342,14 +338,14 @@ def turn(nTab):
     concat(w_or_b)
     minihold = 1
     # Edited is a value used to check
-    # whether any capture is made.  capture()
+    # whether any capture is made. capture()
     # is called as many times as until no pieces
     # are capture (until edited does not change
     # to 1)
     edited = 0
     while minihold == 1:
-        restore_b = []
-        restore_w = []
+        #restore_b = []
+        #restore_w = []
         capture(w_or_b)
         capture(not_w_or_b)
         if edited == 0:
@@ -360,19 +356,21 @@ def turn(nTab):
     # Checks to see if the move, given all the
     # captures it causes, would return the board
     # to a previous game state.
-    if goodmove() == 1:
-        hold = 0
+    #if goodmove() == 1:
+        #hold = 0
     # If the move is invalid, the captured groups need
     # to be returned to the board, so we use
     # the groups stored in the restore lists to
     # restore the o_ and x_groups lists.
-    else:
-        print('invalid move - that returns to board to a previous state')
-        print(w_or_b + str(x) + str(y))
-        for group in restore_b:
-            b_groups.append(group)
-        for group in restore_w:
-            w_groups.append(group)
+    #else:
+        #print('invalid move - that returns to board to a previous state')
+        #print(w_or_b + str(x) + str(y))
+        #for group in restore_b:
+            #b_groups.append(group)
+        #for group in restore_w:
+            #w_groups.append(group)
+    goodmove()
+    hold = 0
     if (player_b_pass == 1) & (player_w_pass == 1):
         gameover = 1
 
