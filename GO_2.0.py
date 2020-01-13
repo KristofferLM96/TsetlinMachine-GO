@@ -176,6 +176,6 @@ for infile in glob.glob(os.path.join(path+"/*", '*.sgf')):
           round((time.time() - start_time) * 1000, 2), "ms")
     file.close()
 output.close()
-timestr = time.strftime("%Y%-m%/d--%H-%M-%S")
+timestr = time.strftime("%Y-%m/%d--%H-%M-%S")
 print("Stopping at " + timestr, "\n")
 print("It took ", (time.time() - time_start) / 60, "minutes")
