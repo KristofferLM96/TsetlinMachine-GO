@@ -3,9 +3,7 @@ import glob
 import time
 import gomill.boards
 
-game = open("Data/20181218natsukaze_self/01/20180709_0621_00934.sgf", 'r')
 path = 'Data/20181218natsukaze_self'
-game_line = game.readlines()
 output_path = "Data/Binary/9x9Natsukaze_binary.txt"
 board_size = 9
 total_pos = 19
