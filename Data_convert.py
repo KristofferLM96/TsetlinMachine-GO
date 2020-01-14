@@ -3,7 +3,7 @@ import glob
 import time
 import gomill.boards
 
-path = 'Data/20181218natsukaze_self'
+path = 'Data/Original/20181218natsukaze_self'
 output_path = "Data/Binary/9x9Natsukaze_binary.txt"
 board_size = 9
 total_pos = 19
