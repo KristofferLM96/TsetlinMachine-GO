@@ -1,12 +1,12 @@
 from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
 # from pyTsetlinMachine.tm import MultiClassTsetlinMachine
 import numpy as np
-from time import time
+import time
 
 # Parameters
 split_ratio = 0.9
-epochs = 50
-clauses = 1000
+epochs = 30
+clauses = 5000
 T = 8000
 s = 27
 
@@ -51,17 +51,16 @@ def TM(_clauses, _T, _s, _epochs):
     results = []
     total_results = 0
     for i in range(_epochs):
-        start_training = time()
+        start_training = time.time()
         tm.fit(X_train, Y_train, epochs=1, incremental=True)
-        stop_training = time()
-
-        start_testing = time()
+        stop_training = time.time()
+        start_testing = time.time()
         result = 100 * ((tm.predict(X_test) == Y_test).mean())
+        stop_testing = time.time()
+        timestamp = time.strftime("%H-%M-%S")
         results.append(result)
-        stop_testing = time()
-
-        print("#%d Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (
-            i + 1, result, stop_training - start_training, stop_testing - start_testing))
+        print("#%d Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (
+            i + 1, timestamp, result, stop_training - start_training, stop_testing - start_testing))
 
     for _result in range(len(results)):
         total_results = total_results + _result
