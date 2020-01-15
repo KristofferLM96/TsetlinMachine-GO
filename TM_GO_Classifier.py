@@ -4,17 +4,17 @@ import time
 # Settings
 clauses = 8000
 Threshold = 13750
-s = 127.0
-epoch = 100
+s = 56.0
+epoch = 50
 k_fold_parts = 1
 machine_type = "TM"  # cTM or TM
 parallel = True
 data_status = "Draw"
 data_dim = "9x9"
 data_name = "Natsukaze_" + data_status
-Window_X = Window_Y = 5
-Shape_X = 9
-Shape_Y = 9
+Window_X = 5
+Window_Y = 5
+Shape_X = Shape_Y = 9
 Shape_Z = 2
 Name = "Kristoffer"
 Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses for.
