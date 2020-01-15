@@ -1,0 +1,18 @@
+/usr/bin/python3.6 /home/kristoffer/Documents/IKT590_Workspace/TsetlinMachine-GO/TsetlinGo.py
+-------------------------------------------------------------------------------------------
+MultiClassTsetlinMachine using 9x9draw0 writen to file 0114-1258.csv
+
+Settings: Clauses: 5000.0 Threshold: 8000.0 S: 27.0
+
+#1 Time: 13:03:25 Accuracy: 81.88% Training: 254.13s Testing: 14.56s
+#2 Time: 13:07:26 Accuracy: 83.59% Training: 226.71s Testing: 13.91s
+#3 Time: 13:11:17 Accuracy: 84.42% Training: 217.40s Testing: 13.76s
+#4 Time: 13:15:04 Accuracy: 84.32% Training: 212.75s Testing: 13.27s
+#5 Time: 13:18:47 Accuracy: 84.37% Training: 210.18s Testing: 13.76s
+#6 Time: 13:22:30 Accuracy: 84.44% Training: 209.46s Testing: 13.82s
+#7 Time: 13:26:15 Accuracy: 84.39% Training: 210.39s Testing: 13.80s
+#8 Time: 13:29:57 Accuracy: 84.32% Training: 209.00s Testing: 13.97s
+#9 Time: 13:33:41 Accuracy: 84.15% Training: 209.19s Testing: 13.71s
+#10 Time: 13:37:36 Accuracy: 84.04% Training: 221.86s Testing: 14.87s
+
+Process finished with exit code 137 (interrupted by signal 9: SIGKILL)
