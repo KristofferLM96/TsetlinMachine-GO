@@ -5,7 +5,7 @@ import time
 clauses = 5000
 Threshold = 9237
 s = 127.0
-epoch = 25
+epoch = 100
 k_fold_parts = 1
 machine_type = "TM"  # cTM or TM
 parallel = True
@@ -137,7 +137,7 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
             Y_test = test_data[:, -1]
             m = MultiClassTsetlinMachine(_clauses, _t, _s, boost_true_positive_feedback=0, weighted_clauses=True)
             print("-------------------------------------------------------------------------------------------")
-            print("MultiClassTsetlinMachine using %s, %s written to file %s%s%s.csv\n"
+            print("MultiClassTsetlinMachine using %s, %s written to file %s%s_%s.csv\n"
                   % (_data_dim, _data_name, _data_dim, _data_name, timestamp))
             print("Settings: Clauses: %.1f Threshold: %.1f S: %.1f\n" % (_clauses, _t, _s))
         if _machine_type == "cTM":
@@ -148,12 +148,14 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
             m = MultiClassConvolutionalTsetlinMachine2D(_clauses, _t, _s, (_window_x, _window_y),
                                                         boost_true_positive_feedback=0, weighted_clauses=True)
             print("-------------------------------------------------------------------------------------------")
-            print("MultiClassConvolutionalTsetlinMachine2D using %s, %s written to file %s%s%s.csv "
+            print("MultiClassConvolutionalTsetlinMachine2D using %s, %s written to file %s%s_%s.csv "
                   "(%.1f x %.1f x %.1f)""\n"
                   % (data_dim, _data_name, _data_dim, _data_name, timestamp, _shape_x, _shape_y, _shape_z))
             print("Settings: Clauses: %.1f Threshold: %.1f S: %.1f Window_X: %.1f Window_Y: %.1f\n" % (
                 _clauses, _t, _s, _window_x, _window_y))
 
+        result_total = []
+        result_temp = 0
         results.write(data_dim + data_name + numb + ",")
         for i in range(_epoch):
             start = time.time()
@@ -165,8 +167,13 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
             stop_testing = time.time()
             print("#%d Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (
                 i + 1, timestamp_epoch, result, stop - start, stop_testing - start_testing))
+            result_total.append(result)
             results.write(",%.4f" % (np.mean(result)))
         results.write("\n")
+        for temp in range(len(result_total)):
+            result_temp = result_temp + temp
+        mean_accuracy = result_temp / len(result_total)
+        print_class("Mean Accuracy:", mean_accuracy)
         counter += 1
         if counter == Write_Clauses:
             result_clauses = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + timestamp +
@@ -182,11 +189,10 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
                                       "clauses2.csv", 'a')
                 print_class(m, 2, _clauses)
                 result_clauses.close()
-    print("Prediction: x1 = 1, x2 = 0, ... -> y = %d" % (m.predict(np.array([[1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
-    print("Prediction: x1 = 0, x2 = 1, ... -> y = %d" % (m.predict(np.array([[0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
-    print("Prediction: x1 = 0, x2 = 0, ... -> y = %d" % (m.predict(np.array([[0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
-    print("Prediction: x1 = 1, x2 = 1, ... -> y = %d" % (m.predict(np.array([[1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
-    results.close()
+    # print("Prediction: x1 = 1, x2 = 0, ... -> y = %d" % (m.predict(np.array([[1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
+    # print("Prediction: x1 = 0, x2 = 1, ... -> y = %d" % (m.predict(np.array([[0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
+    # print("Prediction: x1 = 0, x2 = 0, ... -> y = %d" % (m.predict(np.array([[0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
+    # print("Prediction: x1 = 1, x2 = 1, ... -> y = %d" % (m.predict(np.array([[1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
 
 
 runner()
