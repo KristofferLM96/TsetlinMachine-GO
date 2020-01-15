@@ -2,10 +2,10 @@ import numpy as np
 import time
 
 # Settings
-clauses = 8000
-Threshold = 13750
-s = 56.0
-epoch = 50
+clauses = 10000
+Threshold = 47650
+s = 45.0
+epoch = 25
 k_fold_parts = 1
 machine_type = "TM"  # cTM or TM
 parallel = True
@@ -171,7 +171,7 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
             results.write(",%.4f" % (np.mean(result)))
         results.write("\n")
         for temp in range(len(result_total)):
-            result_temp = result_temp + temp
+            result_temp = result_temp + result_total[temp]
         mean_accuracy = result_temp / len(result_total)
         print("Mean Accuracy:", mean_accuracy)
         counter += 1
