@@ -2,8 +2,8 @@ import numpy as np
 import time
 
 # Settings
-clauses = 5000
-Threshold = 9237
+clauses = 8000
+Threshold = 13750
 s = 127.0
 epoch = 100
 k_fold_parts = 1
@@ -173,9 +173,9 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
         for temp in range(len(result_total)):
             result_temp = result_temp + temp
         mean_accuracy = result_temp / len(result_total)
-        print_class("Mean Accuracy:", mean_accuracy)
+        print("Mean Accuracy:", mean_accuracy)
         counter += 1
-        if counter == Write_Clauses:
+        if counter == Write_Clauses and Write_Clauses != 0:
             result_clauses = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + timestamp +
                                   "clauses1.csv", 'a')
             print_class(m, 1, _clauses)
