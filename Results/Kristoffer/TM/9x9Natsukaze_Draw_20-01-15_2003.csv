@@ -1,0 +1,28 @@
+/home/kristoffer/Documents/IKT590_Workspace/TsetlinMachine-GO/venv/bin/python /home/kristoffer/Documents/IKT590_Workspace/TsetlinMachine-GO/TM_GO_Classifier.py
+-------------------------------------------------------------------------------------------
+MultiClassTsetlinMachine using 9x9, Natsukaze_Draw written to file 9x9Natsukaze_Draw_20-01-15_2003.csv
+
+Settings: Clauses: 8000.0 Threshold: 13750.0 S: 56.0
+
+#1 Time: 20:05:49 Accuracy: 78.65% Training: 100.76s Testing: 4.47s
+#2 Time: 20:07:12 Accuracy: 81.36% Training: 78.73s Testing: 4.50s
+#3 Time: 20:08:34 Accuracy: 82.87% Training: 77.12s Testing: 4.62s
+#4 Time: 20:09:52 Accuracy: 83.45% Training: 73.71s Testing: 4.48s
+#5 Time: 20:11:08 Accuracy: 84.37% Training: 71.25s Testing: 4.43s
+#6 Time: 20:12:22 Accuracy: 84.55% Training: 69.86s Testing: 4.49s
+#7 Time: 20:13:36 Accuracy: 84.81% Training: 69.59s Testing: 4.51s
+#8 Time: 20:14:50 Accuracy: 84.85% Training: 68.65s Testing: 4.49s
+#9 Time: 20:16:02 Accuracy: 84.86% Training: 68.12s Testing: 4.51s
+#10 Time: 20:17:15 Accuracy: 84.77% Training: 68.09s Testing: 4.49s
+#11 Time: 20:18:36 Accuracy: 84.84% Training: 76.21s Testing: 4.82s
+#12 Time: 20:19:55 Accuracy: 84.61% Training: 75.03s Testing: 4.51s
+#13 Time: 20:21:13 Accuracy: 84.48% Training: 73.33s Testing: 4.45s
+#14 Time: 20:22:26 Accuracy: 84.35% Training: 68.09s Testing: 4.47s
+#15 Time: 20:23:39 Accuracy: 83.96% Training: 68.28s Testing: 4.51s
+#16 Time: 20:24:51 Accuracy: 84.30% Training: 68.06s Testing: 4.48s
+#17 Time: 20:26:05 Accuracy: 83.91% Training: 69.05s Testing: 4.68s
+#18 Time: 20:27:20 Accuracy: 83.81% Training: 71.21s Testing: 4.44s
+#19 Time: 20:28:35 Accuracy: 83.64% Training: 70.23s Testing: 4.89s
+#20 Time: 20:29:53 Accuracy: 83.62% Training: 73.05s Testing: 5.29s
+
+Process finished with exit code 137 (interrupted by signal 9: SIGKILL)
