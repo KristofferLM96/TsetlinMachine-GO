@@ -43,8 +43,8 @@ def runner():
 
 def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_x, _window_y,
                   _shape_x, _shape_y, _shape_z, name, write_clauses):
-    timestamp = time.strftime("%y-%m-%d_%H-%M")
-    results = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + timestamp + ".csv", 'a')
+    timestamp = time.strftime("%y-%m-%d_%H%M")
+    results = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + "_" + timestamp + ".csv", 'a')
 
     def tm_get_output(_tm, _tm_class, _clause):
         output = []
@@ -168,7 +168,6 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
             results.write(",%.4f" % (np.mean(result)))
         results.write("\n")
         counter += 1
-        results = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + timestamp + ".csv", 'a')
         if counter == Write_Clauses:
             result_clauses = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + timestamp +
                                   "clauses1.csv", 'a')
