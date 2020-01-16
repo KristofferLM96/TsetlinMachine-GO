@@ -6,17 +6,17 @@ clauses = 12000
 Threshold = 47650
 s = 27.0
 epoch = 25
-k_fold_parts = 1
+k_fold_parts = 1  # 1 - 10, how many k-fold parts to go through
 machine_type = "TM"  # cTM or TM
-parallel = True
-data_status = "Draw"
-data_dim = "9x9"
+parallel = True  # Running with/without parallel Tsetlin Machine
+data_status = "Draw"  # Draw or No-Draw
+data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
 data_name = "Natsukaze_" + data_status
 Window_X = 5
 Window_Y = 5
-Shape_X = Shape_Y = 9
+Shape_X = Shape_Y = 9  # Depending on data_dim
 Shape_Z = 2
-Name = "Kristoffer"
+Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses for.
 
 if parallel:
@@ -191,10 +191,6 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
                                       "clauses2.csv", 'a')
                 print_class(m, 2, _clauses)
                 result_clauses.close()
-    # print("Prediction: x1 = 1, x2 = 0, ... -> y = %d" % (m.predict(np.array([[1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
-    # print("Prediction: x1 = 0, x2 = 1, ... -> y = %d" % (m.predict(np.array([[0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
-    # print("Prediction: x1 = 0, x2 = 0, ... -> y = %d" % (m.predict(np.array([[0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
-    # print("Prediction: x1 = 1, x2 = 1, ... -> y = %d" % (m.predict(np.array([[1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
 
 
 runner()
