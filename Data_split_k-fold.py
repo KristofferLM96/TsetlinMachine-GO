@@ -95,8 +95,8 @@ i = 0
 while i < 10:
     train_numb = str(i)+"train"
     test_numb = str(i)+"test"
-    no_draw_train = open("Data/K-Fold/No-Draw/9x9Natsukaze_NoDraw"+train_numb, 'w')
-    no_draw_test = open("Data/K-Fold/No-Draw/9x9Natsukaze_NoDraw"+test_numb, 'w')
+    no_draw_train = open("Data/K-Fold/No-Draw/9x9Natsukaze_No-Draw"+train_numb, 'w')
+    no_draw_test = open("Data/K-Fold/No-Draw/9x9Natsukaze_No-Draw"+test_numb, 'w')
     draw_train = open("Data/K-Fold/Draw/9x9Natsukaze_Draw"+train_numb, 'w')
     draw_test = open("Data/K-Fold/Draw/9x9Natsukaze_Draw"+test_numb, 'w')
     shuffleWrite(no_draw_train, no_draw_test, collection, i)
