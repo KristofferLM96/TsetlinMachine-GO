@@ -2,9 +2,9 @@ import numpy as np
 import time
 
 # Settings
-clauses = 10000
+clauses = 12000
 Threshold = 47650
-s = 45.0
+s = 27.0
 epoch = 25
 k_fold_parts = 1
 machine_type = "TM"  # cTM or TM
@@ -111,6 +111,7 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
     while epoch_count < _epoch:
         results.write("Epoch" + str(epoch_count + 1) + ",")
         epoch_count += 1
+    results.write("Average " + ",")
     results.write("\n")
 
     if _machine_type == "TM":
@@ -169,11 +170,12 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
                 i + 1, timestamp_epoch, result, stop - start, stop_testing - start_testing))
             result_total.append(result)
             results.write(",%.4f" % (np.mean(result)))
-        results.write("\n")
         for temp in range(len(result_total)):
             result_temp = result_temp + result_total[temp]
         mean_accuracy = result_temp / len(result_total)
         print("Mean Accuracy:", mean_accuracy)
+        results.write(",%.4f" % mean_accuracy)
+        results.write("\n")
         counter += 1
         if counter == Write_Clauses and Write_Clauses != 0:
             result_clauses = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + timestamp +
