@@ -1,0 +1,11 @@
+MultiClassConvolutionalTsetlinMachine2D,Parallel,Epoch1,Epoch2,Epoch3,Epoch4,Epoch5,Epoch6,Epoch7,Epoch8,Epoch9,Epoch10,Epoch11,Epoch12,Epoch13,Epoch14,Epoch15,Epoch16,Epoch17,Epoch18,Epoch19,Epoch20,Average ,
+Settings:
+Clauses:,12000.0
+Threshold:,47650.0
+s:,27.0
+Window_X:,6.0
+Window_Y:,6.0
+Shape_X:,9.0
+Shape_Y:,9.0
+Shape_Z:,2.0
+9x9Natsukaze_Draw0,,79.7581,82.7435,84.0766,84.8886,85.1904,85.6659,85.8418,85.6094,85.1036,85.8092,85.9134,85.6181,85.5530,85.4358,85.7983,85.3402,85.4249,84.6281,84.8235,85.2642,84.9243
