@@ -3,9 +3,9 @@ import glob
 import time
 import gomill.boards
 
-path = 'Data/Original/20181218natsukaze_self'
-output_path = "Data/Binary/9x9Natsukaze_binary.txt"
-board_size = 9
+path = 'Data/Original/foxwq_Pro-9d'
+output_path = "Data/Binary/19x19FoxwqPro-9d_binary.txt"
+board_size = 19
 total_pos = 19
 time_start = time.time()
 timestr = time.strftime("%Y-%m/%d--%H-%M-%S")
@@ -164,7 +164,7 @@ for infile in glob.glob(os.path.join(path+"/*", '*.sgf')):
     end_board = []
     game_board = gomill.boards.Board(board_size)
     binary_board = ""
-    file = open(infile, 'r')
+    file = open(infile, 'r', encoding="ISO-8859-1")
     lines = file.readlines()
     main(lines, init_board())
     write_file(output)
@@ -176,4 +176,4 @@ for infile in glob.glob(os.path.join(path+"/*", '*.sgf')):
 output.close()
 timestr = time.strftime("%Y-%m/%d--%H-%M-%S")
 print("Stopping at " + timestr, "\n")
-print("It took ", (time.time() - time_start) / 60, "minutes")
+print("It took ", round((time.time() - time_start) / 60, 2), "minutes")

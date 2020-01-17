@@ -1,9 +1,9 @@
 import csv
 from numpy.random import shuffle
 
-win = open("Data/Results-Split/9x9Natsukaze_win.txt", 'r')
-loss = open("Data/Results-Split/9x9Natsukaze_loss.txt", 'r')
-draw = open("Data/Results-Split/9x9Natsukaze_draw.txt", 'r')
+win = open("Data/Results-Split/19x19FoxwqPro-9d_win.txt", 'r')
+loss = open("Data/Results-Split/19x19FoxwqPro-9d_loss.txt", 'r')
+draw = open("Data/Results-Split/19x19FoxwqPro-9d_draw.txt", 'r')
 win_line = win.readlines()
 loss_line = loss.readlines()
 draw_line = draw.readlines()
@@ -95,10 +95,10 @@ i = 0
 while i < 10:
     train_numb = str(i)+"train"
     test_numb = str(i)+"test"
-    no_draw_train = open("Data/K-Fold/No-Draw/9x9Natsukaze_No-Draw"+train_numb, 'w')
-    no_draw_test = open("Data/K-Fold/No-Draw/9x9Natsukaze_No-Draw"+test_numb, 'w')
-    draw_train = open("Data/K-Fold/Draw/9x9Natsukaze_Draw"+train_numb, 'w')
-    draw_test = open("Data/K-Fold/Draw/9x9Natsukaze_Draw"+test_numb, 'w')
+    no_draw_train = open("Data/K-Fold/No-Draw/19x19FoxwqPro-9d_No-Draw"+train_numb, 'w')
+    no_draw_test = open("Data/K-Fold/No-Draw/19x19FoxwqPro-9d_No-Draw"+test_numb, 'w')
+    draw_train = open("Data/K-Fold/Draw/19x19FoxwqPro-9d_Draw"+train_numb, 'w')
+    draw_test = open("Data/K-Fold/Draw/19x19FoxwqPro-9d_Draw"+test_numb, 'w')
     shuffleWrite(no_draw_train, no_draw_test, collection, i)
     shuffleWrite(draw_train, draw_test, collection2, i)
     i += 1
