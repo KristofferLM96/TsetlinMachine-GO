@@ -3,13 +3,13 @@ import glob
 import time
 import gomill.boards
 
-path = 'Data/Original/foxwq_Pro-9d'
+path = 'Data/Original/foxwq_Pro-9d' + "/*"
 output_path = "Data/Binary/19x19FoxwqPro-9d_binary.txt"
 board_size = 19
 total_pos = 19
 time_start = time.time()
 timestr = time.strftime("%Y-%m/%d--%H-%M-%S")
-print("Stating at " + timestr, "\n")
+print("Starting at " + timestr, "\n")
 
 
 def init_board():
@@ -68,6 +68,8 @@ def translate(i):
 
 def load_board(in_board, out_board):
     result = in_board[0].split("RE")
+    _handicap = in_board[0].split("HA")
+    handicap = int(_handicap[1][1])
     results = 2
     if result[1][1] == "W":
         results = 0
@@ -78,6 +80,12 @@ def load_board(in_board, out_board):
         x = translate(row[3])
         y = translate(row[4])
         res = row[1]
+        const = 4
+        if row[1]+row[2] == "AB":
+            for i in range(handicap):
+                x = translate(row[4+(i*const)])
+                y = translate(row[5+(i*const)])
+                move = ["b", x, y]
         if row[1] == "B":
             move = ["b", x, y]
         if row[1] == "W":
@@ -158,8 +166,8 @@ def main(input, _board):
 
 counter = 1
 output = open(output_path, 'w+')
-total_files = len(glob.glob(os.path.join(path+"/*", '*.sgf')))
-for infile in glob.glob(os.path.join(path+"/*", '*.sgf')):
+total_files = len(glob.glob(os.path.join(path, '*.sgf')))
+for infile in glob.glob(os.path.join(path, '*.sgf')):
     start_time = time.time()
     end_board = []
     game_board = gomill.boards.Board(board_size)
