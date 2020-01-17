@@ -1,21 +1,22 @@
 import numpy as np
 import time
+import os
 
 # Settings
-clauses = 12000
+clauses = 14000
 Threshold = 47650
 s = 27.0
-epoch = 25
+epoch = 20
 k_fold_parts = 1  # 1 - 10, how many k-fold parts to go through
-machine_type = "TM"  # cTM or TM
+machine_type = "cTM"  # cTM or TM
 parallel = True  # Running with/without parallel Tsetlin Machine
 data_status = "Draw"  # Draw or No-Draw
-data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
-data_name = "Natsukaze_" + data_status
-Window_X = 5
-Window_Y = 5
-Shape_X = Shape_Y = 9  # Depending on data_dim
-Shape_Z = 2
+data_dim = "19x19"  # 9x9, 13x13, 19x19 ..
+data_name = "FoxwqPro-9d_" + data_status
+Window_X = 15
+Window_Y = 15
+Shape_X = Shape_Y = 19  # Depending on data_dim
+Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses for.
 
@@ -44,7 +45,18 @@ def runner():
 def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_x, _window_y,
                   _shape_x, _shape_y, _shape_z, name, write_clauses):
     timestamp = time.strftime("%y-%m-%d_%H%M")
-    results = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + "_" + timestamp + ".csv", 'a')
+
+    if _machine_type == "TM":
+        os.makedirs(os.path.dirname("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + "/"
+                                    + data_dim + data_name + "_" + timestamp + ".csv"), exist_ok=True)
+        results = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + "/"
+                       + data_dim + data_name + "_" + timestamp + ".csv", 'a')
+    elif _machine_type == "cTM":
+        os.makedirs(os.path.dirname("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + "/"
+                                    + str(_window_x) + "x" + str(_window_y) + "/" + data_dim + data_name + "_"
+                                    + timestamp + ".csv"), exist_ok=True)
+        results = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + "/" + str(_window_x) + "x"
+                       + str(_window_y) + "/" + data_dim + data_name + "_" + timestamp + ".csv", 'a')
 
     def tm_get_output(_tm, _tm_class, _clause):
         output = []
@@ -140,7 +152,7 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
             print("-------------------------------------------------------------------------------------------")
             print("MultiClassTsetlinMachine using %s, %s written to file %s%s_%s.csv\n"
                   % (_data_dim, _data_name, _data_dim, _data_name, timestamp))
-            print("Settings: Clauses: %.1f Threshold: %.1f S: %.1f\n" % (_clauses, _t, _s))
+            print("Settings: Clauses: %.1f Threshold: %.1f s: %.1f\n" % (_clauses, _t, _s))
         if _machine_type == "cTM":
             X_train = train_data[:, 0:-1].reshape(train_data.shape[0], _shape_x, _shape_y, _shape_z)
             Y_train = train_data[:, -1]
