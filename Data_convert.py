@@ -68,8 +68,8 @@ def translate(i):
 
 def load_board(_game_lines, _board_state):
     result = _game_lines[0].split("RE")
-    _handicap = _game_lines[0].split("HA")
-    handicap = int(_handicap[1][1])
+    _handicap = _game_lines[0].split("HA[")
+    handicap = int(_handicap[1][0])
     results = 2
     if result[1][1] == "W":
         results = 0
@@ -186,6 +186,7 @@ for infile in glob.glob(os.path.join(path, '*.sgf')):
     binary_board = ""
     file = open(infile, 'r', encoding="ISO-8859-1")
     file_lines = file.readlines()
+    print(infile)
     print("Converting file", counter, "out of", total_files, "files. .................. ",
           round((counter / total_files * 100), 2), "% ..................",
           round((time.time() - start_time) * 1000, 2), "ms")
