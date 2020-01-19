@@ -3,7 +3,7 @@ import glob
 import time
 import gomill.boards
 
-path = 'Data/Original/foxwq_Pro-9d' + "/*"
+path = "Data/Original/foxwq_Pro-9d/*"
 output_path = "Data/Binary/19x19FoxwqPro-9d_binary.txt"
 board_size = 19
 total_pos = 19
@@ -66,9 +66,9 @@ def translate(i):
         return 19
 
 
-def load_board(in_board, out_board):
-    result = in_board[0].split("RE")
-    _handicap = in_board[0].split("HA")
+def load_board(_game_lines, _board_state):
+    result = _game_lines[0].split("RE")
+    _handicap = _game_lines[0].split("HA")
     handicap = int(_handicap[1][1])
     results = 2
     if result[1][1] == "W":
@@ -76,24 +76,29 @@ def load_board(in_board, out_board):
     if result[1][1] == "B":
         results = 1
     _move_list = []
-    for row in in_board[1:-1]:
+    const = 4
+    for row in _game_lines[1:-1]:
         x = translate(row[3])
         y = translate(row[4])
         res = row[1]
-        const = 4
         if row[1]+row[2] == "AB":
+            res = row[2]
             for i in range(handicap):
                 x = translate(row[4+(i*const)])
                 y = translate(row[5+(i*const)])
-                move = ["b", x, y]
-        if row[1] == "B":
-            move = ["b", x, y]
-        if row[1] == "W":
-            move = ["w", x, y]
-        if x != total_pos and y != total_pos:
-            out_board[x][y] = res
-            _move_list.append(move)
-    return out_board, results, _move_list
+                _move = ["b", x, y]
+                if x != total_pos and y != total_pos:
+                    _board_state[x][y] = res
+                    _move_list.append(_move)
+        else:
+            if row[1] == "B":
+                _move = ["b", x, y]
+            if row[1] == "W":
+                _move = ["w", x, y]
+            if x != total_pos and y != total_pos:
+                _board_state[x][y] = res
+                _move_list.append(_move)
+    return _board_state, results, _move_list
 
 
 def play(_turn):
@@ -150,13 +155,19 @@ def write_file(_output):
     _output.write(binary_board + "\n")
 
 
-def main(input, _board):
+def main(_file_lines, _board):
+    global errors
     global binary_board
-    boards, result, move_list = load_board(input, _board)
-    # print("Moves:",  move_list)
-
+    boards, result, move_list = load_board(_file_lines, _board)
+    count = 0
     for turn in move_list:
-        play(turn)
+        count += 1
+        try:
+            play(turn)
+        except ValueError:
+            errors += 1
+            print("Something went wrong. Could not convert file.", infile)
+            break
 
     get_board()
     # print_board()
@@ -164,6 +175,7 @@ def main(input, _board):
     binary_board = binary_board + str(result)
 
 
+errors = 0
 counter = 1
 output = open(output_path, 'w+')
 total_files = len(glob.glob(os.path.join(path, '*.sgf')))
@@ -173,15 +185,16 @@ for infile in glob.glob(os.path.join(path, '*.sgf')):
     game_board = gomill.boards.Board(board_size)
     binary_board = ""
     file = open(infile, 'r', encoding="ISO-8859-1")
-    lines = file.readlines()
-    main(lines, init_board())
-    write_file(output)
-    counter = counter + 1
+    file_lines = file.readlines()
     print("Converting file", counter, "out of", total_files, "files. .................. ",
           round((counter / total_files * 100), 2), "% ..................",
           round((time.time() - start_time) * 1000, 2), "ms")
+    main(file_lines, init_board())
+    write_file(output)
+    counter = counter + 1
     file.close()
 output.close()
 timestr = time.strftime("%Y-%m/%d--%H-%M-%S")
 print("Stopping at " + timestr, "\n")
 print("It took ", round((time.time() - time_start) / 60, 2), "minutes")
+print("\n"+"Errors:", errors)
