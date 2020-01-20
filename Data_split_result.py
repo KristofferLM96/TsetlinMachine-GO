@@ -1,8 +1,9 @@
 import csv
 
-win = open("Data/Results-Split/19x19FoxwqPro-9d_win.txt", 'w')
-loss = open("Data/Results-Split/19x19FoxwqPro-9d_loss.txt", 'w')
-draw = open("Data/Results-Split/19x19FoxwqPro-9d_draw.txt", 'w')
+name = "13x13_2k_r16_75_432x20k"
+win = open("Data/Results-Split/" + name + "_win.txt", 'w+')
+loss = open("Data/Results-Split/" + name + "_loss.txt", 'w+')
+draw = open("Data/Results-Split/" + name + "_draw.txt", 'w+')
 
 
 def convert(_input):
@@ -22,7 +23,7 @@ def convert(_input):
         draw.write(rows)
 
 
-with open("Data/Binary/19x19FoxwqPro-9d_binary.txt", newline='') as file:
+with open("Data/Binary/" + name + "_binary.txt", newline='') as file:
     reader = csv.reader(file)
     for row in reader:
         convert(row)
