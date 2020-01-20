@@ -3,9 +3,10 @@ import glob
 import time
 import gomill.boards
 
-path = "Data/Original/foxwq_Pro-9d/*"
-output_path = "Data/Binary/19x19FoxwqPro-9d_binary.txt"
-board_size = 19
+name = "13x13_2k_r16_75_432x20k"
+path = "Data/Original/" + name + "/*"
+output_path = "Data/Binary/" + name + "_binary.txt"
+board_size = 13
 total_pos = 19
 time_start = time.time()
 timestr = time.strftime("%Y-%m/%d--%H-%M-%S")
@@ -68,8 +69,10 @@ def translate(i):
 
 def load_board(_game_lines, _board_state):
     result = _game_lines[0].split("RE")
-    _handicap = _game_lines[0].split("HA[")
-    handicap = int(_handicap[1][0])
+    if "HA[" in _game_lines[0]:
+        handicap = int(_game_lines[0].split("HA[")[1][0])
+    else:
+        handicap = 0
     results = 2
     if result[1][1] == "W":
         results = 0
@@ -189,7 +192,7 @@ for infile in glob.glob(os.path.join(path, '*.sgf')):
     print(infile)
     print("Converting file", counter, "out of", total_files, "files. .................. ",
           round((counter / total_files * 100), 2), "% ..................",
-          round((time.time() - start_time) * 1000, 2), "ms")
+          round((time.time() - start_time) * 1000, 2), "ms", "\n")
     main(file_lines, init_board())
     write_file(output)
     counter = counter + 1
