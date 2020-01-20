@@ -1,0 +1,6 @@
+MultiClassTsetlinMachineParallel,Parallel,Epoch1,Epoch2,Epoch3,Epoch4,Epoch5,Epoch6,Epoch7,Epoch8,Epoch9,Epoch10,Epoch11,Epoch12,Epoch13,Epoch14,Epoch15,Epoch16,Epoch17,Epoch18,Epoch19,Epoch20,Average ,
+Settings:
+Clauses:,14000.0
+Threshold:,80000.0
+s:,27.0
+9x9Natsukaze_Draw0,,79.0069,82.8108,84.1330,85.0189,85.6377,85.9308,85.9069,86.2369,85.9634,85.7072,85.4618,85.6333,85.5595,85.4553,85.4162,85.1101,84.9972,85.1709,84.9581,84.6216,84.9368
