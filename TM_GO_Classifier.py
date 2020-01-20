@@ -4,18 +4,18 @@ import os
 
 # Settings
 clauses = 14000
-Threshold = 47650
+Threshold = 80000
 s = 27.0
 epoch = 20
 k_fold_parts = 1  # 1 - 10, how many k-fold parts to go through
-machine_type = "cTM"  # cTM or TM
-parallel = True  # Running with/without parallel Tsetlin Machine
+machine_type = "TM"  # cTM or TM
+parallel = False  # Running with/without parallel Tsetlin Machine
 data_status = "Draw"  # Draw or No-Draw
-data_dim = "19x19"  # 9x9, 13x13, 19x19 ..
-data_name = "FoxwqPro-9d_" + data_status
-Window_X = 15
-Window_Y = 15
-Shape_X = Shape_Y = 19  # Depending on data_dim
+data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
+data_name = "Natsukaze_" + data_status
+Window_X = 9
+Window_Y = 9
+Shape_X = Shape_Y = 9  # Depending on data_dim
 Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses for.
@@ -115,11 +115,15 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
 
     epoch_count = 0
     counter = 0
-    if _machine_type == "TM":
+    if _machine_type == "TM" and parallel:
         results.write("MultiClassTsetlinMachineParallel,Parallel,")
-    if _machine_type == "cTM":
+    else:
+        results.write("MultiClassTsetlinMachine,,")
+    if _machine_type == "cTM" and parallel:
         results.write(
             "MultiClassConvolutionalTsetlinMachine2D,Parallel,")
+    else:
+        results.write("MultiClassConvolutionalTsetlinMachine2D,,")
     while epoch_count < _epoch:
         results.write("Epoch" + str(epoch_count + 1) + ",")
         epoch_count += 1
