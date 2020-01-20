@@ -1,0 +1,42 @@
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{|a|d|d|d|d|d|}
+\hline
+\rowcolor{Blue}
+\begin{tabular}[c]{@{}l@{}}Settings\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 9\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 13\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 20\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 12000/47650/27/8x8\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}80.63\%$\pm80.63\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.71\%$\pm85.71\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.52\%$\pm85.52\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}84.8\%$\pm84.8\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 14000/100000/20/8x8\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}80.93\%$\pm80.93\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.04\%$\pm86.04\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.79\%$\pm85.79\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.16\%$\pm85.16\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 20000/100000/27/8x8\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}80.24\%$\pm80.24\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.75\%$\pm86.75\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.55\%$\pm86.55\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.13\%$\pm86.13\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 20000/100000/20/8x8\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}82.16\%$\pm82.16\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.82\%$\pm85.82\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.85\%$\pm85.85\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.25\%$\pm85.25\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 14000/100000/27/8x8\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}79.09\%$\pm79.09\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.53\%$\pm86.53\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.35\%$\pm86.35\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.73\%$\pm85.73\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 18000/100000/27/8x8\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}80.16\%$\pm80.16\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.65\%$\pm86.65\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.69\%$\pm86.69\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.73\%$\pm85.73\%$\end{tabular}\\ \hline
+\end{tabular}
+\caption{Testing 8x8 dataset with 9x9 window under different settings.}
+\label{tab:tab:8x8w 9x9Natsukaze}
+\end{table}
+\FloatBarrier

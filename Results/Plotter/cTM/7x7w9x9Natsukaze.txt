@@ -1,0 +1,32 @@
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{|a|d|d|d|d|d|}
+\hline
+\rowcolor{Blue}
+\begin{tabular}[c]{@{}l@{}}Settings\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 9\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 13\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 20\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 14000/47650/27/7x7\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}81.18\%$\pm81.18\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.39\%$\pm86.39\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}84.78\%$\pm84.78\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.29\%$\pm85.29\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 30000/47650/27/7x7\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}82.95\%$\pm82.95\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}87.18\%$\pm87.18\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.56\%$\pm86.56\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.82\%$\pm85.82\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 20000/47650/27/7x7\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}82.07\%$\pm82.07\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.57\%$\pm85.57\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.33\%$\pm86.33\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.89\%$\pm85.89\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 12000/47650/27/7x7\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}80.17\%$\pm80.17\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.02\%$\pm86.02\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.59\%$\pm85.59\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}84.69\%$\pm84.69\%$\end{tabular}\\ \hline
+\end{tabular}
+\caption{Testing 7x7 dataset with 9x9 window under different settings.}
+\label{tab:7x7w9x9Natsukaze}
+\end{table}
+\FloatBarrier
