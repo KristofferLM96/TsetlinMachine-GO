@@ -1,0 +1,6 @@
+MultiClassTsetlinMachineParallel,Parallel,Epoch1,Epoch2,Epoch3,Epoch4,Epoch5,Epoch6,Epoch7,Epoch8,Epoch9,Epoch10,Epoch11,Epoch12,Epoch13,Epoch14,Epoch15,Epoch16,Epoch17,Epoch18,Epoch19,Epoch20,Average ,
+Settings:
+Clauses:,6000.0
+Threshold:,8000.0
+s:,27.0
+13x13_2k_r16_75_432x20k_Draw0,,68.0016,70.3815,71.5114,70.9315,71.3764,70.9915,69.9965,70.8315,70.3765,69.9415,70.0015,70.7915,70.4165,70.2315,70.8315,70.6415,70.4865,70.2565,70.7665,70.7915,70.4777
