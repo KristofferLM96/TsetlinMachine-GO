@@ -1,14 +1,15 @@
 import numpy as np
 import time
 import os
+import statistics
 
 # Settings
-clauses = 14000
-Threshold = 80000
+clauses = 100
+Threshold = 80
 s = 27.0
-epoch = 20
-k_fold_parts = 1  # 1 - 10, how many k-fold parts to go through
-machine_type = "cTM"  # cTM or TM
+epoch = 15
+k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
+machine_type = "TM"  # cTM or TM
 parallel = True  # Running with/without parallel Tsetlin Machine
 data_status = "Draw"  # Draw or No-Draw
 data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
@@ -35,6 +36,11 @@ X_train = []
 Y_train = []
 X_test = []
 Y_test = []
+epoch_results = []
+average_epoch_results = []
+epochs_total = []
+for i in range(epoch):
+    epoch_results.append([])
 
 
 def runner():
@@ -43,19 +49,19 @@ def runner():
 
 
 def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_x, _window_y,
-                  _shape_x, _shape_y, _shape_z, name, write_clauses):
+                  _shape_x, _shape_y, _shape_z, _name, _write_clauses):
     timestamp = time.strftime("%y-%m-%d_%H%M")
 
     if _machine_type == "TM":
-        os.makedirs(os.path.dirname("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + "/"
+        os.makedirs(os.path.dirname("Results/" + _name + "/" + machine_type + "/" + data_dim + data_name + "/"
                                     + data_dim + data_name + "_" + timestamp + ".csv"), exist_ok=True)
-        results = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + "/"
+        results = open("Results/" + _name + "/" + machine_type + "/" + data_dim + data_name + "/"
                        + data_dim + data_name + "_" + timestamp + ".csv", 'a')
     elif _machine_type == "cTM":
-        os.makedirs(os.path.dirname("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + "/"
+        os.makedirs(os.path.dirname("Results/" + _name + "/" + machine_type + "/" + data_dim + data_name + "/"
                                     + str(_window_x) + "x" + str(_window_y) + "/" + data_dim + data_name + "_"
                                     + timestamp + ".csv"), exist_ok=True)
-        results = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + "/" + str(_window_x) + "x"
+        results = open("Results/" + _name + "/" + machine_type + "/" + data_dim + data_name + "/" + str(_window_x) + "x"
                        + str(_window_y) + "/" + data_dim + data_name + "_" + timestamp + ".csv", 'a')
 
     def tm_get_output(_tm, _tm_class, _clause):
@@ -76,7 +82,6 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
         b_bit = (non_negated[int(len(non_negated) / 2):])
         not_w_bit = (negated[:int(len(negated) / 2)])
         not_b_bit = (negated[int(len(negated) / 2):])
-        board = []
         for i in range(_shape_x * _shape_y):
             result_clauses.write(str(w_bit[i]) + str(b_bit[i]) + str(not_w_bit[i]) + str(not_b_bit[i]))
             if i < _shape_x * _shape_y - 1:
@@ -138,6 +143,7 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
                       % (_clauses, _t, _s, _window_x, _window_y, _shape_x, _shape_y, _shape_z))
 
     while counter < k_fold_parts:
+        print("k-fold ------", counter)
         global X_train
         global Y_train
         global X_test
@@ -172,7 +178,6 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
                 _clauses, _t, _s, _window_x, _window_y))
 
         result_total = []
-        result_temp = 0
         results.write(data_dim + data_name + numb + ",")
         for i in range(_epoch):
             start = time.time()
@@ -186,27 +191,44 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
                 i + 1, timestamp_epoch, result, stop - start, stop_testing - start_testing))
             result_total.append(result)
             results.write(",%.4f" % (np.mean(result)))
-        for temp in range(len(result_total)):
-            result_temp = result_temp + result_total[temp]
-        mean_accuracy = result_temp / len(result_total)
+            epoch_results[i].append(result)
+            epochs_total.append(result)
+        mean_accuracy = statistics.mean(result_total)
         print("Mean Accuracy:", mean_accuracy)
         results.write(",%.4f" % mean_accuracy)
         results.write("\n")
         counter += 1
-        if counter == Write_Clauses and Write_Clauses != 0:
-            result_clauses = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + timestamp +
+        if counter == _write_clauses and _write_clauses != 0:
+            result_clauses = open("Results/" + _name + "/" + machine_type + "/" + data_dim + data_name + timestamp +
                                   "clauses1.csv", 'a')
             print_class(m, 1, _clauses)
             result_clauses.close()
-            result_clauses = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + timestamp +
+            result_clauses = open("Results/" + _name + "/" + machine_type + "/" + data_dim + data_name + timestamp +
                                   "clauses0.csv", 'a')
             print_class(m, 0, _clauses)
             result_clauses.close()
             if data_status == "Draw":
-                result_clauses = open("Results/" + Name + "/" + machine_type + "/" + data_dim + data_name + timestamp +
+                result_clauses = open("Results/" + _name + "/" + machine_type + "/" + data_dim + data_name + timestamp +
                                       "clauses2.csv", 'a')
                 print_class(m, 2, _clauses)
                 result_clauses.close()
+    for j in range(_epoch):
+        epoch_mean = statistics.mean(epoch_results[j])
+        average_epoch_results.append(epoch_mean)
+    single_highest_acc = max(epochs_total)
+    print("Single-highest Accuracy:", single_highest_acc)
+    max_acc = max(average_epoch_results)
+    print("Max Accuracy:", max_acc)
+    avg_avg = statistics.mean(average_epoch_results)
+    print("Average Accuracy for each epoch:", average_epoch_results)
+    print("Average Accuracy total:", avg_avg)
+    results.write("mean " + ",")
+    for m in range(len(average_epoch_results)):
+        results.write(",%.4f" % average_epoch_results[m])
+    results.write(",%.4f" % avg_avg)
+    results.write(",")
+    results.write("\n")
+    results.write("singel-highest/max " + "," + ",%.4f" % single_highest_acc + ",%.4f" % max_acc)
 
 
 runner()
