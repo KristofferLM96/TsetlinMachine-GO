@@ -1,4 +1,4 @@
-MultiClassTsetlinMachine,,MultiClassConvolutionalTsetlinMachine2D,,Epoch1,Epoch2,Epoch3,Epoch4,Epoch5,Epoch6,Epoch7,Epoch8,Epoch9,Epoch10,Epoch11,Epoch12,Epoch13,Epoch14,Epoch15,Epoch16,Epoch17,Epoch18,Epoch19,Epoch20,Average ,
+MultiClassTsetlinMachine,,Epoch1,Epoch2,Epoch3,Epoch4,Epoch5,Epoch6,Epoch7,Epoch8,Epoch9,Epoch10,Epoch11,Epoch12,Epoch13,Epoch14,Epoch15,Epoch16,Epoch17,Epoch18,Epoch19,Epoch20,Average ,
 Settings:
 Clauses:,14000.0
 Threshold:,80000.0
