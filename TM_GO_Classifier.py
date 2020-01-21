@@ -8,8 +8,8 @@ Threshold = 80000
 s = 27.0
 epoch = 20
 k_fold_parts = 1  # 1 - 10, how many k-fold parts to go through
-machine_type = "TM"  # cTM or TM
-parallel = False  # Running with/without parallel Tsetlin Machine
+machine_type = "cTM"  # cTM or TM
+parallel = True  # Running with/without parallel Tsetlin Machine
 data_status = "Draw"  # Draw or No-Draw
 data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
 data_name = "Natsukaze_" + data_status
@@ -117,13 +117,13 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
     counter = 0
     if _machine_type == "TM" and parallel:
         results.write("MultiClassTsetlinMachineParallel,Parallel,")
-    else:
-        results.write("MultiClassTsetlinMachine,,")
+    elif _machine_type == "TM" and not parallel:
+        results.write("MultiClassTsetlinMachine,")
     if _machine_type == "cTM" and parallel:
         results.write(
             "MultiClassConvolutionalTsetlinMachine2D,Parallel,")
-    else:
-        results.write("MultiClassConvolutionalTsetlinMachine2D,,")
+    elif _machine_type == "TM" and not parallel:
+        results.write("MultiClassConvolutionalTsetlinMachine2D,")
     while epoch_count < _epoch:
         results.write("Epoch" + str(epoch_count + 1) + ",")
         epoch_count += 1
