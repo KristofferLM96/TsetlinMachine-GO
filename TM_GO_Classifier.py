@@ -4,8 +4,8 @@ import os
 import statistics
 
 # Settings
-clauses = 100
-Threshold = 80
+clauses = 4000
+Threshold = 2000
 s = 27.0
 epoch = 15
 k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
@@ -194,7 +194,7 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
             epoch_results[i].append(result)
             epochs_total.append(result)
         mean_accuracy = statistics.mean(result_total)
-        print("Mean Accuracy:", mean_accuracy)
+        print("Mean Accuracy:", mean_accuracy, "\n")
         results.write(",%.4f" % mean_accuracy + ",")
         results.write("\n")
         counter += 1
