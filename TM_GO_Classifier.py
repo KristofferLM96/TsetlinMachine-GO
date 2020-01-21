@@ -194,7 +194,7 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
             epoch_results[i].append(result)
             epochs_total.append(result)
         mean_accuracy = statistics.mean(result_total)
-        print("Mean Accuracy:", mean_accuracy, "\n")
+        print("Mean Accuracy:", mean_accuracy, "\n\n")
         results.write(",%.4f" % mean_accuracy + ",")
         results.write("\n")
         counter += 1
@@ -214,14 +214,14 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
                 result_clauses.close()
     for j in range(_epoch):
         epoch_mean = statistics.mean(epoch_results[j])
-        average_epoch_results.append(epoch_mean)
+        average_epoch_results.append(round(epoch_mean, 2))
     single_highest_acc = max(epochs_total)
-    print("Single-highest Accuracy:", single_highest_acc)
+    print("Single-highest Accuracy:", round(single_highest_acc, 2))
     max_acc = max(average_epoch_results)
-    print("Max Accuracy:", max_acc)
+    print("Max Accuracy:", round(max_acc, 2))
     avg_avg = statistics.mean(average_epoch_results)
     print("Average Accuracy for each epoch:", average_epoch_results)
-    print("Average Accuracy total:", avg_avg)
+    print("Average Accuracy total:", round(avg_avg, 2))
     results.write("mean" + ",")
     for m in range(len(average_epoch_results)):
         results.write(",%.4f" % average_epoch_results[m])
