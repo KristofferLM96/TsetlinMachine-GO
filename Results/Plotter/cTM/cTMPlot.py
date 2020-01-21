@@ -80,27 +80,22 @@ for FILENAME in glob.glob(os.path.join(path, '*.csv')):
                     lineds = [str(x) for x in line.strip().split(',')[:1]]
                     names = names + str(lineds[0])
                     names = names[:-6]
-                if counter > 10:
+                if counter > 10 and counter < 21:
                     line = [float(x) for x in line.strip().split(',')[2:]]
                     if average == 1:
                         line = line[0:-1]
                     tab.append(line)
-                else:
-                    lines = [x for x in line.strip().split(',')]
-                    lined.append(lines)
+
             elif machine == "T":
                 if counter == 6:
                     lineds = [str(x) for x in line.strip().split(',')[:1]]
                     names = names + str(lineds[0])
                     names = names[:-6]
-                if counter > 5:
+                if counter > 5 and counter < 16:
                     line = [float(x) for x in line.strip().split(',')[2:]]
                     if average ==1:
                         line = line[0:-1]
                     tab.append(line)
-                else:
-                    lines = [x for x in line.strip().split(',')]
-                    lined.append(lines)
         if kFold == 10:
             for i in range(len(line)):
                 m.append(median([tab[0][i],tab[1][i],tab[2][i],tab[3][i],tab[4][i],tab[5][i],tab[6][i],tab[7][i],tab[8][i],tab[9][i]]))
