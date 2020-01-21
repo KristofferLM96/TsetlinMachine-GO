@@ -132,7 +132,7 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
     while epoch_count < _epoch:
         results.write("Epoch" + str(epoch_count + 1) + ",")
         epoch_count += 1
-    results.write("Average " + ",")
+    results.write("Average" + ",")
     results.write("\n")
 
     if _machine_type == "TM":
@@ -195,7 +195,7 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
             epochs_total.append(result)
         mean_accuracy = statistics.mean(result_total)
         print("Mean Accuracy:", mean_accuracy)
-        results.write(",%.4f" % mean_accuracy)
+        results.write(",%.4f" % mean_accuracy + ",")
         results.write("\n")
         counter += 1
         if counter == _write_clauses and _write_clauses != 0:
@@ -222,13 +222,13 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
     avg_avg = statistics.mean(average_epoch_results)
     print("Average Accuracy for each epoch:", average_epoch_results)
     print("Average Accuracy total:", avg_avg)
-    results.write("mean " + ",")
+    results.write("mean" + ",")
     for m in range(len(average_epoch_results)):
         results.write(",%.4f" % average_epoch_results[m])
     results.write(",%.4f" % avg_avg)
     results.write(",")
     results.write("\n")
-    results.write("singel-highest/max " + "," + ",%.4f" % single_highest_acc + ",%.4f" % max_acc)
+    results.write("singel-highest/max" + "," + ",%.4f" % single_highest_acc + ",%.4f" % max_acc + ",")
 
 
 runner()
