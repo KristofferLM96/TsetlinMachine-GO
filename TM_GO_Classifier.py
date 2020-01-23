@@ -22,15 +22,11 @@ Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses for.
 
 if parallel:
-    if machine_type == "TM":
-        from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
-    else:
-        from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
+    from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
+    from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
 else:
-    if machine_type == "TM":
-        from pyTsetlinMachine.tm import MultiClassTsetlinMachine
-    else:
-        from pyTsetlinMachine.tm import MultiClassConvolutionalTsetlinMachine2D
+    from pyTsetlinMachine.tm import MultiClassTsetlinMachine
+    from pyTsetlinMachine.tm import MultiClassConvolutionalTsetlinMachine2D
 
 X_train = []
 Y_train = []
