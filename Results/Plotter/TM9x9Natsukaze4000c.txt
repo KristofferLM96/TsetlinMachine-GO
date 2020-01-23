@@ -1,0 +1,62 @@
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=.6]{Images/Results/TM9x9Natsukaze4000c.png}
+    \caption{Testing 9x9 data set with TM under different thresholds using 4000 clauses.}
+    \label{fig:TM9x9Natsukaze4000c}
+\end{figure}
+\FloatBarrier
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{|a|d|d|d|d|d|}
+\hline
+\rowcolor{Blue}
+\begin{tabular}[c]{@{}l@{}}Threshold\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 9\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 13\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 15\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 2000\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}80.57\%$\pm0.41\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}81.06\%$\pm0.58\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}80.56\%$\pm0.49\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}80.81\%$\pm0.5\%$\end{tabular}
+
+&\begin{tabular}[c]{@{}l@{}}80.65\%$\pm0.38\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 8000\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}80.8\%$\pm0.39\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}82.37\%$\pm0.32\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}81.51\%$\pm0.55\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}81.53\%$\pm0.42\%$\end{tabular}
+
+&\begin{tabular}[c]{@{}l@{}}81.45\%$\pm0.42\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 16000\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}79.73\%$\pm0.32\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}83.41\%$\pm0.29\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}82.47\%$\pm0.43\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}81.67\%$\pm0.54\%$\end{tabular}
+
+&\begin{tabular}[c]{@{}l@{}}81.71\%$\pm0.34\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 32000\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}77.36\%$\pm0.52\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}83.56\%$\pm0.2\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}83.29\%$\pm0.31\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}82.72\%$\pm0.51\%$\end{tabular}
+
+&\begin{tabular}[c]{@{}l@{}}82.21\%$\pm0.47\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 64000\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}75.24\%$\pm0.38\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}82.19\%$\pm0.44\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}83.69\%$\pm0.25\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}83.73\%$\pm0.38\%$\end{tabular}
+
+&\begin{tabular}[c]{@{}l@{}}83.34\%$\pm0.68\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 128000\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}73.48\%$\pm0.43\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}79.83\%$\pm0.46\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}82.85\%$\pm0.31\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}83.38\%$\pm0.45\%$\end{tabular}
+
+&\begin{tabular}[c]{@{}l@{}}83.39\%$\pm0.48\%$\end{tabular}\\ \hline
+\end{tabular}
+\caption{Testing 9x9 data set with TM under different thresholds using 4000 clauses.}
+\label{tab:TM9x9Natsukaze4000c}
+\end{table}
+\FloatBarrier
