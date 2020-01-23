@@ -18,21 +18,18 @@
 &\begin{tabular}[c]{@{}l@{}}85.22\%$\pm0.32\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}84.69\%$\pm0.37\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}84.11\%$\pm0.73\%$\end{tabular}
-
 &\begin{tabular}[c]{@{}l@{}}83.96\%$\pm0.61\%$\end{tabular}\\ \hline
 \begin{tabular}[c]{@{}l@{}} 64000\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}79.35\%$\pm0.76\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}85.36\%$\pm0.23\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}85.32\%$\pm0.24\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}85.07\%$\pm0.3\%$\end{tabular}
-
 &\begin{tabular}[c]{@{}l@{}}84.91\%$\pm0.89\%$\end{tabular}\\ \hline
 \begin{tabular}[c]{@{}l@{}} 128000\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}77.05\%$\pm0.3\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}84.64\%$\pm0.19\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}85.59\%$\pm0.3\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}85.51\%$\pm0.41\%$\end{tabular}
-
 &\begin{tabular}[c]{@{}l@{}}85.37\%$\pm0.35\%$\end{tabular}\\ \hline
 \end{tabular}
 \caption{Testing 9x9 data set with TM under different thresholds using 14000 clauses.}

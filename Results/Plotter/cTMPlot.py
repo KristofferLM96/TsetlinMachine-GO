@@ -166,7 +166,7 @@ for FILENAME in sorted(glob.glob(os.path.join(path, '*.csv'))):
         table.write("&"+backslash+"begin{tabular}[c]{@{}l@{}}"+str(round(m[showT1[0]],2))+backslash+"%$"+backslash+"pm"+str(round(s[showT1[0]],2))+backslash+"%$"+backslash+"end{tabular}\n")
         table.write("&"+backslash+"begin{tabular}[c]{@{}l@{}}"+str(round(m[showT1[1]],2))+backslash+"%$"+backslash+"pm"+str(round(s[showT1[1]],2))+backslash+"%$"+backslash+"end{tabular}\n")
         table.write("&"+backslash+"begin{tabular}[c]{@{}l@{}}"+str(round(m[showT1[2]],2))+backslash+"%$"+backslash+"pm"+str(round(s[showT1[2]],2))+backslash+"%$"+backslash+"end{tabular}\n")
-        table.write("&"+backslash+"begin{tabular}[c]{@{}l@{}}"+str(round(m[showT1[3]],2))+backslash+"%$"+backslash+"pm"+str(round(s[showT1[3]],2)) + backslash + "%$" + backslash + "end{tabular}\n")
+        table.write("&"+backslash+"begin{tabular}[c]{@{}l@{}}"+str(round(m[showT1[3]],2))+backslash+"%$"+backslash+"pm"+str(round(s[showT1[3]],2)) + backslash + "%$" + backslash + "end{tabular}")
         if len(showT1) == 5:
             table.write("\n")
             table.write("&"+backslash+"begin{tabular}[c]{@{}l@{}}"+str(round(m[showT1[4]],2))+backslash+"%$"+backslash+"pm"+str(round(s[showT1[4]],2))+backslash+"%$"+backslash+"end{tabular}")
