@@ -3,15 +3,15 @@ Settings:
 Clauses:,clauses_amount
 Threshold:,treshold_amount
 s:,s_amount
-9x9Natsukaze_Draw0,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average,
-9x9Natsukaze_Draw1,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average,
-9x9Natsukaze_Draw2,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average,
-9x9Natsukaze_Draw3,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average,
-9x9Natsukaze_Draw4,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average,
-9x9Natsukaze_Draw5,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average,
-9x9Natsukaze_Draw6,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average,
-9x9Natsukaze_Draw7,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average,
-9x9Natsukaze_Draw8,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average,
-9x9Natsukaze_Draw9,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average,
+9x9Natsukaze_Draw0,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average
+9x9Natsukaze_Draw1,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average
+9x9Natsukaze_Draw2,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average
+9x9Natsukaze_Draw3,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average
+9x9Natsukaze_Draw4,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average
+9x9Natsukaze_Draw5,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average
+9x9Natsukaze_Draw6,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average
+9x9Natsukaze_Draw7,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average
+9x9Natsukaze_Draw8,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average
+9x9Natsukaze_Draw9,,result1,result2,result3,result4,result5,result6,result7,result8,result9,result10,result11,result12,result13,result14,result15,average
 mean,,avg1,avg2,avg3,avg4,avg5,avg6,avg7,avg8,avg9,avg10,avg11,avg12,avg13,avg14,avg15,avg-avg,
 singel-highest/max,,highest accuracy of all k-folds, highest accuracy of 'mean',
