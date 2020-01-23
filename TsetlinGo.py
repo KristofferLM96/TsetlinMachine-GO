@@ -145,15 +145,15 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
     for i in meanTab:
         meancount+=1
         meansepoch += i/10
-        if meansepoch > highepoch:
-            highepoch = meansepoch
+        if i/10 > highepoch:
+            highepoch = i/10
         results.write(","+str(i/10))
     results.write("," + str(meansepoch / meancount))
     results.write("\n")
     results.write("Single/k-Fold")
     results.write(","+str(Highest))
     results.write(","+str(highepoch)) # should be highest epoch
-    print("Highest: "+str(Highest)+" Highest k-Fold: "+highepoch+" Average k-Fold: "+str(meansepoch/meancount))
+    print("Highest: "+str(Highest)+" Highest k-Fold: "+str(highepoch)+" Average k-Fold: "+str(meansepoch/meancount))
     #print("Prediction: x1 = 1, x2 = 0, ... -> y = %d" % (m.predict(np.array([[1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
     #print("Prediction: x1 = 0, x2 = 1, ... -> y = %d" % (m.predict(np.array([[0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
     #print("Prediction: x1 = 0, x2 = 0, ... -> y = %d" % (m.predict(np.array([[0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
@@ -161,7 +161,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
     results.close()
 def runner():
     # Settings
-    clauses = 10000
+    clauses = 14000
     Threshold = 2000
     S = 27.0
     epoch = 15
@@ -170,24 +170,19 @@ def runner():
     machine = "TM"    #cTM or TM
     #inndata = "Natsukaze_NoDraw"
     inndata = "Draw"
-    Window_X = 8
-    Window_Y = 8
+    Window_X = 7
+    Window_Y = 7
     Shape_X = 9
     Shape_Y = 9
     Shape_Z = 2
     Name = "Trond"
     Write_Clauses = 0  #0 = don't print clauses, 1-10 which k-Fold to write clauses for.
-    StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-    StartMachine(clauses, epoch, 8000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-    StartMachine(clauses, epoch, 16000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-    StartMachine(clauses, epoch, 32000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-    #StartMachine(clauses, epoch, 64000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
+    #StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
+    #StartMachine(clauses, epoch, 8000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
+    #StartMachine(clauses, epoch, 16000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
+    StartMachine(clauses, epoch, 64000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
+    StartMachine(clauses, epoch, 64000, S, inndata,dim,machine,6,6,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(clauses, epoch, 128000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-
-
-
-
-
 
 runner()

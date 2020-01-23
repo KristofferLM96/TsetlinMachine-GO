@@ -27,8 +27,11 @@ table.write(backslash + "begin{tabular}[c]{@{}l@{}}"+ parsing+backslash+"end{tab
 table.write(backslash + "begin{tabular}[c]{@{}l@{}} Epoch "+str(showT1[0]+1)+backslash+"end{tabular}&")
 table.write(backslash + "begin{tabular}[c]{@{}l@{}} Epoch "+str(showT1[1]+1)+backslash+"end{tabular}&")
 table.write(backslash + "begin{tabular}[c]{@{}l@{}} Epoch "+ str(showT1[2]+1)+backslash+"end{tabular}&")
-#table.write(backslash + "begin{tabular}[c]{@{}l@{}} Epoch "+ str(showT1[3]+1)+backslash+"end{tabular}&")
-table.write(backslash + "begin{tabular}[c]{@{}l@{}} Epoch "+ str(showT1[3]+1)+backslash+"end{tabular}"+backslash+backslash+" "+backslash+"hline\n")
+table.write(backslash + "begin{tabular}[c]{@{}l@{}} Epoch "+ str(showT1[3]+1)+backslash+"end{tabular}")
+if len(showT1) == 5:
+    table.write("&")
+    table.write(backslash + "begin{tabular}[c]{@{}l@{}} Epoch "+ str(showT1[4]+1)+backslash+"end{tabular}")
+table.write(backslash+backslash+" "+backslash+"hline\n")
 for FILENAME in glob.glob(os.path.join(path, '*.csv')):
     #print(FILENAME)
     m = []
@@ -111,8 +114,11 @@ for FILENAME in glob.glob(os.path.join(path, '*.csv')):
         table.write("&"+backslash+"begin{tabular}[c]{@{}l@{}}"+str(round(m[showT1[0]],2))+backslash+"%$"+backslash+"pm"+str(round(s[showT1[0]],2))+backslash+"%$"+backslash+"end{tabular}\n")
         table.write("&"+backslash+"begin{tabular}[c]{@{}l@{}}"+str(round(m[showT1[1]],2))+backslash+"%$"+backslash+"pm"+str(round(s[showT1[1]],2))+backslash+"%$"+backslash+"end{tabular}\n")
         table.write("&"+backslash+"begin{tabular}[c]{@{}l@{}}"+str(round(m[showT1[2]],2))+backslash+"%$"+backslash+"pm"+str(round(s[showT1[2]],2))+backslash+"%$"+backslash+"end{tabular}\n")
-        #table.write("&"+backslash+"begin{tabular}[c]{@{}l@{}}" + str(round(m[showT1[3]], 2)) + backslash + "%$" + backslash + "pm" + str(round(s[showT1[3]], 2)) + backslash + "%$" + backslash + "end{tabular}\n")
-        table.write("&"+backslash+"begin{tabular}[c]{@{}l@{}}"+str(round(m[showT1[3]],2))+backslash+"%$"+backslash+"pm"+str(round(s[showT1[3]],2))+backslash+"%$"+backslash+"end{tabular}"+backslash+backslash+" "+backslash+"hline\n")
+        table.write("&"+backslash+"begin{tabular}[c]{@{}l@{}}" + str(round(m[showT1[3]], 2)) + backslash + "%$" + backslash + "pm" + str(round(s[showT1[3]], 2)) + backslash + "%$" + backslash + "end{tabular}\n")
+        if len(showT1) == 5:
+            table.write("\n")
+            table.write("&"+backslash+"begin{tabular}[c]{@{}l@{}}"+str(round(m[showT1[4]],2))+backslash+"%$"+backslash+"pm"+str(round(s[showT1[4]],2))+backslash+"%$"+backslash+"end{tabular}")
+        table.write(backslash+backslash+" "+backslash+"hline\n")
 
 
 
