@@ -4,8 +4,8 @@ import os
 import statistics
 
 # Settings
-clauses = 4000
-Threshold = 2000
+clauses = 14000
+Threshold = 8000
 s = 27.0
 epoch = 15
 k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
@@ -51,6 +51,14 @@ def runner():
 def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_x, _window_y,
                   _shape_x, _shape_y, _shape_z, _name, _write_clauses):
     timestamp = time.strftime("%y-%m-%d_%H%M")
+    global epoch_results
+    global average_epoch_results
+    global epochs_total
+    epoch_results = []
+    average_epoch_results = []
+    epochs_total = []
+    for i in range(epoch):
+        epoch_results.append([])
 
     if _machine_type == "TM":
         os.makedirs(os.path.dirname("Results/" + _name + "/" + machine_type + "/" + data_dim + data_name + "/"
@@ -143,7 +151,7 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
                       % (_clauses, _t, _s, _window_x, _window_y, _shape_x, _shape_y, _shape_z))
 
     while counter < k_fold_parts:
-        print("k-fold ------", counter)
+        print("k-fold ------", str(counter) + "(" + str(counter + 1) + ")")
         global X_train
         global Y_train
         global X_test
@@ -194,8 +202,8 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
             epoch_results[i].append(result)
             epochs_total.append(result)
         mean_accuracy = statistics.mean(result_total)
-        print("Mean Accuracy:", mean_accuracy, "\n\n")
-        results.write(",%.4f" % mean_accuracy + ",")
+        print("Mean Accuracy:", round(mean_accuracy, 4), "\n\n")
+        results.write(",%.4f" % mean_accuracy)
         results.write("\n")
         counter += 1
         if counter == _write_clauses and _write_clauses != 0:
@@ -221,7 +229,7 @@ def start_machine(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type
     print("Max Accuracy:", round(max_acc, 2))
     avg_avg = statistics.mean(average_epoch_results)
     print("Average Accuracy for each epoch:", average_epoch_results)
-    print("Average Accuracy total:", round(avg_avg, 2))
+    print("Average Accuracy total:", round(avg_avg, 2), "\n\n")
     results.write("mean" + ",")
     for m in range(len(average_epoch_results)):
         results.write(",%.4f" % average_epoch_results[m])
