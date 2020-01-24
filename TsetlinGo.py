@@ -9,61 +9,6 @@ import time as stime
 def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold):
     timestr = stime.strftime("%m%d-%H%M")
     results = open("Results/"+Name+"/"+machine+"/"+machine+dim+timestr+".csv",'a')
-
-    def TMGetOutput(tm,tm_class,clause):
-        output = []
-        for i in range(Shape_X*Shape_Y*4):
-            outputbit = tm.ta_action(tm_class,clause,i)
-            output.append(outputbit)
-        return output
-    def Align(tm,tm_class,clause):
-        output =""
-        if machine == "TM":
-            output = TMGetOutput(tm,tm_class,clause)
-        if machine == "cTM":
-            output = cTMGetOutput(tm,tm_class,clause)
-        nonNegated = output[:int(len(output)/2)]
-        negated = output[int(len(output)/2):]
-        xbit = (nonNegated[:int(len(nonNegated)/2)])
-        obit = (nonNegated[int(len(nonNegated)/2):])
-        nxbit = (negated[:int(len(negated)/2)])
-        nobit = (negated[int(len(negated)/2):])
-        board=[]
-        for i in range(Shape_X*Shape_Y):
-            resultclauses.write(str(xbit[i])+str(obit[i])+str(nxbit[i])+str(nobit[i]))
-            if i < Shape_X*Shape_Y-1:
-                resultclauses.write(",")
-            else:
-                resultclauses.write("\n")
-
-    offset_y = Shape_Y - Window_Y
-    offset_x = Shape_X - Window_X
-
-    def cTMGetOutput(tm, tm_class, clause):
-        output = []
-        xyz_id_old = 0
-        for y in range(Window_Y):
-            for x in range(Window_X):
-                for z in range(Shape_Z):
-                    xyz_id = offset_y + offset_x + y * Shape_X * 2 + x * 2 + z
-                    outputbit = tm.ta_action(tm_class, clause, xyz_id)
-                    output.append(outputbit)
-                    xyz_id_old = xyz_id + 1
-        output = cTMGetOutNegated(tm, tm_class, clause, xyz_id_old, output)
-        return output
-
-    def cTMGetOutNegated(tm, tm_class, clause, xyz_id_old, output):
-        for y in range(Window_Y):
-            for x in range(Window_X):
-                for z in range(Shape_Z):
-                    xyz_id = xyz_id_old + offset_y + offset_x + y * Shape_X * 2 + x * 2 + z
-                    outputbit = tm.ta_action(tm_class, clause, xyz_id)
-                    output.append(outputbit)
-        return output
-
-    def PrintClass(Ts, Class, clauses):
-        for i in range(clauses):
-            Align(Ts, Class, i)
     ecount = 0
     counter = 0
     if machine == "TM":
@@ -128,16 +73,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
         #print("Highest:", Highest)
         print("Accuracy:", 100 * (m.predict(X_test) == Y_test).mean())
         if(counter == Write_Clauses):
-            resultclauses = open("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + "clauses1.csv",'a')
-            PrintClass(m, 1, clauses)
-            resultclauses.close()
-            resultclauses = open("Results/"+Name+"/"+machine+"/"+machine+dim + timestr + "clauses0.csv", 'a')
-            PrintClass(m, 0, clauses)
-            resultclauses.close()
-            if (inndata == "Draw"):
-                resultclauses = open("Results/"+Name+"/"+machine+"/"+machine+dim + timestr + "clauses2.csv", 'a')
-                PrintClass(m, 2, clauses)
-                resultclauses.close()
+            WriteClauses(m, inndata, clauses,Shape_X, Shape_Y, Shape_Z, Window_X, Window_Y,machine, Name, dim, timestr)
     results.write("mean,")
     meancount=0
     meansepoch = 0
@@ -147,17 +83,13 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
         meansepoch += i/10
         if i/10 > highepoch:
             highepoch = i/10
-        results.write(","+str(i/10))
-    results.write("," + str(meansepoch / meancount))
+        results.write(",%.4f" % (i/10))
+    results.write(",%.4f" % (meansepoch / meancount))
     results.write("\n")
     results.write("Single/k-Fold")
-    results.write(","+str(Highest))
-    results.write(","+str(highepoch)) # should be highest epoch
-    print("Highest: "+str(Highest)+" Highest k-Fold: "+str(highepoch)+" Average k-Fold: "+str(meansepoch/meancount))
-    #print("Prediction: x1 = 1, x2 = 0, ... -> y = %d" % (m.predict(np.array([[1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
-    #print("Prediction: x1 = 0, x2 = 1, ... -> y = %d" % (m.predict(np.array([[0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
-    #print("Prediction: x1 = 0, x2 = 0, ... -> y = %d" % (m.predict(np.array([[0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
-    #print("Prediction: x1 = 1, x2 = 1, ... -> y = %d" % (m.predict(np.array([[1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0]]))))
+    results.write(",%.4f" % (Highest))
+    results.write(",%.4f" % (highepoch)) # should be highest epoch
+    print("Highest: %.4f Highest k-Fold: %.4f Average k-Fold: %.4f" % (Highest, highepoch, meansepoch/meancount))
     results.close()
 def runner():
     # Settings
@@ -181,8 +113,69 @@ def runner():
     #StartMachine(clauses, epoch, 8000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(clauses, epoch, 16000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(clauses, epoch, 64000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-    StartMachine(clauses, epoch, 64000, S, inndata,dim,machine,6,6,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
+    StartMachine(clauses, epoch, 64000, S, inndata,dim,machine,5,5,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(clauses, epoch, 128000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
 
+def WriteClauses(m, inndata, clauses,Shape_X, Shape_Y, Shape_Z, Window_X, Window_Y,machine, Name, dim, timestr):
+    def TMGetOutput(tm,tm_class,clause):
+        output = []
+        for i in range(Shape_X*Shape_Y*4):
+            outputbit = tm.ta_action(tm_class,clause,i)
+            output.append(outputbit)
+        return output
+    def Align(tm,tm_class,clause):
+        output =""
+        if machine == "TM":
+            output = TMGetOutput(tm,tm_class,clause)
+        if machine == "cTM":
+            output = cTMGetOutput(tm,tm_class,clause)
+        nonNegated = output[:int(len(output)/2)]
+        negated = output[int(len(output)/2):]
+        xbit = (nonNegated[:int(len(nonNegated)/2)])
+        obit = (nonNegated[int(len(nonNegated)/2):])
+        nxbit = (negated[:int(len(negated)/2)])
+        nobit = (negated[int(len(negated)/2):])
+        board=[]
+        for i in range(Shape_X*Shape_Y):
+            resultclauses.write(str(xbit[i])+str(obit[i])+str(nxbit[i])+str(nobit[i]))
+            if i < Shape_X*Shape_Y-1:
+                resultclauses.write(",")
+            else:
+                resultclauses.write("\n")
+    offset_y = Shape_Y - Window_Y
+    offset_x = Shape_X - Window_X
+    def cTMGetOutput(tm, tm_class, clause):
+        output = []
+        xyz_id_old = 0
+        for y in range(Window_Y):
+            for x in range(Window_X):
+                for z in range(Shape_Z):
+                    xyz_id = offset_y + offset_x + y * Shape_X * 2 + x * 2 + z
+                    outputbit = tm.ta_action(tm_class, clause, xyz_id)
+                    output.append(outputbit)
+                    xyz_id_old = xyz_id + 1
+        output = cTMGetOutNegated(tm, tm_class, clause, xyz_id_old, output)
+        return output
+    def cTMGetOutNegated(tm, tm_class, clause, xyz_id_old, output):
+        for y in range(Window_Y):
+            for x in range(Window_X):
+                for z in range(Shape_Z):
+                    xyz_id = xyz_id_old + offset_y + offset_x + y * Shape_X * 2 + x * 2 + z
+                    outputbit = tm.ta_action(tm_class, clause, xyz_id)
+                    output.append(outputbit)
+        return output
+    def PrintClass(Ts, Class, clauses):
+        for i in range(clauses):
+            Align(Ts, Class, i)
+    resultclauses = open("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + "clauses1.csv", 'a')
+    PrintClass(m, 1, clauses)
+    resultclauses.close()
+    resultclauses = open("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + "clauses0.csv", 'a')
+    PrintClass(m, 0, clauses)
+    resultclauses.close()
+    if (inndata == "Draw"):
+        resultclauses = open("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + "clauses2.csv", 'a')
+        PrintClass(m, 2, clauses)
+        resultclauses.close()
 runner()
