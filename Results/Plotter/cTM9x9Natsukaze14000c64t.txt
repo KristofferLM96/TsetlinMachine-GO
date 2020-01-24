@@ -1,0 +1,44 @@
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=.6]{Images/Results/cTM9x9Natsukaze14000c64t.png}
+    \caption{Testing 9x9 dataset with cTM under different windows using 14000 clauses and 64000 threshold.}
+    \label{fig:cTM9x9Natsukaze14000c64t}
+\end{figure}
+\FloatBarrier
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{|a|d|d|d|d|d|}
+\hline
+\rowcolor{Blue}
+\begin{tabular}[c]{@{}l@{}}Window\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 9\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 13\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 15\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 6x6\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}79.15\%$\pm0.23\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.04\%$\pm0.41\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.95\%$\pm0.45\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.06\%$\pm0.26\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.89\%$\pm0.41\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 7x7\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}79.42\%$\pm0.64\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.32\%$\pm0.29\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}86.11\%$\pm0.16\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.71\%$\pm0.38\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.8\%$\pm0.21\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 8x8\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}79.9\%$\pm0.43\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.55\%$\pm0.18\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.83\%$\pm0.42\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.64\%$\pm0.28\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.37\%$\pm0.48\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 9x9\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}79.31\%$\pm0.6\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.37\%$\pm0.27\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.37\%$\pm0.28\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}84.99\%$\pm0.36\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}84.65\%$\pm0.47\%$\end{tabular}\\ \hline
+\end{tabular}
+\caption{Testing 9x9 dataset with cTM under different windows using 14000 clauses and 64000 threshold.}
+\label{tab:cTM9x9Natsukaze14000c64t}
+\end{table}
+\FloatBarrier
