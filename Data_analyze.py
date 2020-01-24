@@ -4,6 +4,7 @@
 
 
 import numpy as np
+import random
 
 
 # -----------------------------------------------
@@ -37,9 +38,21 @@ def check_duplication():
     global unique_list
     original_list = [line.strip() for line in file]
     print("Original List Length:", len(original_list))
+    original_length = len(original_list)
+
     unique_list = np.unique(original_list)
-    print("Unique List Length:", len(unique_list))
-    print("Difference:", len(original_list) - len(unique_list))
+    unique_length = len(unique_list)
+    print("Unique List Length:", unique_length)
+    print("Original - Unique:", original_length - unique_length, "\n")
+
+    """ Checks whether the random.shuffle() creates duplicates when ran. """
+    # random.shuffle(original_list)
+    # unique_list = np.unique(original_list)
+    # shuffled_length = len(original_list)
+    # print("Shuffled List Length:", shuffled_length)
+    # unique_length = len(unique_list)
+    # print("Unique List Length:", unique_length)
+    # print("Shuffled - Unique:", shuffled_length - unique_length, "\n")
 
 
 # -----------------------------------------------
