@@ -13,7 +13,6 @@ import numpy as np
 
 file_name = "9x9Natsukaze_binary.txt"
 path = "Data/Binary/" + file_name
-# path = "temp.txt"
 encoding = "UTF-8"  # ISO-8859-1 / UTF-8
 file = open(path, 'r', encoding=encoding)
 unique_list = []
