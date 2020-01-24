@@ -2,7 +2,7 @@
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=.6]{Images/Results/cTM9x9Natsukaze14000c64t.png}
-    \caption{Testing 9x9 dataset with cTM under different windows using 14000 clauses and 64000 threshold.}
+    \caption{Testing 9x9 dataset with CTM under different windows using 14000 clauses and 64000 threshold.}
     \label{fig:cTM9x9Natsukaze14000c64t}
 \end{figure}
 \FloatBarrier
@@ -38,7 +38,7 @@
 &\begin{tabular}[c]{@{}l@{}}84.99\%$\pm0.36\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}84.65\%$\pm0.47\%$\end{tabular}\\ \hline
 \end{tabular}
-\caption{Testing 9x9 dataset with cTM under different windows using 14000 clauses and 64000 threshold.}
+\caption{Testing 9x9 dataset with CTM under different windows using 14000 clauses and 64000 threshold.}
 \label{tab:cTM9x9Natsukaze14000c64t}
 \end{table}
 \FloatBarrier
