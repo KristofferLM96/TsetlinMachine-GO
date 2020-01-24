@@ -1,0 +1,26 @@
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=.6]{Images/Results/cTM9x9Natsukaze14000c32t.png}
+    \caption{Testing 9x9 dataset with CTM under different windows using 14000 clauses and 32000 threshold.}
+    \label{fig:cTM9x9Natsukaze14000c32t}
+\end{figure}
+\FloatBarrier
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{|a|d|d|d|d|d|}
+\hline
+\rowcolor{Blue}
+\begin{tabular}[c]{@{}l@{}}Window\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 9\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 13\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 15\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 9x9\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}81.74\%$\pm0.43\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.12\%$\pm0.46\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}84.86\%$\pm0.52\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}84.11\%$\pm0.52\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}84.0\%$\pm0.32\%$\end{tabular}\\ \hline
+\end{tabular}
+\caption{Testing 9x9 dataset with CTM under different windows using 14000 clauses and 32000 threshold.}
+\label{tab:cTM9x9Natsukaze14000c32t}
+\end{table}
+\FloatBarrier
