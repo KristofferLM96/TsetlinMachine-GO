@@ -167,7 +167,7 @@ def runner():
     epoch = 15
     dim = "9x9Natsukaze_"
     kFold = 10
-    machine = "TM"    #cTM or TM
+    machine = "cTM"    #cTM or TM
     #inndata = "Natsukaze_NoDraw"
     inndata = "Draw"
     Window_X = 7
@@ -180,7 +180,7 @@ def runner():
     #StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(clauses, epoch, 8000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(clauses, epoch, 16000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-    StartMachine(clauses, epoch, 64000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
+    #StartMachine(clauses, epoch, 64000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     StartMachine(clauses, epoch, 64000, S, inndata,dim,machine,6,6,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(clauses, epoch, 128000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
