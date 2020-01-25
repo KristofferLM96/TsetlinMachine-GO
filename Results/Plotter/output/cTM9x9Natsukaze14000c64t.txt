@@ -13,6 +13,12 @@
 \hline
 \rowcolor{Blue}
 \begin{tabular}[c]{@{}l@{}}Window\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 9\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 13\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 15\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 5x5\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}77.51\%$\pm0.75\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}83.17\%$\pm0.46\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}83.88\%$\pm0.23\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}83.69\%$\pm0.66\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}83.54\%$\pm0.49\%$\end{tabular}\\ \hline
 \begin{tabular}[c]{@{}l@{}} 6x6\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}79.15\%$\pm0.23\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}85.04\%$\pm0.41\%$\end{tabular}
