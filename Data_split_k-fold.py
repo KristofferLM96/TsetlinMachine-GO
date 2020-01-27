@@ -1,7 +1,7 @@
 import csv
 from numpy.random import shuffle
 
-name = "13x13_2k_r16_75_432x20k"
+name = "9x9_10k_r104_144x20k"
 win = open("Data/Results-Split/" + name + "_win.txt", 'r')
 loss = open("Data/Results-Split/" + name + "_loss.txt", 'r')
 draw = open("Data/Results-Split/" + name + "_draw.txt", 'r')

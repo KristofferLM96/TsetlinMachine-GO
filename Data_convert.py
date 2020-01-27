@@ -3,10 +3,10 @@ import glob
 import time
 import gomill.boards
 
-name = "13x13_2k_r16_75_432x20k"
+name = "9x9_10k_r104_144x20k"
 path = "Data/Original/" + name + "/*"
 output_path = "Data/Binary/" + name + "_binary.txt"
-board_size = 13
+board_size = 9
 total_pos = 19
 time_start = time.time()
 timestr = time.strftime("%Y-%m/%d--%H-%M-%S")
