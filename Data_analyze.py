@@ -72,6 +72,7 @@ def get_result_ratio():
     print("Amount of wins: ", len(win_line))
     print("Amount of loss: ", len(loss_line))
     print("Amount of draw: ", len(draw_line))
+
     win.close()
     loss.close()
     draw.close()
