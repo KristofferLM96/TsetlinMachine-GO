@@ -1,5 +1,5 @@
 from matplotlib import pyplot
-from statistics import stdev, median
+from statistics import stdev, mean
 import os
 import glob
 path = 'input/'
@@ -137,7 +137,7 @@ for FILENAME in sorted(glob.glob(os.path.join(path, '*.csv'))):
                     tab.append(line)
         if kFold == 10:
             for i in range(epoch):
-                m.append(median([tab[0][i], tab[1][i], tab[2][i], tab[3][i], tab[4][i], tab[5][i], tab[6][i], tab[7][i],
+                m.append(mean([tab[0][i], tab[1][i], tab[2][i], tab[3][i], tab[4][i], tab[5][i], tab[6][i], tab[7][i],
                                  tab[8][i], tab[9][i]]))
                 s.append(stdev([tab[0][i], tab[1][i], tab[2][i], tab[3][i], tab[4][i], tab[5][i], tab[6][i], tab[7][i],
                                 tab[8][i], tab[9][i]]))
