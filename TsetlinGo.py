@@ -93,13 +93,14 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
     results.close()
 def runner():
     # Settings
-    clauses = 14000
-    Threshold = 2000
+    clauses = 4000
+    Threshold = 16000
     S = 27.0
     epoch = 15
     dim = "9x9Natsukaze_"
+    dim = "9x9Aya_"
     kFold = 10
-    machine = "cTM"    #cTM or TM
+    machine = "TM"    #cTM or TM
     #inndata = "Natsukaze_NoDraw"
     inndata = "Draw"
     Window_X = 7
@@ -109,13 +110,10 @@ def runner():
     Shape_Z = 2
     Name = "Trond"
     Write_Clauses = 0  #0 = don't print clauses, 1-10 which k-Fold to write clauses for.
-    #StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-    #StartMachine(clauses, epoch, 8000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-    #StartMachine(clauses, epoch, 16000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-    #StartMachine(clauses, epoch, 64000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-    StartMachine(clauses, epoch, 64000, S, inndata,dim,machine,5,5,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-    #StartMachine(clauses, epoch, 128000, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-    #StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
+    StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
+    StartMachine(8000, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
+    StartMachine(16000, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
+
 
 def WriteClauses(m, inndata, clauses,Shape_X, Shape_Y, Shape_Z, Window_X, Window_Y,machine, Name, dim, timestr):
     def TMGetOutput(tm,tm_class,clause):
