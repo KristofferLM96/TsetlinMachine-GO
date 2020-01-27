@@ -11,8 +11,8 @@ import numpy as np
 # ............. GLOBAL VARIABLES ................
 # -----------------------------------------------
 
-# 9x9Natsukaze || 9x9_10k_r104_144x20k
-name = "9x9_10k_r104_144x20k"
+# 9x9Natsukaze || 9x9Aya
+name = "9x9Aya"
 file_name = name + "_binary.txt"
 path = "Data/Binary/" + file_name
 encoding = "UTF-8"  # ISO-8859-1 / UTF-8

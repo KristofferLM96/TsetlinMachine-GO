@@ -3,7 +3,7 @@ import glob
 import time
 import gomill.boards
 
-name = "9x9_10k_r104_144x20k"
+name = "9x9Aya"
 path = "Data/Original/" + name + "/*"
 output_path = "Data/Binary/" + name + "_binary.txt"
 board_size = 9

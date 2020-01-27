@@ -1,7 +1,6 @@
-import csv
 from numpy.random import shuffle
 
-name = "9x9_10k_r104_144x20k"
+name = "9x9Aya"
 win = open("Data/Results-Split/" + name + "_win.txt", 'r')
 loss = open("Data/Results-Split/" + name + "_loss.txt", 'r')
 draw = open("Data/Results-Split/" + name + "_draw.txt", 'r')
@@ -96,10 +95,10 @@ i = 0
 while i < 10:
     train_numb = str(i)+"train"
     test_numb = str(i)+"test"
-    no_draw_train = open("Data/K-Fold/No-Draw/" + name + "_No-Draw"+train_numb, 'w+')
-    no_draw_test = open("Data/K-Fold/No-Draw/" + name + "_No-Draw"+test_numb, 'w+')
+    # no_draw_train = open("Data/K-Fold/No-Draw/" + name + "_No-Draw"+train_numb, 'w+')
+    # no_draw_test = open("Data/K-Fold/No-Draw/" + name + "_No-Draw"+test_numb, 'w+')
     draw_train = open("Data/K-Fold/Draw/" + name + "_Draw"+train_numb, 'w+')
     draw_test = open("Data/K-Fold/Draw/" + name + "_Draw"+test_numb, 'w+')
-    shuffleWrite(no_draw_train, no_draw_test, collection, i)
+    # shuffleWrite(no_draw_train, no_draw_test, collection, i)
     shuffleWrite(draw_train, draw_test, collection2, i)
     i += 1
