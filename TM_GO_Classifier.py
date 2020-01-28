@@ -3,24 +3,25 @@ import time
 import os
 
 # Settings
-clauses = 4000
+clauses = 2000
 Threshold = 64000
 s = 27.0
-epoch = 7
-k_fold_parts = 1  # 1 - 10, how many k-fold parts to go through
+epoch = 3
+k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
 machine_type = "TM"  # cTM or TM
 parallel = True  # Running with/without parallel Tsetlin Machine
 data_status = "Draw"  # Draw or No-Draw
 data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
-data_name = "Aya_" + data_status  # Natsukaze_ || Aya_
+data_name = "Aya" + "_" + data_status  # Natsukaze_ || Aya_
 Window_X = 9
 Window_Y = 9
 Shape_X = Shape_Y = 9  # Depending on data_dim
 Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses for.
-state_date = "20-01-28_1225"
-state_path = "TM-State/" + data_dim + data_name + "_" + state_date + "/" + "state_"
+state_date = "20-01-28_1344"
+state_folder = "TM-State/" + data_dim + data_name + "/" + state_date + "/"
+state_path = state_folder + "state_"
 load_state = False
 
 if parallel:
@@ -82,7 +83,6 @@ def app(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_
         while epoch_count < _epoch:
             _results.write("Epoch" + str(epoch_count + 1) + ",")
             epoch_count += 1
-        _results.write("Average" + ",")
         _results.write("\n")
 
         if _machine_type == "TM":
@@ -206,14 +206,14 @@ def app(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_
         _results.write("\n")
         for j in range(_epoch):
             epoch_mean = np.mean(_epoch_results[j])
-            average_epoch_results.append(round(float(epoch_mean), 2))
+            average_epoch_results.append(round(float(epoch_mean), 4))
         single_highest_acc = max(_epochs_total)
-        print("Single-highest Accuracy:", round(single_highest_acc, 2))
+        print("Single-highest Accuracy:", round(single_highest_acc, 4))
         max_acc = max(average_epoch_results)
-        print("Max Accuracy:", round(max_acc, 2))
+        print("Max Accuracy:", round(max_acc, 4))
         avg_avg = np.mean(average_epoch_results)
         print("Average Accuracy for each epoch:", average_epoch_results)
-        print("Average Accuracy total:", round(float(avg_avg), 2), "\n\n")
+        print("Average Accuracy total:", round(float(avg_avg), 4), "\n\n")
         _results.write("mean" + ",")
         for q in range(len(average_epoch_results)):
             _results.write(",%.4f" % average_epoch_results[q])
@@ -249,6 +249,7 @@ def app(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_
         if load_state:
             m.fit(x_train, y_train, epochs=0, incremental=True)
             m.set_state(np.load(state_path + str(counter) + ".npy", allow_pickle=True))
+            print("Loaded tsetlin machine state from:", state_path + str(counter))
         for i in range(_epoch):
             start = time.time()
             m.fit(x_train, y_train, epochs=1, incremental=True)
@@ -260,13 +261,15 @@ def app(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_
             print("#%d Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (
                 i + 1, timestamp_epoch, result, stop - start, stop_testing - start_testing))
             result_total.append(result)
-            results.write(",%.4f" % (np.mean(result)))
             epoch_results[i].append(result)
             epochs_total.append(result)
         counter += 1
-        np.save("TM-State/" + _data_dim + _data_name + "_" + timestamp_save + "/"
-                + "state_" + str(counter), m.get_state())
-        if counter == _write_clauses and _write_clauses != 0:
+        os.makedirs("TM-State/" + data_dim + data_name + "/" + timestamp_save + "/", exist_ok=True)
+        np.save("TM-State/" + _data_dim + _data_name + "/" + timestamp_save + "/"
+                + "state_" + str(counter-1), m.get_state())
+        print("Saved tsetlin machine state to:", "TM-State/" + _data_dim + _data_name + "/" + timestamp_save + "/"
+              + "state_" + str(counter-1))
+        if counter == _write_clauses:
             write_clauses(m, _clauses, _name, _machine_type, _data_dim, _data_name)
     stat_calc(_epoch, epoch_results, epochs_total, results, result_total)
 
