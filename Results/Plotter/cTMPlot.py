@@ -10,13 +10,13 @@ CI = True
 
 kFold = 10  # 1 or 10
 showT1 = [0, 4, 8, 12, 14]  # specify which epochs will go out. epoch 0 will show as epoch 1 in table.
-OutputFileName = "cTM9x9Natsukaze14000c32t"  # outputname for each file
+OutputFileName = "TM9x9Aya16000t"  # outputname for each file
 # table caption ..
-Caption = "Testing 9x9 dataset with CTM under different windows using 14000 clauses and 32000 threshold."
+Caption = "Testing 9x9 dataset with CTM under different clauses and 16000 threshold."
 label = OutputFileName  # table label
-parsing = "Window"  # Threshold, Window, Settings, Clauses
+parsing = "Clauses"  # Threshold, Window, Settings, Clauses
 epoch = 15
-standdev = 0  # 1 if enabled in graph, 0 if not
+standdev = 1  # 1 if enabled in graph, 0 if not
 title_graph = ""
 backslash = "\ "
 backslash = backslash[:1]

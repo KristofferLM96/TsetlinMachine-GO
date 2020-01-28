@@ -1,0 +1,26 @@
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=.6]{Images/Results/TM9x9Aya16000t.png}
+    \caption{Testing 9x9 dataset with CTM under different clauses and 16000 threshold.}
+    \label{fig:TM9x9Aya16000t}
+\end{figure}
+\FloatBarrier
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{|a|d|d|d|d|d|}
+\hline
+\rowcolor{Blue}
+\begin{tabular}[c]{@{}l@{}}Clauses\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 9\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 13\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 15\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 4000\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}91.66\%$\pm0.15\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}92.49\%$\pm0.23\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}92.03\%$\pm0.15\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}91.85\%$\pm0.15\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}91.85\%$\pm0.12\%$\end{tabular}\\ \hline
+\end{tabular}
+\caption{Testing 9x9 dataset with CTM under different clauses and 16000 threshold.}
+\label{tab:TM9x9Aya16000t}
+\end{table}
+\FloatBarrier
