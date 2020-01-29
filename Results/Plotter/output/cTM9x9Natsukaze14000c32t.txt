@@ -13,36 +13,18 @@
 \hline
 \rowcolor{Blue}
 \begin{tabular}[c]{@{}l@{}}Window\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 9\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 13\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 15\end{tabular}\\ \hline
-\begin{tabular}[c]{@{}l@{}} 5x5\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}79.74\%$\pm0.72\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}83.53\%$\pm0.34\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}83.51\%$\pm0.51\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}83.12\%$\pm0.52\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}82.99\%$\pm0.44\%$\end{tabular}\\ \hline
-\begin{tabular}[c]{@{}l@{}} 6x6\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}81.1\%$\pm0.3\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}85.43\%$\pm0.24\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}85.56\%$\pm0.16\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}85.06\%$\pm0.49\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}84.93\%$\pm0.25\%$\end{tabular}\\ \hline
-\begin{tabular}[c]{@{}l@{}} 7x7\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}81.49\%$\pm0.41\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}85.56\%$\pm0.14\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}85.49\%$\pm0.36\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}85.02\%$\pm0.27\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}84.74\%$\pm0.58\%$\end{tabular}\\ \hline
-\begin{tabular}[c]{@{}l@{}} 8x8\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}82.04\%$\pm0.24\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}85.74\%$\pm0.2\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}85.17\%$\pm0.25\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}84.69\%$\pm0.52\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}84.75\%$\pm0.43\%$\end{tabular}\\ \hline
 \begin{tabular}[c]{@{}l@{}} 9x9\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}81.74\%$\pm0.43\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}85.12\%$\pm0.46\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}84.86\%$\pm0.52\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}84.11\%$\pm0.52\%$\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}84.0\%$\pm0.32\%$\end{tabular}\\ \hline
+&\begin{tabular}[c]{@{}l@{}}81.8\%$\pm0.43\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}85.09\%$\pm0.46\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}84.67\%$\pm0.52\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}83.95\%$\pm0.52\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}83.89\%$\pm0.32\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} \end{tabular}
+&\begin{tabular}[c]{@{}l@{}}91.66\%$\pm0.15\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}92.49\%$\pm0.23\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}92.03\%$\pm0.15\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}91.85\%$\pm0.15\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}91.85\%$\pm0.12\%$\end{tabular}\\ \hline
 \end{tabular}
 \caption{Testing 9x9 dataset with CTM under different windows using 14000 clauses and 32000 threshold.}
 \label{tab:cTM9x9Natsukaze14000c32t}

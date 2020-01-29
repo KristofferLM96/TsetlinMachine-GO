@@ -1,0 +1,7 @@
+MultiClassTsetlinMachineParallel,Parallel,Epoch1,Epoch2,Epoch3,Epoch4,Epoch5,Epoch6,Epoch7
+Settings:
+Clauses:,1000.0
+Threshold:,4000.0
+S:,27.0
+9x9Natsukaze_Draw0,,75.9390,79.0069,79.2479,79.0872,78.5379,78.8441,78.5032
+9x9Natsukaze_Draw1,,77.2695,79.3256,78.9022,78.8414,78.7915,78.4940
