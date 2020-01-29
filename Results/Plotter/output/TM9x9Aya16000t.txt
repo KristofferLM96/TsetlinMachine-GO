@@ -31,6 +31,12 @@
 &\begin{tabular}[c]{@{}l@{}}93.84\%$\pm0.6\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}93.88\%$\pm0.39\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}93.62\%$\pm0.41\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 32000\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}92.91\%$\pm0.32\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.0\%$\pm0.61\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.7\%$\pm0.52\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.43\%$\pm0.53\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.9\%$\pm0.49\%$\end{tabular}\\ \hline
 \end{tabular}
 \caption{Testing 9x9 dataset using TM with different clauses under 16000 threshold.}
 \label{tab:TM9x9Aya16000t}
