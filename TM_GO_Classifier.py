@@ -21,7 +21,7 @@ Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses for.
 state_date = "20-01-28_1344"
-state_folder = Name + "/" + "TM-State/" + data_dim + dataset + "/" + state_date + "/"
+state_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + state_date + "/"
 state_path = state_folder + "state_"
 load_state = False
 
@@ -198,9 +198,9 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         print("Mean Accuracy:", round(float(mean_accuracy), 4))
         counter += 1
         os.makedirs(Name + "/TM-State/" + data_dim + dataset + "/" + timestamp_save + "/", exist_ok=True)
-        np.save(Name + "/TM-State/" + _data_dim + _dataset + "/" + timestamp_save + "/"
+        np.save("/TM-State/" + Name + _data_dim + _dataset + "/" + timestamp_save + "/"
                 + "state_" + str(counter-1), m.get_state())
-        print("Saved tsetlin machine state to:", Name + "/TM-State/" + _data_dim + _dataset + "/" + timestamp_save
+        print("Saved tsetlin machine state to:", "/TM-State/" + Name + _data_dim + _dataset + "/" + timestamp_save
               + "/" + "state_" + str(counter-1), "\n")
         if counter == _write_clauses:
             write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _machine_type, _data_dim,
