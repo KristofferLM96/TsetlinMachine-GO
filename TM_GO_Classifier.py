@@ -106,7 +106,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         global y_train
         global x_test
         global y_test
-
+        checkpoint_start = time.time()
         try:
             print("Loading training dataset..")
             train_data = np.loadtxt("Data/K-Fold/" + data_status + "/" + _data_dim + _dataset + _numb + "train",
@@ -114,8 +114,9 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         except FileNotFoundError:
             print("Error. File not found, could not load training dataset.")
             exit(0)
-        print("Training dataset loaded.")
-
+        checkpoint_stop = time.time()
+        print("Training dataset loaded.          It took:", round(checkpoint_stop - checkpoint_start, 2), "seconds.")
+        checkpoint_start = time.time()
         try:
             print("Loading testing dataset..")
             test_data = np.loadtxt("Data/K-Fold/" + data_status + "/" + _data_dim + _dataset + _numb + "test",
@@ -123,7 +124,8 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         except FileNotFoundError:
             print("Error. File not found, could not load testing dataset.")
             exit(0)
-        print("Testing dataset loaded.")
+        checkpoint_stop = time.time()
+        print("Testing dataset loaded.          It took:", round(checkpoint_stop - checkpoint_start, 2), "seconds.")
 
         if _machine_type == "TM":
             x_train = train_data[:, 0:-1]
