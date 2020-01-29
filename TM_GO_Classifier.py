@@ -58,7 +58,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
 
         if _machine_type == "TM":
             print("Creating result file in.. ", "Results/" + _name + "/" + _machine_type + "/"
-                  + _data_dim + _dataset + "/" + _data_dim + _dataset + "_" + timestamp_save + ".csv")
+                  + _data_dim + _dataset + "/" + _data_dim + _dataset + "_" + timestamp_save + ".csv", "\n\n")
             os.makedirs(os.path.dirname("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                                         + _data_dim + _dataset + "_" + timestamp_save + ".csv"), exist_ok=True)
             _results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
@@ -234,7 +234,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                 print("Could not save file. File or directory not found.")
                 exit(0)
         mean_accuracy = np.mean(result_total)
-        print("Mean Accuracy:", round(float(mean_accuracy), 4))
+        print("Mean Accuracy:", round(float(mean_accuracy), 4), "\n\n")
         counter += 1
         if counter == _write_clauses:
             write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _machine_type, _data_dim,
