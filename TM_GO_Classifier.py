@@ -3,11 +3,11 @@ import time
 import os
 
 # Settings
-clauses = 1000
-Threshold = 16000
+clauses = 10
+Threshold = 16
 s = 27.0
-epoch = 15
-k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
+epoch = 3
+k_fold_parts = 2  # 1 - 10, how many k-fold parts to go through
 machine_type = "TM"  # cTM or TM
 parallel = True  # Running with/without parallel Tsetlin Machine
 data_status = "Draw"  # Draw or No-Draw
@@ -57,11 +57,16 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             _epoch_results.append([])
 
         if _machine_type == "TM":
+            print("Creating result file in.. ", "Results/" + _name + "/" + _machine_type + "/"
+                  + _data_dim + _dataset + "/" + _data_dim + _dataset + "_" + timestamp_save + ".csv")
             os.makedirs(os.path.dirname("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                                         + _data_dim + _dataset + "_" + timestamp_save + ".csv"), exist_ok=True)
             _results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                             + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
         elif _machine_type == "cTM":
+            print("Creating result file in.. ", "Results/" + _name + "/" + _machine_type + "/" + _data_dim
+                  + _dataset + "/" + str(_window_x) + "x" + str(_window_y) + "/"
+                  + _data_dim + _dataset + "_" + timestamp_save + ".csv")
             os.makedirs(os.path.dirname("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                                         + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _dataset + "_"
                                         + timestamp_save + ".csv"), exist_ok=True)
@@ -96,30 +101,48 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         return _results
 
     def load_data(_numb, _shape_x, _shape_y, _shape_z, _clauses, _t, _s, _window_x, _window_y,
-                  _data_dim, _dataset, _timestamp_save):
+                  _data_dim, _dataset, _timestamp_save, _results):
         global x_train
         global y_train
         global x_test
         global y_test
-        train_data = np.loadtxt("Data/K-Fold/" + data_status + "/" + _data_dim + _dataset + _numb + "train",
-                                delimiter=",")
-        test_data = np.loadtxt("Data/K-Fold/" + data_status + "/" + _data_dim + _dataset + _numb + "test",
-                               delimiter=",")
+
+        try:
+            print("Loading training dataset..")
+            train_data = np.loadtxt("Data/K-Fold/" + data_status + "/" + _data_dim + _dataset + _numb + "train",
+                                    delimiter=",")
+        except FileNotFoundError:
+            print("Error. File not found, could not load training dataset.")
+            exit(0)
+        print("Training dataset loaded.")
+
+        try:
+            print("Loading testing dataset..")
+            test_data = np.loadtxt("Data/K-Fold/" + data_status + "/" + _data_dim + _dataset + _numb + "test",
+                                   delimiter=",")
+        except FileNotFoundError:
+            print("Error. File not found, could not load testing dataset.")
+            exit(0)
+        print("Testing dataset loaded.")
+
         if _machine_type == "TM":
             x_train = train_data[:, 0:-1]
             y_train = train_data[:, -1]
             x_test = test_data[:, 0:-1]
             y_test = test_data[:, -1]
+
             machine = MultiClassTsetlinMachine(_clauses, _t, _s, boost_true_positive_feedback=0, weighted_clauses=True)
             print("-------------------------------------------------------------------------------------------")
             print("MultiClassTsetlinMachine using %s, %s, %s written to file %s%s_%s.csv\n"
                   % (_data_dim, data_status, data_name, _data_dim, _dataset, _timestamp_save))
             print("Settings: Clauses: %.1f Threshold: %.1f s: %.1f\n" % (_clauses, _t, _s))
+
         if _machine_type == "cTM":
             x_train = train_data[:, 0:-1].reshape(train_data.shape[0], _shape_x, _shape_y, _shape_z)
             y_train = train_data[:, -1]
             x_test = test_data[:, 0:-1].reshape(test_data.shape[0], _shape_x, _shape_y, _shape_z)
             y_test = test_data[:, -1]
+
             machine = MultiClassConvolutionalTsetlinMachine2D(_clauses, _t, _s, (_window_x, _window_y),
                                                               boost_true_positive_feedback=0, weighted_clauses=True)
             print("-------------------------------------------------------------------------------------------")
@@ -130,7 +153,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             print("Settings: Clauses: %.1f Threshold: %.1f S: %.1f Window_X: %.1f Window_Y: %.1f\n" % (
                 _clauses, _t, _s, _window_x, _window_y))
 
-        results.write(_data_dim + _dataset + _numb + ",")
+        _results.write(_data_dim + _dataset + _numb + ",")
 
         return machine
 
@@ -138,13 +161,18 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         for j in range(_epoch):
             epoch_mean = np.mean(_epoch_results[j])
             average_epoch_results.append(round(float(epoch_mean), 4))
+
         single_highest_acc = max(_epochs_total)
         print("Single-highest Accuracy:", round(single_highest_acc, 4))
+
         max_acc = max(average_epoch_results)
         print("Max Accuracy:", round(max_acc, 4))
+
         avg_avg = np.mean(average_epoch_results)
         print("Average Accuracy for each epoch:", average_epoch_results)
+
         print("Average Accuracy total:", round(float(avg_avg), 4), "\n\n")
+
         _results.write("mean" + ",")
         for q in range(len(average_epoch_results)):
             _results.write(",%.4f" % average_epoch_results[q])
@@ -175,11 +203,15 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         global x_test
         global y_test
         numb = str(counter)
-        m = load_data(numb, _shape_x, _shape_y, _shape_z,
-                      _clauses, _t, _s, _window_x, _window_y, _data_dim, _dataset, timestamp_save)
+        m = load_data(numb, _shape_x, _shape_y, _shape_z, _clauses, _t, _s, _window_x, _window_y, _data_dim,
+                      _dataset, timestamp_save, results)
         if load_state:
             m.fit(x_train, y_train, epochs=0, incremental=True)
-            m.set_state(np.load(state_path + str(counter) + ".npy", allow_pickle=True))
+            try:
+                m.set_state(np.load(state_path + str(counter) + ".npy", allow_pickle=True))
+            except FileNotFoundError:
+                print("Could not load TM state. File or directory not found.")
+                exit(0)
             print("Loaded tsetlin machine state from:", state_path + str(counter))
         for i in range(_epoch):
             start = time.time()
@@ -194,9 +226,13 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             result_total.append(result)
             epoch_results[i].append(result)
             epochs_total.append(result)
-            os.makedirs(Name + "/TM-State/" + data_dim + dataset + "/" + timestamp_save + "/", exist_ok=True)
-            np.save("/TM-State/" + Name + _data_dim + _dataset + "/" + timestamp_save + "/"
-                    + "state_" + str(counter), m.get_state())
+            try:
+                os.makedirs("TM-State/" + Name + "/" + data_dim + dataset + "/" + timestamp_save + "/", exist_ok=True)
+                np.save("TM-State/" + Name + "/" + _data_dim + _dataset + "/" + timestamp_save + "/"
+                        + "state_" + str(counter), m.get_state())
+            except FileNotFoundError:
+                print("Could not save file. File or directory not found.")
+                exit(0)
         mean_accuracy = np.mean(result_total)
         print("Mean Accuracy:", round(float(mean_accuracy), 4))
         counter += 1
