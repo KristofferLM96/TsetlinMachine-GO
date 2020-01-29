@@ -237,7 +237,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             result_total.append(result)
             epoch_results[i].append(result)
             epochs_total.append(result)
-            results.write("," + str(result))
+            results.write("," + str(round(result, 4)))
             try:
                 os.makedirs("TM-State/" + Name + "/" + data_dim + dataset + "/" + timestamp_save + "/", exist_ok=True)
                 np.save("TM-State/" + Name + "/" + _data_dim + _dataset + "/" + timestamp_save + "/"
