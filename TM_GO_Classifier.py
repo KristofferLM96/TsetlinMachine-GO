@@ -3,16 +3,17 @@ import time
 import os
 
 # Settings
-clauses = 2000
-Threshold = 64000
+clauses = 1000
+Threshold = 16000
 s = 27.0
-epoch = 3
+epoch = 15
 k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
 machine_type = "TM"  # cTM or TM
 parallel = True  # Running with/without parallel Tsetlin Machine
 data_status = "Draw"  # Draw or No-Draw
 data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
-data_name = "Aya" + "_" + data_status  # Natsukaze_ || Aya_
+data_name = "Aya"  # Natsukaze_ || Aya_
+dataset = data_name + "_" + data_status
 Window_X = 9
 Window_Y = 9
 Shape_X = Shape_Y = 9  # Depending on data_dim
@@ -20,7 +21,7 @@ Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses for.
 state_date = "20-01-28_1344"
-state_folder = Name + "/" + "TM-State/" + data_dim + data_name + "/" + state_date + "/"
+state_folder = Name + "/" + "TM-State/" + data_dim + dataset + "/" + state_date + "/"
 state_path = state_folder + "state_"
 load_state = False
 
@@ -45,10 +46,10 @@ offset_y = 0
 offset_x = 0
 
 
-def app(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_x, _window_y,
+def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x, _window_y,
         _shape_x, _shape_y, _shape_z, _name, _write_clauses):
 
-    def init(_machine_type, _name, _data_dim, _data_name, _epoch, _clauses, _t, _s, _window_x, _window_y,
+    def init(_machine_type, _name, _data_dim, _dataset, _epoch, _clauses, _t, _s, _window_x, _window_y,
              _shape_x, _shape_y, _shape_z, _epoch_results, _average_epoch_results,
              _epochs_total, _offset_x, _offset_y):
         epoch_count = 0
@@ -56,16 +57,16 @@ def app(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_
             _epoch_results.append([])
 
         if _machine_type == "TM":
-            os.makedirs(os.path.dirname("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _data_name + "/"
-                                        + _data_dim + _data_name + "_" + timestamp_save + ".csv"), exist_ok=True)
-            _results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _data_name + "/"
-                            + _data_dim + _data_name + "_" + timestamp_save + ".csv", 'a')
+            os.makedirs(os.path.dirname("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                                        + _data_dim + _dataset + "_" + timestamp_save + ".csv"), exist_ok=True)
+            _results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                            + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
         elif _machine_type == "cTM":
-            os.makedirs(os.path.dirname("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _data_name + "/"
-                                        + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _data_name + "_"
+            os.makedirs(os.path.dirname("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                                        + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _dataset + "_"
                                         + timestamp_save + ".csv"), exist_ok=True)
-            _results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _data_name + "/"
-                            + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _data_name + "_"
+            _results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                            + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _dataset + "_"
                             + timestamp_save + ".csv", 'a')
 
         _offset_y = _shape_y - _window_y
@@ -78,7 +79,7 @@ def app(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_
         if _machine_type == "cTM" and parallel:
             _results.write(
                 "MultiClassConvolutionalTsetlinMachine2D,Parallel,")
-        elif _machine_type == "TM" and not parallel:
+        elif _machine_type == "cTM" and not parallel:
             _results.write("MultiClassConvolutionalTsetlinMachine2D,")
         while epoch_count < _epoch:
             _results.write("Epoch" + str(epoch_count + 1) + ",")
@@ -95,14 +96,14 @@ def app(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_
         return _results
 
     def load_data(_numb, _shape_x, _shape_y, _shape_z, _clauses, _t, _s, _window_x, _window_y,
-                  _data_dim, _data_name, _timestamp_save):
+                  _data_dim, _dataset, _timestamp_save):
         global x_train
         global y_train
         global x_test
         global y_test
-        train_data = np.loadtxt("Data/K-Fold/" + data_status + "/" + _data_dim + _data_name + _numb + "train",
+        train_data = np.loadtxt("Data/K-Fold/" + data_status + "/" + _data_dim + _dataset + _numb + "train",
                                 delimiter=",")
-        test_data = np.loadtxt("Data/K-Fold/" + data_status + "/" + _data_dim + _data_name + _numb + "test",
+        test_data = np.loadtxt("Data/K-Fold/" + data_status + "/" + _data_dim + _dataset + _numb + "test",
                                delimiter=",")
         if _machine_type == "TM":
             x_train = train_data[:, 0:-1]
@@ -112,7 +113,7 @@ def app(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_
             machine = MultiClassTsetlinMachine(_clauses, _t, _s, boost_true_positive_feedback=0, weighted_clauses=True)
             print("-------------------------------------------------------------------------------------------")
             print("MultiClassTsetlinMachine using %s, %s, %s written to file %s%s_%s.csv\n"
-                  % (_data_dim, data_status, _data_name, _data_dim, _data_name, _timestamp_save))
+                  % (_data_dim, data_status, data_name, _data_dim, _dataset, _timestamp_save))
             print("Settings: Clauses: %.1f Threshold: %.1f s: %.1f\n" % (_clauses, _t, _s))
         if _machine_type == "cTM":
             x_train = train_data[:, 0:-1].reshape(train_data.shape[0], _shape_x, _shape_y, _shape_z)
@@ -124,15 +125,91 @@ def app(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_
             print("-------------------------------------------------------------------------------------------")
             print("MultiClassConvolutionalTsetlinMachine2D using %s, %s, %s written to file %s%s_%s.csv "
                   "(%.1f x %.1f x %.1f)""\n"
-                  % (data_dim, data_status, _data_name, _data_dim, _data_name, timestamp_save,
+                  % (data_dim, data_status, _dataset, _data_dim, _dataset, timestamp_save,
                      _shape_x, _shape_y, _shape_z))
             print("Settings: Clauses: %.1f Threshold: %.1f S: %.1f Window_X: %.1f Window_Y: %.1f\n" % (
                 _clauses, _t, _s, _window_x, _window_y))
 
-        results.write(data_dim + data_name + numb + ",")
+        results.write(_data_dim + _dataset + _numb + ",")
 
         return machine
 
+    def stat_calc(_epoch, _epoch_results, _epochs_total, _results, _result_total):
+        for j in range(_epoch):
+            epoch_mean = np.mean(_epoch_results[j])
+            average_epoch_results.append(round(float(epoch_mean), 4))
+        single_highest_acc = max(_epochs_total)
+        print("Single-highest Accuracy:", round(single_highest_acc, 4))
+        max_acc = max(average_epoch_results)
+        print("Max Accuracy:", round(max_acc, 4))
+        avg_avg = np.mean(average_epoch_results)
+        print("Average Accuracy for each epoch:", average_epoch_results)
+        print("Average Accuracy total:", round(float(avg_avg), 4), "\n\n")
+        _results.write("mean" + ",")
+        for q in range(len(average_epoch_results)):
+            _results.write(",%.4f" % average_epoch_results[q])
+        _results.write(",%.4f" % avg_avg)
+        _results.write(",")
+        _results.write("\n")
+        _results.write("singel-highest/max" + "," + ",%.4f" % single_highest_acc + ",%.4f" % max_acc + ",")
+
+    global timestamp_save
+    global epoch_results
+    global average_epoch_results
+    global epochs_total
+    global offset_x
+    global offset_y
+    timestamp_save = time.strftime("%y-%m-%d_%H%M")
+    epoch_results = []
+    average_epoch_results = []
+    epochs_total = []
+    counter = 0
+    results = init(_machine_type, _name, _data_dim, _dataset, _epoch, _clauses, _t, _s, _window_x,
+                   _window_y, _shape_x, _shape_y, _shape_z, epoch_results, average_epoch_results,
+                   epochs_total, offset_x, offset_y)
+    result_total = []
+    while counter < k_fold_parts:
+        print("k-fold ------", str(counter + 1) + " / " + str(k_fold_parts))
+        global x_train
+        global y_train
+        global x_test
+        global y_test
+        numb = str(counter)
+        m = load_data(numb, _shape_x, _shape_y, _shape_z,
+                      _clauses, _t, _s, _window_x, _window_y, _data_dim, _dataset, timestamp_save)
+        if load_state:
+            m.fit(x_train, y_train, epochs=0, incremental=True)
+            m.set_state(np.load(state_path + str(counter) + ".npy", allow_pickle=True))
+            print("Loaded tsetlin machine state from:", state_path + str(counter))
+        for i in range(_epoch):
+            start = time.time()
+            m.fit(x_train, y_train, epochs=1, incremental=True)
+            stop = time.time()
+            timestamp_epoch = time.strftime("%H:%M:%S")
+            start_testing = time.time()
+            result = 100 * (m.predict(x_test) == y_test).mean()
+            stop_testing = time.time()
+            print("#%d Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (
+                i + 1, timestamp_epoch, result, stop - start, stop_testing - start_testing))
+            result_total.append(result)
+            epoch_results[i].append(result)
+            epochs_total.append(result)
+        mean_accuracy = np.mean(result_total)
+        print("Mean Accuracy:", round(float(mean_accuracy), 4))
+        counter += 1
+        os.makedirs(Name + "/TM-State/" + data_dim + dataset + "/" + timestamp_save + "/", exist_ok=True)
+        np.save(Name + "/TM-State/" + _data_dim + _dataset + "/" + timestamp_save + "/"
+                + "state_" + str(counter-1), m.get_state())
+        print("Saved tsetlin machine state to:", Name + "/TM-State/" + _data_dim + _dataset + "/" + timestamp_save
+              + "/" + "state_" + str(counter-1), "\n")
+        if counter == _write_clauses:
+            write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _machine_type, _data_dim,
+                          _dataset, timestamp_save, m)
+    stat_calc(_epoch, epoch_results, epochs_total, results, result_total)
+
+
+def write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _machine_type, _data_dim, _dataset,
+                  _timestamp_save, _m):
     def tm_get_output(_tm, _tm_class, _clause):
         output = []
         for i in range(_shape_x * _shape_y * 4):
@@ -184,95 +261,20 @@ def app(_epoch, _clauses, _t, _s, _data_name, _data_dim, _machine_type, _window_
         for i in range(_clauses):
             align(_t, _class, i, _result_clauses)
 
-    def write_clauses(_m, _clauses, _name, _machine_type, _data_dim, _data_name):
-        result_clauses = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _data_name + timestamp_save
+        result_clauses = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + _timestamp_save
                               + "clauses1.csv", 'a')
         print_class(_m, 1, _clauses, result_clauses)
         result_clauses.close()
-        result_clauses = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _data_name + timestamp_save
+        result_clauses = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + _timestamp_save
                               + "clauses0.csv", 'a')
         print_class(_m, 0, _clauses, result_clauses)
         result_clauses.close()
         if data_status == "Draw":
-            result_clauses = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _data_name
+            result_clauses = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset
                                   + timestamp_save + "clauses2.csv", 'a')
             print_class(_m, 2, _clauses, result_clauses)
             result_clauses.close()
 
-    def stat_calc(_epoch, _epoch_results, _epochs_total, _results, _result_total):
-        mean_accuracy = np.mean(_result_total)
-        print("Mean Accuracy:", round(float(mean_accuracy), 4), "\n\n")
-        _results.write(",%.4f" % mean_accuracy)
-        _results.write("\n")
-        for j in range(_epoch):
-            epoch_mean = np.mean(_epoch_results[j])
-            average_epoch_results.append(round(float(epoch_mean), 4))
-        single_highest_acc = max(_epochs_total)
-        print("Single-highest Accuracy:", round(single_highest_acc, 4))
-        max_acc = max(average_epoch_results)
-        print("Max Accuracy:", round(max_acc, 4))
-        avg_avg = np.mean(average_epoch_results)
-        print("Average Accuracy for each epoch:", average_epoch_results)
-        print("Average Accuracy total:", round(float(avg_avg), 4), "\n\n")
-        _results.write("mean" + ",")
-        for q in range(len(average_epoch_results)):
-            _results.write(",%.4f" % average_epoch_results[q])
-        _results.write(",%.4f" % avg_avg)
-        _results.write(",")
-        _results.write("\n")
-        _results.write("singel-highest/max" + "," + ",%.4f" % single_highest_acc + ",%.4f" % max_acc + ",")
 
-    global timestamp_save
-    global epoch_results
-    global average_epoch_results
-    global epochs_total
-    global offset_x
-    global offset_y
-    timestamp_save = time.strftime("%y-%m-%d_%H%M")
-    epoch_results = []
-    average_epoch_results = []
-    epochs_total = []
-    counter = 0
-    results = init(_machine_type, _name, _data_dim, _data_name, _epoch, _clauses, _t, _s, _window_x,
-                   _window_y, _shape_x, _shape_y, _shape_z, epoch_results, average_epoch_results,
-                   epochs_total, offset_x, offset_y)
-    result_total = []
-    while counter < k_fold_parts:
-        print("k-fold ------", str(counter) + "(" + str(counter + 1) + ")")
-        global x_train
-        global y_train
-        global x_test
-        global y_test
-        numb = str(counter)
-        m = load_data(numb, _shape_x, _shape_y, _shape_z,
-                      _clauses, _t, _s, _window_x, _window_y, _data_dim, _data_name, timestamp_save)
-        if load_state:
-            m.fit(x_train, y_train, epochs=0, incremental=True)
-            m.set_state(np.load(state_path + str(counter) + ".npy", allow_pickle=True))
-            print("Loaded tsetlin machine state from:", state_path + str(counter))
-        for i in range(_epoch):
-            start = time.time()
-            m.fit(x_train, y_train, epochs=1, incremental=True)
-            stop = time.time()
-            timestamp_epoch = time.strftime("%H:%M:%S")
-            start_testing = time.time()
-            result = 100 * (m.predict(x_test) == y_test).mean()
-            stop_testing = time.time()
-            print("#%d Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (
-                i + 1, timestamp_epoch, result, stop - start, stop_testing - start_testing))
-            result_total.append(result)
-            epoch_results[i].append(result)
-            epochs_total.append(result)
-        counter += 1
-        os.makedirs(Name + "/TM-State/" + data_dim + data_name + "/" + timestamp_save + "/", exist_ok=True)
-        np.save(Name + "/TM-State/" + _data_dim + _data_name + "/" + timestamp_save + "/"
-                + "state_" + str(counter-1), m.get_state())
-        print("Saved tsetlin machine state to:", Name + "/TM-State/" + _data_dim + _data_name + "/" + timestamp_save
-              + "/" + "state_" + str(counter-1))
-        if counter == _write_clauses:
-            write_clauses(m, _clauses, _name, _machine_type, _data_dim, _data_name)
-    stat_calc(_epoch, epoch_results, epochs_total, results, result_total)
-
-
-app(epoch, clauses, Threshold, s, data_name, data_dim, machine_type, Window_X, Window_Y,
+app(epoch, clauses, Threshold, s, dataset, data_dim, machine_type, Window_X, Window_Y,
     Shape_X, Shape_Y, Shape_Z, Name, Write_Clauses)
