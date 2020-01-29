@@ -1,0 +1,8 @@
+MultiClassTsetlinMachineParallel,Parallel,Epoch1,Epoch2,Epoch3,Epoch4,Epoch5,Epoch6,Epoch7,Epoch8,Epoch9,Epoch10,Epoch11,Epoch12,Epoch13,Epoch14,Epoch15,
+Settings:
+Clauses:,2000.0
+Threshold:,16000.0
+s:,27.0
+9x9Aya_Draw0,9x9Aya_Draw1,9x9Aya_Draw2,9x9Aya_Draw3,9x9Aya_Draw4,9x9Aya_Draw5,9x9Aya_Draw6,9x9Aya_Draw7,9x9Aya_Draw8,9x9Aya_Draw9,,91.2284
+mean,,91.2766,91.5881,91.8213,91.7664,91.6287,91.5159,91.2793,91.1012,91.0845,90.9536,90.9315,90.9018,90.8637,90.8313,90.8825,91.2284,
+singel-highest/max,,92.0500,91.8213,
