@@ -1,8 +1,6 @@
 from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
 from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
 import numpy as np
-from statistics import mean
-import csv
 from time import time
 import time as stime
 
@@ -72,7 +70,6 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
     if machine =="cTM": results.write(
         "Settings:\nClauses:,%.1f\nThreshold:,%.1f\nS:,%.1f\nWindow_X:,%.1f\nWindow_Y:,%.1f\nShape_X:,%.1f\nShape_Y:,%.1f\nShape_Z:,%.1f\n" % (
         clauses, Threshold, S, Window_X, Window_Y, Shape_X, Shape_Y, Shape_Z))
-
     while counter < kFold:
         numb = str(counter)
         global X_train,Y_train,X_test,Y_test,m
@@ -96,8 +93,10 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
             print("-------------------------------------------------------------------------------------------")
             print("MultiClassConvolutionalTsetlinMachine2D using %s %s writen to file %s.csv (%.1f x %.1f x %.1f)\n" % (inndata, str(counter), timestr, Shape_X, Shape_Y, Shape_Z))
             print("Settings: Clauses: %.1f Threshold: %.1f S: %.1f Window_X: %.1f Window_Y: %.1f\n" % (clauses, Threshold, S, Window_X, Window_Y))
-
+        results.close()
+        results = open("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + ".csv", 'a')
         results.write(dim+inndata + numb + ",")
+        results.close()
         startepoch = 1
         if loadstate == 1 and len(resArray) >= counter+1:
             print(len(resArray))
@@ -109,6 +108,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
                 timestamp = stime.strftime("%H:%M:%S")
                 print("#%d Time: %s Accuracy: %.2f%% --loaded--" % (startepoch, timestamp, loadresult))
                 startepoch += 1
+                results = open("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + ".csv", 'a')
                 results.write(",%.4f" % (loadresult))
                 meanTab[i] = meanTab[i] + loadresult
                 if Highest < loadresult:
@@ -119,6 +119,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
                         counter) + ".npy", x)
         #print(meanTab)
         startepoch-=1
+        results.close()
         for i in range(epoch-startepoch):
             start = time()
             m.fit(X_train, Y_train, epochs=1, incremental=True)
@@ -134,8 +135,12 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
             if (savestate == 2):
                 x = m.get_state()
                 np.save("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + "kFold" + str(counter) + ".npy",x)
+            results = open("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + ".csv", 'a')
             results.write(",%.4f" % (np.mean(result)))
+            results.close()
+        results = open("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + ".csv", 'a')
         results.write("\n")
+        results.close()
         if(savestate == 1):
             x = m.get_state()
             np.save("Results/" + Name + "/" + machine + "/" + machine + dim + timestr +"kFold"+str(counter) + ".npy", x)
@@ -144,6 +149,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
         print("Accuracy:", 100 * (m.predict(X_test) == Y_test).mean())
         if(counter == Write_Clauses):
             WriteClauses(m, inndata, clauses,Shape_X, Shape_Y, Shape_Z, Window_X, Window_Y,machine, Name, dim, timestr)
+    results = open("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + ".csv", 'a')
     results.write("mean,")
     meancount=0
     meansepoch = 0
@@ -161,27 +167,28 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
     results.write(",%.4f" % (highepoch)) # should be highest epoch
     print("Highest: %.4f Highest k-Fold: %.4f Average k-Fold: %.4f" % (Highest, highepoch, meansepoch/meancount))
     results.close()
+
 def runner():
     # Settings
-    clauses = 1000
-    Threshold = 4000
+    clauses = 32000
+    Threshold = 64000
     S = 27.0
-    epoch = 7
-    dim = "9x9Natsukaze_"
-    #dim = "9x9Aya_"
+    epoch = 5
+    #dim = "9x9Natsukaze_"
+    dim = "9x9Aya_"
     kFold = 10
     machine = "TM"    #cTM or TM
     #inndata = "Natsukaze_NoDraw"
     inndata = "Draw"
-    Window_X = 7
-    Window_Y = 7
+    Window_X = 5
+    Window_Y = 5
     Shape_X = 9
     Shape_Y = 9
     Shape_Z = 2
     Name = "Trond"
     Write_Clauses = 0  #0 = don't print clauses, 1-10 which k-Fold to write clauses for.
     savestate = 2  #0 = no save, #1 = save each kFold  #2 = save each epoch
-    loadstate = 1
+    loadstate = 0
     #loadfile = "0128-1237"
     loadfile = "0128-1559"
     #StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
