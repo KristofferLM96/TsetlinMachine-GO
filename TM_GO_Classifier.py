@@ -1,3 +1,4 @@
+import sys
 import numpy as np
 import time
 import os
@@ -48,6 +49,14 @@ offset_x = 0
 
 def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x, _window_y,
         _shape_x, _shape_y, _shape_z, _name, _write_clauses):
+    print("#################################################################################################")
+    print("#                                                                                               #")
+    print("#           (っ◔◡◔)っ ♥  Ｔｓｅｔｌｉｎ Ｍａｃｈｉｎｅ Ｃｌａｓｓｉｆｉｃａｔｉｏｎ  ♥ と(◔◡◔と)         #")
+    print("#                                            －－ －－ －－                                       #")
+    print("#                                        ＧＯ Ｂｏａｒｄ Ｇａｍｅ                                  #")
+    print("#                                                                                               #")
+    print("#################################################################################################")
+    print("\n\n")
 
     def init(_machine_type, _name, _data_dim, _dataset, _epoch, _clauses, _t, _s, _window_x, _window_y,
              _shape_x, _shape_y, _shape_z, _epoch_results, _average_epoch_results,
@@ -113,7 +122,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                                     delimiter=",")
         except FileNotFoundError:
             print("Error. File not found, could not load training dataset.")
-            exit(0)
+            sys.exit(0)
         checkpoint_stop = time.time()
         print("Training dataset loaded.          It took:", round(checkpoint_stop - checkpoint_start, 2), "seconds.")
         checkpoint_start = time.time()
@@ -123,7 +132,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                                    delimiter=",")
         except FileNotFoundError:
             print("Error. File not found, could not load testing dataset.")
-            exit(0)
+            sys.exit(0)
         checkpoint_stop = time.time()
         print("Testing dataset loaded.          It took:", round(checkpoint_stop - checkpoint_start, 2), "seconds.")
 
@@ -213,7 +222,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                 m.set_state(np.load(state_path + str(counter) + ".npy", allow_pickle=True))
             except FileNotFoundError:
                 print("Could not load TM state. File or directory not found.")
-                exit(0)
+                sys.exit(0)
             print("Loaded tsetlin machine state from:", state_path + str(counter))
         for i in range(_epoch):
             start = time.time()
@@ -228,13 +237,15 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             result_total.append(result)
             epoch_results[i].append(result)
             epochs_total.append(result)
+            results.write("," + str(result))
             try:
                 os.makedirs("TM-State/" + Name + "/" + data_dim + dataset + "/" + timestamp_save + "/", exist_ok=True)
                 np.save("TM-State/" + Name + "/" + _data_dim + _dataset + "/" + timestamp_save + "/"
                         + "state_" + str(counter), m.get_state())
             except FileNotFoundError:
                 print("Could not save file. File or directory not found.")
-                exit(0)
+                sys.exit(0)
+        results.write("\n")
         mean_accuracy = np.mean(result_total)
         print("Mean Accuracy:", round(float(mean_accuracy), 4), "\n\n")
         counter += 1
