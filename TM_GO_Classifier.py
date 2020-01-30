@@ -6,11 +6,11 @@ from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
 from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
 
 # Settings
-clauses = 1000
-Threshold = 16000
+clauses = 10
+Threshold = 16
 s = 27.0
-epoch = 15
-k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
+epoch = 3
+k_fold_parts = 2  # 1 - 10, how many k-fold parts to go through
 machine_type = "TM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
@@ -22,10 +22,11 @@ Shape_X = Shape_Y = 9  # Depending on data_dim
 Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses for.
-state_date = "20-01-28_1344"
-state_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + state_date + "/"
-state_path = state_folder + "state_"
+load_date = "20-01-28_1344"
+load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
+load_path = load_folder + "state_"
 load_state = False
+save_state = True
 
 x_train = []
 y_train = []
@@ -52,9 +53,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
     print("#################################################################################################")
     print("\n\n")
 
-    def init(_machine_type, _name, _data_dim, _dataset, _epoch, _clauses, _t, _s, _window_x, _window_y,
-             _shape_x, _shape_y, _shape_z, _epoch_results, _average_epoch_results,
-             _epochs_total, _offset_x, _offset_y):
+    def init(_epoch_results):
         epoch_count = 0
         for i in range(_epoch):
             _epoch_results.append([])
@@ -66,6 +65,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                                         + _data_dim + _dataset + "_" + timestamp_save + ".csv"), exist_ok=True)
             _results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                             + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
+            _results.close()
         elif _machine_type == "cTM":
             print("Creating result file in.. ", "Results/" + _name + "/" + _machine_type + "/" + _data_dim
                   + _dataset + "/" + str(_window_x) + "x" + str(_window_y) + "/"
@@ -76,6 +76,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             _results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                             + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _dataset + "_"
                             + timestamp_save + ".csv", 'a')
+            _results.close()
 
         _offset_y = _shape_y - _window_y
         _offset_x = _shape_x - _window_x
@@ -96,8 +97,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
 
         return _results
 
-    def load_data(_numb, _shape_x, _shape_y, _shape_z, _clauses, _t, _s, _window_x, _window_y,
-                  _data_dim, _dataset, _timestamp_save, _results):
+    def load_data(_numb, _timestamp_save, _results):
         global x_train
         global y_train
         global x_test
@@ -155,7 +155,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
 
         return machine
 
-    def stat_calc(_epoch, _epoch_results, _epochs_total, _results, _result_total):
+    def stat_calc(_epoch_results, _epochs_total, _results):
         for j in range(_epoch):
             epoch_mean = np.mean(_epoch_results[j])
             average_epoch_results.append(round(float(epoch_mean), 4))
@@ -177,7 +177,57 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         _results.write(",%.4f" % avg_avg)
         _results.write(",")
         _results.write("\n")
-        _results.write("singel-highest/max" + "," + ",%.4f" % single_highest_acc + ",%.4f" % max_acc + ",")
+        _results.write("single-highest/max" + "," + ",%.4f" % single_highest_acc + ",%.4f" % max_acc + ",")
+
+    def load_tm_state(_m, _x_train, _y_train):
+        try:
+            _tm_state = np.load(load_path + str(counter) + ".npy", allow_pickle=True)
+        except FileNotFoundError:
+            print("Could not load TM state. File or directory not found.")
+            return
+        _m.fit(_x_train, _y_train, epochs=0, incremental=True)
+        _m.set_state(_tm_state)
+        print("Loaded tsetlin machine state from:", load_path + str(counter))
+        loaded_results_list = load_results()
+        if len(loaded_results_list) >= counter + 1:
+            for i in range(len(loaded_results_list[counter])):
+                loaded_results = float(loaded_results_list[counter][i])
+                results.write(",%.4f" % loaded_results)
+                
+    def load_results():
+        with open("Results/" + _name + "/" + _machine_type + "/" + _dataset + load_date + ".csv", "r") as file_load:
+            load_array = []
+            for line in file_load.readlines():
+                line_stripped = [str(x) for x in line.strip().split(",")]
+                if line_stripped[-1] == "":
+                    load_array.append(line_stripped[:-1])
+                else:
+                    load_array.append(line_stripped)
+            if load_array[0][0][10] == "T":
+                machine = "TM"
+            else:
+                machine = "cTM"
+            k_fold_start = 0
+            loaded_clauses = int(load_array[2][1][:-2])
+            loaded_threshold = int(load_array[3][1][:-2])
+            loaded_s = int(load_array[4][1][:-2])
+            if machine == "cTM":
+                loaded_window_x = int(load_array[5][1][:-2])
+                loaded_window_y = int(load_array[6][1][:-2])
+                loaded_shape_x = int(load_array[7][1][:-2])
+                loaded_shape_y = int(load_array[8][1][:-2])
+                loaded_shape_z = int(load_array[9][1][:-2])
+                k_fold_start = 10
+            else:
+                k_fold_start = 5
+            result_array = []
+            if len(load_array) - k_fold_start > 10:
+                for i in range(len(load_array) - k_fold_start - 2):
+                    result_array.append(load_array[i + k_fold_start][2:])
+            else:
+                for i in range(len(load_array) - k_fold_start):
+                    result_array.append(load_array[i + k_fold_start][2:])
+            return result_array
 
     global timestamp_save
     global epoch_results
@@ -190,9 +240,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
     average_epoch_results = []
     epochs_total = []
     counter = 0
-    results = init(_machine_type, _name, _data_dim, _dataset, _epoch, _clauses, _t, _s, _window_x,
-                   _window_y, _shape_x, _shape_y, _shape_z, epoch_results, average_epoch_results,
-                   epochs_total, offset_x, offset_y)
+    results = init(epoch_results)
     result_total = []
     while counter < k_fold_parts:
         print("k-fold ------", str(counter + 1) + " / " + str(k_fold_parts))
@@ -201,17 +249,12 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         global x_test
         global y_test
         numb = str(counter)
-        m = load_data(numb, _shape_x, _shape_y, _shape_z, _clauses, _t, _s, _window_x, _window_y, _data_dim,
-                      _dataset, timestamp_save, results)
+        m = load_data(numb, timestamp_save, results)
         if load_state:
-            m.fit(x_train, y_train, epochs=0, incremental=True)
-            try:
-                m.set_state(np.load(state_path + str(counter) + ".npy", allow_pickle=True))
-            except FileNotFoundError:
-                print("Could not load TM state. File or directory not found.")
-                sys.exit(0)
-            print("Loaded tsetlin machine state from:", state_path + str(counter))
+            load_tm_state(m, x_train, y_train)
         for i in range(_epoch):
+            results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                           + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
             start = time.time()
             m.fit(x_train, y_train, epochs=1, incremental=True)
             stop = time.time()
@@ -225,13 +268,17 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             epoch_results[i].append(result)
             epochs_total.append(result)
             results.write("," + str(round(result, 4)))
-            try:
-                os.makedirs("TM-State/" + Name + "/" + data_dim + dataset + "/" + timestamp_save + "/", exist_ok=True)
-                np.save("TM-State/" + Name + "/" + _data_dim + _dataset + "/" + timestamp_save + "/"
-                        + "state_" + str(counter), m.get_state())
-            except FileNotFoundError:
-                print("Could not save file. File or directory not found.")
-                sys.exit(0)
+            if save_state:
+                try:
+                    os.makedirs("TM-State/" + Name + "/" + data_dim + dataset + "/" + timestamp_save + "/", exist_ok=True)
+                    np.save("TM-State/" + Name + "/" + _data_dim + _dataset + "/" + timestamp_save + "/"
+                            + "state_" + str(counter), m.get_state())
+                except FileNotFoundError:
+                    print("Could not save file. File or directory not found.")
+                    sys.exit(0)
+            results.close()
+        results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                       + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
         results.write("\n")
         mean_accuracy = np.mean(result_total)
         print("Mean Accuracy:", round(float(mean_accuracy), 4), "\n\n")
@@ -239,7 +286,11 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         if counter == _write_clauses:
             write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _machine_type, _data_dim,
                           _dataset, timestamp_save, m)
-    stat_calc(_epoch, epoch_results, epochs_total, results, result_total)
+        results.close()
+    results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                   + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
+    stat_calc(epoch_results, epochs_total, results)
+    results.close()
 
 
 def write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _machine_type, _data_dim, _dataset,
