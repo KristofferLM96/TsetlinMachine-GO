@@ -189,11 +189,17 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         _m.set_state(_tm_state)
         print("Loaded tsetlin machine state from:", load_path + str(counter))
         loaded_results_list = load_results()
+        start_epoch = 1
         if len(loaded_results_list) >= counter + 1:
             for i in range(len(loaded_results_list[counter])):
                 loaded_results = float(loaded_results_list[counter][i])
+                print("#%d Time: %s Accuracy: %.2f%% --loaded--" % (start_epoch, load_date, loaded_results))
                 results.write(",%.4f" % loaded_results)
-                
+                start_epoch += 1
+                result_total.append(loaded_results)
+                epoch_results[i].append(loaded_results)
+                epochs_total.append(loaded_results)
+
     def load_results():
         with open("Results/" + _name + "/" + _machine_type + "/" + _dataset + load_date + ".csv", "r") as file_load:
             load_array = []
