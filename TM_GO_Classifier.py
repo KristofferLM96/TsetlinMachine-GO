@@ -2,15 +2,16 @@ import sys
 import numpy as np
 import time
 import os
+from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
+from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
 
 # Settings
-clauses = 10
-Threshold = 16
+clauses = 1000
+Threshold = 16000
 s = 27.0
-epoch = 3
-k_fold_parts = 2  # 1 - 10, how many k-fold parts to go through
+epoch = 15
+k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
 machine_type = "TM"  # cTM or TM
-parallel = True  # Running with/without parallel Tsetlin Machine
 data_status = "Draw"  # Draw or No-Draw
 data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
 data_name = "Aya"  # Natsukaze_ || Aya_
@@ -25,13 +26,6 @@ state_date = "20-01-28_1344"
 state_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + state_date + "/"
 state_path = state_folder + "state_"
 load_state = False
-
-if parallel:
-    from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
-    from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
-else:
-    from pyTsetlinMachine.tm import MultiClassTsetlinMachine
-    from pyTsetlinMachine.tm import MultiClassConvolutionalTsetlinMachine2D
 
 x_train = []
 y_train = []
@@ -86,15 +80,8 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         _offset_y = _shape_y - _window_y
         _offset_x = _shape_x - _window_x
 
-        if _machine_type == "TM" and parallel:
-            _results.write("MultiClassTsetlinMachineParallel,Parallel,")
-        elif _machine_type == "TM" and not parallel:
-            _results.write("MultiClassTsetlinMachine,")
-        if _machine_type == "cTM" and parallel:
-            _results.write(
-                "MultiClassConvolutionalTsetlinMachine2D,Parallel,")
-        elif _machine_type == "cTM" and not parallel:
-            _results.write("MultiClassConvolutionalTsetlinMachine2D,")
+        _results.write("MultiClassTsetlinMachineParallel,Parallel,")
+        _results.write("MultiClassConvolutionalTsetlinMachine2D,Parallel,")
         while epoch_count < _epoch:
             _results.write("Epoch" + str(epoch_count + 1) + ",")
             epoch_count += 1
@@ -134,7 +121,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             print("Error. File not found, could not load testing dataset.")
             sys.exit(0)
         checkpoint_stop = time.time()
-        print("Testing dataset loaded.          It took:", round(checkpoint_stop - checkpoint_start, 2), "seconds.")
+        print("Testing dataset loaded.           It took:", round(checkpoint_stop - checkpoint_start, 2), "seconds.")
 
         if _machine_type == "TM":
             x_train = train_data[:, 0:-1]
@@ -144,7 +131,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
 
             machine = MultiClassTsetlinMachine(_clauses, _t, _s, boost_true_positive_feedback=0, weighted_clauses=True)
             print("-------------------------------------------------------------------------------------------")
-            print("MultiClassTsetlinMachine using %s, %s, %s written to file %s%s_%s.csv\n"
+            print("MultiClassTsetlinMachine using %s, %s, %s, written to file %s%s_%s.csv\n"
                   % (_data_dim, data_status, data_name, _data_dim, _dataset, _timestamp_save))
             print("Settings: Clauses: %.1f Threshold: %.1f s: %.1f\n" % (_clauses, _t, _s))
 
@@ -157,7 +144,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             machine = MultiClassConvolutionalTsetlinMachine2D(_clauses, _t, _s, (_window_x, _window_y),
                                                               boost_true_positive_feedback=0, weighted_clauses=True)
             print("-------------------------------------------------------------------------------------------")
-            print("MultiClassConvolutionalTsetlinMachine2D using %s, %s, %s written to file %s%s_%s.csv "
+            print("MultiClassConvolutionalTsetlinMachine2D using %s, %s, %s, written to file %s%s_%s.csv "
                   "(%.1f x %.1f x %.1f)""\n"
                   % (data_dim, data_status, _dataset, _data_dim, _dataset, timestamp_save,
                      _shape_x, _shape_y, _shape_z))
