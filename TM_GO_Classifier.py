@@ -25,7 +25,7 @@ Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses
 load_date = "20-01-31_1029"
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
-load_state = True
+load_state = False
 save_state = True
 
 x_train = []
