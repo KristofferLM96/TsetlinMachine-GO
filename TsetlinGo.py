@@ -10,9 +10,9 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
     ecount = 0
     counter = 0
     resArray =[]
+
     if loadstate == 1:
-        #with open("Results/" + "Trond" + "/" + "TM" + "/" + "TM9x9Natsukaze_0128-1237.csv", 'r') as file:
-        with open("Results/" + "Trond" + "/" + "TM" + "/" + "TM9x9Natsukaze_"+loadfile+".csv", 'r') as file:
+        with open("Results/" + "Trond" + "/" + "TM" + "/" + machine+dim+loadfile+".csv", 'r') as file:
             loadarray = []
             for line in file.readlines():
                 # print(line)
@@ -129,7 +129,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
             result = 100 * (m.predict(X_test) == Y_test).mean()
             stop_testing = time()
             print("#%d Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (startepoch +i+1, timestamp, result, stop - start,stop_testing-start_testing))
-            meanTab[i] = meanTab[i] + result
+            meanTab[i+startepoch] = meanTab[i+startepoch] + result
             if Highest < result:
                 Highest = result
             if (savestate == 2):
@@ -156,10 +156,10 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
     highepoch = 0
     for i in meanTab:
         meancount+=1
-        meansepoch += i/10
-        if i/10 > highepoch:
-            highepoch = i/10
-        results.write(",%.4f" % (i/10))
+        meansepoch += i/kFold
+        if i/kFold > highepoch:
+            highepoch = i/kFold
+        results.write(",%.4f" % (i/kFold))
     results.write(",%.4f" % (meansepoch / meancount))
     results.write("\n")
     results.write("Single/k-Fold")
@@ -170,8 +170,8 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
 
 def runner():
     # Settings
-    clauses = 32000
-    Threshold = 64000
+    clauses = 20000
+    Threshold = 2000
     S = 27.0
     epoch = 5
     #dim = "9x9Natsukaze_"
@@ -188,9 +188,9 @@ def runner():
     Name = "Trond"
     Write_Clauses = 0  #0 = don't print clauses, 1-10 which k-Fold to write clauses for.
     savestate = 2  #0 = no save, #1 = save each kFold  #2 = save each epoch
-    loadstate = 0
+    loadstate = 1
     #loadfile = "0128-1237"
-    loadfile = "0128-1559"
+    loadfile = "0131-1328"
     #StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(8000, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold, savestate, loadstate, loadfile)
