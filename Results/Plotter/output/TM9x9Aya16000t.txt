@@ -13,6 +13,18 @@
 \hline
 \rowcolor{Blue}
 \begin{tabular}[c]{@{}l@{}}Clauses\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 9\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 13\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 15\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 1000\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}90.44\%$\pm0.24\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}90.45\%$\pm0.12\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}89.77\%$\pm0.22\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}89.71\%$\pm0.35\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}89.72\%$\pm0.16\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 2000\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}91.24\%$\pm0.26\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}91.58\%$\pm0.08\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}91.03\%$\pm0.09\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}90.88\%$\pm0.18\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}90.93\%$\pm0.05\%$\end{tabular}\\ \hline
 \begin{tabular}[c]{@{}l@{}} 4000\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}91.66\%$\pm0.15\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}92.49\%$\pm0.23\%$\end{tabular}
