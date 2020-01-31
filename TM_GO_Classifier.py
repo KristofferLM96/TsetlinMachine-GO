@@ -6,11 +6,11 @@ from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
 from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
 
 # Settings
-clauses = 10
-Threshold = 16
+clauses = 32000
+Threshold = 128000
 s = 27.0
-epoch = 3
-k_fold_parts = 2  # 1 - 10, how many k-fold parts to go through
+epoch = 15
+k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
 machine_type = "TM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
@@ -25,7 +25,7 @@ Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses
 load_date = "20-01-30_1613"
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
-load_state = True
+load_state = False
 save_state = True
 
 x_train = []
@@ -55,7 +55,10 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         global offset_x
         global offset_y
         epoch_count = 0
-        loaded_epochs = len(load_results()[0])
+        if load_state:
+            loaded_epochs = len(load_results()[0])
+        else:
+            loaded_epochs = 0
         for i in range(_epoch + loaded_epochs):
             _epoch_results.append([])
 
@@ -275,10 +278,15 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             start_testing = time.time()
             result = 100 * (m.predict(x_test) == y_test).mean()
             stop_testing = time.time()
-            print("#%d Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (
-                i + start_epoch, timestamp_epoch, result, stop - start, stop_testing - start_testing))
+            if load_state:
+                print("#%d Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (
+                    i + start_epoch, timestamp_epoch, result, stop - start, stop_testing - start_testing))
+                epoch_results[i + (start_epoch - 1)].append(result)
+            else:
+                print("#%d Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (
+                    i + 1, timestamp_epoch, result, stop - start, stop_testing - start_testing))
+                epoch_results[i].append(result)
             result_total.append(result)
-            epoch_results[i + (start_epoch - 1)].append(result)
             epochs_total.append(result)
             results.write("," + str(round(result, 4)))
             if save_state:
