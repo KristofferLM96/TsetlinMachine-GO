@@ -6,11 +6,11 @@ from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
 from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
 
 # Settings
-clauses = 32
-Threshold = 128
+clauses = 32000
+Threshold = 128000
 s = 27.0
-epoch = 6
-k_fold_parts = 4  # 1 - 10, how many k-fold parts to go through
+epoch = 15
+k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
 machine_type = "TM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
@@ -22,10 +22,10 @@ Shape_X = Shape_Y = 9  # Depending on data_dim
 Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses for.
-load_date = "20-01-31_1029"
+load_date = "20-02-01_1049"
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
-load_state = False
+load_state = True
 save_state = True
 
 x_train = []
@@ -184,6 +184,16 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         _results.write("\n")
         _results.write("single-highest/max" + "," + ",%.4f" % single_highest_acc + ",%.4f" % max_acc + ",")
 
+    def save_tm_state():
+        try:
+            os.makedirs("TM-State/" + Name + "/" + _data_dim + _dataset + "/" + timestamp_save + "/",
+                        exist_ok=True)
+            np.save("TM-State/" + Name + "/" + _data_dim + _dataset + "/" + timestamp_save + "/"
+                    + "state_" + str(counter), m.get_state())
+        except FileNotFoundError:
+            print("Could not save file. File or directory not found.")
+            sys.exit(0)
+
     def load_tm_state(_m, _x_train, _y_train, _start_epoch):
         _start_epoch = 1
         try:
@@ -284,6 +294,8 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                            + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
             start_epoch = load_tm_state(m, x_train, y_train, start_epoch)
             results.close()
+        if save_state:
+            save_tm_state()
         for i in range(_epoch - start_epoch + 1):
             results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                            + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
@@ -312,14 +324,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             epochs_total.append(round(result, 4))
             results.write("," + str(round(result, 4)))
             if save_state:
-                try:
-                    os.makedirs("TM-State/" + Name + "/" + data_dim + dataset + "/" + timestamp_save + "/",
-                                exist_ok=True)
-                    np.save("TM-State/" + Name + "/" + _data_dim + _dataset + "/" + timestamp_save + "/"
-                            + "state_" + str(counter), m.get_state())
-                except FileNotFoundError:
-                    print("Could not save file. File or directory not found.")
-                    sys.exit(0)
+                save_tm_state()
             last_epoch = i + 1
             results.close()
         results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
