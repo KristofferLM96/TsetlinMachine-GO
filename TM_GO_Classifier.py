@@ -363,7 +363,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                 epoch_results[i + start_epoch - 1].append(round(result, 4))
             else:
                 print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs"
-                      % (counter + 1, k_fold_parts, current_i, timestamp_epoch, result, stop - start,
+                      % (current_k_fold, k_fold_parts, current_i, timestamp_epoch, result, stop - start,
                          stop_testing - start_testing))
                 epoch_results[i].append(round(result, 4))
             result_total.append(round(result, 4))
