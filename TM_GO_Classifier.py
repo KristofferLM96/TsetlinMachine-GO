@@ -22,7 +22,7 @@ Shape_X = Shape_Y = 9  # Depending on data_dim
 Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses for.
-load_date = "20-02-01_1049"
+load_date = "20-02-02_1034"
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
 load_state = True
@@ -57,10 +57,6 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         global offset_x
         global offset_y
         epoch_count = 0
-        if load_state:
-            loaded_epochs = len(load_results()[0])
-        else:
-            loaded_epochs = 0
         for i in range(_epoch):
             _epoch_results.append([])
         if _machine_type == "TM":
@@ -184,12 +180,12 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         _results.write("\n")
         _results.write("single-highest/max" + "," + ",%.4f" % single_highest_acc + ",%.4f" % max_acc + ",")
 
-    def save_tm_state():
+    def save_tm_state(_m):
         try:
             os.makedirs("TM-State/" + Name + "/" + _data_dim + _dataset + "/" + timestamp_save + "/",
                         exist_ok=True)
             np.save("TM-State/" + Name + "/" + _data_dim + _dataset + "/" + timestamp_save + "/"
-                    + "state_" + str(counter), m.get_state())
+                    + "state_" + str(counter), _m.get_state())
         except FileNotFoundError:
             print("Could not save file. File or directory not found.")
             sys.exit(0)
@@ -294,8 +290,8 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                            + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
             start_epoch = load_tm_state(m, x_train, y_train, start_epoch)
             results.close()
-        if save_state:
-            save_tm_state()
+            if save_state:
+                save_tm_state(m)
         for i in range(_epoch - start_epoch + 1):
             results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                            + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
@@ -324,7 +320,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             epochs_total.append(round(result, 4))
             results.write("," + str(round(result, 4)))
             if save_state:
-                save_tm_state()
+                save_tm_state(m)
             last_epoch = i + 1
             results.close()
         results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
