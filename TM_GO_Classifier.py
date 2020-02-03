@@ -6,8 +6,8 @@ from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
 from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
 
 # Settings
-clauses = 32000
-Threshold = 128000
+clauses = 32
+Threshold = 128
 s = 27.0
 epoch = 15
 k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
@@ -25,7 +25,7 @@ Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses
 load_date = "20-02-02_1034"
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
-load_state = True
+load_state = False
 save_state = True
 
 x_train = []
@@ -305,14 +305,26 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                 current_k_fold = "0" + str(counter + 1)
             else:
                 current_k_fold = str(counter + 1)
+            if (i + 1) < 10 >= _epoch:
+                current_i = "0" + str(i + 1)
+                current_i_load = "0" + str(i + start_epoch)
+            elif (i + 1) < 10 and _epoch >= 100:
+                current_i = "00" + str(i + 1)
+                current_i_load = "00" + str(i + start_epoch)
+            elif 10 < (i + 1) < 100 >= _epoch:
+                current_i = "0" + str(i + 1)
+                current_i_load = "0" + str(i + start_epoch)
+            else:
+                current_i = str(i)
+                current_i_load = str(i + start_epoch)
             if load_state:
-                print("-- %s / %s -- #%d Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs"
-                      % (current_k_fold, k_fold_parts, i + start_epoch, timestamp_epoch, result, stop - start,
+                print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs"
+                      % (current_k_fold, k_fold_parts, current_i_load, timestamp_epoch, result, stop - start,
                          stop_testing - start_testing))
                 epoch_results[i + start_epoch - 1].append(round(result, 4))
             else:
-                print("-- %s / %s -- #%d Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs"
-                      % (counter + 1, k_fold_parts, i + 1, timestamp_epoch, result, stop - start,
+                print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs"
+                      % (counter + 1, k_fold_parts, current_i, timestamp_epoch, result, stop - start,
                          stop_testing - start_testing))
                 epoch_results[i].append(round(result, 4))
             result_total.append(round(result, 4))
