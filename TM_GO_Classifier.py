@@ -180,8 +180,9 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         _results.write("\n")
         _results.write("single-highest/max" + "," + ",%.4f" % single_highest_acc + ",%.4f" % max_acc + ",")
 
-    def save_tm_state(_m):
+    def save_tm_state(_m, _x_train, _y_train):
         try:
+            _m.fit(_x_train, _y_train, epochs=0, incremental=True)
             os.makedirs("TM-State/" + Name + "/" + _data_dim + _dataset + "/" + timestamp_save + "/",
                         exist_ok=True)
             np.save("TM-State/" + Name + "/" + _data_dim + _dataset + "/" + timestamp_save + "/"
@@ -291,7 +292,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             start_epoch = load_tm_state(m, x_train, y_train, start_epoch)
             results.close()
             if save_state:
-                save_tm_state(m)
+                save_tm_state(m, x_train, y_train)
         for i in range(_epoch - start_epoch + 1):
             results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                            + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
@@ -320,7 +321,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             epochs_total.append(round(result, 4))
             results.write("," + str(round(result, 4)))
             if save_state:
-                save_tm_state(m)
+                save_tm_state(m, x_train, y_train)
             last_epoch = i + 1
             results.close()
         results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
