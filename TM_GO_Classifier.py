@@ -5,6 +5,12 @@ import os
 from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
 from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
 
+"""
+TODO: 
+- Comment/Document code.
+- Auto push to github after n-minutes/n-epochs.
+"""
+
 # Settings
 clauses = 32000
 Threshold = 8000
@@ -71,7 +77,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         elif _machine_type == "cTM":
             print("Creating result file in.. ", "Results/" + _name + "/" + _machine_type + "/" + _data_dim
                   + _dataset + "/" + str(_window_x) + "x" + str(_window_y) + "/"
-                  + _data_dim + _dataset + "_" + timestamp_save + ".csv")
+                  + _data_dim + _dataset + "_" + timestamp_save + ".csv", "\n\n")
             os.makedirs(os.path.dirname("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                                         + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _dataset + "_"
                                         + timestamp_save + ".csv"), exist_ok=True)
