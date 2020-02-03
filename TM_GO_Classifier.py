@@ -6,22 +6,23 @@ from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
 from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
 
 # Settings
-clauses = 32
-Threshold = 128
+clauses = 32000
+Threshold = 8000
 s = 27.0
 epoch = 15
 k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
-machine_type = "TM"  # cTM or TM
+machine_type = "cTM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
 data_name = "Aya"  # Natsukaze_ || Aya_
 dataset = data_name + "_" + data_status
-Window_X = 9
-Window_Y = 9
+Window_X = 8
+Window_Y = 8
 Shape_X = Shape_Y = 9  # Depending on data_dim
 Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
-Write_Clauses = 0  # 0 = don't print clauses, 1-10 which k-Fold to write clauses for.
+Write_Clauses = False
+# Clauses_to_write = 1  # 1-10 which k-Fold to write clauses for.
 load_date = "20-02-02_1034"
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
@@ -147,10 +148,17 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                      _shape_x, _shape_y, _shape_z))
             print("Settings: Clauses: %.1f Threshold: %.1f S: %.1f Window_X: %.1f Window_Y: %.1f\n" % (
                 _clauses, _t, _s, _window_x, _window_y))
-        _results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
-                        + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
-        _results.write(_data_dim + _dataset + _numb + ",")
-        _results.close()
+        if _machine_type == "TM":
+            _results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                            + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
+            _results.write(_data_dim + _dataset + _numb + ",")
+            _results.close()
+        elif _machine_type == "cTM":
+            _results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                            + str(_window_x) + "x" + str(_window_y) + "/"
+                            + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
+            _results.write(_data_dim + _dataset + _numb + ",")
+            _results.close()
 
         return machine
 
@@ -189,7 +197,8 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             print("Could not save file. File or directory not found.")
             sys.exit(0)
 
-    def load_tm_state(_m, _x_train, _y_train, _start_epoch):
+    def load_tm_state(_m, _x_train, _y_train, _start_epoch, _clauses, _t, _s, _window_x, _window_y, _shape_x, _shape_y,
+                      _shape_z):
         _start_epoch = 1
         try:
             _tm_state = np.load(load_path + str(counter) + ".npy", allow_pickle=True)
@@ -198,7 +207,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             return _start_epoch
         _m.fit(_x_train, _y_train, epochs=0, incremental=True)
         _m.set_state(_tm_state)
-        loaded_results_list = load_results()
+        loaded_results_list = load_results(_clauses, _t, _s, _window_x, _window_y, _shape_x, _shape_y, _shape_z)
         _start_epoch = set_results(_start_epoch, loaded_results_list)
 
         return _start_epoch
@@ -224,9 +233,14 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
 
         return _start_epoch
 
-    def load_results():
-        with open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/" + _data_dim + _dataset
-                  + "_" + load_date + ".csv", "r") as file_load:
+    def load_results(_clauses, _t, _s, _window_x, _window_y, _shape_x, _shape_y, _shape_z):
+        if _machine_type == "TM":
+            path = "Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/" \
+                   + _data_dim + _dataset + "_" + load_date + ".csv"
+        elif _machine_type == "cTM":
+            path = "Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/" + str(_window_x) + "x" \
+                   + str(_window_y) + "/" + _data_dim + _dataset + "_" + load_date + ".csv"
+        with open(path, "r") as file_load:
             load_array = []
             for line in file_load.readlines():
                 line_stripped = [str(x) for x in line.strip().split(",")]
@@ -238,15 +252,15 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                 machine = "TM"
             else:
                 machine = "cTM"
-            # loaded_clauses = int(load_array[2][1][:-2])
-            # loaded_threshold = int(load_array[3][1][:-2])
-            # loaded_s = int(load_array[4][1][:-2])
+            _clauses = int(load_array[2][1][:-2])
+            _t = int(load_array[3][1][:-2])
+            _s = int(load_array[4][1][:-2])
             if machine == "cTM":
-                # loaded_window_x = int(load_array[5][1][:-2])
-                # loaded_window_y = int(load_array[6][1][:-2])
-                # loaded_shape_x = int(load_array[7][1][:-2])
-                # loaded_shape_y = int(load_array[8][1][:-2])
-                # loaded_shape_z = int(load_array[9][1][:-2])
+                _window_x = int(load_array[5][1][:-2])
+                _window_y = int(load_array[6][1][:-2])
+                _shape_x = int(load_array[7][1][:-2])
+                _shape_y = int(load_array[8][1][:-2])
+                _shape_z = int(load_array[9][1][:-2])
                 k_fold_start = 10
             else:
                 k_fold_start = 5
@@ -285,15 +299,26 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         last_epoch = 0
         m = load_data(numb, timestamp_save)
         if load_state:
-            results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
-                           + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
-            start_epoch = load_tm_state(m, x_train, y_train, start_epoch)
+            if _machine_type == "TM":
+                results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                               + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
+            elif _machine_type == "cTM":
+                results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                               + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _dataset + "_"
+                               + timestamp_save + ".csv", 'a')
+            start_epoch = load_tm_state(m, x_train, y_train, start_epoch, _clauses, _t, _s, _window_x, _window_y,
+                                        _shape_x, _shape_y, _shape_z)
             results.close()
             if save_state:
                 save_tm_state(m, x_train, y_train)
         for i in range(_epoch - start_epoch + 1):
-            results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
-                           + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
+            if _machine_type == "TM":
+                results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                               + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
+            elif _machine_type == "cTM":
+                results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                               + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _dataset + "_"
+                               + timestamp_save + ".csv", 'a')
             start = time.time()
             m.fit(x_train, y_train, epochs=1, incremental=True)
             stop = time.time()
@@ -305,7 +330,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                 current_k_fold = "0" + str(counter + 1)
             else:
                 current_k_fold = str(counter + 1)
-            if (i + 1) < 10 >= _epoch:
+            if (i + 1) < 10 <= _epoch:
                 current_i = "0" + str(i + 1)
                 current_i_load = "0" + str(i + start_epoch)
             elif (i + 1) < 10 and _epoch >= 100:
@@ -315,7 +340,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                 current_i = "0" + str(i + 1)
                 current_i_load = "0" + str(i + start_epoch)
             else:
-                current_i = str(i)
+                current_i = str(i + 1)
                 current_i_load = str(i + start_epoch)
             if load_state:
                 print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs"
@@ -334,19 +359,29 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                 save_tm_state(m, x_train, y_train)
             last_epoch = i + 1
             results.close()
-        results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
-                       + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
+        if _machine_type == "TM":
+            results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                           + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
+        elif _machine_type == "cTM":
+            results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                           + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _dataset + "_"
+                           + timestamp_save + ".csv", 'a')
         results.write("\n")
         mean_accuracy = np.mean(result_total)
         print("Mean Accuracy:", round(float(mean_accuracy), 4), "\n\n")
         counter += 1
-        if counter == _write_clauses:
+        if _write_clauses:
             write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _machine_type, _data_dim,
                           _dataset, timestamp_save, m)
         results.close()
         last_k_fold = counter + 1
-    results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
-                   + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
+    if _machine_type == "TM":
+        results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                       + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
+    elif _machine_type == "cTM":
+        results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                       + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _dataset + "_"
+                       + timestamp_save + ".csv", 'a')
     stat_calc(epoch_results, epochs_total, results)
     results.close()
 
