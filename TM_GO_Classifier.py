@@ -94,8 +94,6 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                            % (_clauses, _t, _s, _window_x, _window_y, _shape_x, _shape_y, _shape_z))
         _results.close()
 
-        return _results
-
     def load_data(_numb, _timestamp_save):
         global x_train
         global y_train
@@ -273,7 +271,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
     average_epoch_results = []
     epochs_total = []
     counter = 0
-    results = init(epoch_results)
+    init(epoch_results)
     result_total = []
     while counter < k_fold_parts:
         print("k-fold ------", str(counter + 1) + " / " + str(k_fold_parts))
