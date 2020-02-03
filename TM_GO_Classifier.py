@@ -228,8 +228,16 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                     _current_k_fold = "0" + str(counter + 1)
                 else:
                     _current_k_fold = str(counter + 1)
-                print("-- %s / %s -- #%d Time: %s Accuracy: %.2f%% --loaded--"
-                      % (_current_k_fold, k_fold_parts, _start_epoch, timestamp, loaded_results))
+                if (i + 1) < 10 <= _start_epoch:
+                    _current_i_load = "0" + str(_start_epoch)
+                elif (i + 1) < 10 and _start_epoch >= 100:
+                    _current_i_load = "00" + str(_start_epoch)
+                elif 10 < (i + 1) < 100 >= _start_epoch:
+                    _current_i_load = "0" + str(_start_epoch)
+                else:
+                    _current_i_load = str(_start_epoch)
+                print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% --loaded--"
+                      % (_current_k_fold, k_fold_parts, _current_i_load, timestamp, loaded_results))
                 results.write(",%.4f" % loaded_results)
                 _start_epoch += 1
                 last_epoch += 1
