@@ -12,8 +12,8 @@ TODO:
 """
 
 # Settings
-clauses = 32000
-Threshold = 8000
+clauses = 32
+Threshold = 80
 s = 27.0
 epoch = 15
 k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
@@ -29,10 +29,10 @@ Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = False
 # Clauses_to_write = 1  # 1-10 which k-Fold to write clauses for.
-load_date = "20-02-03_1748"
+load_date = "20-02-04_0935"
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
-load_state = True
+load_state = False
 save_state = True
 
 x_train = []
@@ -228,14 +228,26 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                     _current_k_fold = "0" + str(counter + 1)
                 else:
                     _current_k_fold = str(counter + 1)
-                if (i + 1) < 10 <= _start_epoch:
-                    _current_i_load = "0" + str(_start_epoch)
-                elif (i + 1) < 10 and _start_epoch >= 100:
-                    _current_i_load = "00" + str(_start_epoch)
-                elif 10 <= (i + 1) < 100 <= _start_epoch:
-                    _current_i_load = "0" + str(_start_epoch)
-                else:
-                    _current_i_load = str(_start_epoch)
+                if _epoch < 10:
+                    _current_i = str(i + 1)
+                    _current_i_load = str(i + start_epoch)
+                elif 10 <= _epoch < 100:
+                    if (i + 1) < 10:
+                        _current_i = "0" + str(i + 1)
+                        _current_i_load = "0" + str(i + start_epoch)
+                    else:
+                        _current_i = str(i + 1)
+                        _current_i_load = str(i + start_epoch)
+                elif 100 <= _epoch:
+                    if (i + 1) < 10:
+                        _current_i = "00" + str(i + 1)
+                        _current_i_load = "00" + str(i + start_epoch)
+                    elif 10 < (i + 1) < 100:
+                        _current_i = "0" + str(i + 1)
+                        _current_i_load = "0" + str(i + start_epoch)
+                    else:
+                        _current_i = str(i + 1)
+                        _current_i_load = str(i + start_epoch)
                 print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% --loaded--"
                       % (_current_k_fold, k_fold_parts, _current_i_load, timestamp, loaded_results))
                 results.write(",%.4f" % loaded_results)
@@ -312,7 +324,9 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         start_epoch = 0
         last_epoch = 0
         m = load_data(numb, timestamp_save)
+        epoch_range = _epoch
         if load_state:
+            epoch_range = _epoch - start_epoch + 1
             if _machine_type == "TM":
                 results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                                + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
@@ -325,7 +339,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             results.close()
             if save_state:
                 save_tm_state(m, x_train, y_train)
-        for i in range(_epoch - start_epoch + 1):
+        for i in range(epoch_range):
             if _machine_type == "TM":
                 results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                                + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
@@ -344,18 +358,27 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                 current_k_fold = "0" + str(counter + 1)
             else:
                 current_k_fold = str(counter + 1)
-            if (i + 1) < 10 <= _epoch:
-                current_i = "0" + str(i + 1)
-                current_i_load = "0" + str(i + start_epoch)
-            elif (i + 1) < 10 and _epoch >= 100:
-                current_i = "00" + str(i + 1)
-                current_i_load = "00" + str(i + start_epoch)
-            elif 10 < (i + 1) < 100 >= _epoch:
-                current_i = "0" + str(i + 1)
-                current_i_load = "0" + str(i + start_epoch)
-            else:
+            if _epoch < 10:
                 current_i = str(i + 1)
                 current_i_load = str(i + start_epoch)
+            elif 10 <= _epoch < 100:
+                if (i + 1) < 10:
+                    current_i = "0" + str(i + 1)
+                    current_i_load = "0" + str(i + start_epoch)
+                else:
+                    current_i = str(i + 1)
+                    current_i_load = str(i + start_epoch)
+            elif 100 <= _epoch:
+                if (i + 1) < 10:
+                    current_i = "00" + str(i + 1)
+                    current_i_load = "00" + str(i + start_epoch)
+                elif 10 < (i + 1) < 100:
+                    current_i = "0" + str(i + 1)
+                    current_i_load = "0" + str(i + start_epoch)
+                else:
+                    current_i = str(i + 1)
+                    current_i_load = str(i + start_epoch)
+
             if load_state:
                 print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs"
                       % (current_k_fold, k_fold_parts, current_i_load, timestamp_epoch, result, stop - start,
