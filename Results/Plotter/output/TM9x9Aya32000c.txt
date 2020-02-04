@@ -1,0 +1,35 @@
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=.6]{Images/Results/TM9x9Aya32000c.png}
+    \caption{Testing 9x9 dataset using TM with different clauses under 16000 threshold.}
+    \label{fig:TM9x9Aya32000c}
+\end{figure}
+\FloatBarrier
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{|a|d|d|d|d|d|}
+\hline
+\rowcolor{Blue}
+\begin{tabular}[c]{@{}l@{}}Threshold\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 4\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 7\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 10\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 8000\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}93.15\%$\pm0.41\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.08\%$\pm1.07\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.3\%$\pm0.71\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.05\%$\pm0.88\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 16000\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}92.91\%$\pm0.32\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.49\%$\pm0.53\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.95\%$\pm0.71\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.32\%$\pm0.49\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 64000\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}92.2\%$\pm0.21\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}93.11\%$\pm0.37\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}93.61\%$\pm0.61\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.2\%$\pm0.65\%$\end{tabular}\\ \hline
+\end{tabular}
+\caption{Testing 9x9 dataset using TM with different clauses under 16000 threshold.}
+\label{tab:TM9x9Aya32000c}
+\end{table}
+\FloatBarrier

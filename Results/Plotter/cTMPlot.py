@@ -9,13 +9,13 @@ OFFSET = 0
 CI = True
 
 kFold = 10  # 1 or 10
-showT1 = [0, 4, 8, 12, 14]  # specify which epochs will go out. epoch 0 will show as epoch 1 in table.
-OutputFileName = "TM9x9Aya16000t"  # outputname for each file
+showT1 = [0, 3, 6, 9]  # specify which epochs will go out. epoch 0 will show as epoch 1 in table.
+OutputFileName = "TM9x9Aya32000c"  # outputname for each file
 # table caption ..
 Caption = "Testing 9x9 dataset using TM with different clauses under 16000 threshold."
 label = OutputFileName  # table label
-parsing = "Clauses"  # Threshold, Window, Settings, Clauses
-epoch = 15
+parsing = "Threshold"  # Threshold, Window, Settings, Clauses
+epoch = 10
 standdev = 0  # 1 if enabled in graph, 0 if not
 title_graph = ""
 backslash = "\ "
@@ -196,7 +196,7 @@ table.write(backslash + "end{table}\n")
 table.write(backslash + "FloatBarrier\n")
 pyplot.legend(loc='best')
 TITLE = title_graph
-pyplot.gca().set_xlim([1, 15])
+pyplot.gca().set_xlim([1, epoch])
 pyplot.xticks(x)
 pyplot.title(TITLE)
 pyplot.xlabel(XLABEL)
