@@ -12,8 +12,8 @@ TODO:
 """
 
 # Settings
-clauses = 32
-Threshold = 80
+clauses = 32000
+Threshold = 8000
 s = 27.0
 epoch = 15
 k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
@@ -32,7 +32,7 @@ Write_Clauses = False
 load_date = "20-02-04_0935"
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
-load_state = False
+load_state = True
 save_state = True
 
 x_train = []
@@ -229,25 +229,19 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                 else:
                     _current_k_fold = str(counter + 1)
                 if _epoch < 10:
-                    _current_i = str(i + 1)
-                    _current_i_load = str(i + start_epoch)
+                    _current_i_load = str(i + start_epoch + 1)
                 elif 10 <= _epoch < 100:
                     if (i + 1) < 10:
-                        _current_i = "0" + str(i + 1)
-                        _current_i_load = "0" + str(i + start_epoch)
+                        _current_i_load = "0" + str(i + start_epoch + 1)
                     else:
-                        _current_i = str(i + 1)
-                        _current_i_load = str(i + start_epoch)
+                        _current_i_load = str(i + start_epoch + 1)
                 elif 100 <= _epoch:
                     if (i + 1) < 10:
-                        _current_i = "00" + str(i + 1)
-                        _current_i_load = "00" + str(i + start_epoch)
+                        _current_i_load = "00" + str(i + start_epoch + 1)
                     elif 10 < (i + 1) < 100:
-                        _current_i = "0" + str(i + 1)
-                        _current_i_load = "0" + str(i + start_epoch)
+                        _current_i_load = "0" + str(i + start_epoch + 1)
                     else:
-                        _current_i = str(i + 1)
-                        _current_i_load = str(i + start_epoch)
+                        _current_i_load = str(i + start_epoch + 1)
                 print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% --loaded--"
                       % (_current_k_fold, k_fold_parts, _current_i_load, timestamp, loaded_results))
                 results.write(",%.4f" % loaded_results)
