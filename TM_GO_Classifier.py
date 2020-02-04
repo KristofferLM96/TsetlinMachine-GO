@@ -29,10 +29,10 @@ Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = False
 # Clauses_to_write = 1  # 1-10 which k-Fold to write clauses for.
-load_date = "20-02-02_1034"
+load_date = "20-02-03_1748"
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
-load_state = False
+load_state = True
 save_state = True
 
 x_train = []
@@ -232,7 +232,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                     _current_i_load = "0" + str(_start_epoch)
                 elif (i + 1) < 10 and _start_epoch >= 100:
                     _current_i_load = "00" + str(_start_epoch)
-                elif 10 < (i + 1) < 100 >= _start_epoch:
+                elif 10 <= (i + 1) < 100 <= _start_epoch:
                     _current_i_load = "0" + str(_start_epoch)
                 else:
                     _current_i_load = str(_start_epoch)
