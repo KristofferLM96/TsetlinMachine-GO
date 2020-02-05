@@ -13,23 +13,23 @@ TODO:
 
 # Settings
 clauses = 32000
-Threshold = 8000
+Threshold = 128000
 s = 27.0
 epoch = 15
 k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
-machine_type = "cTM"  # cTM or TM
+machine_type = "TM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
 data_name = "Aya"  # Natsukaze_ || Aya_
 dataset = data_name + "_" + data_status
-Window_X = 8
-Window_Y = 8
+Window_X = 9
+Window_Y = 9
 Shape_X = Shape_Y = 9  # Depending on data_dim
 Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = False
 # Clauses_to_write = 1  # 1-10 which k-Fold to write clauses for.
-load_date = "20-02-04_0935"
+load_date = "20-02-04_0941"
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
 load_state = True
@@ -320,7 +320,6 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         m = load_data(numb, timestamp_save)
         epoch_range = _epoch
         if load_state:
-            epoch_range = _epoch - start_epoch + 1
             if _machine_type == "TM":
                 results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                                + _data_dim + _dataset + "_" + timestamp_save + ".csv", 'a')
@@ -330,6 +329,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                                + timestamp_save + ".csv", 'a')
             start_epoch = load_tm_state(m, x_train, y_train, start_epoch, _clauses, _t, _s, _window_x, _window_y,
                                         _shape_x, _shape_y, _shape_z)
+            epoch_range = _epoch - start_epoch
             results.close()
             if save_state:
                 save_tm_state(m, x_train, y_train)
