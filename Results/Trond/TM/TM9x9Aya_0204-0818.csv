@@ -1,0 +1,6 @@
+MultiClassTsetlinMachineParallel,Parallel,Epoch1,Epoch2,Epoch3,Epoch4,Epoch5,Epoch6,Epoch7,Epoch8,Epoch9,Epoch10,Epoch11,Epoch12,Epoch13,Epoch14,Epoch15
+Settings:
+Clauses:,26000.0
+Threshold:,32000.0
+S:,27.0
+9x9Aya_Draw0,,92.5774,92.6137,93.0458,94.0727,94.0210,93.6419,94.3338,94.6210,94.4564,95.0663

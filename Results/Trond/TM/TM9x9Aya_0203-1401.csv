@@ -1,0 +1,13 @@
+MultiClassTsetlinMachineParallel,Parallel,Epoch1,Epoch2,Epoch3,Epoch4,Epoch5,Epoch6,Epoch7,Epoch8,Epoch9,Epoch10,Epoch11,Epoch12,Epoch13,Epoch14,Epoch15
+Settings:
+Clauses:,26000.0
+Threshold:,8000.0
+S:,27.0
+MultiClassTsetlinMachineParallel,Parallel,Epoch1,Epoch2,Epoch3,Epoch4,Epoch5,Epoch6,Epoch7,Epoch8,Epoch9,Epoch10,Epoch11,Epoch12,Epoch13,Epoch14,Epoch15
+Settings:
+Clauses:,26000.0
+Threshold:,8000.0
+S:,27.0
+9x9Aya_Draw0,,92.8590,93.7026,94.4697,94.8180,94.7304,95.0560,95.5163,94.8846,95.2808,95.4863,94.2462,94.9180,94.7966,94.7838,94.7197
+9x9Aya_Draw1,,93.0838,94.1103,94.3663,94.4188,94.8915,94.9970,94.9013,95.0051,95.0868,95.0457,95.3257,94.7825,94.4487,94.6274,94.0782
+9x9Aya_Draw2,
