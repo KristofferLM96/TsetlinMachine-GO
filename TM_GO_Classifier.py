@@ -29,7 +29,7 @@ Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = False
 # Clauses_to_write = 1  # 1-10 which k-Fold to write clauses for.
-load_date = "20-02-04_0941"
+load_date = "20-02-05_2305"
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
 load_state = True
@@ -329,7 +329,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                                + timestamp_save + ".csv", 'a')
             start_epoch = load_tm_state(m, x_train, y_train, start_epoch, _clauses, _t, _s, _window_x, _window_y,
                                         _shape_x, _shape_y, _shape_z)
-            epoch_range = _epoch - start_epoch
+            epoch_range = _epoch - start_epoch + 1
             results.close()
             if save_state:
                 save_tm_state(m, x_train, y_train)
