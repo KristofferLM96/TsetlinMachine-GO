@@ -4,7 +4,7 @@ import time
 import gomill.boards
 
 full_board = False
-completion_percentage = 0.75
+completion_percentage = 0.5
 name = "9x9Aya"
 # path = "Data/Original/" + name + "/*"
 path = "/home/kristoffer/Documents/Data/Original/9x9_10k_r104_144x20k/*"
@@ -198,8 +198,8 @@ for infile in glob.glob(os.path.join(path, '*.sgf')):
     file = open(infile, 'r', encoding="ISO-8859-1")
     file_lines = file.readlines()
     print(infile)
-    print("Converting file", counter, "out of", total_files, "files. .................. ",
-          round((counter / total_files * 100), 2), "% ..................",
+    print("Converting file", counter, "out of", total_files, "files. ............................................... ",
+          round((counter / total_files * 100), 2), "% ............................................... ",
           round((time.time() - start_time) * 1000, 2), "ms", "\n")
     main(file_lines, init_board())
     write_file(output)
