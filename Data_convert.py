@@ -3,9 +3,17 @@ import glob
 import time
 import gomill.boards
 
+full_board = False
+completion_percentage = 0.75
 name = "9x9Aya"
-path = "Data/Original/" + name + "/*"
-output_path = "Data/Binary/" + name + "_binary.txt"
+# path = "Data/Original/" + name + "/*"
+path = "/home/kristoffer/Documents/Data/Original/9x9_10k_r104_144x20k/*"
+
+if full_board:
+    output_path = "Data/Binary/" + name + "_binary.txt"
+else:
+    output_path = "Data/Binary/" + str(completion_percentage) + "_" + name + "_binary.txt"
+
 board_size = 9
 total_pos = 19
 time_start = time.time()
@@ -163,7 +171,7 @@ def main(_file_lines, _board):
     global binary_board
     boards, result, move_list = load_board(_file_lines, _board)
     count = 0
-    for turn in move_list:
+    for turn in move_list[:int(len(move_list)*completion_percentage)]:
         count += 1
         try:
             play(turn)
