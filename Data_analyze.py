@@ -12,7 +12,7 @@ import numpy as np
 # -----------------------------------------------
 
 # 9x9Natsukaze || 9x9Aya
-name = "9x9Aya"
+name = "0.75_9x9Aya"
 file_name = name + "_binary.txt"
 path = "Data/Binary/" + file_name
 encoding = "UTF-8"  # ISO-8859-1 / UTF-8
@@ -82,5 +82,5 @@ def get_result_ratio():
 # .................. MAIN .......................
 # -----------------------------------------------
 # check_handicap()
-# check_duplication()
-get_result_ratio()
+check_duplication()
+# get_result_ratio()

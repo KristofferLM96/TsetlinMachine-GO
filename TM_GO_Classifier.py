@@ -12,14 +12,15 @@ TODO:
 """
 
 # Settings
-clauses = 32
-Threshold = 12
+clauses = 32000
+Threshold = 8000
 s = 27.0
 epoch = 15
 k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
 machine_type = "TM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
-data_dim = "9x9"  # 9x9, 13x13, 19x19 ..
+completion_percentage = "0.75"
+data_dim = completion_percentage + "_" + "9x9"  # 9x9, 13x13, 19x19 ..
 data_name = "Aya"  # Natsukaze_ || Aya_
 dataset = data_name + "_" + data_status
 Window_X = 9
@@ -32,7 +33,7 @@ Write_Clauses = False
 load_date = "20-02-05_2305"
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
-load_state = True
+load_state = False
 save_state = True
 
 x_train = []

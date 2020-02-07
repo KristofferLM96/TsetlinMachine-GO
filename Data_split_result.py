@@ -1,6 +1,6 @@
 import csv
 
-name = "9x9Aya"
+name = "0.5_9x9Aya"
 win = open("Data/Results-Split/" + name + "_win.txt", 'w+')
 loss = open("Data/Results-Split/" + name + "_loss.txt", 'w+')
 draw = open("Data/Results-Split/" + name + "_draw.txt", 'w+')
