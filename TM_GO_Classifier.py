@@ -12,8 +12,8 @@ TODO:
 """
 
 # Settings
-clauses = 32000
-Threshold = 128000
+clauses = 32
+Threshold = 12
 s = 27.0
 epoch = 15
 k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
@@ -205,11 +205,13 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
 
     def load_tm_state(_m, _x_train, _y_train, _start_epoch, _clauses, _t, _s, _window_x, _window_y, _shape_x, _shape_y,
                       _shape_z):
+        global load_state
         _start_epoch = 1
         try:
             _tm_state = np.load(load_path + str(counter) + ".npy", allow_pickle=True)
         except FileNotFoundError:
             print("Could not load TM state. File or directory not found.")
+            load_state = False
             return _start_epoch
         _m.fit(_x_train, _y_train, epochs=0, incremental=True)
         _m.set_state(_tm_state)
@@ -353,25 +355,25 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             else:
                 current_k_fold = str(counter + 1)
             if _epoch < 10:
+                current_i_load = str(i + start_epoch + 1)
                 current_i = str(i + 1)
-                current_i_load = str(i + start_epoch)
             elif 10 <= _epoch < 100:
                 if (i + 1) < 10:
+                    current_i_load = "0" + str(i + start_epoch + 1)
                     current_i = "0" + str(i + 1)
-                    current_i_load = "0" + str(i + start_epoch)
                 else:
+                    current_i_load = str(i + start_epoch + 1)
                     current_i = str(i + 1)
-                    current_i_load = str(i + start_epoch)
             elif 100 <= _epoch:
                 if (i + 1) < 10:
+                    current_i_load = "00" + str(i + start_epoch + 1)
                     current_i = "00" + str(i + 1)
-                    current_i_load = "00" + str(i + start_epoch)
                 elif 10 < (i + 1) < 100:
-                    current_i = "0" + str(i + 1)
-                    current_i_load = "0" + str(i + start_epoch)
+                    current_i_load = "0" + str(i + start_epoch + 1)
+                    current = "0" + str(i + 1)
                 else:
-                    current_i = str(i + 1)
-                    current_i_load = str(i + start_epoch)
+                    current_i_load = str(i + start_epoch + 1)
+                    current = str(i + 1)
 
             if load_state:
                 print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs"
