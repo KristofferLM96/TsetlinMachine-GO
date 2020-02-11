@@ -71,6 +71,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
         "Settings:\nClauses:,%.1f\nThreshold:,%.1f\nS:,%.1f\nWindow_X:,%.1f\nWindow_Y:,%.1f\nShape_X:,%.1f\nShape_Y:,%.1f\nShape_Z:,%.1f\n" % (
         clauses, Threshold, S, Window_X, Window_Y, Shape_X, Shape_Y, Shape_Z))
     while counter < kFold:
+        kFoldtotal = 0
         numb = str(counter)
         global X_train,Y_train,X_test,Y_test,m
         train_data = np.loadtxt("Data/" + dim + inndata + numb + "train", delimiter=",")
@@ -110,6 +111,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
                 startepoch += 1
                 results = open("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + ".csv", 'a')
                 results.write(",%.4f" % (loadresult))
+                kFoldtotal+=loadresult
                 meanTab[i] = meanTab[i] + loadresult
                 if Highest < loadresult:
                     Highest = loadresult
@@ -137,6 +139,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
                 np.save("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + "kFold" + str(counter) + ".npy",x)
             results = open("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + ".csv", 'a')
             results.write(",%.4f" % (np.mean(result)))
+            kFoldtotal += np.mean(result)
             results.close()
         results = open("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + ".csv", 'a')
         results.write("\n")
@@ -146,7 +149,18 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
             np.save("Results/" + Name + "/" + machine + "/" + machine + dim + timestr +"kFold"+str(counter) + ".npy", x)
         counter += 1
         #print("Highest:", Highest)
-        print("Accuracy:", 100 * (m.predict(X_test) == Y_test).mean())
+        meancount = 0
+        meansepoch = 0
+        highepoch = 0
+        for i in meanTab:
+            meancount += 1
+            meansepoch += i / counter
+            if i / counter > highepoch:
+                highepoch = i / counter
+        print("Average Epoch: %.4f " % (kFoldtotal/meancount))
+        print("Total Highest: %.4f Total Highest k-Fold: %.4f Total Average k-Fold: %.4f" % (
+            Highest, highepoch, meansepoch / meancount))
+        #print("Accuracy:", 100 * (m.predict(X_test) == Y_test).mean())
         if(counter == Write_Clauses):
             WriteClauses(m, inndata, clauses,Shape_X, Shape_Y, Shape_Z, Window_X, Window_Y,machine, Name, dim, timestr)
     results = open("Results/" + Name + "/" + machine + "/" + machine + dim + timestr + ".csv", 'a')
@@ -160,22 +174,24 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
         if i/kFold > highepoch:
             highepoch = i/kFold
         results.write(",%.4f" % (i/kFold))
-    results.write(",%.4f" % (meansepoch / meancount))
     results.write("\n")
-    results.write("Single/k-Fold")
+    results.write("Single/k-Fold/Average")
     results.write(",%.4f" % (Highest))
     results.write(",%.4f" % (highepoch)) # should be highest epoch
+    results.write(",%.4f" % (meansepoch / meancount))
     print("Highest: %.4f Highest k-Fold: %.4f Average k-Fold: %.4f" % (Highest, highepoch, meansepoch/meancount))
     results.close()
 
 def runner():
     # Settings
-    clauses = 20000
-    Threshold = 2000
-    S = 27.0
-    epoch = 5
+    clauses = 32000
+    Threshold = 8000
+    S = 28.0
+    epoch = 15
     #dim = "9x9Natsukaze_"
     dim = "9x9Aya_"
+    #dim = "0.75_9x9Aya_"
+    #dim = "0.5_9x9Aya_"
     kFold = 10
     machine = "TM"    #cTM or TM
     #inndata = "Natsukaze_NoDraw"
@@ -189,8 +205,8 @@ def runner():
     Write_Clauses = 0  #0 = don't print clauses, 1-10 which k-Fold to write clauses for.
     savestate = 2  #0 = no save, #1 = save each kFold  #2 = save each epoch
     loadstate = 1
-    #loadfile = "0128-1237"
-    loadfile = "0131-1328"
+    #loadfile = "0211-1111"
+    loadfile = "0210-2343"
     #StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(8000, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold, savestate, loadstate, loadfile)
