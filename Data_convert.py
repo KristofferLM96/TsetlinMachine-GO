@@ -2,9 +2,18 @@ import os
 import glob
 import time
 import gomill.boards
+import gomill.ascii_boards
 
+board_print = False
 full_board = False
-completion_percentage = 0.5
+current_results = True
+x_axis = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+          "K", "L", "M", "N", "O", "P", "Q", "R", "S"]
+if not full_board:
+    completion_percentage = 0.75
+else:
+    completion_percentage = 1
+komi = 7
 name = "9x9Aya"
 # path = "Data/Original/" + name + "/*"
 path = "/home/kristoffer/Documents/Data/Original/9x9_10k_r104_144x20k/*"
@@ -129,18 +138,25 @@ def get_board():
             if pos == "w" or pos == "b":
                 end_board.append(pos)
             else:
-                end_board.append("+")
+                end_board.append("·")
 
 
 def print_board():
     global end_board
+    global x_axis
+    y_axis = board_size
     pos = 0
     for i in range(board_size):
-        print_string = ""
+        print_string = str(y_axis)
         for j in range(board_size):
-            print_string = print_string + " " + end_board[pos]
+            print_string = print_string + "  " + end_board[pos]
             pos = pos + 1
+        y_axis -= 1
         print(print_string)
+    axis_str = " "
+    for axis in range(board_size):
+        axis_str = axis_str + "  " + x_axis[axis]
+    print(axis_str)
 
 
 def convert():
@@ -169,6 +185,7 @@ def write_file(_output):
 def main(_file_lines, _board):
     global errors
     global binary_board
+    global game_board
     boards, result, move_list = load_board(_file_lines, _board)
     count = 0
     for turn in move_list[:int(len(move_list)*completion_percentage)]:
@@ -181,9 +198,29 @@ def main(_file_lines, _board):
             break
 
     get_board()
-    # print_board()
+    area_score = game_board.area_score() - komi
+    if board_print:
+        print("Total turns:", len(move_list))
+        print("Turns done:", count)
+        print("Area Score:", area_score, "\n")
+        print("   | Board End Positions |")
+        print("-----------------------------")
+        print_board()
+        print("-----------------------------")
+        print("\n")
     binary_board = convert()
-    binary_board = binary_board + str(result)
+    if not current_results and full_board:
+        binary_board = binary_board + str(result)
+    else:
+        if str(result) == 2:
+            binary_board = binary_board + str(result)
+        else:
+            if area_score < 0:
+                binary_board = binary_board + "0"
+            elif area_score == 0:
+                binary_board = binary_board + "2"
+            else:
+                binary_board = binary_board + "1"
 
 
 errors = 0
