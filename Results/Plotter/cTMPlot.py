@@ -10,11 +10,11 @@ CI = True
 
 kFold = 10  # 1 or 10
 showT1 = [0, 4, 8, 12,14]  # specify which epochs will go out. epoch 0 will show as epoch 1 in table.
-OutputFileName = "TM9x9Aya32000c"  # outputname for each file
+OutputFileName = "TM9x9Aya32k8k-s"  # outputname for each file
 # table caption ..
-Caption = "Testing 9x9 dataset using TM with 32000 clauses and different thresholds."
+Caption = "Testing 9x9 dataset using TM with 32000 clauses 8000 thresholds with different s values."
 label = OutputFileName  # table label
-parsing = "Threshold"  # Threshold, Window, Settings, Clauses
+parsing = "S"  # Threshold, Window, Settings, Clauses, S
 epoch = 15
 standdev = 0  # 1 if enabled in graph, 0 if not
 title_graph = ""
@@ -161,6 +161,10 @@ for FILENAME in sorted(glob.glob(os.path.join(path, '*.csv'))):
             labelinput = window
             title_graph = namestab[-1] + ", " + clauses + " clauses, " + threshold + " threshold, " + namestab[2] + " s"
             names = window + " window"
+        elif parsing[0] == "S" or parsing[0] == "s":
+            labelinput = namestab[2]
+            title_graph = namestab[-1] + ", " + clauses + " clauses, " + threshold + " threshold"
+            names = namestab[2] + " s"
         else:
             labelinput = setting
             title_graph = namestab[-1]
