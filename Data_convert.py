@@ -209,18 +209,15 @@ def main(_file_lines, _board):
         print("-----------------------------")
         print("\n")
     binary_board = convert()
-    if not current_results and full_board:
+    if not current_results:
         binary_board = binary_board + str(result)
     else:
-        if str(result) == 2:
-            binary_board = binary_board + str(result)
+        if area_score < 0:
+            binary_board = binary_board + "0"
+        elif area_score == 0:
+            binary_board = binary_board + "2"
         else:
-            if area_score < 0:
-                binary_board = binary_board + "0"
-            elif area_score == 0:
-                binary_board = binary_board + "2"
-            else:
-                binary_board = binary_board + "1"
+            binary_board = binary_board + "1"
 
 
 errors = 0
