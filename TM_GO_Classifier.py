@@ -12,15 +12,16 @@ TODO:
 """
 
 # Settings
-clauses = 32000
-Threshold = 8000
+clauses = 8000
+Threshold = 10000
 s = 27.0
 epoch = 15
 k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
 machine_type = "TM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 completion_percentage = "0.75"
-data_dim = completion_percentage + "_" + "9x9"  # 9x9, 13x13, 19x19 ..
+data_dim = completion_percentage + "_" + "1" + "_" + "9x9"  # 9x9, 13x13, 19x19 ..
+# data_dim = "9x9"
 data_name = "Aya"  # Natsukaze_ || Aya_
 dataset = data_name + "_" + data_status
 Window_X = 9
@@ -189,7 +190,6 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         for q in range(len(average_epoch_results)):
             _results.write(",%.4f" % average_epoch_results[q])
         _results.write(",%.4f" % avg_avg)
-        _results.write(",")
         _results.write("\n")
         _results.write("single-highest/max" + "," + ",%.4f" % single_highest_acc + ",%.4f" % max_acc + ",")
 
