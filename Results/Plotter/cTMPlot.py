@@ -67,6 +67,7 @@ for FILENAME in sorted(glob.glob(os.path.join(path, '*.csv'))):
         window = ""
         clauses = ""
         machine = ""
+        sparam = ""
         for line in file.readlines():
             counter += 1
             if counter == 1:
@@ -96,6 +97,7 @@ for FILENAME in sorted(glob.glob(os.path.join(path, '*.csv'))):
                 linesd = str(lineds[1])
                 linede = linesd[:-2]
                 namestab.append(linede)
+                sparam= linesd
                 names = names + linede + "s "
                 setting = setting + linede + "/"
             if machine == "C":
@@ -162,9 +164,9 @@ for FILENAME in sorted(glob.glob(os.path.join(path, '*.csv'))):
             title_graph = namestab[-1] + ", " + clauses + " clauses, " + threshold + " threshold, " + namestab[2] + " s"
             names = window + " window"
         elif parsing[0] == "S" or parsing[0] == "s":
-            labelinput = namestab[2]
+            labelinput = sparam
             title_graph = namestab[-1] + ", " + clauses + " clauses, " + threshold + " threshold"
-            names = namestab[2] + " s"
+            names = sparam + " s"
         else:
             labelinput = setting
             title_graph = namestab[-1]
