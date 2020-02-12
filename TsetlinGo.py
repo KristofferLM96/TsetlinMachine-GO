@@ -100,7 +100,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
         results.close()
         startepoch = 1
         if loadstate == 1 and len(resArray) >= counter+1:
-            print(len(resArray))
+            #print(len(resArray))
             loadedstate = np.load("Results/" + Name + "/" + machine + "/" + machine + dim + loadfile +"kFold"+str(counter) + ".npy", allow_pickle=True)
             m.fit(X_train, Y_train, epochs=0, incremental=True)
             m.set_state(loadedstate)
@@ -185,8 +185,8 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
 def runner():
     # Settings
     clauses = 32000
-    Threshold = 8000
-    S = 28.0
+    Threshold = 10000
+    S = 27.0
     epoch = 15
     #dim = "9x9Natsukaze_"
     dim = "9x9Aya_"
@@ -204,7 +204,7 @@ def runner():
     Name = "Trond"
     Write_Clauses = 0  #0 = don't print clauses, 1-10 which k-Fold to write clauses for.
     savestate = 2  #0 = no save, #1 = save each kFold  #2 = save each epoch
-    loadstate = 1
+    loadstate = 0
     #loadfile = "0211-1111"
     loadfile = "0210-2343"
     #StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)

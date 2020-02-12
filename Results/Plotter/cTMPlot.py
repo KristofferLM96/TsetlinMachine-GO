@@ -9,13 +9,13 @@ OFFSET = 0
 CI = True
 
 kFold = 10  # 1 or 10
-showT1 = [0, 3, 6, 9]  # specify which epochs will go out. epoch 0 will show as epoch 1 in table.
+showT1 = [0, 4, 8, 12,14]  # specify which epochs will go out. epoch 0 will show as epoch 1 in table.
 OutputFileName = "TM9x9Aya32000c"  # outputname for each file
 # table caption ..
-Caption = "Testing 9x9 dataset using TM with different clauses under 16000 threshold."
+Caption = "Testing 9x9 dataset using TM with 32000 clauses and different thresholds."
 label = OutputFileName  # table label
 parsing = "Threshold"  # Threshold, Window, Settings, Clauses
-epoch = 10
+epoch = 15
 standdev = 0  # 1 if enabled in graph, 0 if not
 title_graph = ""
 backslash = "\ "
