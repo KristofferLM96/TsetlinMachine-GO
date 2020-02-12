@@ -25,6 +25,12 @@
 &\begin{tabular}[c]{@{}l@{}}95.39\%$\pm0.51\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}95.25\%$\pm0.76\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}95.37\%$\pm0.68\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 28.0\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}93.5\%$\pm0.3\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.33\%$\pm0.61\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.31\%$\pm0.75\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.23\%$\pm0.52\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.79\%$\pm0.72\%$\end{tabular}\\ \hline
 \begin{tabular}[c]{@{}l@{}} 29.0\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}93.35\%$\pm0.47\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}95.57\%$\pm0.55\%$\end{tabular}

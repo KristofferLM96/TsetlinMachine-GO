@@ -175,7 +175,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
             highepoch = i/kFold
         results.write(",%.4f" % (i/kFold))
     results.write("\n")
-    results.write("Single/k-Fold/Average")
+    results.write("Single/k-Fold/Average,")
     results.write(",%.4f" % (Highest))
     results.write(",%.4f" % (highepoch)) # should be highest epoch
     results.write(",%.4f" % (meansepoch / meancount))
