@@ -37,6 +37,12 @@
 &\begin{tabular}[c]{@{}l@{}}95.37\%$\pm0.45\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}95.27\%$\pm0.58\%$\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}95.11\%$\pm0.35\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 40.0\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}92.89\%$\pm0.39\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.89\%$\pm0.63\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.45\%$\pm0.57\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.81\%$\pm0.45\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.47\%$\pm0.38\%$\end{tabular}\\ \hline
 \end{tabular}
 \caption{Testing 9x9 dataset using TM with 32000 clauses 8000 thresholds with different s values.}
 \label{tab:TM9x9Aya32k8k-s}
