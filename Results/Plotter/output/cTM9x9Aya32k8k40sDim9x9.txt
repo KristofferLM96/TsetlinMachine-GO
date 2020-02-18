@@ -1,0 +1,26 @@
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=.6]{Images/Results/cTM9x9Aya32k8k40sDim9x9.png}
+    \caption{Testing 9x9 dataset using cTM with 32000 clauses, 8000 thresholds, 40s under different window sizes.}
+    \label{fig:cTM9x9Aya32k8k40sDim9x9}
+\end{figure}
+\FloatBarrier
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{|a|d|d|d|d|d|}
+\hline
+\rowcolor{Blue}
+\begin{tabular}[c]{@{}l@{}}Window\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 9\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 13\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 15\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 9x9\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}92.91\%$\pm0.36\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.08\%$\pm0.66\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.55\%$\pm0.65\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.82\%$\pm0.71\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.52\%$\pm0.72\%$\end{tabular}\\ \hline
+\end{tabular}
+\caption{Testing 9x9 dataset using cTM with 32000 clauses, 8000 thresholds, 40s under different window sizes.}
+\label{tab:cTM9x9Aya32k8k40sDim9x9}
+\end{table}
+\FloatBarrier
