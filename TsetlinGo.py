@@ -4,7 +4,7 @@ import numpy as np
 from time import time
 import time as stime
 
-def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold,savestate,loadstate,loadfile):
+def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold,savestate,loadstate,loadfile,boost):
     timestr = stime.strftime("%m%d-%H%M")
     results = open("Results/"+Name+"/"+machine+"/"+machine+dim+timestr+".csv",'a')
     ecount = 0
@@ -12,7 +12,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
     resArray =[]
 
     if loadstate == 1:
-        with open("Results/" + "Trond" + "/" + "TM" + "/" + machine+dim+loadfile+".csv", 'r') as file:
+        with open("Results/" + "Trond" + "/" + machine + "/" + machine+dim+loadfile+".csv", 'r') as file:
             loadarray = []
             for line in file.readlines():
                 # print(line)
@@ -81,7 +81,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
             Y_train = train_data[:, -1]
             X_test = test_data[:, 0:-1]
             Y_test = test_data[:, -1]
-            m = MultiClassTsetlinMachine(clauses, Threshold, S, boost_true_positive_feedback=0, weighted_clauses=True)
+            m = MultiClassTsetlinMachine(clauses, Threshold, S, boost_true_positive_feedback=boost, weighted_clauses=True)
             print("-------------------------------------------------------------------------------------------")
             print("MultiClassTsetlinMachine using %s%s%s writen to file %s.csv\n" %(dim,inndata,numb,timestr))
             print("Settings: Clauses: %.1f Threshold: %.1f S: %.1f\n" % (clauses, Threshold, S))
@@ -90,7 +90,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
             Y_train = train_data[:, -1]
             X_test = test_data[:, 0:-1].reshape(test_data.shape[0], Shape_X, Shape_Y, Shape_Z)
             Y_test = test_data[:, -1]
-            m = MultiClassConvolutionalTsetlinMachine2D(clauses, Threshold, S, (Window_X, Window_Y),boost_true_positive_feedback=0, weighted_clauses=True)
+            m = MultiClassConvolutionalTsetlinMachine2D(clauses, Threshold, S, (Window_X, Window_Y),boost_true_positive_feedback=boost, weighted_clauses=True)
             print("-------------------------------------------------------------------------------------------")
             print("MultiClassConvolutionalTsetlinMachine2D using %s %s writen to file %s.csv (%.1f x %.1f x %.1f)\n" % (inndata, str(counter), timestr, Shape_X, Shape_Y, Shape_Z))
             print("Settings: Clauses: %.1f Threshold: %.1f S: %.1f Window_X: %.1f Window_Y: %.1f\n" % (clauses, Threshold, S, Window_X, Window_Y))
@@ -179,37 +179,41 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
     results.write(",%.4f" % (Highest))
     results.write(",%.4f" % (highepoch)) # should be highest epoch
     results.write(",%.4f" % (meansepoch / meancount))
+    if(boost == 1):
+        results.write("\n")
+        results.write("Boost:,True")
     print("Highest: %.4f Highest k-Fold: %.4f Average k-Fold: %.4f" % (Highest, highepoch, meansepoch/meancount))
     results.close()
 
 def runner():
     # Settings
     clauses = 32000
-    Threshold = 10000
-    S = 27.0
+    Threshold = 8000
+    S = 40.0
     epoch = 15
     #dim = "9x9Natsukaze_"
     dim = "9x9Aya_"
     #dim = "0.75_9x9Aya_"
     #dim = "0.5_9x9Aya_"
     kFold = 10
-    machine = "TM"    #cTM or TM
+    machine = "cTM"    #cTM or TM
     #inndata = "Natsukaze_NoDraw"
     inndata = "Draw"
-    Window_X = 5
-    Window_Y = 5
+    Window_X = 9
+    Window_Y = 9
     Shape_X = 9
     Shape_Y = 9
     Shape_Z = 2
     Name = "Trond"
     Write_Clauses = 0  #0 = don't print clauses, 1-10 which k-Fold to write clauses for.
     savestate = 2  #0 = no save, #1 = save each kFold  #2 = save each epoch
-    loadstate = 0
+    loadstate = 1
     #loadfile = "0211-1111"
-    loadfile = "0210-2343"
+    loadfile = "0217-1307"
+    boost = 1
     #StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(8000, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
-    StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold, savestate, loadstate, loadfile)
+    StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold, savestate, loadstate, loadfile,boost)
 
 
 def WriteClauses(m, inndata, clauses,Shape_X, Shape_Y, Shape_Z, Window_X, Window_Y,machine, Name, dim, timestr):

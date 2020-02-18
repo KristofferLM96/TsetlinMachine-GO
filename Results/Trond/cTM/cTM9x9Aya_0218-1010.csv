@@ -1,0 +1,11 @@
+MultiClassConvolutionalTsetlinMachine2D,Parallel,Epoch1,Epoch2,Epoch3,Epoch4,Epoch5,Epoch6,Epoch7,Epoch8,Epoch9,Epoch10,Epoch11,Epoch12,Epoch13,Epoch14,Epoch15
+Settings:
+Clauses:,32000.0
+Threshold:,8000.0
+S:,40.0
+Window_X:,9.0
+Window_Y:,9.0
+Shape_X:,9.0
+Shape_Y:,9.0
+Shape_Z:,2.0
+9x9Aya_Draw0,,93.3761,94.3782,94.3402,94.5252,95.0415,95.1611
