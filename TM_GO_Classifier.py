@@ -7,6 +7,8 @@ from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
 
 """
 TODO: 
+- Add estimated time to completion.
+- Add total time it took to run program.
 - Comment/Document code.
 - Auto push to github after n-minutes/n-epochs.
 """
@@ -411,6 +413,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         if _write_clauses:
             write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _machine_type, _data_dim,
                           _dataset, timestamp_save, m)
+        stat_calc(epoch_results, epochs_total, results)
         results.close()
         last_k_fold = counter + 1
     if _machine_type == "TM":
