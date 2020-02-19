@@ -12,16 +12,16 @@ TODO:
 """
 
 # Settings
-clauses = 8000
-Threshold = 10000
-s = 27.0
+clauses = 32000
+Threshold = 16000
+s = 40.0
 epoch = 15
 k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
-machine_type = "TM"  # cTM or TM
+machine_type = "cTM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 completion_percentage = "0.75"
-data_dim = completion_percentage + "_" + "1" + "_" + "9x9"  # 9x9, 13x13, 19x19 ..
-# data_dim = "9x9"
+# data_dim = completion_percentage + "_" + "1" + "_" + "9x9"
+data_dim = "9x9"
 data_name = "Aya"  # Natsukaze_ || Aya_
 dataset = data_name + "_" + data_status
 Window_X = 9
@@ -31,10 +31,14 @@ Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = False
 # Clauses_to_write = 1  # 1-10 which k-Fold to write clauses for.
-load_date = "20-02-05_2305"
+year = "20"
+month = "02"
+day = "18"
+time_point = "2155"
+load_date = year + "-" + month + "-" + day + "_" + time_point
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
-load_state = False
+load_state = True
 save_state = True
 
 x_train = []
