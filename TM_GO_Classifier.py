@@ -73,7 +73,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
     print("\n\n")
     app_start_date = time.strftime("%y-%m-%d_%H%M")
     app_start_date_formatted = time.strftime("%d.%m.%y  %H:%M")
-    print("Program started at:", app_start_date, "\n\n")
+    print("Program started at:", app_start_date_formatted, "\n\n")
 
     def init(_epoch_results):
         global offset_x
@@ -311,11 +311,11 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                     result_array.append(load_array[i + k_fold_start][2:])
             return result_array
 
-    def estimate_time(_current_epoch, _current_k_fold, _epoch, _k_fold_parts):
+    def estimate_time(_epoch_counter, _epoch, _k_fold_parts):
         global app_start
         global app_start_date_formatted
         current_time_taken = time.time() - app_start
-        est_time = current_time_taken * (1 + (1 - ((_current_epoch * _current_k_fold) / (_epoch * _k_fold_parts))))
+        est_time = current_time_taken * (1 + (1 - (_epoch_counter / (_epoch * _k_fold_parts))))
         est_timestamp = (datetime.strptime(app_start_date_formatted, "%d.%m.%y  %H:%M")
                          + timedelta(seconds=est_time)).strftime("%d.%m.%y  %H:%M")
         return est_timestamp
@@ -334,6 +334,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
     counter = 0
     init(epoch_results)
     result_total = []
+    epoch_counter = 0
     while counter < k_fold_parts:
         print("k-fold ------", str(counter + 1) + " / " + str(k_fold_parts))
         global x_train
@@ -360,6 +361,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             if save_state:
                 save_tm_state(m, x_train, y_train)
         for i in range(epoch_range):
+            epoch_counter += 1
             if _machine_type == "TM":
                 results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                                + _data_dim + _dataset + "_" + app_start_date + ".csv", 'a')
