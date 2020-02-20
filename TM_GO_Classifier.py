@@ -13,10 +13,10 @@ TODO:
 """
 
 # Settings
-clauses = 32
-Threshold = 16
+clauses = 40
+Threshold = 80
 s = 40.0
-epoch = 5
+epoch = 4
 k_fold_parts = 3  # 1 - 10, how many k-fold parts to go through
 machine_type = "TM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
@@ -311,14 +311,15 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                     result_array.append(load_array[i + k_fold_start][2:])
             return result_array
 
-    def estimate_time(_epoch_counter, _k_fold_counter, _epoch, _k_fold_parts):
+    def estimate_time(_epoch_counter, _epoch, _k_fold_parts):
         global app_start
-        global app_start_date_formatted
-        current_time_taken = time.time() - app_start
-        est_time = current_time_taken * (1 + (1 - (_epoch_counter / (_epoch * _k_fold_parts))))
-        est_timestamp = (datetime.strptime(app_start_date_formatted, "%d.%m.%Y  %H:%M")
-                         + timedelta(seconds=est_time)).strftime("%d.%m.%Y  %H:%M")
-        return est_timestamp
+        current_time = time.time()
+        elapsed_time = current_time - app_start
+        est_time = (elapsed_time / _epoch_counter) * (_epoch * _k_fold_parts)
+        finish_time = app_start + est_time
+        time_left = est_time - elapsed_time
+        est_timestamp = datetime.fromtimestamp(finish_time).strftime("%d.%m.%Y  %H:%M")
+        return elapsed_time, time_left, est_timestamp
 
     global epoch_results
     global average_epoch_results
@@ -401,18 +402,20 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                     current_i_load = str(i + start_epoch + 1)
                     current_i = str(i + 1)
 
+            time_elapsed, time_left, estimated_finish = estimate_time(epoch_counter, _epoch, k_fold_parts)
+            time_elapsed = round(time_elapsed / 60, 2)
+            time_left = round(time_left / 60, 2)
             if load_state:
                 print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs  "
-                      "-----  est. finished: %s"
+                      "-----  App have ran: %s minutes, App have %s minutes left ---- est. finished: %s"
                       % (current_k_fold, k_fold_parts, current_i_load, timestamp_epoch, result, stop - start,
-                         stop_testing - start_testing,
-                         estimate_time(epoch_counter, counter, _epoch, k_fold_parts)))
+                         stop_testing - start_testing, time_elapsed, time_left, estimated_finish))
                 epoch_results[i + start_epoch - 1].append(round(result, 4))
             else:
                 print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs  "
-                      "-----  est. finished: %s"
+                      "-----  App have ran: %s minutes, App have %s minutes left ---- est. finished: %s"
                       % (current_k_fold, k_fold_parts, current_i, timestamp_epoch, result, stop - start,
-                         stop_testing - start_testing, estimate_time(epoch_counter, counter, _epoch, k_fold_parts)))
+                         stop_testing - start_testing, time_elapsed, time_left, estimated_finish))
                 epoch_results[i].append(round(result, 4))
 
             result_total.append(round(result, 4))
