@@ -10,7 +10,7 @@ current_results = True
 x_axis = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
           "K", "L", "M", "N", "O", "P", "Q", "R", "S"]
 if not full_board:
-    completion_percentage = 0.75
+    completion_percentage = 0.5
 else:
     completion_percentage = 1
 komi = 7
@@ -21,7 +21,10 @@ path = "/home/kristoffer/Documents/Data/Original/9x9_10k_r104_144x20k/*"
 if full_board:
     output_path = "Data/Binary/" + name + "_binary.txt"
 else:
-    output_path = "Data/Binary/" + str(completion_percentage) + "_" + name + "_binary.txt"
+    if current_results:
+        output_path = "Data/Binary/" + str(completion_percentage) + "_1_" + name + "_binary.txt"
+    else:
+        output_path = "Data/Binary/" + str(completion_percentage) + "_" + name + "_binary.txt"
 
 board_size = 9
 total_pos = 19
