@@ -14,16 +14,16 @@ TODO:
 """
 
 # Settings
-clauses = 32000
-Threshold = 16000
+clauses = 32
+Threshold = 16
 s = 40.0
-epoch = 15
-k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
-machine_type = "cTM"  # cTM or TM
+epoch = 5
+k_fold_parts = 4  # 1 - 10, how many k-fold parts to go through
+machine_type = "TM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 completion_percentage = "0.75"
-# data_dim = completion_percentage + "_" + "1" + "_" + "9x9"
-data_dim = "9x9"
+data_dims = ["9x9", completion_percentage + "_" + "1" + "_" + "9x9", completion_percentage + "_" + "9x9"]
+data_dim = data_dims[0]
 data_name = "Aya"  # Natsukaze_ || Aya_
 dataset = data_name + "_" + data_status
 Window_X = 9
@@ -40,7 +40,7 @@ time_point = "2155"
 load_date = year + "-" + month + "-" + day + "_" + time_point
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
-load_state = True
+load_state = False
 save_state = True
 
 x_train = []
@@ -177,6 +177,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         return machine
 
     def stat_calc(_epoch_results, _epochs_total, _results):
+        global average_epoch_results
         for j in range(_epoch):
             epoch_mean = np.mean(_epoch_results[j])
             average_epoch_results.append(round(float(epoch_mean), 4))
@@ -198,6 +199,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         _results.write(",%.4f" % avg_avg)
         _results.write("\n")
         _results.write("single-highest/max" + "," + ",%.4f" % single_highest_acc + ",%.4f" % max_acc + ",")
+        average_epoch_results = []
 
     def save_tm_state(_m, _x_train, _y_train):
         try:
@@ -323,6 +325,9 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         global y_train
         global x_test
         global y_test
+        # epoch_results = []
+        # for i in range(_epoch):
+        #    epoch_results.append([])
         numb = str(counter)
         start_epoch = 0
         last_epoch = 0
@@ -496,8 +501,21 @@ def write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _ma
 
 
 try:
+    print("Program started at:", time.strftime("%y-%m-%d_%H%M"))
+    app_start = time.time()
     app(epoch, clauses, Threshold, s, dataset, data_dim, machine_type, Window_X, Window_Y,
         Shape_X, Shape_Y, Shape_Z, Name, Write_Clauses)
+    app_stop = time.time()
+    print("Program stopped at:", time.strftime("%y-%m-%d_%H%M"))
+    time_taken = app_stop - app_start
+    if 3600 > time_taken > 60:
+        time_taken = time_taken / 60
+        print("It took", round(time_taken), 4), "minutes to finish the program."
+    elif time_taken > 3600:
+        time_taken = time_taken / (60 * 60)
+        print("It took", round(time_taken), 4), "hours to finish the program."
+    else:
+        print("It took", round(time_taken), 4), "seconds to finish the program."
 except KeyboardInterrupt:
     print("\n\n")
     print("Aborted.. stopped by force.", "\n")
