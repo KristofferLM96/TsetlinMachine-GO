@@ -8,7 +8,6 @@ from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
 """
 TODO: 
 - Add estimated time to completion.
-- Add total time it took to run program.
 - Comment/Document code.
 - Auto push to github after n-minutes/n-epochs.
 """
@@ -18,7 +17,7 @@ clauses = 32
 Threshold = 16
 s = 40.0
 epoch = 5
-k_fold_parts = 4  # 1 - 10, how many k-fold parts to go through
+k_fold_parts = 3  # 1 - 10, how many k-fold parts to go through
 machine_type = "TM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 completion_percentage = "0.75"
@@ -51,6 +50,7 @@ epoch_results = []
 average_epoch_results = []
 epochs_total = []
 timestamp_save = ""
+time_taken = 0
 offset_y = 0
 offset_x = 0
 last_k_fold = 0
@@ -67,6 +67,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
     print("#                                                                                               #")
     print("#################################################################################################")
     print("\n\n")
+    print("Program started at:", time.strftime("%y-%m-%d_%H%M"), "\n\n")
 
     def init(_epoch_results):
         global offset_x
@@ -325,9 +326,6 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         global y_train
         global x_test
         global y_test
-        # epoch_results = []
-        # for i in range(_epoch):
-        #    epoch_results.append([])
         numb = str(counter)
         start_epoch = 0
         last_epoch = 0
@@ -413,7 +411,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                            + timestamp_save + ".csv", 'a')
         results.write("\n")
         mean_accuracy = np.mean(result_total)
-        print("Mean Accuracy:", round(float(mean_accuracy), 4), "\n\n")
+        print("Mean Accuracy for k-fold -", counter + 1, ":", round(float(mean_accuracy), 4), "\n")
         counter += 1
         if _write_clauses:
             write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _machine_type, _data_dim,
@@ -428,8 +426,8 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                        + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _dataset + "_"
                        + timestamp_save + ".csv", 'a')
-    stat_calc(epoch_results, epochs_total, results)
     results.close()
+    print("Program stopped at:", time.strftime("%y-%m-%d_%H%M"))
 
 
 def write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _machine_type, _data_dim, _dataset,
@@ -501,21 +499,19 @@ def write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _ma
 
 
 try:
-    print("Program started at:", time.strftime("%y-%m-%d_%H%M"))
     app_start = time.time()
     app(epoch, clauses, Threshold, s, dataset, data_dim, machine_type, Window_X, Window_Y,
         Shape_X, Shape_Y, Shape_Z, Name, Write_Clauses)
     app_stop = time.time()
-    print("Program stopped at:", time.strftime("%y-%m-%d_%H%M"))
     time_taken = app_stop - app_start
     if 3600 > time_taken > 60:
         time_taken = time_taken / 60
-        print("It took", round(time_taken), 4), "minutes to finish the program."
+        print("It took", round(time_taken, 2), "minutes to finish the program.")
     elif time_taken > 3600:
         time_taken = time_taken / (60 * 60)
-        print("It took", round(time_taken), 4), "hours to finish the program."
+        print("It took", round(time_taken, 2), "hours to finish the program.")
     else:
-        print("It took", round(time_taken), 4), "seconds to finish the program."
+        print("It took", round(time_taken, 2), "seconds to finish the program.")
 except KeyboardInterrupt:
     print("\n\n")
     print("Aborted.. stopped by force.", "\n")
