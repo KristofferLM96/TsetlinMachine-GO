@@ -315,12 +315,15 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
 
     def estimate_time(_epoch_counter, _epoch, _k_fold_parts):
         global app_start
+        global data_train_load
+        global data_test_load
 
         current_time = time.time()
         elapsed_time = current_time - app_start
         est_time = (elapsed_time / _epoch_counter) * (_epoch * _k_fold_parts)
-        finish_time = app_start + est_time
+        # finish_time = app_start + est_time
         time_left = est_time - elapsed_time
+        finish_time = time.time() + time_left
         est_timestamp = datetime.fromtimestamp(finish_time).strftime("%d.%m.%Y  %H:%M")
         return elapsed_time, time_left, est_timestamp
 
