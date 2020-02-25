@@ -1,7 +1,7 @@
 import sys
 import numpy as np
 import time
-from datetime import datetime, timedelta
+from datetime import datetime
 import os
 from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
 from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
@@ -16,8 +16,8 @@ TODO:
 clauses = 40
 Threshold = 80
 s = 40.0
-epoch = 4
-k_fold_parts = 3  # 1 - 10, how many k-fold parts to go through
+epoch = 5
+k_fold_parts = 4  # 1 - 10, how many k-fold parts to go through
 machine_type = "TM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 completion_percentage = "0.75"
@@ -51,6 +51,8 @@ average_epoch_results = []
 epochs_total = []
 app_start_date = ""
 app_start_date_formatted = ""
+data_train_load = 0
+data_test_load = 0
 app_start = 0
 app_stop = 0
 offset_y = 0
@@ -121,6 +123,9 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         global y_train
         global x_test
         global y_test
+        global data_test_load
+        global data_train_load
+
         checkpoint_start = time.time()
         try:
             print("Loading training dataset..")
@@ -130,7 +135,8 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             print("Error. File not found, could not load training dataset.")
             sys.exit(0)
         checkpoint_stop = time.time()
-        print("Training dataset loaded.          It took:", round(checkpoint_stop - checkpoint_start, 2), "seconds.")
+        data_train_load = checkpoint_stop - checkpoint_start
+        print("Training dataset loaded.          It took:", round(data_train_load, 2), "seconds.")
         checkpoint_start = time.time()
         try:
             print("Loading testing dataset..")
@@ -140,7 +146,8 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             print("Error. File not found, could not load testing dataset.")
             sys.exit(0)
         checkpoint_stop = time.time()
-        print("Testing dataset loaded.           It took:", round(checkpoint_stop - checkpoint_start, 2), "seconds.")
+        data_test_load = checkpoint_stop - checkpoint_start
+        print("Testing dataset loaded.           It took:", round(data_test_load, 2), "seconds.")
 
         if _machine_type == "TM":
             x_train = train_data[:, 0:-1]
@@ -185,28 +192,23 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
 
     def stat_calc(_epoch_results, _epochs_total, _results):
         global average_epoch_results
+        average_epoch_results = []
         for j in range(_epoch):
             epoch_mean = np.mean(_epoch_results[j])
             average_epoch_results.append(round(float(epoch_mean), 4))
-
         single_highest_acc = max(_epochs_total)
-        print("Single-highest Accuracy:", round(single_highest_acc, 4))
-
         max_acc = max(average_epoch_results)
-        print("Max Accuracy:", round(max_acc, 4))
-
         avg_avg = np.mean(average_epoch_results)
-        print("Average Accuracy for each epoch:", average_epoch_results)
 
-        print("Average Accuracy total:", round(float(avg_avg), 4), "\n\n")
+        return single_highest_acc, max_acc, avg_avg, average_epoch_results
 
+    def write_stat(_results, _acc_highest, _acc_max, _acc_avg, _acc_epochs):
         _results.write("mean" + ",")
-        for q in range(len(average_epoch_results)):
-            _results.write(",%.4f" % average_epoch_results[q])
-        _results.write(",%.4f" % avg_avg)
+        for q in range(len(_acc_epochs)):
+            _results.write(",%.4f" % _acc_epochs[q])
+        _results.write(",%.4f" % _acc_avg)
         _results.write("\n")
-        _results.write("single-highest/max" + "," + ",%.4f" % single_highest_acc + ",%.4f" % max_acc + ",")
-        average_epoch_results = []
+        _results.write("single-highest/max" + "," + ",%.4f" % _acc_highest + ",%.4f" % _acc_max + ",")
 
     def save_tm_state(_m, _x_train, _y_train):
         try:
@@ -313,6 +315,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
 
     def estimate_time(_epoch_counter, _epoch, _k_fold_parts):
         global app_start
+
         current_time = time.time()
         elapsed_time = current_time - app_start
         est_time = (elapsed_time / _epoch_counter) * (_epoch * _k_fold_parts)
@@ -404,18 +407,25 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
 
             time_elapsed, time_left, estimated_finish = estimate_time(epoch_counter, _epoch, k_fold_parts)
             time_elapsed = round(time_elapsed / 60, 2)
+            notation = "minutes"
+            if time_elapsed > 60:
+                time_elapsed = round(time_elapsed / 60, 2)
+                notation = "hours"
             time_left = round(time_left / 60, 2)
+            if time_left > 60:
+                time_left = round(time_left / 60, 2)
+
             if load_state:
-                print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs  "
-                      "-----  App have ran: %s minutes, App have %s minutes left ---- est. finished: %s"
+                print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs "
+                      "----- Elapsed time: %s %s, Time left: %s %s ---- est. finish: %s"
                       % (current_k_fold, k_fold_parts, current_i_load, timestamp_epoch, result, stop - start,
-                         stop_testing - start_testing, time_elapsed, time_left, estimated_finish))
+                         stop_testing - start_testing, time_elapsed, notation, time_left, notation, estimated_finish))
                 epoch_results[i + start_epoch - 1].append(round(result, 4))
             else:
-                print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs  "
-                      "-----  App have ran: %s minutes, App have %s minutes left ---- est. finished: %s"
+                print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs "
+                      "----- Elapsed time: %s %s, Time left: %s %s ---- est. finish: %s"
                       % (current_k_fold, k_fold_parts, current_i, timestamp_epoch, result, stop - start,
-                         stop_testing - start_testing, time_elapsed, time_left, estimated_finish))
+                         stop_testing - start_testing, time_elapsed, notation, time_left, notation, estimated_finish))
                 epoch_results[i].append(round(result, 4))
 
             result_total.append(round(result, 4))
@@ -439,7 +449,12 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         if _write_clauses:
             write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _machine_type, _data_dim,
                           _dataset, app_start_date, m)
-        stat_calc(epoch_results, epochs_total, results)
+        acc_highest, acc_max, acc_avg, acc_epochs = stat_calc(epoch_results, epochs_total, results)
+        print("Single-highest Accuracy:", round(acc_highest, 4))
+        print("Max Accuracy:", round(acc_max, 4))
+        print("Average Accuracy for each epoch:", acc_epochs)
+        print("Average Accuracy total:", round(float(acc_avg), 4), "\n\n")
+
         results.close()
         last_k_fold = counter + 1
     if _machine_type == "TM":
@@ -449,6 +464,8 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                        + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _dataset + "_"
                        + app_start_date + ".csv", 'a')
+    acc_highest, acc_max, acc_avg, acc_epochs = stat_calc(epoch_results, epochs_total, results)
+    write_stat(results, acc_highest, acc_max, acc_avg, acc_epochs)
     results.close()
     print("Program stopped at:", time.strftime("%d.%m.%y  %H:%M"))
 
