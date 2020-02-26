@@ -10,7 +10,7 @@ CI = True
 
 kFold = 10  # 1 or 10
 showT1 = [0, 4, 8, 12,14]  # specify which epochs will go out. epoch 0 will show as epoch 1 in table.
-OutputFileName = "cTM9x9Aya32k8k40sDim9x9"  # outputname for each file
+OutputFileName = "cTM9x9Aya32k8k40sDim"  # outputname for each file
 # table caption ..
 Caption = "Testing 9x9 dataset using cTM with 32000 clauses, 8000 thresholds, 40s under different window sizes."
 label = OutputFileName  # table label

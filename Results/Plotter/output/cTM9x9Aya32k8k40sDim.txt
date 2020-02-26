@@ -1,0 +1,50 @@
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=.6]{Images/Results/cTM9x9Aya32k8k40sDim.png}
+    \caption{Testing 9x9 dataset using cTM with 32000 clauses, 8000 thresholds, 40s under different window sizes.}
+    \label{fig:cTM9x9Aya32k8k40sDim}
+\end{figure}
+\FloatBarrier
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{|a|d|d|d|d|d|}
+\hline
+\rowcolor{Blue}
+\begin{tabular}[c]{@{}l@{}}Window\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 9\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 13\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 15\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 5x5\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}92.74\%$\pm0.27\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.13\%$\pm0.48\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.22\%$\pm0.6\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}93.97\%$\pm0.75\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}93.84\%$\pm0.71\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 6x6\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}92.98\%$\pm0.19\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.15\%$\pm0.48\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.67\%$\pm0.47\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.72\%$\pm0.62\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.51\%$\pm0.48\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 7x7\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}93.07\%$\pm0.35\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.02\%$\pm0.29\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.01\%$\pm0.55\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.94\%$\pm0.31\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.81\%$\pm0.6\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 8x8\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}93.12\%$\pm0.37\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}94.7\%$\pm0.63\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.49\%$\pm0.57\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.43\%$\pm0.67\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.58\%$\pm0.54\%$\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} 9x9\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}92.91\%$\pm0.36\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.08\%$\pm0.66\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.55\%$\pm0.65\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.82\%$\pm0.71\%$\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}95.52\%$\pm0.72\%$\end{tabular}\\ \hline
+\end{tabular}
+\caption{Testing 9x9 dataset using cTM with 32000 clauses, 8000 thresholds, 40s under different window sizes.}
+\label{tab:cTM9x9Aya32k8k40sDim}
+\end{table}
+\FloatBarrier
