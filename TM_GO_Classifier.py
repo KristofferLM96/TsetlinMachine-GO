@@ -13,20 +13,20 @@ TODO:
 """
 
 # Settings
-clauses = 40
-Threshold = 80
+clauses = 32000
+Threshold = 16000
 s = 40.0
-epoch = 5
-k_fold_parts = 4  # 1 - 10, how many k-fold parts to go through
-machine_type = "TM"  # cTM or TM
+epoch = 15
+k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
+machine_type = "cTM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 completion_percentage = "0.75"
 data_dims = ["9x9", completion_percentage + "_" + "1" + "_" + "9x9", completion_percentage + "_" + "9x9"]
 data_dim = data_dims[0]
 data_name = "Aya"  # Natsukaze_ || Aya_
 dataset = data_name + "_" + data_status
-Window_X = 9
-Window_Y = 9
+Window_X = 8
+Window_Y = 8
 Shape_X = Shape_Y = 9  # Depending on data_dim
 Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
@@ -34,8 +34,8 @@ Write_Clauses = False
 # Clauses_to_write = 1  # 1-10 which k-Fold to write clauses for.
 year = "20"
 month = "02"
-day = "18"
-time_point = "2155"
+day = "25"
+time_point = "0911"
 load_date = year + "-" + month + "-" + day + "_" + time_point
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
@@ -420,15 +420,15 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
 
             if load_state:
                 print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs "
-                      "----- Elapsed time: %s %s, Time left: %s %s ---- est. finish: %s"
+                      "----- Elapsed time: %s %s, Time left: %s %s"
                       % (current_k_fold, k_fold_parts, current_i_load, timestamp_epoch, result, stop - start,
-                         stop_testing - start_testing, time_elapsed, notation, time_left, notation, estimated_finish))
+                         stop_testing - start_testing, time_elapsed, notation, time_left, notation))
                 epoch_results[i + start_epoch - 1].append(round(result, 4))
             else:
                 print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs "
-                      "----- Elapsed time: %s %s, Time left: %s %s ---- est. finish: %s"
+                      "----- Elapsed time: %s %s, Time left: %s %s"
                       % (current_k_fold, k_fold_parts, current_i, timestamp_epoch, result, stop - start,
-                         stop_testing - start_testing, time_elapsed, notation, time_left, notation, estimated_finish))
+                         stop_testing - start_testing, time_elapsed, notation, time_left, notation))
                 epoch_results[i].append(round(result, 4))
 
             result_total.append(round(result, 4))

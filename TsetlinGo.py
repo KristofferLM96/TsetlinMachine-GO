@@ -82,7 +82,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
             X_test = test_data[:, 0:-1]
             Y_test = test_data[:, -1]
             m = MultiClassTsetlinMachine(clauses, Threshold, S, boost_true_positive_feedback=boost, weighted_clauses=True)
-            print("-------------------------------------------------------------------------------------------")
+            print("----------------------------------------------------------------------------------------------------------")
             print("MultiClassTsetlinMachine using %s%s%s writen to file %s.csv\n" %(dim,inndata,numb,timestr))
             print("Settings: Clauses: %.1f Threshold: %.1f S: %.1f\n" % (clauses, Threshold, S))
         if machine == "cTM":
@@ -91,7 +91,7 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
             X_test = test_data[:, 0:-1].reshape(test_data.shape[0], Shape_X, Shape_Y, Shape_Z)
             Y_test = test_data[:, -1]
             m = MultiClassConvolutionalTsetlinMachine2D(clauses, Threshold, S, (Window_X, Window_Y),boost_true_positive_feedback=boost, weighted_clauses=True)
-            print("-------------------------------------------------------------------------------------------")
+            print("----------------------------------------------------------------------------------------------------------")
             print("MultiClassConvolutionalTsetlinMachine2D using %s %s writen to file %s.csv (%.1f x %.1f x %.1f)\n" % (inndata, str(counter), timestr, Shape_X, Shape_Y, Shape_Z))
             print("Settings: Clauses: %.1f Threshold: %.1f S: %.1f Window_X: %.1f Window_Y: %.1f\n" % (clauses, Threshold, S, Window_X, Window_Y))
         results.close()
@@ -157,9 +157,20 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
             meansepoch += i / counter
             if i / counter > highepoch:
                 highepoch = i / counter
-        print("Average Epoch: %.4f " % (kFoldtotal/meancount))
-        print("Total Highest: %.4f Total Highest k-Fold: %.4f Total Average k-Fold: %.4f" % (
-            Highest, highepoch, meansepoch / meancount))
+        lastten = 0
+        for i in meanTab[-10:]:
+            lastten += i
+        lastten = lastten/counter
+        print("--------------------------")
+        print("| Average Epoch: %.4f |" % (kFoldtotal/meancount))
+        print("--------------------------")
+        print("---------")
+        print("| Total |")
+        print("----------------------------------------------------------------------------------------------------------")
+        #print("----------------------------------------------------------------------------------------------------------------------------------")
+        print("| Highest: %.4f | Highest k-Fold: %.4f | Average k-Fold: %.4f | Average Last 10 Epochs: %.4f |" % (
+            Highest, highepoch, meansepoch / meancount, lastten / 10))
+        print("----------------------------------------------------------------------------------------------------------")
         #print("Accuracy:", 100 * (m.predict(X_test) == Y_test).mean())
         if(counter == Write_Clauses):
             WriteClauses(m, inndata, clauses,Shape_X, Shape_Y, Shape_Z, Window_X, Window_Y,machine, Name, dim, timestr)
@@ -174,21 +185,28 @@ def StartMachine(clauses,epoch,Threshold,S,inndata,dim,machine,Window_X,Window_Y
         if i/kFold > highepoch:
             highepoch = i/kFold
         results.write(",%.4f" % (i/kFold))
+    lastten = 0
+    for i in meanTab[-10:]:
+        lastten+=i
+        lastten=lastten/kFold
+
+    #epochs-etc etc
     results.write("\n")
-    results.write("Single/k-Fold/Average,")
+    results.write("Single/k-Fold/Average/Last10,")
     results.write(",%.4f" % (Highest))
     results.write(",%.4f" % (highepoch)) # should be highest epoch
     results.write(",%.4f" % (meansepoch / meancount))
+    results.write(",%.4f" % (lastten/10))
     if(boost == 1):
         results.write("\n")
         results.write("Boost:,True")
-    print("Highest: %.4f Highest k-Fold: %.4f Average k-Fold: %.4f" % (Highest, highepoch, meansepoch/meancount))
+    print("Highest: %.4f Highest k-Fold: %.4f Average k-Fold: %.4f Average Last 10 Epochs: %.4f" % (Highest, highepoch, meansepoch/meancount, lastten/10))
     results.close()
 
 def runner():
     # Settings
-    clauses = 32000
-    Threshold = 8000
+    clauses = 320
+    Threshold = 80
     S = 40.0
     epoch = 15
     #dim = "9x9Natsukaze_"
@@ -196,8 +214,7 @@ def runner():
     #dim = "0.75_9x9Aya_"
     #dim = "0.5_9x9Aya_"
     kFold = 10
-    machine = "cTM"    #cTM or TM
-    #inndata = "Natsukaze_NoDraw"
+    machine = "TM"    #cTM or TM
     inndata = "Draw"
     Window_X = 9
     Window_Y = 9
@@ -207,10 +224,10 @@ def runner():
     Name = "Trond"
     Write_Clauses = 0  #0 = don't print clauses, 1-10 which k-Fold to write clauses for.
     savestate = 2  #0 = no save, #1 = save each kFold  #2 = save each epoch
-    loadstate = 1
+    loadstate = 0
     #loadfile = "0211-1111"
-    loadfile = "0217-1307"
-    boost = 1
+    loadfile = "0219-0011"
+    boost = 0
     #StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     #StartMachine(8000, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold)
     StartMachine(clauses, epoch, Threshold, S, inndata,dim,machine,Window_X,Window_Y,Shape_X,Shape_Y,Shape_Z,Name, Write_Clauses,kFold, savestate, loadstate, loadfile,boost)

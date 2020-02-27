@@ -9,7 +9,8 @@ OFFSET = 0
 CI = True
 
 kFold = 10  # 1 or 10
-showT1 = [0, 4, 8, 12,14]  # specify which epochs will go out. epoch 0 will show as epoch 1 in table.
+#showT1 = [0, 4, 8, 12,14]  # specify which epochs will go out. epoch 0 will show as epoch 1 in table.
+showT1 = [0, 4, 9, 14] # showing 4 epochs + average of last 10 epochs.
 OutputFileName = "cTM9x9Aya32k8k40sDim"  # outputname for each file
 # table caption ..
 Caption = "Testing 9x9 dataset using cTM with 32000 clauses, 8000 thresholds, 40s under different window sizes."
@@ -33,7 +34,10 @@ table.write(backslash + "FloatBarrier\n")
 table.write(backslash + "FloatBarrier\n")
 table.write(backslash + "begin{table}[h!]\n")
 table.write(backslash + "centering\n")
-table.write(backslash + "begin{tabular}{|a|d|d|d|d|d|}\n")
+if len(showT1) == 5:
+    table.write(backslash + "begin{tabular}{|a|d|d|d|d|d|}\n")
+if len(showT1) == 4:
+    table.write(backslash + "begin{tabular}{|a|d|d|d|d||x|}\n")
 table.write(backslash + "hline\n")
 table.write(backslash + "rowcolor{Blue}\n")
 table.write(backslash + "begin{tabular}[c]{@{}l@{}}" + parsing+backslash + "end{tabular}&")
@@ -48,6 +52,9 @@ stitle = ""
 if len(showT1) == 5:
     table.write("&")
     table.write(backslash + "begin{tabular}[c]{@{}l@{}} Epoch " + str(showT1[4] + 1) + backslash + "end{tabular}")
+if len(showT1) == 4:
+    table.write("&")
+    table.write(backslash + "begin{tabular}[c]{@{}l@{}} Last 10 Epoch"+ backslash + "end{tabular}")
 table.write(backslash + backslash + " " + backslash + "hline\n")
 for FILENAME in sorted(glob.glob(os.path.join(path, '*.csv'))):
     print(FILENAME)
@@ -184,6 +191,14 @@ for FILENAME in sorted(glob.glob(os.path.join(path, '*.csv'))):
             table.write("\n")
             table.write("&" + backslash + "begin{tabular}[c]{@{}l@{}}" + str(round(m[showT1[4]], 2)) + backslash+"%$"
                         + backslash + "pm" + str(round(s[showT1[4]], 2)) + backslash+"%$" + backslash + "end{tabular}")
+        lastten = 0
+        for i in m[-10:]:
+            lastten += i
+        lastten = lastten /10
+        if len(showT1) == 4:
+            table.write("\n")
+            table.write("&" + backslash + "begin{tabular}[c]{@{}l@{}}" + str(round(lastten, 2)) + backslash + "%"
+                        + backslash + "end{tabular}")
         table.write(backslash + backslash+" " + backslash + "hline\n")
 
     x = [i + 1 for i in range(len(m))]
