@@ -15,18 +15,18 @@ TODO:
 # Settings
 clauses = 32000
 Threshold = 16000
-s = 40.0
+s = 150.0
 epoch = 15
-k_fold_parts = 10  # 1 - 10, how many k-fold parts to go through
+k_fold_parts = 1  # 1 - 10, how many k-fold parts to go through
 machine_type = "cTM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 completion_percentage = "0.75"
 data_dims = ["9x9", completion_percentage + "_" + "1" + "_" + "9x9", completion_percentage + "_" + "9x9"]
-data_dim = data_dims[0]
+data_dim = data_dims[2]
 data_name = "Aya"  # Natsukaze_ || Aya_
 dataset = data_name + "_" + data_status
-Window_X = 8
-Window_Y = 8
+Window_X = 7
+Window_Y = 7
 Shape_X = Shape_Y = 9  # Depending on data_dim
 Shape_Z = 2  # 3D board
 Name = "Kristoffer"  # Kristoffer or Trond
