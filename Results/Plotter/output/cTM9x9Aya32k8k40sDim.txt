@@ -9,7 +9,7 @@
 \FloatBarrier
 \begin{table}[h!]
 \centering
-\begin{tabular}{|a|d|d|d|d||c|}
+\begin{tabular}{|a|d|d|d|d||x|}
 \hline
 \rowcolor{Blue}
 \begin{tabular}[c]{@{}l@{}}Window\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 10\end{tabular}&\begin{tabular}[c]{@{}l@{}} Epoch 15\end{tabular}&\begin{tabular}[c]{@{}l@{}} Last 10 Epoch\end{tabular}\\ \hline

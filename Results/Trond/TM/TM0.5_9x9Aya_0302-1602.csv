@@ -1,0 +1,6 @@
+MultiClassTsetlinMachineParallel,Parallel,Epoch1,Epoch2,Epoch3,Epoch4,Epoch5,Epoch6,Epoch7,Epoch8,Epoch9,Epoch10,Epoch11,Epoch12,Epoch13,Epoch14,Epoch15,Epoch16,Epoch17,Epoch18,Epoch19,Epoch20,Epoch21,Epoch22,Epoch23,Epoch24,Epoch25,Epoch26,Epoch27,Epoch28,Epoch29,Epoch30,Epoch31,Epoch32,Epoch33,Epoch34,Epoch35,Epoch36,Epoch37,Epoch38,Epoch39,Epoch40,Epoch41,Epoch42,Epoch43,Epoch44,Epoch45,Epoch46,Epoch47,Epoch48,Epoch49,Epoch50,Epoch51,Epoch52,Epoch53,Epoch54,Epoch55,Epoch56,Epoch57,Epoch58,Epoch59,Epoch60,Epoch61,Epoch62,Epoch63,Epoch64,Epoch65,Epoch66,Epoch67,Epoch68,Epoch69,Epoch70,Epoch71,Epoch72,Epoch73,Epoch74,Epoch75,Epoch76,Epoch77,Epoch78,Epoch79,Epoch80,Epoch81,Epoch82,Epoch83,Epoch84,Epoch85,Epoch86,Epoch87,Epoch88,Epoch89,Epoch90,Epoch91,Epoch92,Epoch93,Epoch94,Epoch95,Epoch96,Epoch97,Epoch98,Epoch99,Epoch100
+Settings:
+Clauses:,4000.0
+Threshold:,300000.0
+S:,200.0
+0.5_9x9Aya_Draw0,,57.2938,57.6062,58.2092,58.9758,60.0113,60.7938,61.6403,62.3784,63.0972,63.7937,64.3929,64.9352,65.4339,65.9822,66.2805,66.7848,67.1839,67.3608,67.6100,67.8822,68.1095,68.3429,68.5403,68.8309,68.9608,69.0565,69.1766,69.2159,69.3343,69.5198,69.5976,69.8527,69.8441,69.9745,70.0531,70.0929,70.2416,70.3018,70.3976,70.3805,70.4471,70.5647,70.5232,70.6018,70.7433,70.7390,70.6783,70.7664,70.7463,70.7305,70.7382,70.8676,70.7681,70.8416,70.7988
