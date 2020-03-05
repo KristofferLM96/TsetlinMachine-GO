@@ -1,6 +1,6 @@
 from numpy.random import shuffle
 
-name = "0.5_1_9x9Aya"
+name = "100_9x9Aya"
 win = open("Data/Results-Split/" + name + "_win.txt", 'r')
 loss = open("Data/Results-Split/" + name + "_loss.txt", 'r')
 draw = open("Data/Results-Split/" + name + "_draw.txt", 'r')

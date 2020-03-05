@@ -4,32 +4,40 @@
 import glob
 import os
 import time
-
 import numpy as np
-# import random
 
 
 # -----------------------------------------------
 # ............. GLOBAL VARIABLES ................
 # -----------------------------------------------
 
-# 9x9Natsukaze || 9x9Aya
-name = "9x9Aya"
+name = "80_9x9Aya" # 9x9Natsukaze || 9x9Aya || x_9x9Aya .. x = amount moves
 file_name = name + "_binary.txt"
-# path = "Data/Binary/" + file_name
-path = "/home/kristoffer/Documents/Data/Original/9x9_10k_r104_144x20k/*"
+binary_path = "Data/Binary/" + file_name
+original_path = "/home/kristoffer/Documents/Data/Original/9x9_10k_r104_144x20k/*"
 encoding = "UTF-8"  # ISO-8859-1 / UTF-8
 multiple_files = True
 unique_list = []
 original_list = []
+# [check_handicap(), check_duplication(), get_result_ratio(), check_moves(), remove_empty_lines()]
+run_programs = [0, 1, 0, 0, 0]
+
 
 # -----------------------------------------------
 # ................. FUNCTIONS ...................
 # -----------------------------------------------
 
 
+def remove_empty_lines():
+    output_file = open("Data/Binary/" + name + "_binary_1.txt", "w+")
+    with open(binary_path, "r") as file:
+        for line in file:
+            if not line.isspace():
+                output_file.write(line)
+
+
 def check_handicap():
-    file = open(path, 'r', encoding=encoding)
+    file = open(original_path, 'r', encoding=encoding)
     file_lines = file.readlines()
     _handicap = file_lines[0].split("HA[")
     print(_handicap)
@@ -40,7 +48,7 @@ def check_handicap():
 
 
 def check_duplication():
-    file = open(path, 'r', encoding=encoding)
+    file = open(binary_path, 'r', encoding=encoding)
     global original_list
     global unique_list
     original_list = [line.strip() for line in file]
@@ -52,15 +60,6 @@ def check_duplication():
     print("Unique List Length:", unique_length)
     print("Original - Unique:", original_length - unique_length, "\n")
 
-    """ Checks whether the random.shuffle() creates duplicates when ran. """
-    # random.shuffle(original_list)
-    # unique_list = np.unique(original_list)
-    # shuffled_length = len(original_list)
-    # print("Shuffled List Length:", shuffled_length)
-    # unique_length = len(unique_list)
-    # print("Unique List Length:", unique_length)
-    # print("Shuffled - Unique:", shuffled_length - unique_length, "\n")
-
     file.close()
 
 
@@ -68,12 +67,13 @@ def get_result_ratio():
     win = open("Data/Results-Split/" + name + "_win.txt", 'r')
     loss = open("Data/Results-Split/" + name + "_loss.txt", 'r')
     draw = open("Data/Results-Split/" + name + "_draw.txt", 'r')
-    win_line = win.readlines()
-    loss_line = loss.readlines()
-    draw_line = draw.readlines()
-    print("Amount of wins: ", len(win_line))
-    print("Amount of loss: ", len(loss_line))
-    print("Amount of draw: ", len(draw_line))
+    win_amount = len(win.readlines())
+    loss_amount = len(loss.readlines())
+    draw_amount = len(draw.readlines())
+    total_amount = win_amount + loss_amount + draw_amount
+    print("Amount of wins: ", win_amount, ",", round(((win_amount * 100) / total_amount)), "%")
+    print("Amount of loss: ", loss_amount, ",", round(((loss_amount * 100) / total_amount)), "%")
+    print("Amount of draw: ", draw_amount, ",", round(((draw_amount * 100) / total_amount)), "%")
 
     win.close()
     loss.close()
@@ -153,8 +153,8 @@ def check_moves():
             return 19
 
     counter = 1
-    total_files = len(glob.glob(os.path.join(path, '*.sgf')))
-    for infile in glob.glob(os.path.join(path, '*.sgf')):
+    total_files = len(glob.glob(os.path.join(original_path, '*.sgf')))
+    for infile in glob.glob(os.path.join(original_path, '*.sgf')):
         start_time = time.time()
         file = open(infile, 'r', encoding="ISO-8859-1")
         file_lines = file.readlines()
@@ -168,16 +168,25 @@ def check_moves():
         file.close()
 
     unique_moves_list, unique_moves_list_count = np.unique(moves_list, return_counts=True)
-    for game in unique_moves_list:
-        print(game)
-    print(unique_moves_list)
-    print(unique_moves_list_count)
+    print(unique_moves_list, "\n")
+    print(unique_moves_list_count, "\n")
+    total_data = sum(unique_moves_list_count)
+    for x, y in np.nditer([unique_moves_list, unique_moves_list_count]):
+        print("Moves: %d : Amount: %d, %d %%" % (int(x), int(y), ((int(y)*100)/total_data)))
+    print("\n")
+    print("Unique Move lengths:", len(unique_moves_list))
 
 
 # -----------------------------------------------
 # .................. MAIN .......................
 # -----------------------------------------------
-# check_handicap()
-# check_duplication()
-# get_result_ratio()
-check_moves()
+if run_programs[0]:
+    check_handicap()
+if run_programs[1]:
+    check_duplication()
+if run_programs[2]:
+    get_result_ratio()
+if run_programs[3]:
+    check_moves()
+if run_programs[4]:
+    remove_empty_lines()

@@ -6,13 +6,18 @@ import gomill.ascii_boards
 
 board_print = False
 full_board = False
-current_results = True
+current_results = False
+moves_count = True
+move_count = 100
+
 x_axis = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
           "K", "L", "M", "N", "O", "P", "Q", "R", "S"]
-if not full_board:
-    completion_percentage = 0.5
-else:
-    completion_percentage = 1
+if not moves_count:
+    if not full_board:
+        completion_percentage = 0.5
+    else:
+        completion_percentage = 1
+
 komi = 7
 name = "9x9Aya"
 # path = "Data/Original/" + name + "/*"
@@ -20,11 +25,13 @@ path = "/home/kristoffer/Documents/Data/Original/9x9_10k_r104_144x20k/*"
 
 if full_board:
     output_path = "Data/Binary/" + name + "_binary.txt"
-else:
+elif not full_board and not moves_count:
     if current_results:
         output_path = "Data/Binary/" + str(completion_percentage) + "_1_" + name + "_binary.txt"
     else:
         output_path = "Data/Binary/" + str(completion_percentage) + "_" + name + "_binary.txt"
+else:
+    output_path = "Data/Binary/" + str(move_count) + "_" + name + "_binary.txt"
 
 board_size = 9
 total_pos = 19
@@ -191,7 +198,13 @@ def main(_file_lines, _board):
     global game_board
     boards, result, move_list = load_board(_file_lines, _board)
     count = 0
-    for turn in move_list[:int(len(move_list)*completion_percentage)]:
+    if moves_count:
+        move_range = move_count
+    else:
+        move_range = int(len(move_list) * completion_percentage)
+    if len(move_list) < move_count:
+        return
+    for turn in move_list[:move_range]:
         count += 1
         try:
             play(turn)
