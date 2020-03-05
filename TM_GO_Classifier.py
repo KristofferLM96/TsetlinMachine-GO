@@ -14,15 +14,21 @@ TODO:
 
 # Settings
 clauses = 32000
-Threshold = 16000
-s = 150.0
+Threshold = 8000
+s = 40.0
 epoch = 15
 k_fold_parts = 1  # 1 - 10, how many k-fold parts to go through
-machine_type = "cTM"  # cTM or TM
+boost = 1  # 1 = ON || 0 = OFF
+weighted = True  # True/False for weighted clauses
+machine_type = "TM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 completion_percentage = "0.75"
-data_dims = ["9x9", completion_percentage + "_" + "1" + "_" + "9x9", completion_percentage + "_" + "9x9"]
-data_dim = data_dims[2]
+moves_completed = "90"
+data_dims = ["9x9",
+             completion_percentage + "_" + "1" + "_" + "9x9",
+             completion_percentage + "_" + "9x9",
+             moves_completed + "_" + "9x9"]
+data_dim = data_dims[3]
 data_name = "Aya"  # Natsukaze_ || Aya_
 dataset = data_name + "_" + data_status
 Window_X = 7
@@ -155,7 +161,8 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             x_test = test_data[:, 0:-1]
             y_test = test_data[:, -1]
 
-            machine = MultiClassTsetlinMachine(_clauses, _t, _s, boost_true_positive_feedback=0, weighted_clauses=True)
+            machine = MultiClassTsetlinMachine(_clauses, _t, _s, boost_true_positive_feedback=boost,
+                                               weighted_clauses=weighted)
             print("-------------------------------------------------------------------------------------------")
             print("MultiClassTsetlinMachine using %s, %s, %s, written to file %s%s_%s.csv\n"
                   % (_data_dim, data_status, data_name, _data_dim, _dataset, _app_start_date))
@@ -168,7 +175,8 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             y_test = test_data[:, -1]
 
             machine = MultiClassConvolutionalTsetlinMachine2D(_clauses, _t, _s, (_window_x, _window_y),
-                                                              boost_true_positive_feedback=0, weighted_clauses=True)
+                                                              boost_true_positive_feedback=boost,
+                                                              weighted_clauses=weighted)
             print("-------------------------------------------------------------------------------------------")
             print("MultiClassConvolutionalTsetlinMachine2D using %s, %s, %s, written to file %s%s_%s.csv "
                   "(%.1f x %.1f x %.1f)""\n"
@@ -410,25 +418,27 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
 
             time_elapsed, time_left, estimated_finish = estimate_time(epoch_counter, _epoch, k_fold_parts)
             time_elapsed = round(time_elapsed / 60, 2)
-            notation = "minutes"
+            notation_elapsed = "minutes"
+            notation_left = "minutes"
             if time_elapsed > 60:
                 time_elapsed = round(time_elapsed / 60, 2)
-                notation = "hours"
+                notation_elapsed = "hours"
             time_left = round(time_left / 60, 2)
             if time_left > 60:
                 time_left = round(time_left / 60, 2)
+                notation_left = "hours"
 
             if load_state:
                 print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs "
                       "----- Elapsed time: %s %s, Time left: %s %s"
                       % (current_k_fold, k_fold_parts, current_i_load, timestamp_epoch, result, stop - start,
-                         stop_testing - start_testing, time_elapsed, notation, time_left, notation))
+                         stop_testing - start_testing, time_elapsed, notation_elapsed, time_left, notation_left))
                 epoch_results[i + start_epoch - 1].append(round(result, 4))
             else:
                 print("-- %s / %s -- #%s Time: %s Accuracy: %.2f%% Training: %.2fs Testing: %.2fs "
                       "----- Elapsed time: %s %s, Time left: %s %s"
                       % (current_k_fold, k_fold_parts, current_i, timestamp_epoch, result, stop - start,
-                         stop_testing - start_testing, time_elapsed, notation, time_left, notation))
+                         stop_testing - start_testing, time_elapsed, notation_elapsed, time_left, notation_left))
                 epoch_results[i].append(round(result, 4))
 
             result_total.append(round(result, 4))
