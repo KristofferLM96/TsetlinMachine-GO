@@ -11,7 +11,7 @@ import numpy as np
 # ............. GLOBAL VARIABLES ................
 # -----------------------------------------------
 
-name = "80_9x9Aya" # 9x9Natsukaze || 9x9Aya || x_9x9Aya .. x = amount moves
+name = "100_9x9Aya"  # 9x9Natsukaze || 9x9Aya || x_9x9Aya .. x = amount moves
 file_name = name + "_binary.txt"
 binary_path = "Data/Binary/" + file_name
 original_path = "/home/kristoffer/Documents/Data/Original/9x9_10k_r104_144x20k/*"
@@ -20,7 +20,7 @@ multiple_files = True
 unique_list = []
 original_list = []
 # [check_handicap(), check_duplication(), get_result_ratio(), check_moves(), remove_empty_lines()]
-run_programs = [0, 1, 0, 0, 0]
+run_programs = [0, 0, 1, 0, 0]
 
 
 # -----------------------------------------------
@@ -71,9 +71,10 @@ def get_result_ratio():
     loss_amount = len(loss.readlines())
     draw_amount = len(draw.readlines())
     total_amount = win_amount + loss_amount + draw_amount
-    print("Amount of wins: ", win_amount, ",", round(((win_amount * 100) / total_amount)), "%")
-    print("Amount of loss: ", loss_amount, ",", round(((loss_amount * 100) / total_amount)), "%")
-    print("Amount of draw: ", draw_amount, ",", round(((draw_amount * 100) / total_amount)), "%")
+    print("Total Amount:", total_amount)
+    print("Amount of wins:", win_amount, ",", round(((win_amount * 100) / total_amount), 2), "%")
+    print("Amount of loss:", loss_amount, ",", round(((loss_amount * 100) / total_amount), 2), "%")
+    print("Amount of draw:", draw_amount, ",", round(((draw_amount * 100) / total_amount), 2), "%")
 
     win.close()
     loss.close()
