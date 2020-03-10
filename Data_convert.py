@@ -18,8 +18,11 @@ print("board_print:", board_print)
 print("full_board:", full_board)
 print("current_results:", current_results)
 print("moves_count:", moves_count)
-print("move_count:", move_count)
-print("move_threshold:", move_threshold)
+print("threshold:", threshold)
+if moves_count:
+    print("move_count:", move_count)
+if threshold:
+    print("move_threshold:", move_threshold)
 
 x_axis = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
           "K", "L", "M", "N", "O", "P", "Q", "R", "S"]
