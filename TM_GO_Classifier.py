@@ -8,26 +8,29 @@ from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
 
 """
 TODO: 
+- Fix time left when loading tm-state.
 - Comment/Document code.
 - Auto push to github after n-minutes/n-epochs.
 """
 
 # Settings
-clauses = 32000
-Threshold = 8000
+clauses = 320
+Threshold = 80
 s = 40.0
 epoch = 15
-k_fold_parts = 1  # 1 - 10, how many k-fold parts to go through
+k_fold_parts = 5  # 1 - 10, how many k-fold parts to go through
 boost = 1  # 1 = ON || 0 = OFF
 weighted = True  # True/False for weighted clauses
 machine_type = "TM"  # cTM or TM
 data_status = "Draw"  # Draw or No-Draw
 completion_percentage = "0.75"
-moves_completed = "90"
+moves_completed = "100"
+move_threshold = "90"
 data_dims = ["9x9",
              completion_percentage + "_" + "1" + "_" + "9x9",
              completion_percentage + "_" + "9x9",
-             moves_completed + "_" + "9x9"]
+             moves_completed + "_" + "9x9",
+             moves_completed + "_" + move_threshold + "T_" + "9x9"]
 data_dim = data_dims[3]
 data_name = "Aya"  # Natsukaze_ || Aya_
 dataset = data_name + "_" + data_status
@@ -39,13 +42,13 @@ Name = "Kristoffer"  # Kristoffer or Trond
 Write_Clauses = False
 # Clauses_to_write = 1  # 1-10 which k-Fold to write clauses for.
 year = "20"
-month = "02"
-day = "25"
-time_point = "0911"
+month = "03"
+day = "10"
+time_point = "1215"
 load_date = year + "-" + month + "-" + day + "_" + time_point
 load_folder = "TM-State/" + Name + "/" + data_dim + dataset + "/" + load_date + "/"
 load_path = load_folder + "state_"
-load_state = False
+load_state = True
 save_state = True
 
 x_train = []
@@ -68,7 +71,7 @@ last_epoch = 0
 
 
 def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x, _window_y,
-        _shape_x, _shape_y, _shape_z, _name, _write_clauses):
+        _shape_x, _shape_y, _shape_z, _name, _write_clauses, _boost):
     global app_start_date
     global app_start_date_formatted
     print("#################################################################################################")
@@ -117,12 +120,26 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         _results.write("\n")
 
         if _machine_type == "TM":
-            _results.write("Settings:\nClauses:,%.1f\nThreshold:,%.1f\ns:,%.1f\n" % (_clauses, _t, _s))
+            _results.write("Settings:\nClauses:,%.1f\nThreshold:,%.1f\ns:,%.1f\nboost:,%s\n" % (_clauses, _t, _s, _boost))
         if _machine_type == "cTM":
-            _results.write("Settings:\nClauses:,%.1f\nThreshold:,%.1f\ns:,%.1f\nWindow_X:,%.1f\nWindow_Y:,%.1f\n" 
-                           "Shape_X:,%.1f\nShape_Y:,%.1f\nShape_Z:,%.1f\n"
-                           % (_clauses, _t, _s, _window_x, _window_y, _shape_x, _shape_y, _shape_z))
+            _results.write("Settings:\nClauses:,%.1f\nThreshold:,%.1f\ns:,%.1f\nboost:,%s\nWindow_X:,%.1f\n"
+                           "Window_Y:,%.1f\nShape_X:,%.1f\nShape_Y:,%.1f\nShape_Z:,%.1f\n"
+                           % (_clauses, _t, _s, _boost, _window_x, _window_y, _shape_x, _shape_y, _shape_z))
         _results.close()
+
+        print("Settings:", "\n")
+        print("Clauses:", _clauses)
+        print("Threshold:", _t)
+        print("s:", _s)
+        print("boost:", _boost)
+        print("weighted clauses:", weighted)
+        if _machine_type == "cTM":
+            print("Window X", _window_x)
+            print("Window Y", _window_y)
+            print("Shape X", _shape_x)
+            print("Shape Y", _shape_y)
+            print("Shape Z", _shape_z)
+        print("\n")
 
     def load_data(_numb, _app_start_date):
         global x_train
@@ -206,15 +223,16 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
             average_epoch_results.append(round(float(epoch_mean), 4))
         single_highest_acc = max(_epochs_total)
         max_acc = max(average_epoch_results)
+        avg_10_last = np.mean(average_epoch_results[-10:])
         avg_avg = np.mean(average_epoch_results)
 
-        return single_highest_acc, max_acc, avg_avg, average_epoch_results
+        return single_highest_acc, max_acc, avg_avg, avg_10_last, average_epoch_results
 
-    def write_stat(_results, _acc_highest, _acc_max, _acc_avg, _acc_epochs):
+    def write_stat(_results, _acc_highest, _acc_max, _acc_avg, _acc_avg_10_last, _acc_epochs):
         _results.write("mean" + ",")
         for q in range(len(_acc_epochs)):
             _results.write(",%.4f" % _acc_epochs[q])
-        _results.write(",%.4f" % _acc_avg)
+        _results.write(",%.4f" % _acc_avg + ",%.4f" % _acc_avg_10_last)
         _results.write("\n")
         _results.write("single-highest/max" + "," + ",%.4f" % _acc_highest + ",%.4f" % _acc_max + ",")
 
@@ -302,18 +320,19 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
                 machine = "cTM"
             _clauses = int(load_array[2][1][:-2])
             _t = int(load_array[3][1][:-2])
-            _s = int(load_array[4][1][:-2])
+            _s = float(load_array[4][1][:-2])
+            _boost = load_array[5][1][:-2]
             if machine == "cTM":
-                _window_x = int(load_array[5][1][:-2])
-                _window_y = int(load_array[6][1][:-2])
-                _shape_x = int(load_array[7][1][:-2])
-                _shape_y = int(load_array[8][1][:-2])
-                _shape_z = int(load_array[9][1][:-2])
-                k_fold_start = 10
+                _window_x = int(load_array[6][1][:-2])
+                _window_y = int(load_array[7][1][:-2])
+                _shape_x = int(load_array[8][1][:-2])
+                _shape_y = int(load_array[9][1][:-2])
+                _shape_z = int(load_array[10][1][:-2])
+                k_fold_start = 11
             else:
-                k_fold_start = 5
+                k_fold_start = 6
             result_array = []
-            if len(load_array) - k_fold_start > 10:
+            if len(load_array) - k_fold_start > 11:
                 for i in range(len(load_array) - k_fold_start - 2):
                     result_array.append(load_array[i + k_fold_start][2:])
             else:
@@ -462,11 +481,12 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         if _write_clauses:
             write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _machine_type, _data_dim,
                           _dataset, app_start_date, m)
-        acc_highest, acc_max, acc_avg, acc_epochs = stat_calc(epoch_results, epochs_total, results)
+        acc_highest, acc_max, acc_avg, acc_avg_10_last, acc_epochs = stat_calc(epoch_results, epochs_total, results)
         print("Single-highest Accuracy:", round(acc_highest, 4))
         print("Max Accuracy:", round(acc_max, 4))
         print("Average Accuracy for each epoch:", acc_epochs)
-        print("Average Accuracy total:", round(float(acc_avg), 4), "\n\n")
+        print("Average Accuracy total:", round(float(acc_avg), 4))
+        print("Average Accuracy last 10 epochs:", round(float(acc_avg_10_last), 4), "\n\n")
 
         results.close()
         last_k_fold = counter + 1
@@ -477,8 +497,8 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
                        + str(_window_x) + "x" + str(_window_y) + "/" + _data_dim + _dataset + "_"
                        + app_start_date + ".csv", 'a')
-    acc_highest, acc_max, acc_avg, acc_epochs = stat_calc(epoch_results, epochs_total, results)
-    write_stat(results, acc_highest, acc_max, acc_avg, acc_epochs)
+    acc_highest, acc_max, acc_avg, acc_avg_10_last, acc_epochs = stat_calc(epoch_results, epochs_total, results)
+    write_stat(results, acc_highest, acc_max, acc_avg, acc_avg_10_last, acc_epochs)
     results.close()
     print("Program stopped at:", time.strftime("%d.%m.%y  %H:%M"))
 
@@ -554,7 +574,7 @@ def write_clauses(_shape_x, _shape_y, _shape_z, _window_x, _window_y, _name, _ma
 try:
     app_start = time.time()
     app(epoch, clauses, Threshold, s, dataset, data_dim, machine_type, Window_X, Window_Y,
-        Shape_X, Shape_Y, Shape_Z, Name, Write_Clauses)
+        Shape_X, Shape_Y, Shape_Z, Name, Write_Clauses, boost)
     app_stop = time.time()
     time_taken = app_stop - app_start
     if 3600 > time_taken > 60:
@@ -568,7 +588,6 @@ try:
 except KeyboardInterrupt:
     print("\n\n")
     print("Aborted.. stopped by force.", "\n")
-    if not last_k_fold == 0:
-        print("Last k-fold ran:", last_k_fold, " ", "Last epoch ran:", last_epoch)
-        print("Last epochs saved to.. ", data_dim + dataset + "_" + app_start_date + ".csv")
+    print("Last k-fold ran:", last_k_fold, " ", "Last epoch ran:", last_epoch)
+    print("Last epochs saved to.. ", data_dim + dataset + "_" + app_start_date + ".csv")
     sys.exit(0)
