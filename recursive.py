@@ -166,6 +166,14 @@ def recursive(bwtable,player,size,moves,tm):
             nplayer = "B"
         i.append(recursive(i, nplayer, size, moves,tm))
     bwtable.append(newBoards)
+    #bwtable[0] have bitboard
+    #bwtable[1] have black/white table
+    #bwtable[2] have converted moves,
+    #bwtable[3] have player
+    #bwtable[4] have outcome
+    #bwtable[5] have score make as table? tmscore = index 0 go score =index 1 or vice versa
+    #bwtable[6] have printableoutput
+    #bwtable[7] have list of top5 children nodes (newBoards)
     return bwtable
 def predictSum(tm, boards):
     newArray = np.array([boards])
@@ -244,7 +252,7 @@ def main():
     player = "B"
     init(dim,machine,loadfile)
     initBoard = X_train[numbboard]
-    newArray = np.array([X_train[numbboard]])
+    newArray = np.array([initBoard])
     result = m.predict2(newArray)
     outcome = result[0]
     score = result[1]
@@ -261,7 +269,6 @@ def printTree(table, pos):
     for i in range(len(table[7])):
         if(len(table[7][i])) == 9:
             printTree(table[7][i],i)
-
 main()
 
 
