@@ -253,7 +253,7 @@ def app(_epoch, _clauses, _t, _s, _dataset, _data_dim, _machine_type, _window_x,
         return single_highest_acc, max_acc, avg_avg, avg_10_last, average_epoch_results
 
     def write_stat(_results, _acc_highest, _acc_max, _acc_avg, _acc_avg_10_last, _acc_epochs):
-        _results.write("mean" + ",")
+        _results.write("mean/mean_10-last" + ",")
         for q in range(len(_acc_epochs)):
             _results.write(",%.4f" % _acc_epochs[q])
         _results.write(",%.4f" % _acc_avg + ",%.4f" % _acc_avg_10_last)
