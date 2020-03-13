@@ -1,3 +1,6 @@
+from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
+
+
 def init(os, _clauses, _t, _s, _name, _machine_type, _data_dim, _dataset, app_start_date, _epoch, _boost,
          _weighted, _epoch_results):
     epoch_count = 0
@@ -29,3 +32,27 @@ def init(os, _clauses, _t, _s, _name, _machine_type, _data_dim, _dataset, app_st
     print("boost:", _boost)
     print("weighted clauses:", _weighted)
     print("\n")
+
+    return _epoch_results
+
+
+def load_data(train_data, test_data, _clauses, _t, _s, _boost, _weighted, _data_dim, data_name, _dataset,
+              _app_start_date, _name, _machine_type, _numb):
+    x_train = train_data[:, 0:-1]
+    y_train = train_data[:, -1]
+    x_test = test_data[:, 0:-1]
+    y_test = test_data[:, -1]
+
+    machine = MultiClassTsetlinMachine(_clauses, _t, _s, boost_true_positive_feedback=_boost,
+                                       weighted_clauses=_weighted)
+    print("-------------------------------------------------------------------------------------------")
+    print("MultiClassTsetlinMachine using %s, Draw, %s, written to file %s%s_%s.csv\n"
+          % (_data_dim, data_name, _data_dim, _dataset, _app_start_date))
+    print("Settings: Clauses: %.1f Threshold: %.1f s: %.1f\n" % (_clauses, _t, _s))
+
+    _results = open("Results/" + _name + "/" + _machine_type + "/" + _data_dim + _dataset + "/"
+                    + _data_dim + _dataset + "_" + _app_start_date + ".csv", 'a')
+    _results.write(_data_dim + _dataset + _numb + ",")
+    _results.close()
+
+    return x_train, y_train, x_test, y_test, machine
