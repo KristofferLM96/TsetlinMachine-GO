@@ -1,8 +1,0 @@
-MultiClassTsetlinMachineParallel,Parallel,Epoch1,Epoch2,Epoch3,Average,
-Settings:
-Clauses:,2000.0
-Threshold:,64000.0
-s:,27.0
-9x9Aya_Draw0,,91.5184,91.7834,91.7834,91.6950
-mean,,91.5184,91.7834,91.7834,91.6951,
-singel-highest/max,,91.7834,91.7834,
