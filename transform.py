@@ -1,5 +1,7 @@
 from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
 from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
+import gomill.boards
+import gomill.ascii_boards
 import numpy as np
 import time as stime
 
@@ -100,9 +102,11 @@ def printableTable(table, size):
     mellomrom = "  "
     printTable = []
     printTable.append("-------------------------------------------")
-    printTable.append("Correct outcome: %i Predicted outcome: %i     " % (Y_train[numbboard], table[4][-1]))
+    #print(table[4][-1])
+    #print(table[4][-1][0])
+    printTable.append("Correct outcome: %i Predicted outcome: %i     " % (Y_train[numbboard], table[4][-1][0]))
     for i in range(len(table[3])):
-        scoreLine= "%s Move: %s Score: %i         (%s)" % (table[3][i], table[2][i], table[5][i],table[4][i])
+        scoreLine= "%s Move: %s Score: %i   (%s)      " % (table[3][i], table[2][i], table[5][i],table[4][i][0])
         printTable.append(scoreLine+length(table[5][i]))
 
     for column in range(size):
@@ -149,14 +153,14 @@ def findEmpty(table, player,size,tm):
                 tempTable[i] = 1
             else:
                 tempTable[i + 81] = 1
-            outcome, score = predictSum(tm,tempTable)
+            outcome, score, percentage = predictSum(tm,tempTable)
             newM = tableCopy(table[2])
             newM.append(moveTransform(i,9))
             newP = tableCopy(table[3])
             newO = tableCopy(table[4])
             newS = tableCopy(table[5])
             newP.append(player)
-            newO.append(outcome)
+            newO.append([outcome,percentage])
             newS.append(score)
             alteredTables.append([tempTable,tempTable2,newM,newP, newO, newS])
     #print(alteredTables)
@@ -202,6 +206,9 @@ def predictSum(tm, boards):
     loss = weights[0][0]
     win = weights[1][0]
     draw = weights[2][0]
+    outcome = -1
+    score = -1
+    percentage = 0
     #print("Predicted Result: ",result[0], " ", result[1])
     lossresult = weightedCalc(result2[0][0:clauses],loss)
     winresult = weightedCalc(result2[0][clauses:clauses*2], win)
@@ -215,15 +222,21 @@ def predictSum(tm, boards):
     if losstot > wintot and losstot > drawtot:
         outcome = 0
         score = losstot
+        percentage = losstot + drawtot + wintot *100
+        percentage = percentage /losstot
     elif wintot > losstot and wintot > drawtot:
         outcome = 1
         score = wintot
+        percentage = losstot + drawtot + wintot * 100
+        percentage = percentage /wintot
     else:
         outcome = 2
         score = drawtot
+        percentage = losstot + drawtot + wintot * 100
+        percentage = percentage /drawtot
     #outcome = result[0]
     #score = result[1]
-    return outcome, score
+    return outcome, score, percentage
 def weightedCalc(clause, weight):
     negs = 0
     ones = 0
@@ -240,11 +253,11 @@ def topFive(boards, player):
     blackBoard = []
     drawBoard = []
     for board in boards:
-        if board[4][-1] == 0:
+        if board[4][-1][0] == 0:
             whiteBoard.append(board)
-        if board[4][-1] == 1:
+        if board[4][-1][0] == 1:
             blackBoard.append(board)
-        if board[4][-1] == 2:
+        if board[4][-1][0] == 2:
             drawBoard.append(board)
     if player == "W":
         if len(whiteBoard) == 5:
@@ -321,9 +334,9 @@ def main():
     #result = m.predict2(newArray)
     #outcome = result[0]
     #score = result[1]
-    outcome, score = predictSum(m,newArray)
+    outcome, score, percentage = predictSum(m,newArray)
     bwtable = transform(initBoard, size)
-    bwTable = [initBoard,bwtable, ["Initial   "], [player], [outcome], [score]]
+    bwTable = [initBoard,bwtable, ["Initial   "], [player], [[outcome,percentage]], [score]]
     pTable = printableTable(bwTable, size)
     bwTable.append(pTable)
     tree = recursive(bwTable, player, size, moves,m)
