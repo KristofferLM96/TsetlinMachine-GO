@@ -1,6 +1,9 @@
 from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
 from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
 import numpy as np
+import time as stime
+
+
 machine = "TM"
 name = "Trond"
 #name = "Kristoffer"
@@ -97,9 +100,10 @@ def printableTable(table, size):
     mellomrom = "  "
     printTable = []
     printTable.append("-------------------------------------------")
-    printTable.append("Correct outcome: %i Predicted outcome: %i     " % (Y_train[numbboard], table[4]))
-    scoreLine = "%s Move: %s Score: %i            " % (table[3], table[2], table[5][0])
-    printTable.append(scoreLine+length(table[5][0]))
+    printTable.append("Correct outcome: %i Predicted outcome: %i     " % (Y_train[numbboard], table[4][-1]))
+    for i in range(len(table[3])):
+        scoreLine= "%s Move: %s Score: %i         (%)" % (table[3][i], table[2][i], table[5][i],table[4][i])
+        printTable.append(scoreLine+length(table[5][i]))
 
     for column in range(size):
         start = str(size-column)+mellomrom
@@ -146,7 +150,16 @@ def findEmpty(table, player,size,tm):
             else:
                 tempTable[i + 81] = 1
             outcome, score = predictSum(tm,tempTable)
-            alteredTables.append([tempTable,tempTable2,moveTransform(i,9),player, outcome[0], score])
+            newM = tableCopy(table[2])
+            newM.append(moveTransform(i,9))
+            newP = tableCopy(table[3])
+            newO = tableCopy(table[4])
+            newS = tableCopy(table[5])
+            newP.append(player)
+            newO.append(outcome)
+            newS.append(score)
+            alteredTables.append([tempTable,tempTable2,newM,newP, newO, newS])
+    #print(alteredTables)
     alteredTables = topFive(alteredTables,player)
     for i in range(len(alteredTables)):
         alteredTables[i].append(printableTable(
@@ -158,17 +171,20 @@ def tableCopy(table):
     for i in range(len(table)):
         newTable.append(table[i])
     return newTable
+end_table = []
 def recursive(bwtable,player,size,moves,tm):
+    if moves == 0: end_table.append(bwtable)
     if moves == 0: return bwtable
     moves -= 1
     newBoards = findEmpty(bwtable,player,size,tm)
     for i in newBoards:
-        if i[3] == "B":
+        if i[3][-1] == "B":
             nplayer = "W"
         else:
             nplayer = "B"
         i.append(recursive(i, nplayer, size, moves,tm))
     bwtable.append(newBoards)
+
     #bwtable[0] have bitboard
     #bwtable[1] have black/white table
     #bwtable[2] have converted moves,
@@ -186,17 +202,27 @@ def predictSum(tm, boards):
     loss = weights[0][0]
     win = weights[1][0]
     draw = weights[2][0]
-    print("Predicted Result: ",result[0], " ", result[1])
+    #print("Predicted Result: ",result[0], " ", result[1])
     lossresult = weightedCalc(result2[0][0:clauses],loss)
     winresult = weightedCalc(result2[0][clauses:clauses*2], win)
     drawresult = weightedCalc(result2[0][clauses*2:clauses*3], draw)
-    print("Pos Prediction for loss: %s Prediction for win: %s Prediction for draw: %s" % (lossresult[0],winresult[0],drawresult[0]))
-    print("Neg Prediction for loss: %s Prediction for win: %s Prediction for draw: %s" % (
-    lossresult[1], winresult[1], drawresult[1]))
-    print("Sum Prediction for loss: %s Prediction for win: %s Prediction for draw: %s" % (
-        lossresult[0] - lossresult[1], winresult[0] - winresult[1], drawresult[0] - drawresult[1]))
-    outcome = result[0]
-    score = result[1]
+    #print("Pos Prediction for loss: %s Prediction for win: %s Prediction for draw: %s" % (lossresult[0],winresult[0],drawresult[0]))
+    #print("Neg Prediction for loss: %s Prediction for win: %s Prediction for draw: %s" % (lossresult[1], winresult[1], drawresult[1]))
+    #print("Sum Prediction for loss: %s Prediction for win: %s Prediction for draw: %s" % (lossresult[0] - lossresult[1], winresult[0] - winresult[1], drawresult[0] - drawresult[1]))
+    losstot = lossresult[0] - lossresult[1]
+    wintot = winresult[0] - winresult[1]
+    drawtot = drawresult[0] - drawresult[1]
+    if losstot > wintot and losstot > drawtot:
+        outcome = 0
+        score = losstot
+    elif wintot > losstot and wintot > drawtot:
+        outcome = 1
+        score = wintot
+    else:
+        outcome = 2
+        score = drawtot
+    #outcome = result[0]
+    #score = result[1]
     return outcome, score
 def weightedCalc(clause, weight):
     negs = 0
@@ -214,11 +240,11 @@ def topFive(boards, player):
     blackBoard = []
     drawBoard = []
     for board in boards:
-        if board[4] == 0:
+        if board[4][-1] == 0:
             whiteBoard.append(board)
-        if board[4] == 1:
+        if board[4][-1] == 1:
             blackBoard.append(board)
-        if board[4] == 2:
+        if board[4][-1] == 2:
             drawBoard.append(board)
     if player == "W":
         if len(whiteBoard) == 5:
@@ -252,14 +278,13 @@ def topFiveCalculate(boards, numb):
         tempScore = 0
         tempID = 0
         for j in range(len(boards)):
-            listallscore.append(boards[j][5][0])
+            listallscore.append(boards[j][5][-1])
             #if abs(boards[j][5][0]) > tempScore:
-            if boards[j][5][0] >= tempScore:
+            if boards[j][5][-1] >= tempScore:
                 #tempScore = abs(boards[j][5][0])
-                tempScore = boards[j][5][0]
+                tempScore = boards[j][5][-1]
                 tempID = j
         boards, list = sortList(boards, list, tempID)
-        print(listallscore)
     return list
 def bottomFiveCalculate(boards,numb):
     listallscore = []
@@ -268,14 +293,13 @@ def bottomFiveCalculate(boards,numb):
         tempScore = 0
         tempID = 0
         for j in range(len(boards)):
-            listallscore.append(boards[j][5][0])
+            listallscore.append(boards[j][5][-1])
             #if abs(boards[j][5][0]) < tempScore:
                 #tempScore = abs(boards[j][5][0])
-            if boards[j][5][0] < tempScore:
-                tempScore = boards[j][5][0]
+            if boards[j][5][-1] < tempScore:
+                tempScore = boards[j][5][-1]
                 tempID = j
         boards, list = sortList(boards,list,tempID)
-        print(listallscore)
     return list
 def sortList(boards,list,iD):
     newList = []
@@ -286,29 +310,40 @@ def sortList(boards,list,iD):
     return newList, list
 
 def main():
-    moves = 2
+    moves = 5
     size = 9
     player = "B"
+    timestamp = stime.strftime("%H:%M:%S")
     init(dim,machine,loadfile)
-
+    timestamp2 = stime.strftime("%H:%M:%S")
     initBoard = X_train[numbboard]
     newArray = np.array([initBoard])
-    result = m.predict2(newArray)
-    outcome = result[0]
-    score = result[1]
+    #result = m.predict2(newArray)
+    #outcome = result[0]
+    #score = result[1]
+    outcome, score = predictSum(m,newArray)
     bwtable = transform(initBoard, size)
-    bwTable = [initBoard,bwtable, "Initial   ", player, outcome, score]
+    bwTable = [initBoard,bwtable, ["Initial   "], [player], [outcome], [score]]
     pTable = printableTable(bwTable, size)
     bwTable.append(pTable)
     tree = recursive(bwTable, player, size, moves,m)
+    timestamp3 = stime.strftime("%H:%M:%S")
     printTree(tree,0)
+    print("Start Time        : %s " % (timestamp))
+    print("Init finished Time: %s " % (timestamp2))
+    print("Predict done Time : %s " % (timestamp3))
+    printTop(topFive(end_table,"B"))
+    printTop(bottomFiveCalculate(end_table,5))
 def printTree(table, pos):
     printTable(table[6], pos)
-    for i in range(13):
+    for i in range(len(table[7][0][6])):
         print(table[7][0][6][i]+table[7][1][6][i]+table[7][2][6][i]+table[7][3][6][i]+table[7][4][6][i])
     for i in range(len(table[7])):
         if(len(table[7][i])) == 9:
             printTree(table[7][i],i)
+def printTop(table):
+    for i in range(len(table[0][6])):
+        print(table[0][6][i] + table[1][6][i] + table[2][6][i] + table[3][6][i] + table[4][6][i])
 main()
 
 
