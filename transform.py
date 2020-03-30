@@ -18,7 +18,8 @@ dim = "90_100T_9x9Aya_"
 loadfile = "0310-1342"
 inndata = "Draw"
 numb = "0"
-numbboard = 88
+#numbboard = 88
+numbboard = 388
 weights = []
 clauses= 0
 global X_train,Y_train,X_test,Y_test,m, loadedstate
@@ -106,8 +107,8 @@ def printableTable(table, size):
     #print(table[4][-1][0])
     printTable.append("Correct outcome: %i Predicted outcome: %i     " % (Y_train[numbboard], table[4][-1][0]))
     for i in range(len(table[3])):
-        scoreLine= "%s Move: %s Score: %i   (%s)      " % (table[3][i], table[2][i], table[5][i],table[4][i][0])
-        printTable.append(scoreLine+length(table[5][i]))
+        scoreLine= "%s Move: %s Score: %i (%s)(%s)   " % (table[3][i], table[2][i], table[5][i],table[4][i][0],table[4][i][1])
+        printTable.append(scoreLine+length(table[5][i],6)+length(table[4][i][1],3))
 
     for column in range(size):
         start = str(size-column)+mellomrom
@@ -121,9 +122,9 @@ def printableTable(table, size):
         uLine +=underline[i] + mellomrom
     printTable.append(uLine)
     return printTable
-def length(numb): #alters space depending on length of score
+def length(numb,length): #alters space depending on length of score
     mellomrom = ""
-    for i in range(6-int(len(str(numb)))):
+    for i in range(length-int(len(str(numb)))):
         mellomrom += " "
     return mellomrom
 def printTable(table,position):
@@ -153,7 +154,7 @@ def findEmpty(table, player,size,tm):
                 tempTable[i] = 1
             else:
                 tempTable[i + 81] = 1
-            outcome, score, percentage = predictSum(tm,tempTable)
+            outcome, score, percentage = predictSum(tm,tempTable,tempTable2)
             newM = tableCopy(table[2])
             newM.append(moveTransform(i,9))
             newP = tableCopy(table[3])
@@ -198,9 +199,9 @@ def recursive(bwtable,player,size,moves,tm):
     #bwtable[6] have printableoutput
     #bwtable[7] have list of top5 children nodes (newBoards)
     return bwtable
-def predictSum(tm, boards):
+def predictSum(tm, boards,boards2):
     newArray = np.array([boards])
-    result = tm.predict2(newArray)
+    #result = tm.predict2(newArray)
     result2 = tm.transform(newArray,inverted = False)
     #print(result2[0][0])
     loss = weights[0][0]
@@ -208,7 +209,7 @@ def predictSum(tm, boards):
     draw = weights[2][0]
     outcome = -1
     score = -1
-    percentage = 0
+    go_correct = go_calc(boards2)
     #print("Predicted Result: ",result[0], " ", result[1])
     lossresult = weightedCalc(result2[0][0:clauses],loss)
     winresult = weightedCalc(result2[0][clauses:clauses*2], win)
@@ -222,21 +223,15 @@ def predictSum(tm, boards):
     if losstot > wintot and losstot > drawtot:
         outcome = 0
         score = losstot
-        percentage = losstot + drawtot + wintot *100
-        percentage = percentage /losstot
     elif wintot > losstot and wintot > drawtot:
         outcome = 1
         score = wintot
-        percentage = losstot + drawtot + wintot * 100
-        percentage = percentage /wintot
     else:
         outcome = 2
         score = drawtot
-        percentage = losstot + drawtot + wintot * 100
-        percentage = percentage /drawtot
     #outcome = result[0]
     #score = result[1]
-    return outcome, score, percentage
+    return outcome, score, go_correct
 def weightedCalc(clause, weight):
     negs = 0
     ones = 0
@@ -334,8 +329,9 @@ def main():
     #result = m.predict2(newArray)
     #outcome = result[0]
     #score = result[1]
-    outcome, score, percentage = predictSum(m,newArray)
     bwtable = transform(initBoard, size)
+    outcome, score, percentage = predictSum(m,newArray, bwtable)
+
     bwTable = [initBoard,bwtable, ["Initial   "], [player], [[outcome,percentage]], [score]]
     print(bwTable[1])
     pTable = printableTable(bwTable, size)
@@ -358,6 +354,42 @@ def printTree(table, pos):
 def printTop(table):
     for i in range(len(table[0][6])):
         print(table[0][6][i] + table[1][6][i] + table[2][6][i] + table[3][6][i] + table[4][6][i])
+
+
+def go_calc(board):
+    board_size = 9
+    komi = 7
+    def play(_turn,game_board):
+        x = _turn[1]
+        y = _turn[2]
+        color = _turn[0]
+        game_board.play(x, y, color)
+        return game_board
+    def translate(board):
+        _move_list = []
+        for i in range(len(board)):
+            x = i % 9
+            y = i / 9
+            y = str(int(y))
+            y = y[0]
+            y = int(y)
+            if board[i] == "b" or board[i] == "B":
+                _move = ["b", x, y]
+                _move_list.append(_move)
+            if board[i] == "w" or board[i] == "W":
+                _move = ["w", x, y]
+                _move_list.append(_move)
+        return _move_list
+    game_board = gomill.boards.Board(board_size)
+    movelist = translate(board)
+    for i in movelist:
+        game_board = play(i,game_board)
+    #area_score = game_board.area_score() - komi
+    # print("Area Score:", area_score, "\n")
+    # play(["b", 2,1])
+    area_score = game_board.area_score() - komi
+    # print("Area Score:", area_score, "\n")
+    return area_score
 main()
 
 
