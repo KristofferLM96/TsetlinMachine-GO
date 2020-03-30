@@ -323,7 +323,7 @@ def sortList(boards,list,iD):
     return newList, list
 
 def main():
-    moves = 5
+    moves = 3
     size = 9
     player = "B"
     timestamp = stime.strftime("%H:%M:%S")
@@ -337,6 +337,7 @@ def main():
     outcome, score, percentage = predictSum(m,newArray)
     bwtable = transform(initBoard, size)
     bwTable = [initBoard,bwtable, ["Initial   "], [player], [[outcome,percentage]], [score]]
+    print(bwTable[1])
     pTable = printableTable(bwTable, size)
     bwTable.append(pTable)
     tree = recursive(bwTable, player, size, moves,m)
