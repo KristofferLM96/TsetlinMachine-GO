@@ -102,7 +102,7 @@ def printableTable(table, size):
     printTable.append("-------------------------------------------")
     printTable.append("Correct outcome: %i Predicted outcome: %i     " % (Y_train[numbboard], table[4][-1]))
     for i in range(len(table[3])):
-        scoreLine= "%s Move: %s Score: %i         (%)" % (table[3][i], table[2][i], table[5][i],table[4][i])
+        scoreLine= "%s Move: %s Score: %i         (%s)" % (table[3][i], table[2][i], table[5][i],table[4][i])
         printTable.append(scoreLine+length(table[5][i]))
 
     for column in range(size):
