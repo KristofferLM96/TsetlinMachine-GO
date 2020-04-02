@@ -277,7 +277,7 @@ def sortList(boards,list,iD):
     return newList, list
 def main():
     global end_table
-    #results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + ".csv", 'a')
+    results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + ".txt", 'a')
     timestamp = stime.strftime("%H:%M:%S")
     print("Start Time        : %s " % (timestamp))
     init(dim,machine,loadfile)
@@ -291,8 +291,8 @@ def main():
     wcounter_r = 0
     lcounter_r = 0
     dcounter_r = 0
-    for numbboard in range(100):
-        moves = 3
+    for numbboard in range(1000):
+        moves = 1
         size = 9
         player = "B"
         counter+=1
@@ -304,19 +304,19 @@ def main():
         tree = recursive(bwTable, player, size, moves,m)
         fivetable = topFive(end_table,"B")
         table = fivetable[0]
-        if table[4][-1][0] == 0:
+        if Y_train[numbboard] == 0:
             lcounter+=1
-            if table[4][-1][0] < 0:
+            if table[4][-1][1] < 0:
                 lcounter_r+=1
                 counter_r +=1
-        elif table[4][-1][0] == 1:
+        elif Y_train[numbboard] == 1:
             wcounter += 1
-            if table[4][-1][0] > 0:
+            if table[4][-1][1] > 0:
                 wcounter_r += 1
                 counter_r +=1
         else:
             dcounter+=1
-            if table[4][-1][0] == 0:
+            if table[4][-1][1] == 2:
                 dcounter_r += 1
                 counter_r +=1
         end_table = []
@@ -326,12 +326,18 @@ def main():
         #printTop(bottomFiveCalculate(end_table,5))
         # Y_train[numbboard], table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][0], table[4][-1][4][0], table[4][-1][4][1])
         time = stime.strftime("%H:%M:%S")
-        print("#%s Time: %s   Orig_Result: %s Pred_before_moves: %s Pred_after_moves: %s Area Score: %s  Other: %s/%s   %s/%s   %s/%s"%(counter,time,Y_train[numbboard],outcome, table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][0], table[4][-1][4][0], table[4][-1][4][1]))
+        print("#%s Time: %s   Orig_Result: %s Pred_before_moves: %s Pred_after_moves: %s Area Score: %s  Other: %s/%s   %s/%s   %s/%s"
+              %(counter,time,Y_train[numbboard],outcome, table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][1], table[4][-1][4][0], table[4][-1][4][1]))
+        results.write("#%s Time: %s   Orig_Result: %s Pred_before_moves: %s Pred_after_moves: %s Area Score: %s  Other: %s/%s   %s/%s   %s/%s"%(counter,time,Y_train[numbboard],outcome, table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][1], table[4][-1][4][0], table[4][-1][4][1]))
     timestamp3 = stime.strftime("%H:%M:%S")
     print("Start Time        : %s " % (timestamp))
     print("Init finished Time: %s " % (timestamp2))
     print("Predict done Time : %s " % (timestamp3))
-    print("Total : %s/%s Loss: %s/%s Win: %s/%s Draw: %s/%s" % (counter_r,counter,lcounter_r,lcounter,wcounter_r,wcounter,dcounter_r,dcounter ))
+    print("Total : %s/%s Loss: %s/%s Win: %s/%s Draw: %s/%s" % (counter_r,counter,lcounter_r,lcounter,wcounter_r,wcounter,dcounter_r,dcounter))
+    results.write("Start Time        : %s " % (timestamp))
+    results.write("Init finished Time: %s " % (timestamp2))
+    results.write("Predict done Time : %s " % (timestamp3))
+    results.write("Total : %s/%s Loss: %s/%s Win: %s/%s Draw: %s/%s" % (counter_r,counter,lcounter_r,lcounter,wcounter_r,wcounter,dcounter_r,dcounter ))
 
 def go_calc(board):
     board_size = 9
