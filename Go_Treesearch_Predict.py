@@ -4,6 +4,7 @@ import gomill.boards
 import gomill.ascii_boards
 import numpy as np
 import time as stime
+import operator
 
 machine = "TM"
 name = "Trond"
@@ -16,13 +17,13 @@ dim = "90_100T_9x9Aya_"
 #loadfile = "0310-1211"
 loadfile = "0310-1342"
 inndata = "Draw"
-numb = "0"
+#numb = "0"
 #numbboard = 88
 numbboard = 388
 weights = []
 clauses= 0
 global X_train,Y_train,X_test,Y_test,m, loadedstate
-def init(dim, machine, loadfile):
+def init(dim, machine, loadfile, numb):
     global X_train, Y_train, X_test, Y_test, m, loadedstate, weights, clauses
     inndata = "Draw"
     boost = 1
@@ -118,14 +119,14 @@ def findEmpty(table, player,size,tm):
             else:
                 tempTable[i + 81] = 1
             outcome, score, go_outcome, lossresult, winresult, drawresult = predictSum(tm,tempTable,tempTable2)
-            newM = tableCopy(table[2])
-            newM.append(moveTransform(i,9))
-            newP = tableCopy(table[3])
-            newO = tableCopy(table[4])
-            newS = tableCopy(table[5])
-            newP.append(player)
-            newO.append([outcome,go_outcome, lossresult, winresult, drawresult])
-            newS.append(score)
+            #newM = tableCopy(table[2])
+            newM = go_outcome
+            #newP = tableCopy(table[3])
+            #newO = tableCopy(table[4])
+            #newS = tableCopy(table[5])
+            newP=player
+            newO=outcome
+            newS = score
             alteredTables.append([tempTable,tempTable2,newM,newP, newO, newS])
     #print(alteredTables)
     #Y_train[numbboard], table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][0], table[4][-1][4][0], table[4][-1][4][1])
@@ -203,86 +204,71 @@ def weightedCalc(clause, weight):
     return ones,negs
 
 def topFive(boards, player):
+    number = 2
     whiteBoard = []
     blackBoard = []
     drawBoard = []
     for board in boards:
-        if board[4][-1][0] == 0:
+        if board[4] == 0:
             whiteBoard.append(board)
-        if board[4][-1][0] == 1:
+        if board[4] == 1:
             blackBoard.append(board)
-        if board[4][-1][0] == 2:
+        if board[4] == 2:
             drawBoard.append(board)
+    #print(whiteBoard)
+    whiteBoard = sort_table(whiteBoard,5)
+    #print(whiteBoard)
+    #print(blackBoard)
+    blackBoard = sort_table(blackBoard,5)
+    #print("------------------------------------------")
+    #print(blackBoard)
+    drawBoard = sort_table(drawBoard,5)
+    #if player == "W":
+    #    if(len(whiteBoard) < 1):
+    #        if(len(drawBoard) <1):
+    #            return [blackBoard[-1]]
+    #        else:
+    #            return [drawBoard[0]]
+    #    else: return [whiteBoard[0]]
+    #if player == "B":
+    #    if(len(blackBoard) < 1):
+    #        if(len(drawBoard) <1):
+    #            return [whiteBoard[-1]]
+    #        else:
+    #            return [drawBoard[0]]
+    #    else: return [blackBoard[0]]
     if player == "W":
-        if len(whiteBoard) == 5:
-            return whiteBoard
-        elif len(whiteBoard) > 5:
-            return topFiveCalculate(whiteBoard, 5)
-        elif len(whiteBoard) < 5:
-            if len(whiteBoard) +len(drawBoard) == 5:
-                return whiteBoard + drawBoard
-            elif len(whiteBoard) + len(drawBoard) > 5:
-                return whiteBoard + topFiveCalculate(drawBoard, 5-len(whiteBoard))
-            elif len(whiteBoard) + len(drawBoard) < 5:
-                return whiteBoard + drawBoard + bottomFiveCalculate(blackBoard, 5 - len(whiteBoard)-len(drawBoard))
+        if len(whiteBoard) >= number:
+            return whiteBoard[0:number]
+        elif len(whiteBoard) < number:
+            if len(whiteBoard) + len(drawBoard) >= 5:
+                return whiteBoard + drawBoard[0:5-len(whiteBoard)]
+            elif len(whiteBoard) + len(drawBoard) < number:
+                return whiteBoard + drawBoard + blackBoard[len(whiteBoard)+len(drawBoard)-number:]
     if player == "B":
-        if len(blackBoard) == 5:
-            return blackBoard
-        elif len(blackBoard) > 5:
-            return topFiveCalculate(blackBoard,5)
-        elif len(blackBoard) < 5:
-            if len(blackBoard) +len(drawBoard) == 5:
-                return blackBoard + drawBoard
-            elif len(blackBoard) + len(drawBoard) > 5:
-                return blackBoard + topFiveCalculate(drawBoard, 5-len(blackBoard))
-            elif len(blackBoard) + len(drawBoard) < 5:
-                return blackBoard + drawBoard + bottomFiveCalculate(whiteBoard, 5 - len(blackBoard)-len(drawBoard))
-
-def topFiveCalculate(boards, numb):
-    listallscore = []
-    list =[]
-    for i in range(numb):
-        tempScore = 0
-        tempID = 0
-        for j in range(len(boards)):
-            listallscore.append(boards[j][5][-1])
-            #if abs(boards[j][5][0]) > tempScore:
-            if boards[j][5][-1] >= tempScore:
-                #tempScore = abs(boards[j][5][0])
-                tempScore = boards[j][5][-1]
-                tempID = j
-        boards, list = sortList(boards, list, tempID)
-    return list
-def bottomFiveCalculate(boards,numb):
-    listallscore = []
-    list = []
-    for i in range(numb):
-        tempScore = 0
-        tempID = 0
-        for j in range(len(boards)):
-            listallscore.append(boards[j][5][-1])
-            #if abs(boards[j][5][0]) < tempScore:
-                #tempScore = abs(boards[j][5][0])
-            if boards[j][5][-1] < tempScore:
-                tempScore = boards[j][5][-1]
-                tempID = j
-        boards, list = sortList(boards,list,tempID)
-    return list
-def sortList(boards,list,iD):
-    newList = []
-    list.append(boards[iD])
-    for i in range(len(boards)):
-        if i != iD:
-            newList.append(boards[i])
-    return newList, list
+        if len(blackBoard) >= number:
+            return blackBoard[0:number]
+        elif len(blackBoard) < number:
+            if len(blackBoard) + len(drawBoard) >= number:
+                return blackBoard + drawBoard[0:5-len(blackBoard)]
+            elif len(blackBoard) + len(drawBoard) < number:
+                #print(blackBoard + drawBoard + whiteBoard[len(blackBoard)+len(drawBoard)-5:])
+                return blackBoard + drawBoard + whiteBoard[len(blackBoard)+len(drawBoard)-number:]
+def sort_table(table, col):
+    return sorted(table, key=operator.itemgetter(col), reverse=True)
 def main():
     global end_table
-    results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + ".txt", 'a')
+    moves = 1
+    results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "tree"+str(moves)+".txt", 'a')
+    results.write("Moves: %s"%(moves))
+    results.close()
     timestamp = stime.strftime("%H:%M:%S")
     print("Start Time        : %s " % (timestamp))
-    init(dim,machine,loadfile)
+    numb = "0"
+    init(dim,machine,loadfile,numb)
     timestamp2 = stime.strftime("%H:%M:%S")
     print("Init finished Time: %s " % (timestamp2))
+    invalid_counter = 0
     counter = 0
     wcounter = 0
     lcounter = 0
@@ -291,54 +277,78 @@ def main():
     wcounter_r = 0
     lcounter_r = 0
     dcounter_r = 0
-    for numbboard in range(1000):
-        moves = 1
+    print(len(X_test))
+    print(len(X_train))
+    printnumb = 1
+    for numbboard in range(12000):
+        #numbboard+=40000
+        #print(numbboard)
+        if(counter == printnumb*5000):
+            tempTime = stime.strftime("%H:%M:%S")
+            results = open(
+                "Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "tree" + str(moves) + ".txt", 'a')
+            print("Time: %s Done: %s Total: %s"%(tempTime,printnumb*5000,len(X_test)))
+            print("Total : %s/%s Loss: %s/%s Win: %s/%s Draw: %s/%s" % (counter_r, counter, lcounter_r, lcounter, wcounter_r, wcounter, dcounter_r, dcounter))
+            results.close()
+            printnumb+=1
         size = 9
         player = "B"
         counter+=1
-        initBoard = X_train[numbboard]
-        newArray = np.array([initBoard])
-        bwtable = transform(initBoard, size)
-        outcome, score, percentage, losstot,wintot,drawtot = predictSum(m,newArray, bwtable)
-        bwTable = [initBoard,bwtable, ["Initial   "], [player], [[outcome,percentage]], [score]]
-        tree = recursive(bwTable, player, size, moves,m)
-        fivetable = topFive(end_table,"B")
-        table = fivetable[0]
-        if Y_train[numbboard] == 0:
-            lcounter+=1
-            if table[4][-1][1] < 0:
-                lcounter_r+=1
-                counter_r +=1
-        elif Y_train[numbboard] == 1:
-            wcounter += 1
-            if table[4][-1][1] > 0:
-                wcounter_r += 1
-                counter_r +=1
-        else:
-            dcounter+=1
-            if table[4][-1][1] == 2:
-                dcounter_r += 1
-                counter_r +=1
-        end_table = []
-        #printTree(tree,0)
+        initBoard = X_test[numbboard]
+        if sum(initBoard) < 73:
+            initResult = Y_test[numbboard]
+            newArray = np.array([initBoard])
+            bwtable = transform(initBoard, size)
 
-        #printTop()
-        #printTop(bottomFiveCalculate(end_table,5))
-        # Y_train[numbboard], table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][0], table[4][-1][4][0], table[4][-1][4][1])
-        time = stime.strftime("%H:%M:%S")
-        print("#%s Time: %s   Orig_Result: %s Pred_before_moves: %s Pred_after_moves: %s Area Score: %s  Other: %s/%s   %s/%s   %s/%s"
-              %(counter,time,Y_train[numbboard],outcome, table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][1], table[4][-1][4][0], table[4][-1][4][1]))
-        results.write("#%s Time: %s   Orig_Result: %s Pred_before_moves: %s Pred_after_moves: %s Area Score: %s  Other: %s/%s   %s/%s   %s/%s"%(counter,time,Y_train[numbboard],outcome, table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][1], table[4][-1][4][0], table[4][-1][4][1]))
+            outcome, score, percentage, losstot,wintot,drawtot = predictSum(m,newArray, bwtable)
+            bwTable = [initBoard,bwtable, percentage, player, outcome, score]
+            tree = recursive(bwTable, player, size, moves,m)
+            fivetable = topFive(end_table,"B")
+            table = fivetable[0]
+            if initResult == 0:
+                lcounter+=1
+                if table[2] < 0:
+                    lcounter_r+=1
+                    counter_r +=1
+            elif initResult == 1:
+                wcounter += 1
+                if table[2] > 0:
+                    wcounter_r += 1
+                    counter_r +=1
+            else:
+                dcounter+=1
+                if table[2] == 0:
+                    dcounter_r += 1
+                    counter_r +=1
+            end_table = []
+            #printTree(tree,0)
+
+            #printTop()
+            #printTop(bottomFiveCalculate(end_table,5))
+            # Y_train[numbboard], table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][0], table[4][-1][4][0], table[4][-1][4][1])
+            time = stime.strftime("%H:%M:%S")
+            #print("#%s Time: %s   Orig_Result: %s Pred_before_moves: %s Pred_after_moves: %s Area Score: %s"
+            #      %(counter,time,initResult,outcome, table[4],table[2], ))
+            #results.write("#%s Time: %s   Orig_Result: %s Pred_before_moves: %s Pred_after_moves: %s Area Score: %s  Other: %s/%s   %s/%s   %s/%s"%(counter,time,Y_train[numbboard],outcome, table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][1], table[4][-1][4][0], table[4][-1][4][1]))
+        else:
+            #print("Invalid board: %s"%(counter))
+            counter-=1
+            invalid_counter +=1
     timestamp3 = stime.strftime("%H:%M:%S")
+    print("train Moves: %s " %(moves))
     print("Start Time        : %s " % (timestamp))
     print("Init finished Time: %s " % (timestamp2))
     print("Predict done Time : %s " % (timestamp3))
     print("Total : %s/%s Loss: %s/%s Win: %s/%s Draw: %s/%s" % (counter_r,counter,lcounter_r,lcounter,wcounter_r,wcounter,dcounter_r,dcounter))
-    results.write("Start Time        : %s " % (timestamp))
-    results.write("Init finished Time: %s " % (timestamp2))
-    results.write("Predict done Time : %s " % (timestamp3))
-    results.write("Total : %s/%s Loss: %s/%s Win: %s/%s Draw: %s/%s" % (counter_r,counter,lcounter_r,lcounter,wcounter_r,wcounter,dcounter_r,dcounter ))
-
+    print("Invalid: %s" % (invalid_counter))
+    #results.write("Start Time        : %s " % (timestamp))
+    #results.write("Init finished Time: %s " % (timestamp2))
+    #results.write("Predict done Time : %s " % (timestamp3))
+    #results.write(counter_r,",",counter,lcounter_r,lcounter,wcounter_r,wcounter,dcounter_r,dcounter)
+    results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "tree.txt", 'a')
+    print("\n")
+    results.write("test Moves: %s Total : %s/%s Loss: %s/%s Win: %s/%s Draw: %s/%s\n" % (moves,counter_r,counter,lcounter_r,lcounter,wcounter_r,wcounter,dcounter_r,dcounter ))
+    results.close()
 def go_calc(board):
     board_size = 9
     komi = 7
@@ -372,5 +382,7 @@ def go_calc(board):
     # play(["b", 2,1])
     area_score = game_board.area_score() - komi
     # print("Area Score:", area_score, "\n")
+    #print("------------------------------------------")
+    #print(blackBoard)
     return area_score
 main()
