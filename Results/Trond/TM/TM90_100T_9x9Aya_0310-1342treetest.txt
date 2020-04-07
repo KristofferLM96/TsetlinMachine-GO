@@ -1,0 +1,34 @@
+Start Time        : 18:24:50
+Init finished Time: 18:25:24
+61489
+553382
+Time: 20:24:10 Done: 1000 Total: 10000
+Moves: 1 Total : 836/1000 Loss: 391/426 Win: 439/531 Draw: 6/43
+Moves: 2 Total : 820/1000 Loss: 395/426 Win: 422/531 Draw: 3/43
+Moves: 3 Total : 832/1000 Loss: 395/426 Win: 435/531 Draw: 2/43
+Moves: 4 Total : 818/1000 Loss: 395/426 Win: 420/531 Draw: 3/43
+Moves: 5 Total : 823/1000 Loss: 390/426 Win: 430/531 Draw: 3/43
+Time: 22:22:39 Done: 2000 Total: 10000
+Moves: 1 Total : 1679/2000 Loss: 775/840 Win: 896/1087 Draw: 8/73
+Moves: 2 Total : 1649/2000 Loss: 780/840 Win: 862/1087 Draw: 7/73
+Moves: 3 Total : 1671/2000 Loss: 781/840 Win: 883/1087 Draw: 7/73
+Moves: 4 Total : 1642/2000 Loss: 784/840 Win: 852/1087 Draw: 6/73
+Moves: 5 Total : 1656/2000 Loss: 768/840 Win: 881/1087 Draw: 7/73
+Time: 00:17:49 Done: 3000 Total: 10000
+Moves: 1 Total : 2509/3000 Loss: 1137/1239 Win: 1363/1651 Draw: 9/110
+Moves: 2 Total : 2468/3000 Loss: 1152/1239 Win: 1308/1651 Draw: 8/110
+Moves: 3 Total : 2499/3000 Loss: 1145/1239 Win: 1346/1651 Draw: 8/110
+Moves: 4 Total : 2456/3000 Loss: 1155/1239 Win: 1295/1651 Draw: 6/110
+Moves: 5 Total : 2482/3000 Loss: 1130/1239 Win: 1342/1651 Draw: 10/110
+Time: 02:15:14 Done: 4000 Total: 10000
+Moves: 1 Total : 3346/4000 Loss: 1522/1648 Win: 1812/2200 Draw: 12/152
+Moves: 2 Total : 3279/4000 Loss: 1539/1648 Win: 1730/2200 Draw: 10/152
+Moves: 3 Total : 3325/4000 Loss: 1531/1648 Win: 1781/2200 Draw: 13/152
+Moves: 4 Total : 3280/4000 Loss: 1547/1648 Win: 1724/2200 Draw: 9/152
+Moves: 5 Total : 3305/4000 Loss: 1512/1648 Win: 1781/2200 Draw: 12/152
+Time: 04:13:52 Done: 5000 Total: 10000
+Moves: 1 Total : 4181/5000 Loss: 1911/2066 Win: 2255/2741 Draw: 15/193
+Moves: 2 Total : 4101/5000 Loss: 1932/2066 Win: 2158/2741 Draw: 11/193
+Moves: 3 Total : 4156/5000 Loss: 1917/2066 Win: 2225/2741 Draw: 14/193
+Moves: 4 Total : 4103/5000 Loss: 1937/2066 Win: 2153/2741 Draw: 13/193
+Moves: 5 Total : 4126/5000 Loss: 1895/2066 Win: 2217/2741 Draw: 14/193

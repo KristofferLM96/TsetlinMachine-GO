@@ -1,0 +1,10 @@
+Moves: 1Moves: 1Moves: 1Moves: 1Moves: 1Moves: 1Moves: 1
+Time: 21:05:27 Done: 5000 Total: 61489
+Time: 21:05:27 Done: 5000 Total: 61489
+Time: 21:28:18 Done: 10000 Total: 61489
+Time: 21:28:18 Done: 10000 Total: 61489
+Moves: 1
+Moves: 1
+Time: 23:58:38 Done: 5000 Total: 61489
+Total : 4181/5000 Loss: 1911/2066 Win: 2255/2741 Draw: 15/193Time: 00:21:35 Done: 10000 Total: 61489
+Total : 8367/10000 Loss: 3792/4090 Win: 4543/5550 Draw: 32/360

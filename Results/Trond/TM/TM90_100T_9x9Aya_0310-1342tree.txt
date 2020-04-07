@@ -1,0 +1,4 @@
+test Moves: 1 Total : 9967/11933 Loss: 4507/4870 Win: 5420/6624 Draw: 40/439
+test Moves: 1 Total : 8476/10140 Loss: 3835/4142 Win: 4609/5636 Draw: 32/362
+test Moves: 1 Total : 8476/10140 Loss: 3835/4142 Win: 4609/5636 Draw: 32/362
+test Moves: 2 Total : 8283/10140 Loss: 3882/4142 Win: 4381/5636 Draw: 20/362
