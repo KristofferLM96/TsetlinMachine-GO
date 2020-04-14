@@ -124,8 +124,8 @@ def findEmpty(table, player,size,tm):
             #newS = tableCopy(table[5])
             newP=player
             newO=outcome
-            newS = score
-            alteredTables.append([tempTable,tempTable2,newM,newP, newO, newS])
+            newS =score
+            alteredTables.append([tempTable,tempTable2,newM,newP, newO, newS,lossresult,winresult,drawresult])
     #print(alteredTables)
     #Y_train[numbboard], table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][0], table[4][-1][4][0], table[4][-1][4][1])
     alteredTables = topFive(alteredTables,player)
@@ -140,12 +140,20 @@ end_table2 = []
 end_table3 = []
 end_table4 = []
 end_table5 = []
+end_table6 = []
+end_table7 = []
+end_table8 = []
+end_table9 = []
 def recursive(bwtable,player,size,moves,tm):
-    if moves == 0: end_table5.append(bwtable)
-    if moves == 1: end_table4.append(bwtable)
-    if moves == 2: end_table3.append(bwtable)
-    if moves == 3: end_table2.append(bwtable)
-    if moves == 4: end_table1.append(bwtable)
+    if moves == 0: end_table9.append(bwtable)
+    if moves == 1: end_table8.append(bwtable)
+    if moves == 2: end_table7.append(bwtable)
+    if moves == 3: end_table6.append(bwtable)
+    if moves == 4: end_table5.append(bwtable)
+    if moves == 5: end_table4.append(bwtable)
+    if moves == 6: end_table3.append(bwtable)
+    if moves == 7: end_table2.append(bwtable)
+    if moves == 8: end_table1.append(bwtable)
     if moves == 0: return bwtable
     moves -= 1
     newBoards = findEmpty(bwtable,player,size,tm)
@@ -159,12 +167,14 @@ def recursive(bwtable,player,size,moves,tm):
 
     #bwtable[0] have bitboard
     #bwtable[1] have black/white table
-    #bwtable[2] have converted moves,
+    #bwtable[2] have go_outcome,
     #bwtable[3] have player
     #bwtable[4] have outcome
     #bwtable[5] have score make as table? tmscore = index 0 go score =index 1 or vice versa
-    #bwtable[6] have printableoutput
-    #bwtable[7] have list of top5 children nodes (newBoards)
+    #bwtable[6] have loss
+    #bwtable[7] have win
+    #bwtable[8] have draw
+    #bwtable[9] have list of top5 children nodes (newBoards)
     return bwtable
 def predictSum(tm, boards,boards2):
     newArray = np.array([boards])
@@ -262,11 +272,29 @@ def topFive(boards, player):
                 return blackBoard + drawBoard + whiteBoard[len(blackBoard)+len(drawBoard)-number:]
 def sort_table(table, col):
     return sorted(table, key=operator.itemgetter(col), reverse=True)
-def main(sort):
-    global end_table1,end_table2,end_table3,end_table4,end_table5,moves
-    moves = 5
+def main(sort,moves):
+    global end_table1,end_table2,end_table3,end_table4,end_table5,end_table6,end_table7,end_table8,end_table9
+    #moves = 7
     results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "tree"+sort+".txt", 'a')
     results.close()
+    results1 = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "detai_" + sort + ".csv", 'a')
+    # print("orig_result")
+    results1.write("orig_result")
+    for i in range(10):
+        results1.write(",%s_loss_pro,%s_loss_neg,%s_win_pro,%s_win_neg,%s_draw_pro,%s_draw_neg,%s_area_score" % (i, i, i, i, i, i,i))
+        # print(",%s_loss_pro,%s_loss_neg,%s_win_pro,%s_win_neg,%s_draw_pro,%s_draw_neg,"%(i,i,i,i,i,i))
+        #results1.write(("area_score"))
+        # print("area_score")
+    results1.write("\n")
+    results1.close()
+    results2 = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "short_" + sort + ".csv", 'a')
+    # print("orig_result")
+    results2.write("orig_result")
+    for i in range(10):
+        # print(",%s_area,%s_result,%s_score"%(i,i,i))
+        results2.write(",%s_area,%s_result,%s_score" % (i, i, i))
+    results2.write("\n")
+    results2.close()
     timestamp = stime.strftime("%H:%M:%S")
     print("Start Time        : %s " % (timestamp))
     numb = "0"
@@ -274,38 +302,38 @@ def main(sort):
     timestamp2 = stime.strftime("%H:%M:%S")
     print("Init finished Time: %s " % (timestamp2))
     invalid_counter = 0
-    counter = [0,0,0,0,0]
-    wcounter = [0,0,0,0,0]
-    lcounter = [0,0,0,0,0]
-    dcounter = [0,0,0,0,0]
-    counter_r = [0,0,0,0,0]
-    wcounter_r = [0,0,0,0,0]
-    lcounter_r = [0,0,0,0,0]
-    dcounter_r = [0,0,0,0,0]
+    counter = [0,0,0,0,0,0,0,0,0]
+    wcounter = [0,0,0,0,0,0,0,0,0]
+    lcounter = [0,0,0,0,0,0,0,0,0]
+    dcounter = [0,0,0,0,0,0,0,0,0]
+    counter_r = [0,0,0,0,0,0,0,0,0]
+    wcounter_r = [0,0,0,0,0,0,0,0,0]
+    lcounter_r = [0,0,0,0,0,0,0,0,0]
+    dcounter_r = [0,0,0,0,0,0,0,0,0]
     print(len(X_test))
     print(len(X_train))
     printnumb = 1
     printnumb2 = 1
-    for numbboard in range(10060):
+    for numbboard in range(1004): #10063 #1004
         #numbboard+=40000
         #print(numbboard)
-        if (counter[0] == printnumb2 * 1000):
+        if (counter[0] == printnumb2 * 10):
             tempTime = stime.strftime("%H:%M:%S")
-            print("Time: %s Done: %s Total: %s" % (tempTime, printnumb2 * 1000, 10000))
-            for i in range(5):
+            print("Time: %s Done: %s Total: %s" % (tempTime, printnumb2 * 10, 1000))
+            for i in range(9):
                 print("Moves: %s Total : %s/%s Loss: %s/%s Win: %s/%s Draw: %s/%s" % (i+1,
                     counter_r[i], counter[i], lcounter_r[i], lcounter[i], wcounter_r[i], wcounter[i], dcounter_r[i],
                     dcounter[i]))
             print("Invalid board: %s" % (invalid_counter))
             printnumb2 += 1
-        if(counter[0] == printnumb*5000):
+        if(counter[0] == printnumb*100):
             tempTime = stime.strftime("%H:%M:%S")
-            print("Time: %s Done: %s Total: %s"%(tempTime,printnumb*5000,10000))
+            print("Time: %s Done: %s Total: %s"%(tempTime,printnumb*100,1000))
             results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "tree" + sort + ".txt",
                            'a')
-            results.write("Time: %s Done: %s Total: %s\n"%(tempTime,printnumb*5000,10000))
-            for i in range(5):
-                print("Moves: %sT otal : %s/%s Loss: %s/%s Win: %s/%s Draw: %s/%s" % (i+1,
+            results.write("Time: %s Done: %s Total: %s\n"%(tempTime,printnumb*100,10000))
+            for i in range(9):
+                print("Moves: %s Total : %s/%s Loss: %s/%s Win: %s/%s Draw: %s/%s" % (i+1,
                 counter_r[i], counter[i], lcounter_r[i], lcounter[i], wcounter_r[i], wcounter[i], dcounter_r[i],
                 dcounter[i]))
                 results.write("%s Moves: %s Total : %s/%s Loss: %s/%s Win: %s/%s Draw: %s/%s\n" % (
@@ -316,16 +344,15 @@ def main(sort):
             printnumb+=1
         size = 9
         player = "B"
-        for i in range(5):
+        for i in range(9):
             counter[i]+=1
         initBoard = X_train[numbboard]
+        initResult = Y_train[numbboard]
         if sort == "test":
             initBoard = X_test[numbboard]
+            initResult = Y_test[numbboard]
 
-        if sum(initBoard) < 73:
-            initResult = Y_train[numbboard]
-            if sort == "test":
-                initResult = Y_test[numbboard]
+        if sum(initBoard) < 73 and initResult == 0:
             newArray = np.array([initBoard])
             bwtable = transform(initBoard, size)
 
@@ -342,8 +369,17 @@ def main(sort):
             table4 = fivetable4[0]
             fivetable5 = topFive(end_table5, "B")
             table5 = fivetable5[0]
+            fivetable6 = topFive(end_table6, "B")
+            table6 = fivetable6[0]
+            fivetable7 = topFive(end_table7, "B")
+            table7 = fivetable7[0]
+            fivetable9 = topFive(end_table9, "B")
+            table8 = fivetable9[0]
+            fivetable9 = topFive(end_table9, "B")
+            table9 = fivetable9[0]
+
             if initResult == 0:
-                for i in range(5):
+                for i in range(9):
                     lcounter[i]+=1
                 if table1[2] < 0:
                     lcounter_r[0]+=1
@@ -360,8 +396,20 @@ def main(sort):
                 if table5[2] < 0:
                     lcounter_r[4]+=1
                     counter_r[4] +=1
+                if table6[2] < 0:
+                    lcounter_r[5]+=1
+                    counter_r[5] +=1
+                if table7[2] < 0:
+                    lcounter_r[6]+=1
+                    counter_r[6] +=1
+                if table8[2] < 0:
+                    lcounter_r[7]+=1
+                    counter_r[7] +=1
+                if table9[2] < 0:
+                    lcounter_r[8]+=1
+                    counter_r[8] +=1
             elif initResult == 1:
-                for i in range(5):
+                for i in range(9):
                     wcounter[i] += 1
                 if table1[2] > 0:
                     wcounter_r[0] += 1
@@ -378,8 +426,20 @@ def main(sort):
                 if table5[2] > 0:
                     wcounter_r[4]+=1
                     counter_r[4] +=1
+                if table6[2] > 0:
+                    wcounter_r[5]+=1
+                    counter_r[5] +=1
+                if table7[2] > 0:
+                    wcounter_r[6]+=1
+                    counter_r[6] +=1
+                if table8[2] > 0:
+                    wcounter_r[7]+=1
+                    counter_r[7] +=1
+                if table9[2] > 0:
+                    wcounter_r[8]+=1
+                    counter_r[8] +=1
             else:
-                for i in range(5):
+                for i in range(9):
                     dcounter[i]+=1
                 if table1[2] == 0:
                     dcounter_r[0] += 1
@@ -396,23 +456,92 @@ def main(sort):
                 if table5[2] == 0:
                     dcounter_r[4] += 1
                     counter_r[4] +=1
+                if table6[2] == 0:
+                    dcounter_r[5]+=1
+                    counter_r[5] +=1
+                if table7[2] == 0:
+                    dcounter_r[6]+=1
+                    counter_r[6] +=1
+                if table8[2] == 0:
+                    dcounter_r[7]+=1
+                    counter_r[7] +=1
+                if table9[2] == 0:
+                    dcounter_r[8]+=1
+                    counter_r[8] +=1
             end_table1 = []
             end_table2 = []
             end_table3 = []
             end_table4 = []
             end_table5 = []
+            end_table6 = []
+            end_table7 = []
+            end_table8 = []
+            end_table9 = []
             #printTree(tree,0)
+            # print(initResult,)
+            results1 = open(
+                "Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "detai_" + sort + ".csv", 'a')
+            # print("%s,%s,%s,%s,%s,%s,%s"%(initResult,losstot[0],losstot[1], wintot[0],wintot[1],drawtot[0],drawtot[1]))
+            results1.write("%s,%s,%s,%s,%s,%s,%s,%s" % (
+            initResult, losstot[0], losstot[1], wintot[0], wintot[1], drawtot[0], drawtot[1],percentage))
+            # print(",%s,%s,%s,%s,%s,%s"%(table[6][0],table[6][1],table[7][0],table[7][1],table[8][0],table[8][1],table[2]))
+            results1.write(",%s,%s,%s,%s,%s,%s,%s" % (
+            table1[6][0], table1[6][1], table1[7][0], table1[7][1], table1[8][0], table1[8][1], table1[2]))
+            results1.write(
+                ",%s,%s,%s,%s,%s,%s,%s" % (
+                table2[6][0], table2[6][1], table2[7][0], table2[7][1], table2[8][0], table2[8][1], table2[2]))
+            results1.write(
+                ",%s,%s,%s,%s,%s,%s,%s" % (
+                table3[6][0], table3[6][1], table3[7][0], table3[7][1], table3[8][0], table3[8][1], table3[2]))
+            results1.write(
+                ",%s,%s,%s,%s,%s,%s,%s" % (
+                table4[6][0], table4[6][1], table4[7][0], table4[7][1], table4[8][0], table4[8][1], table4[2]))
+            results1.write(
+                ",%s,%s,%s,%s,%s,%s,%s" % (
+                table5[6][0], table5[6][1], table5[7][0], table5[7][1], table5[8][0], table5[8][1], table5[2]))
+            results1.write(
+                ",%s,%s,%s,%s,%s,%s,%s" % (
+                    table6[6][0], table6[6][1], table6[7][0], table6[7][1], table6[8][0], table6[8][1], table6[2]))
+            results1.write(
+                ",%s,%s,%s,%s,%s,%s,%s" % (
+                    table7[6][0], table7[6][1], table7[7][0], table7[7][1], table7[8][0], table7[8][1], table7[2]))
+            results1.write(
+                ",%s,%s,%s,%s,%s,%s,%s" % (
+                    table8[6][0], table8[6][1], table8[7][0], table8[7][1], table8[8][0], table8[8][1], table8[2]))
+            results1.write(
+                ",%s,%s,%s,%s,%s,%s,%s" % (
+                    table9[6][0], table9[6][1], table9[7][0], table9[7][1], table9[8][0], table9[8][1], table9[2]))
+            results1.write("\n")
+            results1.close()
 
+            results2 = open(
+                "Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "short_" + sort + ".csv", 'a')
+            # print(initResult,percentage,outcome,score)
+            results2.write("%s,%s,%s,%s" % (initResult, percentage, outcome, score))
+            for i in range(9):
+                # print(table[2], table[4], table[5])
+                results2.write(",%s,%s,%s" % (table1[2], table1[4], table1[5]))
+                results2.write(",%s,%s,%s" % (table2[2], table2[4], table2[5]))
+                results2.write(",%s,%s,%s" % (table3[2], table3[4], table3[5]))
+                results2.write(",%s,%s,%s" % (table4[2], table4[4], table4[5]))
+                results2.write(",%s,%s,%s" % (table5[2], table5[4], table5[5]))
+                results2.write(",%s,%s,%s" % (table6[2], table6[4], table6[5]))
+                results2.write(",%s,%s,%s" % (table7[2], table7[4], table7[5]))
+                results2.write(",%s,%s,%s" % (table8[2], table8[4], table8[5]))
+                results2.write(",%s,%s,%s" % (table9[2], table9[4], table9[5]))
+            results2.write("\n")
+            results2.close()
             #printTop()
             #printTop(bottomFiveCalculate(end_table,5))
             # Y_train[numbboard], table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][0], table[4][-1][4][0], table[4][-1][4][1])
             time = stime.strftime("%H:%M:%S")
-            #print("#%s Time: %s   Orig_Result: %s Pred_before_moves: %s Pred_after_moves: %s Area Score: %s"
-            #      %(counter,time,initResult,outcome, table[4],table[2], ))
+            #print("#%s Time: %s   Orig_Result: %s Pred_before_moves: %s Pred_after_moves: %s Area Score: %s  Other: %s/%s   %s/%s   %s/%s"%
+            #      (counter,time,initResult,outcome, table[4],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][1], table[4][-1][4][0], table[4][-1][4][1]))
+#)
             #results.write("#%s Time: %s   Orig_Result: %s Pred_before_moves: %s Pred_after_moves: %s Area Score: %s  Other: %s/%s   %s/%s   %s/%s"%(counter,time,Y_train[numbboard],outcome, table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][1], table[4][-1][4][0], table[4][-1][4][1]))
         else:
             #print("Invalid board: %s"%(counter))
-            for i in range(5):
+            for i in range(9):
                 counter[i] -= 1
             invalid_counter +=1
     timestamp3 = stime.strftime("%H:%M:%S")
@@ -421,7 +550,7 @@ def main(sort):
     print("Init finished Time: %s " % (timestamp2))
     print("Predict done Time : %s " % (timestamp3))
     results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "tree" + sort + ".txt", 'a')
-    for i in range(5):
+    for i in range(9):
         print("Moves: %s Total : %s/%s Loss: %s/%s Win: %s/%s Draw: %s/%s" % (i+1,counter_r[i],counter[i],lcounter_r[i],lcounter[i],wcounter_r[i],wcounter[i],dcounter_r[i],dcounter[i]))
         results.write("%s Moves: %s Total : %s/%s Loss: %s/%s Win: %s/%s Draw: %s/%s\n" % (
         sort, i + 1, counter_r[i], counter[i], lcounter_r[i], lcounter[i], wcounter_r[i], wcounter[i], dcounter_r[i],
@@ -470,6 +599,13 @@ def go_calc(board):
     #print("------------------------------------------")
     #print(blackBoard)
     return area_score
-for i in range(2):
-    #main("test")
-    main("train")
+main("train9-",9)
+def tempMain():
+    init(dim, machine, loadfile, "0")
+    results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "notworking"+".txt", 'a')
+    for numbboard in range(1004):  # 10063
+        initBoard = X_train[numbboard]
+        if sum(initBoard) > 72:
+            results.write("%s \n"%(numbboard))
+    results.close()
+#tempMain()
