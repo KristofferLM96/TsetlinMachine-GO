@@ -1,0 +1,99 @@
+Time: 22:38:14 Done: 100 Total: 10000
+train8 Moves: 1 Total : 88/100 Loss: 40/44 Win: 48/56 Draw: 0/0
+train8 Moves: 2 Total : 85/100 Loss: 41/44 Win: 44/56 Draw: 0/0
+train8 Moves: 3 Total : 85/100 Loss: 39/44 Win: 46/56 Draw: 0/0
+train8 Moves: 4 Total : 82/100 Loss: 39/44 Win: 43/56 Draw: 0/0
+train8 Moves: 5 Total : 82/100 Loss: 39/44 Win: 43/56 Draw: 0/0
+train8 Moves: 6 Total : 81/100 Loss: 39/44 Win: 42/56 Draw: 0/0
+train8 Moves: 7 Total : 83/100 Loss: 40/44 Win: 43/56 Draw: 0/0
+train8 Moves: 8 Total : 85/100 Loss: 42/44 Win: 43/56 Draw: 0/0
+train8 Moves: 9 Total : 88/100 Loss: 42/44 Win: 46/56 Draw: 0/0
+Time: 01:12:43 Done: 200 Total: 10000
+train8 Moves: 1 Total : 171/200 Loss: 85/91 Win: 86/109 Draw: 0/0
+train8 Moves: 2 Total : 168/200 Loss: 87/91 Win: 81/109 Draw: 0/0
+train8 Moves: 3 Total : 169/200 Loss: 84/91 Win: 85/109 Draw: 0/0
+train8 Moves: 4 Total : 168/200 Loss: 85/91 Win: 83/109 Draw: 0/0
+train8 Moves: 5 Total : 168/200 Loss: 83/91 Win: 85/109 Draw: 0/0
+train8 Moves: 6 Total : 166/200 Loss: 84/91 Win: 82/109 Draw: 0/0
+train8 Moves: 7 Total : 169/200 Loss: 85/91 Win: 84/109 Draw: 0/0
+train8 Moves: 8 Total : 173/200 Loss: 87/91 Win: 86/109 Draw: 0/0
+train8 Moves: 9 Total : 175/200 Loss: 87/91 Win: 88/109 Draw: 0/0
+Time: 03:51:39 Done: 300 Total: 10000
+train8 Moves: 1 Total : 258/300 Loss: 127/137 Win: 131/163 Draw: 0/0
+train8 Moves: 2 Total : 253/300 Loss: 128/137 Win: 125/163 Draw: 0/0
+train8 Moves: 3 Total : 257/300 Loss: 127/137 Win: 130/163 Draw: 0/0
+train8 Moves: 4 Total : 254/300 Loss: 127/137 Win: 127/163 Draw: 0/0
+train8 Moves: 5 Total : 254/300 Loss: 126/137 Win: 128/163 Draw: 0/0
+train8 Moves: 6 Total : 251/300 Loss: 127/137 Win: 124/163 Draw: 0/0
+train8 Moves: 7 Total : 254/300 Loss: 128/137 Win: 126/163 Draw: 0/0
+train8 Moves: 8 Total : 259/300 Loss: 130/137 Win: 129/163 Draw: 0/0
+train8 Moves: 9 Total : 262/300 Loss: 129/137 Win: 133/163 Draw: 0/0
+Time: 06:25:27 Done: 400 Total: 10000
+train8 Moves: 1 Total : 340/400 Loss: 158/173 Win: 182/227 Draw: 0/0
+train8 Moves: 2 Total : 334/400 Loss: 160/173 Win: 174/227 Draw: 0/0
+train8 Moves: 3 Total : 338/400 Loss: 158/173 Win: 180/227 Draw: 0/0
+train8 Moves: 4 Total : 334/400 Loss: 158/173 Win: 176/227 Draw: 0/0
+train8 Moves: 5 Total : 335/400 Loss: 155/173 Win: 180/227 Draw: 0/0
+train8 Moves: 6 Total : 332/400 Loss: 157/173 Win: 175/227 Draw: 0/0
+train8 Moves: 7 Total : 339/400 Loss: 159/173 Win: 180/227 Draw: 0/0
+train8 Moves: 8 Total : 342/400 Loss: 162/173 Win: 180/227 Draw: 0/0
+train8 Moves: 9 Total : 347/400 Loss: 160/173 Win: 187/227 Draw: 0/0
+Time: 09:03:18 Done: 500 Total: 10000
+train8 Moves: 1 Total : 427/500 Loss: 190/208 Win: 237/292 Draw: 0/0
+train8 Moves: 2 Total : 422/500 Loss: 193/208 Win: 229/292 Draw: 0/0
+train8 Moves: 3 Total : 427/500 Loss: 191/208 Win: 236/292 Draw: 0/0
+train8 Moves: 4 Total : 421/500 Loss: 191/208 Win: 230/292 Draw: 0/0
+train8 Moves: 5 Total : 421/500 Loss: 188/208 Win: 233/292 Draw: 0/0
+train8 Moves: 6 Total : 417/500 Loss: 190/208 Win: 227/292 Draw: 0/0
+train8 Moves: 7 Total : 426/500 Loss: 191/208 Win: 235/292 Draw: 0/0
+train8 Moves: 8 Total : 429/500 Loss: 195/208 Win: 234/292 Draw: 0/0
+train8 Moves: 9 Total : 433/500 Loss: 191/208 Win: 242/292 Draw: 0/0
+Time: 21:09:48 Done: 600 Total: 10000
+train8 Moves: 1 Total : 83/600 Loss: 35/37 Win: 48/63 Draw: 0/0
+train8 Moves: 2 Total : 81/600 Loss: 33/37 Win: 48/63 Draw: 0/0
+train8 Moves: 3 Total : 82/600 Loss: 34/37 Win: 48/63 Draw: 0/0
+train8 Moves: 4 Total : 76/600 Loss: 32/37 Win: 44/63 Draw: 0/0
+train8 Moves: 5 Total : 80/600 Loss: 33/37 Win: 47/63 Draw: 0/0
+train8 Moves: 6 Total : 84/600 Loss: 34/37 Win: 50/63 Draw: 0/0
+train8 Moves: 7 Total : 83/600 Loss: 32/37 Win: 51/63 Draw: 0/0
+train8 Moves: 8 Total : 80/600 Loss: 35/37 Win: 45/63 Draw: 0/0
+train8 Moves: 9 Total : 79/600 Loss: 32/37 Win: 47/63 Draw: 0/0
+Time: 23:49:03 Done: 700 Total: 10000
+train8 Moves: 1 Total : 173/700 Loss: 74/79 Win: 99/121 Draw: 0/0
+train8 Moves: 2 Total : 171/700 Loss: 73/79 Win: 98/121 Draw: 0/0
+train8 Moves: 3 Total : 175/700 Loss: 75/79 Win: 100/121 Draw: 0/0
+train8 Moves: 4 Total : 165/700 Loss: 72/79 Win: 93/121 Draw: 0/0
+train8 Moves: 5 Total : 169/700 Loss: 73/79 Win: 96/121 Draw: 0/0
+train8 Moves: 6 Total : 171/700 Loss: 73/79 Win: 98/121 Draw: 0/0
+train8 Moves: 7 Total : 173/700 Loss: 73/79 Win: 100/121 Draw: 0/0
+train8 Moves: 8 Total : 168/700 Loss: 76/79 Win: 92/121 Draw: 0/0
+train8 Moves: 9 Total : 169/700 Loss: 74/79 Win: 95/121 Draw: 0/0
+Time: 02:27:10 Done: 800 Total: 10000
+train8 Moves: 1 Total : 254/800 Loss: 107/116 Win: 147/184 Draw: 0/0
+train8 Moves: 2 Total : 251/800 Loss: 106/116 Win: 145/184 Draw: 0/0
+train8 Moves: 3 Total : 253/800 Loss: 107/116 Win: 146/184 Draw: 0/0
+train8 Moves: 4 Total : 244/800 Loss: 105/116 Win: 139/184 Draw: 0/0
+train8 Moves: 5 Total : 251/800 Loss: 107/116 Win: 144/184 Draw: 0/0
+train8 Moves: 6 Total : 255/800 Loss: 108/116 Win: 147/184 Draw: 0/0
+train8 Moves: 7 Total : 255/800 Loss: 107/116 Win: 148/184 Draw: 0/0
+train8 Moves: 8 Total : 250/800 Loss: 110/116 Win: 140/184 Draw: 0/0
+train8 Moves: 9 Total : 251/800 Loss: 107/116 Win: 144/184 Draw: 0/0
+Time: 05:01:12 Done: 900 Total: 10000
+train8 Moves: 1 Total : 339/900 Loss: 154/167 Win: 185/233 Draw: 0/0
+train8 Moves: 2 Total : 338/900 Loss: 155/167 Win: 183/233 Draw: 0/0
+train8 Moves: 3 Total : 340/900 Loss: 156/167 Win: 184/233 Draw: 0/0
+train8 Moves: 4 Total : 331/900 Loss: 154/167 Win: 177/233 Draw: 0/0
+train8 Moves: 5 Total : 337/900 Loss: 154/167 Win: 183/233 Draw: 0/0
+train8 Moves: 6 Total : 341/900 Loss: 155/167 Win: 186/233 Draw: 0/0
+train8 Moves: 7 Total : 341/900 Loss: 154/167 Win: 187/233 Draw: 0/0
+train8 Moves: 8 Total : 334/900 Loss: 157/167 Win: 177/233 Draw: 0/0
+train8 Moves: 9 Total : 336/900 Loss: 154/167 Win: 182/233 Draw: 0/0
+train8 Moves: 1 Total : 407/982 Loss: 186/201 Win: 221/281 Draw: 0/0
+train8 Moves: 2 Total : 405/982 Loss: 187/201 Win: 218/281 Draw: 0/0
+train8 Moves: 3 Total : 409/982 Loss: 188/201 Win: 221/281 Draw: 0/0
+train8 Moves: 4 Total : 402/982 Loss: 186/201 Win: 216/281 Draw: 0/0
+train8 Moves: 5 Total : 409/982 Loss: 185/201 Win: 224/281 Draw: 0/0
+train8 Moves: 6 Total : 413/982 Loss: 188/201 Win: 225/281 Draw: 0/0
+train8 Moves: 7 Total : 412/982 Loss: 185/201 Win: 227/281 Draw: 0/0
+train8 Moves: 8 Total : 405/982 Loss: 189/201 Win: 216/281 Draw: 0/0
+train8 Moves: 9 Total : 410/982 Loss: 185/201 Win: 225/281 Draw: 0/0
