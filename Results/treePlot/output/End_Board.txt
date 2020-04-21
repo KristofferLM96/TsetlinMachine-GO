@@ -1,0 +1,32 @@
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=.6]{Images/Results/End_Board.png}
+    \caption{Current board is correct with end result}
+    \label{fig:End_Board}
+\end{figure}
+\FloatBarrier
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{|a|d|d|d|d|d|}
+\hline
+\rowcolor{Blue}
+\begin{tabular}[c]{@{}l@{}}Outcome\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 0\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 3\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 7\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} Correct black\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}435\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}471\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}494\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}511\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}521\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} Correct white\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}379\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}360\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}355\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}352\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}343\end{tabular}\\ \hline
+\end{tabular}
+\caption{Current board is correct with end result}
+\label{tab:End_Board}
+\end{table}
+\FloatBarrier

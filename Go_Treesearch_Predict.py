@@ -5,7 +5,8 @@ import gomill.ascii_boards
 import numpy as np
 import time as stime
 import operator
-moves = 1
+weights = []
+clauses= 0
 machine = "TM"
 name = "Trond"
 #name = "Kristoffer"
@@ -19,9 +20,12 @@ loadfile = "0310-1342"
 inndata = "Draw"
 #numb = "0"
 #numbboard = 88
-numbboard = 388
-weights = []
-clauses= 0
+#numbboard = 388
+#######################
+depth = 7   #number of moves 5,7,9
+tree_width = 2
+save_name = "train7fixed"
+#######################
 global X_train,Y_train,X_test,Y_test,m, loadedstate
 def init(dim, machine, loadfile, numb):
     global X_train, Y_train, X_test, Y_test, m, loadedstate, weights, clauses
@@ -96,6 +100,9 @@ def reform(table,size):
             black.append(0.)
         else:
             print("Something went wrong!!")
+            print(table)
+            print(i)
+            print(table[i])
     return black+white
 
 def moveTransform(number,size): #change the moves into letter/number variation
@@ -105,7 +112,7 @@ def moveTransform(number,size): #change the moves into letter/number variation
     a = int(number/size)
     b = number%size
     return alphabet[b]+str(size-a)+"        "
-def findEmpty(table, player,size,tm):
+def findEmpty(table, player,size,tm, width):
     alteredTables = []
     for i in range(len(table[1])):
         if table[1][i] == ".":
@@ -116,7 +123,7 @@ def findEmpty(table, player,size,tm):
                 tempTable[i] = 1
             else:
                 tempTable[i + 81] = 1
-            outcome, score, go_outcome, lossresult, winresult, drawresult = predictSum(tm,tempTable,tempTable2)
+            outcome, score, go_outcome, lossresult, winresult, drawresult, retTable, retBw = predictSum(tm,tempTable,tempTable2)
             #newM = tableCopy(table[2])
             newM = go_outcome
             #newP = tableCopy(table[3])
@@ -125,10 +132,10 @@ def findEmpty(table, player,size,tm):
             newP=player
             newO=outcome
             newS =score
-            alteredTables.append([tempTable,tempTable2,newM,newP, newO, newS,lossresult,winresult,drawresult])
+            alteredTables.append([retTable,retBw,newM,newP, newO, newS,lossresult,winresult,drawresult])
     #print(alteredTables)
     #Y_train[numbboard], table[4][-1][0],table[4][-1][1], table[4][-1][2][0], table[4][-1][2][1], table[4][-1][3][0], table[4][-1][3][0], table[4][-1][4][0], table[4][-1][4][1])
-    alteredTables = topFive(alteredTables,player)
+    alteredTables = topFive(alteredTables,player, width)
     return alteredTables
 def tableCopy(table):
     newTable = []
@@ -144,25 +151,41 @@ end_table6 = []
 end_table7 = []
 end_table8 = []
 end_table9 = []
-def recursive(bwtable,player,size,moves,tm):
-    if moves == 0: end_table9.append(bwtable)
-    if moves == 1: end_table8.append(bwtable)
-    if moves == 2: end_table7.append(bwtable)
-    if moves == 3: end_table6.append(bwtable)
-    if moves == 4: end_table5.append(bwtable)
-    if moves == 5: end_table4.append(bwtable)
-    if moves == 6: end_table3.append(bwtable)
-    if moves == 7: end_table2.append(bwtable)
-    if moves == 8: end_table1.append(bwtable)
+def recursive(bwtable,player,size,moves,tm,tot, width):
+    if tot == 9:
+        if moves == 0: end_table9.append(bwtable)
+        if moves == 1: end_table8.append(bwtable)
+        if moves == 2: end_table7.append(bwtable)
+        if moves == 3: end_table6.append(bwtable)
+        if moves == 4: end_table5.append(bwtable)
+        if moves == 5: end_table4.append(bwtable)
+        if moves == 6: end_table3.append(bwtable)
+        if moves == 7: end_table2.append(bwtable)
+        if moves == 8: end_table1.append(bwtable)
+    if tot == 7:
+        if moves == 0: end_table7.append(bwtable)
+        if moves == 1: end_table6.append(bwtable)
+        if moves == 2: end_table5.append(bwtable)
+        if moves == 3: end_table4.append(bwtable)
+        if moves == 4: end_table3.append(bwtable)
+        if moves == 5: end_table2.append(bwtable)
+        if moves == 6: end_table1.append(bwtable)
+    if tot == 7:
+        if moves == 0: end_table5.append(bwtable)
+        if moves == 1: end_table4.append(bwtable)
+        if moves == 2: end_table3.append(bwtable)
+        if moves == 3: end_table2.append(bwtable)
+        if moves == 4: end_table1.append(bwtable)
+        if moves == 0: return bwtable
     if moves == 0: return bwtable
     moves -= 1
-    newBoards = findEmpty(bwtable,player,size,tm)
+    newBoards = findEmpty(bwtable,player,size,tm, width)
     for i in newBoards:
         if i[3][-1] == "B":
             nplayer = "W"
         else:
             nplayer = "B"
-        i.append(recursive(i, nplayer, size, moves,tm))
+        i.append(recursive(i, nplayer, size, moves,tm,tot, width))
     bwtable.append(newBoards)
 
     #bwtable[0] have bitboard
@@ -177,7 +200,9 @@ def recursive(bwtable,player,size,moves,tm):
     #bwtable[9] have list of top5 children nodes (newBoards)
     return bwtable
 def predictSum(tm, boards,boards2):
-    newArray = np.array([boards])
+    go_correct,nbwtable = go_calc(boards2)
+    bittable = reform(nbwtable,9)
+    newArray = np.array([bittable])
     result2 = tm.transform(newArray,inverted = False)
     #print(result2[0][0])
     loss = weights[0][0]
@@ -185,7 +210,6 @@ def predictSum(tm, boards,boards2):
     draw = weights[2][0]
     outcome = -1
     score = -1
-    go_correct = go_calc(boards2)
     #print("Predicted Result: ",result[0], " ", result[1])
     lossresult = weightedCalc(result2[0][0:clauses],loss)
     winresult = weightedCalc(result2[0][clauses:clauses*2], win)
@@ -207,7 +231,11 @@ def predictSum(tm, boards,boards2):
         score = drawtot
     #outcome = result[0]
     #score = result[1]
-    return outcome, score, go_correct, lossresult, winresult, drawresult
+    #for i in range(len(boards2)):
+    #   if boards2[i] == "B" or boards[i] == "W":
+    #        if nbwtable[i] == ".":
+    #            score = -30000
+    return outcome, score, go_correct, lossresult, winresult, drawresult,bittable,nbwtable
 def weightedCalc(clause, weight):
     negs = 0
     ones = 0
@@ -218,8 +246,7 @@ def weightedCalc(clause, weight):
             else:
                 negs += clause[i]*weight[i]
     return ones,negs
-
-def topFive(boards, player):
+def topFiveTemp(boards, player):
     number = 2
     whiteBoard = []
     blackBoard = []
@@ -272,7 +299,91 @@ def topFive(boards, player):
                 return blackBoard + drawBoard + whiteBoard[len(blackBoard)+len(drawBoard)-number:]
 def sort_table(table, col):
     return sorted(table, key=operator.itemgetter(col), reverse=True)
-def main(sort,moves):
+def topFive(boards, player, width):
+    number = width #how wide is the search
+    whiteBoard = []
+    blackBoard = []
+    drawBoard = []
+    for board in boards:
+        if board[4] == 0:
+            whiteBoard.append(board)
+        if board[4] == 1:
+            blackBoard.append(board)
+        if board[4] == 2:
+            drawBoard.append(board)
+    #whiteBoard = np.random.shuffle(whiteBoard)
+    #blackBoard = np.random.shuffle(blackBoard)
+    #drawBoard = np.random.shuffle(drawBoard)
+    if player == "W":
+        if len(whiteBoard) >= number:
+            return topFiveCalculate(whiteBoard, number)
+        elif len(whiteBoard) < number:
+            if len(whiteBoard) +len(drawBoard) == number:
+                return topFiveCalculate(whiteBoard,len(whiteBoard)) + topFiveCalculate(drawBoard,len(drawBoard))
+            elif len(whiteBoard) + len(drawBoard) > number:
+                return topFiveCalculate(whiteBoard,len(whiteBoard))  + topFiveCalculate(drawBoard, number-len(whiteBoard))
+            elif len(whiteBoard) + len(drawBoard) < number:
+                return topFiveCalculate(whiteBoard,len(whiteBoard)) + topFiveCalculate(drawBoard,len(drawBoard)) + bottomFiveCalculate(blackBoard, number - len(whiteBoard)-len(drawBoard))
+    if player == "B":
+        if len(blackBoard) >= number:
+            return topFiveCalculate(blackBoard,number)
+        elif len(blackBoard) < number:
+            if len(blackBoard) +len(drawBoard) == number:
+                return topFiveCalculate(blackBoard,len(blackBoard)) + topFiveCalculate(drawBoard,len(drawBoard))
+            elif len(blackBoard) + len(drawBoard) > number:
+                return topFiveCalculate(blackBoard,len(blackBoard))+ topFiveCalculate(drawBoard, number-len(blackBoard))
+            elif len(blackBoard) + len(drawBoard) < number:
+                return topFiveCalculate(blackBoard,len(blackBoard)) + topFiveCalculate(drawBoard,len(drawBoard)) + bottomFiveCalculate(whiteBoard, number - len(blackBoard)-len(drawBoard))
+def topFiveCalculate(boards, numb):
+    listallscore = []
+    list =[]
+    for i in range(numb):
+        tempScore = -100000
+        tempID = 0
+        for j in range(len(boards)):
+            listallscore.append(boards[j][5])
+            #if abs(boards[j][5][0]) > tempScore:
+            if boards[j][5] > tempScore:
+                #tempScore = abs(boards[j][5][0])
+                tempScore = boards[j][5]
+                tempID = j
+            if boards[j][5] == tempScore:
+                np.random.seed()
+                X1 = np.random.randint(low=0, high=10, size=(1))
+                if X1[0] > 4:
+                    tempScore = boards[j][5]
+                    tempID = j
+        boards, list = sortList(boards, list, tempID)
+    return list
+def bottomFiveCalculate(boards,numb):
+    listallscore = []
+    list = []
+    for i in range(numb):
+        tempScore = 100000
+        tempID = 0
+        for j in range(len(boards)):
+            listallscore.append(boards[j][5])
+            #if abs(boards[j][5][0]) < tempScore:
+                #tempScore = abs(boards[j][5][0])
+            if boards[j][5] < tempScore:
+                tempScore = boards[j][5]
+                tempID = j
+            if boards[j][5] == tempScore:
+                np.random.seed()
+                X1 = np.random.randint(low=0, high=10, size=(1))
+                if X1[0] > 4:
+                    tempScore = boards[j][5]
+                    tempID = j
+        boards, list = sortList(boards,list,tempID)
+    return list
+def sortList(boards,list,iD):
+    newList = []
+    list.append(boards[iD])
+    for i in range(len(boards)):
+        if i != iD:
+            newList.append(boards[i])
+    return newList, list
+def main(sort,moves,width):
     global end_table1,end_table2,end_table3,end_table4,end_table5,end_table6,end_table7,end_table8,end_table9
     #moves = 7
     results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "tree"+sort+".txt", 'a')
@@ -312,9 +423,10 @@ def main(sort,moves):
     dcounter_r = [0,0,0,0,0,0,0,0,0]
     print(len(X_test))
     print(len(X_train))
-    printnumb = 1
-    printnumb2 = 1
+    printnumb = 1 #1
+    printnumb2 = 1#1
     for numbboard in range(1004): #10063 #1004
+        #numbboard+=1
         #numbboard+=40000
         #print(numbboard)
         if (counter[0] == printnumb2 * 10):
@@ -352,31 +464,42 @@ def main(sort,moves):
             initBoard = X_test[numbboard]
             initResult = Y_test[numbboard]
 
-        if sum(initBoard) < 73 and initResult == 0:
+        if sum(initBoard) < 73 and initResult != 2:
             newArray = np.array([initBoard])
             bwtable = transform(initBoard, size)
-
-            outcome, score, percentage, losstot,wintot,drawtot = predictSum(m,newArray, bwtable)
+            table6 = []
+            table7 = []
+            table8 = []
+            table9 = []
+            outcome, score, percentage, losstot,wintot,drawtot, newbit,newbw = predictSum(m,newArray, bwtable)
             bwTable = [initBoard,bwtable, percentage, player, outcome, score]
-            tree = recursive(bwTable, player, size, moves,m)
-            fivetable1 = topFive(end_table1,"B")
+            tree = recursive(bwTable, player, size, moves,m,moves, width)
+            fivetable1 = topFive(end_table1,"B", 10)
             table1 = fivetable1[0]
-            fivetable2 = topFive(end_table2, "B")
+            fivetable2 = topFive(end_table2, "B", 10)
             table2 = fivetable2[0]
-            fivetable3 = topFive(end_table3, "B")
+            fivetable3 = topFive(end_table3, "B", 10)
             table3 = fivetable3[0]
-            fivetable4 = topFive(end_table4, "B")
+            fivetable4 = topFive(end_table4, "B", 10)
             table4 = fivetable4[0]
-            fivetable5 = topFive(end_table5, "B")
+            fivetable5 = topFive(end_table5, "B", 10)
             table5 = fivetable5[0]
-            fivetable6 = topFive(end_table6, "B")
-            table6 = fivetable6[0]
-            fivetable7 = topFive(end_table7, "B")
-            table7 = fivetable7[0]
-            fivetable9 = topFive(end_table9, "B")
-            table8 = fivetable9[0]
-            fivetable9 = topFive(end_table9, "B")
-            table9 = fivetable9[0]
+            if moves > 5:
+                fivetable6 = topFive(end_table6, "B", 10)
+                table6 = fivetable6[0]
+                fivetable7 = topFive(end_table7, "B", 10)
+                table7 = fivetable7[0]
+            else:
+                table6 = [0, 0, 0, 0, 0, 0, 0, 0]
+                table7 = [0, 0, 0, 0, 0, 0, 0, 0]
+            if moves >7:
+                fivetable8 = topFive(end_table8, "B", 10)
+                table8 = fivetable8[0]
+                fivetable9 = topFive(end_table9, "B", 10)
+                table9 = fivetable9[0]
+            else:
+                table8 = [0, 0, 0, 0, 0, 0, 0, 0]
+                table9 = [0, 0, 0, 0, 0, 0, 0, 0]
 
             if initResult == 0:
                 for i in range(9):
@@ -499,18 +622,18 @@ def main(sort,moves):
             results1.write(
                 ",%s,%s,%s,%s,%s,%s,%s" % (
                 table5[6][0], table5[6][1], table5[7][0], table5[7][1], table5[8][0], table5[8][1], table5[2]))
-            results1.write(
-                ",%s,%s,%s,%s,%s,%s,%s" % (
-                    table6[6][0], table6[6][1], table6[7][0], table6[7][1], table6[8][0], table6[8][1], table6[2]))
-            results1.write(
-                ",%s,%s,%s,%s,%s,%s,%s" % (
-                    table7[6][0], table7[6][1], table7[7][0], table7[7][1], table7[8][0], table7[8][1], table7[2]))
-            results1.write(
-                ",%s,%s,%s,%s,%s,%s,%s" % (
-                    table8[6][0], table8[6][1], table8[7][0], table8[7][1], table8[8][0], table8[8][1], table8[2]))
-            results1.write(
-                ",%s,%s,%s,%s,%s,%s,%s" % (
-                    table9[6][0], table9[6][1], table9[7][0], table9[7][1], table9[8][0], table9[8][1], table9[2]))
+            #results1.write(
+            #    ",%s,%s,%s,%s,%s,%s,%s" % (
+            #        table6[6][0], table6[6][1], table6[7][0], table6[7][1], table6[8][0], table6[8][1], table6[2]))
+            #results1.write(
+            #    ",%s,%s,%s,%s,%s,%s,%s" % (
+            #        table7[6][0], table7[6][1], table7[7][0], table7[7][1], table7[8][0], table7[8][1], table7[2]))
+            #results1.write(
+            #    ",%s,%s,%s,%s,%s,%s,%s" % (
+            #        table8[6][0], table8[6][1], table8[7][0], table8[7][1], table8[8][0], table8[8][1], table8[2]))
+            #results1.write(
+            #    ",%s,%s,%s,%s,%s,%s,%s" % (
+            #        table9[6][0], table9[6][1], table9[7][0], table9[7][1], table9[8][0], table9[8][1], table9[2]))
             results1.write("\n")
             results1.close()
 
@@ -518,17 +641,17 @@ def main(sort,moves):
                 "Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "short_" + sort + ".csv", 'a')
             # print(initResult,percentage,outcome,score)
             results2.write("%s,%s,%s,%s" % (initResult, percentage, outcome, score))
-            for i in range(9):
+            #for i in range(9):
                 # print(table[2], table[4], table[5])
-                results2.write(",%s,%s,%s" % (table1[2], table1[4], table1[5]))
-                results2.write(",%s,%s,%s" % (table2[2], table2[4], table2[5]))
-                results2.write(",%s,%s,%s" % (table3[2], table3[4], table3[5]))
-                results2.write(",%s,%s,%s" % (table4[2], table4[4], table4[5]))
-                results2.write(",%s,%s,%s" % (table5[2], table5[4], table5[5]))
-                results2.write(",%s,%s,%s" % (table6[2], table6[4], table6[5]))
-                results2.write(",%s,%s,%s" % (table7[2], table7[4], table7[5]))
-                results2.write(",%s,%s,%s" % (table8[2], table8[4], table8[5]))
-                results2.write(",%s,%s,%s" % (table9[2], table9[4], table9[5]))
+            results2.write(",%s,%s,%s" % (table1[2], table1[4], table1[5]))
+            results2.write(",%s,%s,%s" % (table2[2], table2[4], table2[5]))
+            results2.write(",%s,%s,%s" % (table3[2], table3[4], table3[5]))
+            results2.write(",%s,%s,%s" % (table4[2], table4[4], table4[5]))
+            results2.write(",%s,%s,%s" % (table5[2], table5[4], table5[5]))
+            results2.write(",%s,%s,%s" % (table6[2], table6[4], table6[5]))
+            results2.write(",%s,%s,%s" % (table7[2], table7[4], table7[5]))
+            results2.write(",%s,%s,%s" % (table8[2], table8[4], table8[5]))
+            results2.write(",%s,%s,%s" % (table9[2], table9[4], table9[5]))
             results2.write("\n")
             results2.close()
             #printTop()
@@ -566,6 +689,16 @@ def main(sort,moves):
 def go_calc(board):
     board_size = 9
     komi = 7
+    def get_board(game_board):
+        end_board = []
+        for y in range(board_size):
+            for x in range(board_size):
+                pos = game_board.get(x, y)
+                if pos == "w" or pos == "b" or pos == "W" or pos == "B":
+                    end_board.append(pos)
+                else:
+                    end_board.append(".")
+        return end_board
     def play(_turn,game_board):
         x = _turn[1]
         y = _turn[2]
@@ -595,11 +728,12 @@ def go_calc(board):
     # print("Area Score:", area_score, "\n")
     # play(["b", 2,1])
     area_score = game_board.area_score() - komi
+    newbwboard = get_board(game_board)
     # print("Area Score:", area_score, "\n")
     #print("------------------------------------------")
     #print(blackBoard)
-    return area_score
-main("train9-",9)
+    return area_score, newbwboard
+main(save_name,depth,tree_width)
 def tempMain():
     init(dim, machine, loadfile, "0")
     results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "notworking"+".txt", 'a')
@@ -608,4 +742,4 @@ def tempMain():
         if sum(initBoard) > 72:
             results.write("%s \n"%(numbboard))
     results.close()
-#tempMain()
+#tempMain()    if nbwtable != boards2:

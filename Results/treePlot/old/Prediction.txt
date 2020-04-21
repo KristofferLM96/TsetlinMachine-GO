@@ -1,0 +1,32 @@
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=.6]{Images/Results/Prediction.png}
+    \caption{Current prediction is correct with end result}
+    \label{fig:Prediction}
+\end{figure}
+\FloatBarrier
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{|a|d|d|d|d|d|}
+\hline
+\rowcolor{Blue}
+\begin{tabular}[c]{@{}l@{}}Outcome\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 3\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 7\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 9\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} Correct black\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}558\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}559\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}560\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}561\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}561\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} Correct white\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}346\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}335\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}320\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}292\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}279\end{tabular}\\ \hline
+\end{tabular}
+\caption{Current prediction is correct with end result}
+\label{tab:Prediction}
+\end{table}
+\FloatBarrier
