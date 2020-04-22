@@ -1,0 +1,32 @@
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=.6]{Images/Results/No_Komi.png}
+    \caption{Current board is correct with end result - komi}
+    \label{fig:No_Komi}
+\end{figure}
+\FloatBarrier
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{|a|d|d|d|d|d|}
+\hline
+\rowcolor{Blue}
+\begin{tabular}[c]{@{}l@{}}Outcome\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 3\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 7\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 9\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} Correct black\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}529\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}524\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}521\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}526\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}530\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}} Correct white\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}318\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}316\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}314\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}322\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}324\end{tabular}\\ \hline
+\end{tabular}
+\caption{Current board is correct with end result - komi}
+\label{tab:No_Komi}
+\end{table}
+\FloatBarrier

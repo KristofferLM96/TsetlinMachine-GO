@@ -6,6 +6,7 @@ import numpy as np
 import time as stime
 
 
+
 machine = "TM"
 name = "Trond"
 #name = "Kristoffer"
@@ -18,8 +19,15 @@ dim = "90_100T_9x9Aya_"
 loadfile = "0310-1342"
 inndata = "Draw"
 numb = "0"
-#numbboard = 88
-numbboard = 388
+###################
+#numbboard = 654
+#numbboard = 566
+#numbboard = 868
+numbboard = 399
+depth = 5   #number of moves
+tree_width = 2
+save_file = "399-5-2"
+##################
 weights = []
 clauses= 0
 global X_train,Y_train,X_test,Y_test,m, loadedstate
@@ -134,6 +142,7 @@ def printTable(table,position):
         line +=mellomrom
     for row in table:
         print(line+row)
+        results.write(line+row + "\n")
 counter = 0
 def moveTransform(number,size): #change the moves into letter/number variation
     if(number < 0): return "Start     "
@@ -142,7 +151,7 @@ def moveTransform(number,size): #change the moves into letter/number variation
     a = int(number/size)
     b = number%size
     return alphabet[b]+str(size-a)+"        "
-def findEmpty(table, player,size,tm):
+def findEmpty(table, player,size,tm,width):
     global counter
     alteredTables = []
     for i in range(len(table[1])):
@@ -154,18 +163,18 @@ def findEmpty(table, player,size,tm):
                 tempTable[i] = 1
             else:
                 tempTable[i + 81] = 1
-            outcome, score, percentage = predictSum(tm,tempTable,tempTable2)
+            outcome, score, go_outcome, lossresult, winresult, drawresult, retTable, retBw = predictSum(tm,tempTable,tempTable2)
             newM = tableCopy(table[2])
             newM.append(moveTransform(i,9))
             newP = tableCopy(table[3])
             newO = tableCopy(table[4])
             newS = tableCopy(table[5])
             newP.append(player)
-            newO.append([outcome,percentage])
+            newO.append([outcome,go_outcome])
             newS.append(score)
-            alteredTables.append([tempTable,tempTable2,newM,newP, newO, newS])
+            alteredTables.append([retTable,retBw,newM,newP, newO, newS])
     #print(alteredTables)
-    alteredTables = topFive(alteredTables,player)
+    alteredTables = topFive(alteredTables,player, width)
     for i in range(len(alteredTables)):
         alteredTables[i].append(printableTable(
             [alteredTables[i][0], alteredTables[i][1], alteredTables[i][2], alteredTables[i][3], alteredTables[i][4],
@@ -177,17 +186,17 @@ def tableCopy(table):
         newTable.append(table[i])
     return newTable
 end_table = []
-def recursive(bwtable,player,size,moves,tm):
+def recursive(bwtable,player,size,moves,tm,width):
     if moves == 0: end_table.append(bwtable)
     if moves == 0: return bwtable
     moves -= 1
-    newBoards = findEmpty(bwtable,player,size,tm)
+    newBoards = findEmpty(bwtable,player,size,tm,width)
     for i in newBoards:
         if i[3][-1] == "B":
             nplayer = "W"
         else:
             nplayer = "B"
-        i.append(recursive(i, nplayer, size, moves,tm))
+        i.append(recursive(i, nplayer, size, moves,tm,width))
     bwtable.append(newBoards)
 
     #bwtable[0] have bitboard
@@ -200,8 +209,9 @@ def recursive(bwtable,player,size,moves,tm):
     #bwtable[7] have list of top5 children nodes (newBoards)
     return bwtable
 def predictSum(tm, boards,boards2):
-    newArray = np.array([boards])
-    #result = tm.predict2(newArray)
+    go_correct,nbwtable = go_calc(boards2)
+    bittable = reform(nbwtable,9)
+    newArray = np.array([bittable])
     result2 = tm.transform(newArray,inverted = False)
     #print(result2[0][0])
     loss = weights[0][0]
@@ -209,7 +219,7 @@ def predictSum(tm, boards,boards2):
     draw = weights[2][0]
     outcome = -1
     score = -1
-    go_correct = go_calc(boards2)
+
     #print("Predicted Result: ",result[0], " ", result[1])
     lossresult = weightedCalc(result2[0][0:clauses],loss)
     winresult = weightedCalc(result2[0][clauses:clauses*2], win)
@@ -231,7 +241,11 @@ def predictSum(tm, boards,boards2):
         score = drawtot
     #outcome = result[0]
     #score = result[1]
-    return outcome, score, go_correct
+    #for i in range(len(boards2)):
+    #    if boards2[i] == "B" or boards2[i] == "W":
+    #        if nbwtable[i] == ".":
+    #            score = -30000
+    return outcome, score, go_correct, lossresult, winresult, drawresult,bittable,nbwtable
 def weightedCalc(clause, weight):
     negs = 0
     ones = 0
@@ -243,7 +257,42 @@ def weightedCalc(clause, weight):
                 negs += clause[i]*weight[i]
     return ones,negs
 
-def topFive(boards, player):
+def topFive(boards, player, width):
+    number = width #how wide is the search
+    whiteBoard = []
+    blackBoard = []
+    drawBoard = []
+    for board in boards:
+        if board[4][-1][0] == 0:
+            whiteBoard.append(board)
+        if board[4][-1][0] == 1:
+            blackBoard.append(board)
+        if board[4][-1][0] == 2:
+            drawBoard.append(board)
+    #whiteBoard = np.random.shuffle(whiteBoard)
+    #blackBoard = np.random.shuffle(blackBoard)
+    #drawBoard = np.random.shuffle(drawBoard)
+    if player == "W":
+        if len(whiteBoard) >= number:
+            return topFiveCalculate(whiteBoard, number)
+        elif len(whiteBoard) < number:
+            if len(whiteBoard) +len(drawBoard) == number:
+                return topFiveCalculate(whiteBoard,len(whiteBoard)) + topFiveCalculate(drawBoard,len(drawBoard))
+            elif len(whiteBoard) + len(drawBoard) > number:
+                return topFiveCalculate(whiteBoard,len(whiteBoard))  + topFiveCalculate(drawBoard, number-len(whiteBoard))
+            elif len(whiteBoard) + len(drawBoard) < number:
+                return topFiveCalculate(whiteBoard,len(whiteBoard)) + topFiveCalculate(drawBoard,len(drawBoard)) + bottomFiveCalculate(blackBoard, number - len(whiteBoard)-len(drawBoard))
+    if player == "B":
+        if len(blackBoard) >= number:
+            return topFiveCalculate(blackBoard,number)
+        elif len(blackBoard) < number:
+            if len(blackBoard) +len(drawBoard) == number:
+                return topFiveCalculate(blackBoard,len(blackBoard)) + topFiveCalculate(drawBoard,len(drawBoard))
+            elif len(blackBoard) + len(drawBoard) > number:
+                return topFiveCalculate(blackBoard,len(blackBoard))+ topFiveCalculate(drawBoard, number-len(blackBoard))
+            elif len(blackBoard) + len(drawBoard) < number:
+                return topFiveCalculate(blackBoard,len(blackBoard)) + topFiveCalculate(drawBoard,len(drawBoard)) + bottomFiveCalculate(whiteBoard, number - len(blackBoard)-len(drawBoard))
+def topFive5(boards, player,number):
     whiteBoard = []
     blackBoard = []
     drawBoard = []
@@ -255,50 +304,51 @@ def topFive(boards, player):
         if board[4][-1][0] == 2:
             drawBoard.append(board)
     if player == "W":
-        if len(whiteBoard) == 5:
-            return whiteBoard
-        elif len(whiteBoard) > 5:
-            return topFiveCalculate(whiteBoard, 5)
-        elif len(whiteBoard) < 5:
-            if len(whiteBoard) +len(drawBoard) == 5:
-                return whiteBoard + drawBoard
-            elif len(whiteBoard) + len(drawBoard) > 5:
-                return whiteBoard + topFiveCalculate(drawBoard, 5-len(whiteBoard))
-            elif len(whiteBoard) + len(drawBoard) < 5:
-                return whiteBoard + drawBoard + bottomFiveCalculate(blackBoard, 5 - len(whiteBoard)-len(drawBoard))
+        if len(whiteBoard) >= number:
+            return topFiveCalculate(whiteBoard, number)
+        elif len(whiteBoard) < number:
+            if len(whiteBoard) +len(drawBoard) == number:
+                return topFiveCalculate(whiteBoard,len(whiteBoard)) + topFiveCalculate(drawBoard,len(drawBoard))
+            elif len(whiteBoard) + len(drawBoard) > number:
+                return topFiveCalculate(whiteBoard,len(whiteBoard))  + topFiveCalculate(drawBoard, number-len(whiteBoard))
+            elif len(whiteBoard) + len(drawBoard) < number:
+                return topFiveCalculate(whiteBoard,len(whiteBoard)) + topFiveCalculate(drawBoard,len(drawBoard)) + bottomFiveCalculate(blackBoard, number - len(whiteBoard)-len(drawBoard))
     if player == "B":
-        if len(blackBoard) == 5:
-            return blackBoard
-        elif len(blackBoard) > 5:
-            return topFiveCalculate(blackBoard,5)
-        elif len(blackBoard) < 5:
-            if len(blackBoard) +len(drawBoard) == 5:
-                return blackBoard + drawBoard
-            elif len(blackBoard) + len(drawBoard) > 5:
-                return blackBoard + topFiveCalculate(drawBoard, 5-len(blackBoard))
-            elif len(blackBoard) + len(drawBoard) < 5:
-                return blackBoard + drawBoard + bottomFiveCalculate(whiteBoard, 5 - len(blackBoard)-len(drawBoard))
-
+        if len(blackBoard) >= number:
+            return topFiveCalculate(blackBoard,number)
+        elif len(blackBoard) < number:
+            if len(blackBoard) +len(drawBoard) == number:
+                return topFiveCalculate(blackBoard,len(blackBoard)) + topFiveCalculate(drawBoard,len(drawBoard))
+            elif len(blackBoard) + len(drawBoard) > number:
+                return topFiveCalculate(blackBoard,len(blackBoard))+ topFiveCalculate(drawBoard, number-len(blackBoard))
+            elif len(blackBoard) + len(drawBoard) < number:
+                return topFiveCalculate(blackBoard,len(blackBoard)) + topFiveCalculate(drawBoard,len(drawBoard)) + bottomFiveCalculate(whiteBoard, number - len(blackBoard)-len(drawBoard))
 def topFiveCalculate(boards, numb):
     listallscore = []
     list =[]
     for i in range(numb):
-        tempScore = 0
+        tempScore = -100000
         tempID = 0
         for j in range(len(boards)):
             listallscore.append(boards[j][5][-1])
             #if abs(boards[j][5][0]) > tempScore:
-            if boards[j][5][-1] >= tempScore:
+            if boards[j][5][-1] > tempScore:
                 #tempScore = abs(boards[j][5][0])
                 tempScore = boards[j][5][-1]
                 tempID = j
+            if boards[j][5][-1] == tempScore:
+                np.random.seed()
+                X1 = np.random.randint(low=0, high=10, size=(1))
+                if X1[0] > 4:
+                    tempScore = boards[j][5][-1]
+                    tempID = j
         boards, list = sortList(boards, list, tempID)
     return list
 def bottomFiveCalculate(boards,numb):
     listallscore = []
     list = []
     for i in range(numb):
-        tempScore = 0
+        tempScore = 100000
         tempID = 0
         for j in range(len(boards)):
             listallscore.append(boards[j][5][-1])
@@ -307,6 +357,12 @@ def bottomFiveCalculate(boards,numb):
             if boards[j][5][-1] < tempScore:
                 tempScore = boards[j][5][-1]
                 tempID = j
+            if boards[j][5][-1] == tempScore:
+                np.random.seed()
+                X1 = np.random.randint(low=0, high=10, size=(1))
+                if X1[0] > 4:
+                    tempScore = boards[j][5][-1]
+                    tempID = j
         boards, list = sortList(boards,list,tempID)
     return list
 def sortList(boards,list,iD):
@@ -317,8 +373,9 @@ def sortList(boards,list,iD):
             newList.append(boards[i])
     return newList, list
 
-def main():
-    moves = 3
+def main(moves, width):
+    #moves = 5
+    #width= 2
     size = 9
     player = "B"
     timestamp = stime.strftime("%H:%M:%S")
@@ -330,35 +387,55 @@ def main():
     #outcome = result[0]
     #score = result[1]
     bwtable = transform(initBoard, size)
-    outcome, score, percentage = predictSum(m,newArray, bwtable)
+    outcome, score, percentage, losstot,wintot,drawtot, newbit,newbw = predictSum(m,newArray, bwtable)
 
     bwTable = [initBoard,bwtable, ["Initial   "], [player], [[outcome,percentage]], [score]]
-    print(bwTable[1])
+    #print(bwTable[1])
     pTable = printableTable(bwTable, size)
     bwTable.append(pTable)
-    tree = recursive(bwTable, player, size, moves,m)
+    tree = recursive(bwTable, player, size, moves,m,width)
     timestamp3 = stime.strftime("%H:%M:%S")
-    printTree(tree,0)
+
+    printTree(tree,0,width)
     print("Start Time        : %s " % (timestamp))
     print("Init finished Time: %s " % (timestamp2))
     print("Predict done Time : %s " % (timestamp3))
-    printTop(topFive(end_table,"B"))
-    printTop(bottomFiveCalculate(end_table,5))
-def printTree(table, pos):
+    printTop(topFive5(end_table,"B",5),width)
+    printTop(bottomFiveCalculate(end_table,5),5)
+def printTree(table, pos,width):
     printTable(table[6], pos)
     for i in range(len(table[7][0][6])):
-        print(table[7][0][6][i]+table[7][1][6][i]+table[7][2][6][i]+table[7][3][6][i]+table[7][4][6][i])
+        #print(table[7][0][6][i]+table[7][1][6][i]+table[7][2][6][i]+table[7][3][6][i]+table[7][4][6][i]) #if number = 5
+        tempTxt = ""
+        for j in range(width):
+            tempTxt+= table[7][j][6][i]
+        print(tempTxt)
+        results.write(tempTxt+"\n")
     for i in range(len(table[7])):
         if(len(table[7][i])) == 9:
-            printTree(table[7][i],i)
-def printTop(table):
+            printTree(table[7][i],i, width)
+def printTop(table, width):
     for i in range(len(table[0][6])):
-        print(table[0][6][i] + table[1][6][i] + table[2][6][i] + table[3][6][i] + table[4][6][i])
-
+        tempTxt = ""
+        #print(table[0][6][i] + table[1][6][i] + table[2][6][i] + table[3][6][i] + table[4][6][i])
+        for j in range(width):
+            tempTxt += table[j][6][i]
+        print(tempTxt)
+        results.write(tempTxt + "\n")
 
 def go_calc(board):
     board_size = 9
     komi = 7
+    def get_board(game_board):
+        end_board = []
+        for y in range(board_size):
+            for x in range(board_size):
+                pos = game_board.get(x, y)
+                if pos == "w" or pos == "b" or pos == "W" or pos == "B":
+                    end_board.append(pos)
+                else:
+                    end_board.append(".")
+        return end_board
     def play(_turn,game_board):
         x = _turn[1]
         y = _turn[2]
@@ -388,8 +465,11 @@ def go_calc(board):
     # print("Area Score:", area_score, "\n")
     # play(["b", 2,1])
     area_score = game_board.area_score() - komi
+    newbwboard = get_board(game_board)
     # print("Area Score:", area_score, "\n")
-    return area_score
-main()
-
-
+    #print("------------------------------------------")
+    #print(blackBoard)
+    return area_score, newbwboard
+results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + save_file+".txt", 'w')
+main(depth, tree_width)
+results.close()

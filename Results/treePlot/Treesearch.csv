@@ -1,0 +1,20 @@
+Current Prediction is correct with end result
+372, 346, 365, 335, 355, 320, 341, 292, 317, 279
+547, 558, 549, 559, 556, 560, 558, 561, 559, 561
+Current board is correct with end result
+379, 374, 378, 377, 375, 370, 375, 373, 381, 373
+435, 449, 436, 446, 436, 448, 443, 453, 442, 458
+Current board is correct with end result - komi
+328, 318, 325, 316, 328, 314, 324, 322, 330, 324
+520, 529, 518, 524, 516, 521, 521, 526, 525, 530
+White, 406, Black, 562 Total, 968
+
+Current Prediction is correct with end result
+[372, 356, 368, 349, 364, 332, 353, 323, 406, 406]
+[547, 558, 552, 560, 557, 561, 559, 561, 0, 0]
+Current board is correct with end result
+[379, 360, 379, 355, 370, 352, 370, 343, 0, 0]
+[435, 471, 442, 494, 465, 511, 491, 521, 0, 0]
+Current board is correct with end result - komi
+[328, 297, 315, 287, 310, 270, 294, 270, 0, 0]
+[520, 535, 519, 541, 532, 550, 545, 552, 562, 562]
