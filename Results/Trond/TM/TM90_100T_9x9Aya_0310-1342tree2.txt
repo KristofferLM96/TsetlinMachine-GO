@@ -1,6 +1,0 @@
-Moves: 2Moves: 2
-Moves: 2
-Moves: 2
-Time: 13:49:18 Done: 5000 Total: 61489
-Total : 4101/5000 Loss: 1932/2066 Win: 2158/2741 Draw: 11/193Time: 14:54:00 Done: 10000 Total: 61489
-Total : 8173/10000 Loss: 3836/4090 Win: 4317/5550 Draw: 20/360

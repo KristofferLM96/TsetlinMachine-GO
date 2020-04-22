@@ -1,0 +1,99 @@
+Time: 14:16:34 Done: 100 Total: 10000
+train7fixed Moves: 1 Total : 84/100 Loss: 35/44 Win: 49/56 Draw: 0/0
+train7fixed Moves: 2 Total : 85/100 Loss: 37/44 Win: 48/56 Draw: 0/0
+train7fixed Moves: 3 Total : 86/100 Loss: 35/44 Win: 51/56 Draw: 0/0
+train7fixed Moves: 4 Total : 87/100 Loss: 38/44 Win: 49/56 Draw: 0/0
+train7fixed Moves: 5 Total : 87/100 Loss: 34/44 Win: 53/56 Draw: 0/0
+train7fixed Moves: 6 Total : 87/100 Loss: 38/44 Win: 49/56 Draw: 0/0
+train7fixed Moves: 7 Total : 87/100 Loss: 34/44 Win: 53/56 Draw: 0/0
+train7fixed Moves: 8 Total : 0/100 Loss: 0/44 Win: 0/56 Draw: 0/0
+train7fixed Moves: 9 Total : 0/100 Loss: 0/44 Win: 0/56 Draw: 0/0
+Time: 15:09:38 Done: 200 Total: 10000
+train7fixed Moves: 1 Total : 174/200 Loss: 77/91 Win: 97/109 Draw: 0/0
+train7fixed Moves: 2 Total : 171/200 Loss: 80/91 Win: 91/109 Draw: 0/0
+train7fixed Moves: 3 Total : 175/200 Loss: 74/91 Win: 101/109 Draw: 0/0
+train7fixed Moves: 4 Total : 175/200 Loss: 79/91 Win: 96/109 Draw: 0/0
+train7fixed Moves: 5 Total : 175/200 Loss: 73/91 Win: 102/109 Draw: 0/0
+train7fixed Moves: 6 Total : 177/200 Loss: 81/91 Win: 96/109 Draw: 0/0
+train7fixed Moves: 7 Total : 176/200 Loss: 74/91 Win: 102/109 Draw: 0/0
+train7fixed Moves: 8 Total : 0/200 Loss: 0/91 Win: 0/109 Draw: 0/0
+train7fixed Moves: 9 Total : 0/200 Loss: 0/91 Win: 0/109 Draw: 0/0
+Time: 16:03:45 Done: 300 Total: 10000
+train7fixed Moves: 1 Total : 262/300 Loss: 117/137 Win: 145/163 Draw: 0/0
+train7fixed Moves: 2 Total : 260/300 Loss: 122/137 Win: 138/163 Draw: 0/0
+train7fixed Moves: 3 Total : 265/300 Loss: 113/137 Win: 152/163 Draw: 0/0
+train7fixed Moves: 4 Total : 268/300 Loss: 122/137 Win: 146/163 Draw: 0/0
+train7fixed Moves: 5 Total : 267/300 Loss: 112/137 Win: 155/163 Draw: 0/0
+train7fixed Moves: 6 Total : 271/300 Loss: 125/137 Win: 146/163 Draw: 0/0
+train7fixed Moves: 7 Total : 267/300 Loss: 112/137 Win: 155/163 Draw: 0/0
+train7fixed Moves: 8 Total : 0/300 Loss: 0/137 Win: 0/163 Draw: 0/0
+train7fixed Moves: 9 Total : 0/300 Loss: 0/137 Win: 0/163 Draw: 0/0
+Time: 16:54:29 Done: 400 Total: 10000
+train7fixed Moves: 1 Total : 347/400 Loss: 146/173 Win: 201/227 Draw: 0/0
+train7fixed Moves: 2 Total : 343/400 Loss: 153/173 Win: 190/227 Draw: 0/0
+train7fixed Moves: 3 Total : 352/400 Loss: 143/173 Win: 209/227 Draw: 0/0
+train7fixed Moves: 4 Total : 356/400 Loss: 153/173 Win: 203/227 Draw: 0/0
+train7fixed Moves: 5 Total : 356/400 Loss: 142/173 Win: 214/227 Draw: 0/0
+train7fixed Moves: 6 Total : 360/400 Loss: 157/173 Win: 203/227 Draw: 0/0
+train7fixed Moves: 7 Total : 356/400 Loss: 142/173 Win: 214/227 Draw: 0/0
+train7fixed Moves: 8 Total : 0/400 Loss: 0/173 Win: 0/227 Draw: 0/0
+train7fixed Moves: 9 Total : 0/400 Loss: 0/173 Win: 0/227 Draw: 0/0
+Time: 17:47:14 Done: 500 Total: 10000
+train7fixed Moves: 1 Total : 437/500 Loss: 175/208 Win: 262/292 Draw: 0/0
+train7fixed Moves: 2 Total : 433/500 Loss: 184/208 Win: 249/292 Draw: 0/0
+train7fixed Moves: 3 Total : 443/500 Loss: 172/208 Win: 271/292 Draw: 0/0
+train7fixed Moves: 4 Total : 445/500 Loss: 183/208 Win: 262/292 Draw: 0/0
+train7fixed Moves: 5 Total : 446/500 Loss: 170/208 Win: 276/292 Draw: 0/0
+train7fixed Moves: 6 Total : 449/500 Loss: 187/208 Win: 262/292 Draw: 0/0
+train7fixed Moves: 7 Total : 447/500 Loss: 171/208 Win: 276/292 Draw: 0/0
+train7fixed Moves: 8 Total : 0/500 Loss: 0/208 Win: 0/292 Draw: 0/0
+train7fixed Moves: 9 Total : 0/500 Loss: 0/208 Win: 0/292 Draw: 0/0
+Time: 18:39:31 Done: 600 Total: 10000
+train7fixed Moves: 1 Total : 521/600 Loss: 210/248 Win: 311/352 Draw: 0/0
+train7fixed Moves: 2 Total : 514/600 Loss: 221/248 Win: 293/352 Draw: 0/0
+train7fixed Moves: 3 Total : 529/600 Loss: 203/248 Win: 326/352 Draw: 0/0
+train7fixed Moves: 4 Total : 534/600 Loss: 221/248 Win: 313/352 Draw: 0/0
+train7fixed Moves: 5 Total : 531/600 Loss: 203/248 Win: 328/352 Draw: 0/0
+train7fixed Moves: 6 Total : 538/600 Loss: 225/248 Win: 313/352 Draw: 0/0
+train7fixed Moves: 7 Total : 533/600 Loss: 205/248 Win: 328/352 Draw: 0/0
+train7fixed Moves: 8 Total : 0/600 Loss: 0/248 Win: 0/352 Draw: 0/0
+train7fixed Moves: 9 Total : 0/600 Loss: 0/248 Win: 0/352 Draw: 0/0
+Time: 19:32:14 Done: 700 Total: 10000
+train7fixed Moves: 1 Total : 614/700 Loss: 248/289 Win: 366/411 Draw: 0/0
+train7fixed Moves: 2 Total : 607/700 Loss: 260/289 Win: 347/411 Draw: 0/0
+train7fixed Moves: 3 Total : 623/700 Loss: 241/289 Win: 382/411 Draw: 0/0
+train7fixed Moves: 4 Total : 628/700 Loss: 260/289 Win: 368/411 Draw: 0/0
+train7fixed Moves: 5 Total : 624/700 Loss: 240/289 Win: 384/411 Draw: 0/0
+train7fixed Moves: 6 Total : 632/700 Loss: 264/289 Win: 368/411 Draw: 0/0
+train7fixed Moves: 7 Total : 627/700 Loss: 243/289 Win: 384/411 Draw: 0/0
+train7fixed Moves: 8 Total : 0/700 Loss: 0/289 Win: 0/411 Draw: 0/0
+train7fixed Moves: 9 Total : 0/700 Loss: 0/289 Win: 0/411 Draw: 0/0
+Time: 20:23:18 Done: 800 Total: 10000
+train7fixed Moves: 1 Total : 697/800 Loss: 282/330 Win: 415/470 Draw: 0/0
+train7fixed Moves: 2 Total : 689/800 Loss: 296/330 Win: 393/470 Draw: 0/0
+train7fixed Moves: 3 Total : 711/800 Loss: 276/330 Win: 435/470 Draw: 0/0
+train7fixed Moves: 4 Total : 714/800 Loss: 297/330 Win: 417/470 Draw: 0/0
+train7fixed Moves: 5 Total : 715/800 Loss: 275/330 Win: 440/470 Draw: 0/0
+train7fixed Moves: 6 Total : 717/800 Loss: 300/330 Win: 417/470 Draw: 0/0
+train7fixed Moves: 7 Total : 719/800 Loss: 279/330 Win: 440/470 Draw: 0/0
+train7fixed Moves: 8 Total : 0/800 Loss: 0/330 Win: 0/470 Draw: 0/0
+train7fixed Moves: 9 Total : 0/800 Loss: 0/330 Win: 0/470 Draw: 0/0
+Time: 21:15:32 Done: 900 Total: 10000
+train7fixed Moves: 1 Total : 784/900 Loss: 322/377 Win: 462/523 Draw: 0/0
+train7fixed Moves: 2 Total : 775/900 Loss: 337/377 Win: 438/523 Draw: 0/0
+train7fixed Moves: 3 Total : 798/900 Loss: 315/377 Win: 483/523 Draw: 0/0
+train7fixed Moves: 4 Total : 802/900 Loss: 339/377 Win: 463/523 Draw: 0/0
+train7fixed Moves: 5 Total : 803/900 Loss: 314/377 Win: 489/523 Draw: 0/0
+train7fixed Moves: 6 Total : 805/900 Loss: 342/377 Win: 463/523 Draw: 0/0
+train7fixed Moves: 7 Total : 806/900 Loss: 317/377 Win: 489/523 Draw: 0/0
+train7fixed Moves: 8 Total : 0/900 Loss: 0/377 Win: 0/523 Draw: 0/0
+train7fixed Moves: 9 Total : 0/900 Loss: 0/377 Win: 0/523 Draw: 0/0
+train7fixed Moves: 1 Total : 843/968 Loss: 349/406 Win: 494/562 Draw: 0/0
+train7fixed Moves: 2 Total : 833/968 Loss: 365/406 Win: 468/562 Draw: 0/0
+train7fixed Moves: 3 Total : 860/968 Loss: 342/406 Win: 518/562 Draw: 0/0
+train7fixed Moves: 4 Total : 863/968 Loss: 366/406 Win: 497/562 Draw: 0/0
+train7fixed Moves: 5 Total : 865/968 Loss: 340/406 Win: 525/562 Draw: 0/0
+train7fixed Moves: 6 Total : 865/968 Loss: 369/406 Win: 496/562 Draw: 0/0
+train7fixed Moves: 7 Total : 868/968 Loss: 343/406 Win: 525/562 Draw: 0/0
+train7fixed Moves: 8 Total : 0/968 Loss: 0/406 Win: 0/562 Draw: 0/0
+train7fixed Moves: 9 Total : 0/968 Loss: 0/406 Win: 0/562 Draw: 0/0

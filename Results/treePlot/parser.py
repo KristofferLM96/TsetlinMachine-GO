@@ -1,7 +1,7 @@
 import csv
 
 
-file9=open("TM90_100T_9x9Aya_0310-1342short_train7new.csv", "r")
+file9=open("TM90_100T_9x9Aya_0310-1342short_train7fixed.csv", "r")
 pred = open("Prediction"+".csv", 'w')
 end = open("End_Result"+".csv", 'w')
 komi = open("No_Komi"+".csv", 'w')

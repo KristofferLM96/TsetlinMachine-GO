@@ -15,16 +15,16 @@
 \begin{tabular}[c]{@{}l@{}}Outcome\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 0\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 3\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 7\end{tabular}\\ \hline
 \begin{tabular}[c]{@{}l@{}} Correct black\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}520\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}535\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}541\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}550\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}552\end{tabular}\\ \hline
+&\begin{tabular}[c]{@{}l@{}}520\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}532\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}545\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}546\end{tabular}\\ \hline
 \begin{tabular}[c]{@{}l@{}} Correct white\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}328\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}297\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}287\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}270\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}270\end{tabular}\\ \hline
+&\begin{tabular}[c]{@{}l@{}}328\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}296\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}292\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}294\end{tabular}\\ \hline
 \end{tabular}
 \caption{Current board is correct with end result - komi}
 \label{tab:No_Komi}

@@ -1,10 +1,8 @@
 from pyTsetlinMachineParallel.tm import MultiClassTsetlinMachine
 from pyTsetlinMachineParallel.tm import MultiClassConvolutionalTsetlinMachine2D
-import gomill.boards
-import gomill.ascii_boards
 import numpy as np
 import time as stime
-
+import tm_predict as predict
 
 
 machine = "TM"
@@ -24,7 +22,7 @@ numb = "0"
 #numbboard = 566
 #numbboard = 868
 numbboard = 399
-depth = 5   #number of moves
+depth = 9   #number of moves
 tree_width = 2
 save_file = "399-5-2"
 ##################
@@ -90,22 +88,7 @@ def transform(table,size):
         else:
             print("Something went wrong!")
     return bwtable
-def reform(table,size):
-    black = []
-    white = []
-    for i in range(size*size):
-        if table[i] == ".":
-            black.append(0.)
-            white.append(0.)
-        elif table[i] == "b" or table[i] == "B":
-            black.append(1.)
-            white.append(0.)
-        elif table[i] == "w" or table[i] == "W":
-            white.append(1.)
-            black.append(0.)
-        else:
-            print("Something went wrong!!")
-    return black+white
+
 def printableTable(table, size):
     underline =      ["A","B","C","D","E","F","G","H","I              "]
     mellomrom = "  "
@@ -151,7 +134,7 @@ def moveTransform(number,size): #change the moves into letter/number variation
     a = int(number/size)
     b = number%size
     return alphabet[b]+str(size-a)+"        "
-def findEmpty(table, player,size,tm,width):
+def findEmpty(table, player,size,width):
     global counter
     alteredTables = []
     for i in range(len(table[1])):
@@ -163,7 +146,7 @@ def findEmpty(table, player,size,tm,width):
                 tempTable[i] = 1
             else:
                 tempTable[i + 81] = 1
-            outcome, score, go_outcome, lossresult, winresult, drawresult, retTable, retBw = predictSum(tm,tempTable,tempTable2)
+            outcome, score, go_outcome, lossresult, winresult, drawresult, retTable, retBw = predict.predictSum(tempTable2)
             newM = tableCopy(table[2])
             newM.append(moveTransform(i,9))
             newP = tableCopy(table[3])
@@ -186,17 +169,17 @@ def tableCopy(table):
         newTable.append(table[i])
     return newTable
 end_table = []
-def recursive(bwtable,player,size,moves,tm,width):
+def recursive(bwtable,player,size,moves,width):
     if moves == 0: end_table.append(bwtable)
     if moves == 0: return bwtable
     moves -= 1
-    newBoards = findEmpty(bwtable,player,size,tm,width)
+    newBoards = findEmpty(bwtable,player,size,width)
     for i in newBoards:
         if i[3][-1] == "B":
             nplayer = "W"
         else:
             nplayer = "B"
-        i.append(recursive(i, nplayer, size, moves,tm,width))
+        i.append(recursive(i, nplayer, size, moves,width))
     bwtable.append(newBoards)
 
     #bwtable[0] have bitboard
@@ -208,54 +191,6 @@ def recursive(bwtable,player,size,moves,tm,width):
     #bwtable[6] have printableoutput
     #bwtable[7] have list of top5 children nodes (newBoards)
     return bwtable
-def predictSum(tm, boards,boards2):
-    go_correct,nbwtable = go_calc(boards2)
-    bittable = reform(nbwtable,9)
-    newArray = np.array([bittable])
-    result2 = tm.transform(newArray,inverted = False)
-    #print(result2[0][0])
-    loss = weights[0][0]
-    win = weights[1][0]
-    draw = weights[2][0]
-    outcome = -1
-    score = -1
-
-    #print("Predicted Result: ",result[0], " ", result[1])
-    lossresult = weightedCalc(result2[0][0:clauses],loss)
-    winresult = weightedCalc(result2[0][clauses:clauses*2], win)
-    drawresult = weightedCalc(result2[0][clauses*2:clauses*3], draw)
-    #print("Pos Prediction for loss: %s Prediction for win: %s Prediction for draw: %s" % (lossresult[0],winresult[0],drawresult[0]))
-    #print("Neg Prediction for loss: %s Prediction for win: %s Prediction for draw: %s" % (lossresult[1], winresult[1], drawresult[1]))
-    #print("Sum Prediction for loss: %s Prediction for win: %s Prediction for draw: %s" % (lossresult[0] - lossresult[1], winresult[0] - winresult[1], drawresult[0] - drawresult[1]))
-    losstot = lossresult[0] - lossresult[1]
-    wintot = winresult[0] - winresult[1]
-    drawtot = drawresult[0] - drawresult[1]
-    if losstot > wintot and losstot > drawtot:
-        outcome = 0
-        score = losstot
-    elif wintot > losstot and wintot > drawtot:
-        outcome = 1
-        score = wintot
-    else:
-        outcome = 2
-        score = drawtot
-    #outcome = result[0]
-    #score = result[1]
-    #for i in range(len(boards2)):
-    #    if boards2[i] == "B" or boards2[i] == "W":
-    #        if nbwtable[i] == ".":
-    #            score = -30000
-    return outcome, score, go_correct, lossresult, winresult, drawresult,bittable,nbwtable
-def weightedCalc(clause, weight):
-    negs = 0
-    ones = 0
-    for i in range(len(clause)):
-        if clause[i] == 1:
-            if i%2 == 0:
-                ones += clause[i]*weight[i]
-            else:
-                negs += clause[i]*weight[i]
-    return ones,negs
 
 def topFive(boards, player, width):
     number = width #how wide is the search
@@ -380,27 +315,21 @@ def main(moves, width):
     player = "B"
     timestamp = stime.strftime("%H:%M:%S")
     init(dim,machine,loadfile)
+    predict.init(weights, clauses,m)
     timestamp2 = stime.strftime("%H:%M:%S")
     initBoard = X_train[numbboard]
-    newArray = np.array([initBoard])
-    #result = m.predict2(newArray)
-    #outcome = result[0]
-    #score = result[1]
     bwtable = transform(initBoard, size)
-    outcome, score, percentage, losstot,wintot,drawtot, newbit,newbw = predictSum(m,newArray, bwtable)
-
+    outcome, score, percentage, losstot,wintot,drawtot, newbit,newbw = predict.predictSum(bwtable)
     bwTable = [initBoard,bwtable, ["Initial   "], [player], [[outcome,percentage]], [score]]
-    #print(bwTable[1])
     pTable = printableTable(bwTable, size)
     bwTable.append(pTable)
-    tree = recursive(bwTable, player, size, moves,m,width)
+    tree = recursive(bwTable, player, size, moves,width)
     timestamp3 = stime.strftime("%H:%M:%S")
-
     printTree(tree,0,width)
     print("Start Time        : %s " % (timestamp))
     print("Init finished Time: %s " % (timestamp2))
     print("Predict done Time : %s " % (timestamp3))
-    printTop(topFive5(end_table,"B",5),width)
+    printTop(topFive(end_table,"B",5),5)
     printTop(bottomFiveCalculate(end_table,5),5)
 def printTree(table, pos,width):
     printTable(table[6], pos)
@@ -423,53 +352,7 @@ def printTop(table, width):
         print(tempTxt)
         results.write(tempTxt + "\n")
 
-def go_calc(board):
-    board_size = 9
-    komi = 7
-    def get_board(game_board):
-        end_board = []
-        for y in range(board_size):
-            for x in range(board_size):
-                pos = game_board.get(x, y)
-                if pos == "w" or pos == "b" or pos == "W" or pos == "B":
-                    end_board.append(pos)
-                else:
-                    end_board.append(".")
-        return end_board
-    def play(_turn,game_board):
-        x = _turn[1]
-        y = _turn[2]
-        color = _turn[0]
-        game_board.play(x, y, color)
-        return game_board
-    def translate(board):
-        _move_list = []
-        for i in range(len(board)):
-            x = i % 9
-            y = i / 9
-            y = str(int(y))
-            y = y[0]
-            y = int(y)
-            if board[i] == "b" or board[i] == "B":
-                _move = ["b", x, y]
-                _move_list.append(_move)
-            if board[i] == "w" or board[i] == "W":
-                _move = ["w", x, y]
-                _move_list.append(_move)
-        return _move_list
-    game_board = gomill.boards.Board(board_size)
-    movelist = translate(board)
-    for i in movelist:
-        game_board = play(i,game_board)
-    #area_score = game_board.area_score() - komi
-    # print("Area Score:", area_score, "\n")
-    # play(["b", 2,1])
-    area_score = game_board.area_score() - komi
-    newbwboard = get_board(game_board)
-    # print("Area Score:", area_score, "\n")
-    #print("------------------------------------------")
-    #print(blackBoard)
-    return area_score, newbwboard
+
 results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + save_file+".txt", 'w')
 main(depth, tree_width)
 results.close()
