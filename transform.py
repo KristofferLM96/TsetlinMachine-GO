@@ -21,10 +21,11 @@ numb = "0"
 #numbboard = 654
 #numbboard = 566
 #numbboard = 868
-numbboard = 399
-depth = 9   #number of moves
-tree_width = 2
-save_file = "399-5-2"
+numbboard = 91
+depth = 8   #number of moves
+tree_width = 3
+#save_file = "91-5-4"
+save_file = str(numbboard)+"-"+str(depth)+"-"+str(tree_width)
 ##################
 weights = []
 clauses= 0
@@ -329,8 +330,12 @@ def main(moves, width):
     print("Start Time        : %s " % (timestamp))
     print("Init finished Time: %s " % (timestamp2))
     print("Predict done Time : %s " % (timestamp3))
-    printTop(topFive(end_table,"B",5),5)
-    printTop(bottomFiveCalculate(end_table,5),5)
+    ran =5
+    if width == 1:
+        ran = 1
+    printTop(topFive(end_table,"B",ran),ran)
+    printTop(bottomFiveCalculate(end_table,ran),ran)
+    print(predict.getTime())
 def printTree(table, pos,width):
     printTable(table[6], pos)
     for i in range(len(table[7][0][6])):

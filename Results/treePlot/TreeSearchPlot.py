@@ -28,6 +28,7 @@ for FILENAME in sorted(glob.glob(os.path.join(path, '*.csv'))):
         s2 = []
         perc1 = []
         perc2 = []
+        perc3 = []
         c = 0
         counter = 0
         tab = []
@@ -36,6 +37,7 @@ for FILENAME in sorted(glob.glob(os.path.join(path, '*.csv'))):
         labelinput2 = "Correct black"
         names = "White"
         names2 = "Black"
+        names3 = "Total"
         namestab = []
         average = 0
         #print(FILENAME)
@@ -73,9 +75,10 @@ for FILENAME in sorted(glob.glob(os.path.join(path, '*.csv'))):
             for i in range(epoch):
                 perc1.append(int(m[i])/int(White)*100)
                 perc2.append(int(m2[i]) / int(Black) * 100)
+                perc3.append((int(m[i])+int(m2[i]))/(int(White)+int(Black))*100)
 
-        print(perc1)
-        print(perc2)
+        #print(perc1)
+        #print(perc2)
         table = open("output/" + FILENAME[6:-4] + ".txt", 'w')
         table.write(backslash + "FloatBarrier\n")
         table.write(backslash + "begin{figure}[h!]\n")
@@ -133,9 +136,10 @@ for FILENAME in sorted(glob.glob(os.path.join(path, '*.csv'))):
             table.write("&" + backslash + "begin{tabular}[c]{@{}l@{}}" + str(round(m[showT1[4]], 2))+ backslash + "end{tabular}")
             table.write(backslash + backslash+" " + backslash + "hline\n")
 
-
+    x3 = [i for i in range(len(perc3))]
     x2 = [i for i in range(len(perc2))]
     x = [i for i in range(len(perc1))]
+    pyplot.plot(x3, perc3, lw=2, label=f"{names3}")
     pyplot.plot(x2, perc2, lw=2, label=f"{names2}")
     pyplot.plot(x, perc1, lw=2, label=f"{names}")
     table.write(backslash + "end{tabular}\n")

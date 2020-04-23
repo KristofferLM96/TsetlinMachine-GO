@@ -1,0 +1,455 @@
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 1     
+B Move: Initial    Score: 3539 (1)(9)       
+9  b  .  b  b  b  b  w  .  b                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  .                
+4  b  b  w  b  b  w  b  b  b                
+3  b  b  w  .  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 1     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+9  b  .  b  b  b  b  w  .  b                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  .                
+4  b  b  .  b  b  w  b  b  b                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 1     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+9  b  .  b  b  b  b  w  .  b                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  .                
+4  b  b  .  b  b  w  b  b  b                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 1     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+9  b  .  b  b  b  b  w  .  b                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  .  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 1     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+9  b  .  b  b  b  b  w  .  b                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  .  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 1     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+9  b  .  b  b  b  b  w  .  b                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  b  .  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 1     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+9  b  .  b  b  b  b  w  .  b                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  b  .  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  b  .  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  b  .  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 1     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  b  .  b                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 1     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  b  .  b                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+W Move: h4         Score: 3908 (0)(4)       
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  w  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+W Move: h4         Score: 3908 (0)(4)       
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  w  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+W Move: h4         Score: 3908 (0)(4)       
+B Move: g7         Score: 1947 (0)(5)       
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  b  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  w  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+W Move: h4         Score: 3908 (0)(4)       
+B Move: g7         Score: 1947 (0)(5)       
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  b  b  b                
+6  .  b  b  b  w  w  .  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  w  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+W Move: h4         Score: 3908 (0)(4)       
+B Move: g7         Score: 1947 (0)(5)       
+W Move: g6         Score: 3807 (0)(-2)      
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  .  .                
+6  .  b  b  b  w  w  w  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  w  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+W Move: h4         Score: 3908 (0)(4)       
+B Move: g7         Score: 1947 (0)(5)       
+W Move: g6         Score: 3807 (0)(-2)      
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  .  .                
+6  .  b  b  b  w  w  w  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  w  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+W Move: h4         Score: 3908 (0)(4)       
+B Move: g7         Score: 1947 (0)(5)       
+W Move: g6         Score: 3807 (0)(-2)      
+B Move: g7         Score: 1846 (0)(2)       
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  b  .  .                
+6  .  b  b  b  w  w  w  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  w  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+W Move: h4         Score: 3908 (0)(4)       
+B Move: g7         Score: 1947 (0)(5)       
+W Move: g6         Score: 3807 (0)(-2)      
+B Move: g7         Score: 1846 (0)(2)       
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  b  .  .                
+6  .  b  b  b  w  w  w  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  w  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+W Move: h4         Score: 3908 (0)(4)       
+B Move: g7         Score: 1947 (0)(5)       
+W Move: g6         Score: 3807 (0)(-2)      
+B Move: g7         Score: 1846 (0)(2)       
+W Move: h7         Score: 2819 (0)(-2)      
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  w  .                
+6  .  b  b  b  w  w  w  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  w  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+W Move: h4         Score: 3908 (0)(4)       
+B Move: g7         Score: 1947 (0)(5)       
+W Move: g6         Score: 3807 (0)(-2)      
+B Move: g7         Score: 1846 (0)(2)       
+W Move: h7         Score: 2819 (0)(-2)      
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  w  .                
+6  .  b  b  b  w  w  w  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  w  .                
+3  b  b  .  b  b  w  w  w  w                
+2  .  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+W Move: h4         Score: 3908 (0)(4)       
+B Move: g7         Score: 1947 (0)(5)       
+W Move: g6         Score: 3807 (0)(-2)      
+B Move: g7         Score: 1846 (0)(2)       
+W Move: h7         Score: 2819 (0)(-2)      
+B Move: a2         Score: 1996 (0)(-2)      
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  w  .                
+6  .  b  b  b  w  w  w  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  w  .                
+3  b  b  .  b  b  w  w  w  w                
+2  b  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+W Move: h4         Score: 3908 (0)(4)       
+B Move: g7         Score: 1947 (0)(5)       
+W Move: g6         Score: 3807 (0)(-2)      
+B Move: g7         Score: 1846 (0)(2)       
+W Move: h7         Score: 2819 (0)(-2)      
+B Move: a2         Score: 1996 (0)(-2)      
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  w  .                
+6  .  b  b  b  w  w  w  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  w  .                
+3  b  b  .  b  b  w  w  w  w                
+2  b  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                
+-------------------------------------------
+Correct outcome: 0 Predicted outcome: 0     
+B Move: Initial    Score: 3539 (1)(9)       
+B Move: d3         Score: 5433 (1)(14)      
+W Move: i5         Score: 1348 (1)(7)       
+B Move: g4         Score: 3296 (1)(11)      
+W Move: h9         Score: 1486 (0)(8)       
+B Move: i4         Score: 1743 (1)(9)       
+W Move: h4         Score: 3908 (0)(4)       
+B Move: g7         Score: 1947 (0)(5)       
+W Move: g6         Score: 3807 (0)(-2)      
+B Move: g7         Score: 1846 (0)(2)       
+W Move: h7         Score: 2819 (0)(-2)      
+B Move: a2         Score: 1996 (0)(-2)      
+9  b  .  b  b  b  b  w  w  .                
+8  .  b  b  b  w  w  w  w  w                
+7  b  b  b  w  w  w  .  w  .                
+6  .  b  b  b  w  w  w  w  w                
+5  b  .  b  b  b  w  w  w  w                
+4  b  b  .  b  b  w  .  w  .                
+3  b  b  .  b  b  w  w  w  w                
+2  b  b  b  b  b  b  w  w  .                
+1  b  .  b  b  b  w  w  .  w                
+   A  B  C  D  E  F  G  H  I                

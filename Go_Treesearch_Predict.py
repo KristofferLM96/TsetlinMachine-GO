@@ -23,7 +23,7 @@ inndata = "Draw"
 #######################
 depth = 7   #number of moves 5,7,9
 tree_width = 2
-save_name = "train7fixed"
+save_name = "train7"
 #######################
 global X_train,Y_train,X_test,Y_test,m, loadedstate
 def init(dim, machine, loadfile, numb):
@@ -111,7 +111,7 @@ def moveTransform(number,size): #change the moves into letter/number variation
     a = int(number/size)
     b = number%size
     return alphabet[b]+str(size-a)+"        "
-def findEmpty(table, player,size, width):
+def findEmpty(table, player,size, width, initResult):
     alteredTables = []
     for i in range(len(table[1])):
         if table[1][i] == ".":
@@ -122,7 +122,7 @@ def findEmpty(table, player,size, width):
                 tempTable[i] = 1
             else:
                 tempTable[i + 81] = 1
-            outcome, score, go_outcome, lossresult, winresult, drawresult, retTable, retBw = predict.predictSum(tempTable2)
+            outcome, score, go_outcome, lossresult, winresult, drawresult, retTable, retBw = predict.predictSum(tempTable2, initResult)
             #newM = tableCopy(table[2])
             newM = go_outcome
             #newP = tableCopy(table[3])
@@ -150,7 +150,7 @@ end_table6 = []
 end_table7 = []
 end_table8 = []
 end_table9 = []
-def recursive(bwtable,player,size,moves,tot, width):
+def recursive(bwtable,player,size,moves,tot, width, initResult):
     if tot == 9:
         if moves == 0: end_table9.append(bwtable)
         if moves == 1: end_table8.append(bwtable)
@@ -169,7 +169,7 @@ def recursive(bwtable,player,size,moves,tot, width):
         if moves == 4: end_table3.append(bwtable)
         if moves == 5: end_table2.append(bwtable)
         if moves == 6: end_table1.append(bwtable)
-    if tot == 7:
+    if tot == 5:
         if moves == 0: end_table5.append(bwtable)
         if moves == 1: end_table4.append(bwtable)
         if moves == 2: end_table3.append(bwtable)
@@ -178,13 +178,13 @@ def recursive(bwtable,player,size,moves,tot, width):
         if moves == 0: return bwtable
     if moves == 0: return bwtable
     moves -= 1
-    newBoards = findEmpty(bwtable,player,size, width)
+    newBoards = findEmpty(bwtable,player,size, width, initResult)
     for i in newBoards:
         if i[3][-1] == "B":
             nplayer = "W"
         else:
             nplayer = "B"
-        i.append(recursive(i, nplayer, size, moves,tot, width))
+        i.append(recursive(i, nplayer, size, moves,tot, width, initResult))
     bwtable.append(newBoards)
 
     #bwtable[0] have bitboard
@@ -369,31 +369,31 @@ def main(sort,moves,width):
             table7 = []
             table8 = []
             table9 = []
-            outcome, score, percentage, losstot,wintot,drawtot, newbit,newbw = predict.predictSum(bwtable)
+            outcome, score, percentage, losstot,wintot,drawtot, newbit,newbw = predict.predictSum(bwtable, initResult)
             bwTable = [initBoard,bwtable, percentage, player, outcome, score]
-            tree = recursive(bwTable, player, size, moves,moves, width)
-            fivetable1 = topFive(end_table1,"B", 10)
+            tree = recursive(bwTable, player, size, moves,moves, width, initResult)
+            fivetable1 = topFive(end_table1,"B", width)
             table1 = fivetable1[0]
-            fivetable2 = topFive(end_table2, "B", 10)
+            fivetable2 = topFive(end_table2, "W", width)
             table2 = fivetable2[0]
-            fivetable3 = topFive(end_table3, "B", 10)
+            fivetable3 = topFive(end_table3, "B", width)
             table3 = fivetable3[0]
-            fivetable4 = topFive(end_table4, "B", 10)
+            fivetable4 = topFive(end_table4, "W", width)
             table4 = fivetable4[0]
-            fivetable5 = topFive(end_table5, "B", 10)
+            fivetable5 = topFive(end_table5, "B", width)
             table5 = fivetable5[0]
             if moves > 5:
-                fivetable6 = topFive(end_table6, "B", 10)
+                fivetable6 = topFive(end_table6, "W", width)
                 table6 = fivetable6[0]
-                fivetable7 = topFive(end_table7, "B", 10)
+                fivetable7 = topFive(end_table7, "B", width)
                 table7 = fivetable7[0]
             else:
                 table6 = [0, 0, 0, 0, 0, 0, 0, 0]
                 table7 = [0, 0, 0, 0, 0, 0, 0, 0]
             if moves >7:
-                fivetable8 = topFive(end_table8, "B", 10)
+                fivetable8 = topFive(end_table8, "W", width)
                 table8 = fivetable8[0]
-                fivetable9 = topFive(end_table9, "B", 10)
+                fivetable9 = topFive(end_table9, "B", width)
                 table9 = fivetable9[0]
             else:
                 table8 = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -585,7 +585,33 @@ def main(sort,moves,width):
     print("\n")
     results.close()
 
+
 main(save_name,depth,tree_width)
+resul = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + save_name+ "clauses"+".csv", 'a')
+claus,losses,wins,draws = predict.getClause()
+resul.write("loss,win,draw - pos_true, pos_false, neg_true, neg_false")
+for i in range(12):
+    for j in range(1000):
+        resul.write("%s,"%(claus[i][j]))
+    resul.write("\n")
+resul.write("Weights:")
+for j in range(1000):
+    resul.write("%s,"%(losses[j]))
+resul.write("\n")
+for j in range(1000):
+    resul.write("%s,"%(wins[j]))
+resul.write("\n")
+for j in range(1000):
+    resul.write("%s,"%(draws[j]))
+resul.write("\n")
+resul.close()
+#loss pos
+#win pos
+#draw pos
+#loss neg
+#win neg
+#draw neg
+
 def tempMain():
     init(dim, machine, loadfile, "0")
     results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + "notworking"+".txt", 'a')

@@ -15,16 +15,16 @@
 \begin{tabular}[c]{@{}l@{}}Outcome\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 0\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 1\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 3\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 5\end{tabular}&\begin{tabular}[c]{@{}l@{}} B Move 7\end{tabular}\\ \hline
 \begin{tabular}[c]{@{}l@{}} Correct black\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}435\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}435\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}468\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}497\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}496\end{tabular}\\ \hline
+&\begin{tabular}[c]{@{}l@{}}472\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}494\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}510\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}528\end{tabular}\\ \hline
 \begin{tabular}[c]{@{}l@{}} Correct white\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}379\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}379\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}365\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}366\end{tabular}
-&\begin{tabular}[c]{@{}l@{}}369\end{tabular}\\ \hline
+&\begin{tabular}[c]{@{}l@{}}359\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}352\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}351\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}346\end{tabular}\\ \hline
 \end{tabular}
 \caption{Current board is correct with end result}
 \label{tab:End_Result}

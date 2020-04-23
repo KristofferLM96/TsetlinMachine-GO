@@ -1,9 +1,15 @@
 import gomill.boards
 import gomill.ascii_boards
+import time as stime
+time = 0
+def getTime():
+    return time
 def go_calc(board):
+    global time, game_board
+    seconds = int(round(stime.time()))
     board_size = 9
     komi = 7
-    def get_board(game_board):
+    def get_board():
         end_board = []
         for y in range(board_size):
             for x in range(board_size):
@@ -13,13 +19,13 @@ def go_calc(board):
                 else:
                     end_board.append(".")
         return end_board
-    def play(_turn,game_board):
+    def play(_turn):
         x = _turn[1]
         y = _turn[2]
         color = _turn[0]
         game_board.play(x, y, color)
-        return game_board
-    def translate(board):
+        #return game_board
+    def translate():
         _move_list = []
         for i in range(len(board)):
             x = i % 9
@@ -35,9 +41,11 @@ def go_calc(board):
                 _move_list.append(_move)
         return _move_list
     game_board = gomill.boards.Board(board_size)
-    movelist = translate(board)
+    movelist = translate()
     for i in movelist:
-        game_board = play(i,game_board)
+        play(i)
     area_score = game_board.area_score() - komi
-    newbwboard = get_board(game_board)
+    newbwboard = get_board()
+    seconds2 = int(round(stime.time()))
+    time += seconds2-seconds
     return area_score, newbwboard

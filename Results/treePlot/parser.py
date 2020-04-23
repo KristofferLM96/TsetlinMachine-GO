@@ -77,7 +77,7 @@ pred.write("%s"%(pred0[0]))
 end.write("%s"%(end0[0]))
 komi.write("%s"%(komi0[0]))
 for i in range(len(pred0)-1):
-    i+1
+    i=i+1
     pred.write(",%s"%(pred0[i]))
     end.write(",%s"%(end0[i]))
     komi.write(",%s"%(komi0[i]))
@@ -88,7 +88,7 @@ pred.write("%s"%(pred1[0]))
 end.write("%s"%(end1[0]))
 komi.write("%s"%(komi1[0]))
 for i in range(len(pred1)-1):
-    i+1
+    i=i+1
     pred.write(",%s"%(pred1[i]))
     end.write(",%s"%(end1[i]))
     komi.write(",%s"%(komi1[i]))
