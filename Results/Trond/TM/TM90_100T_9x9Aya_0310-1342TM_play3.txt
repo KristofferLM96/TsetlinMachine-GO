@@ -1,0 +1,926 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Turn: 0 Predicted outcome: 1     Turn: 0 Predicted outcome: 1     Turn: 0 Predicted outcome: 1     Turn: 0 Predicted outcome: 1     Turn: 0 Predicted outcome: 1     
+W Move: e1         Score: 2676 (1)(4)       W Move: e1         Score: 2676 (1)(4)       W Move: e1         Score: 2676 (1)(4)       W Move: e1         Score: 2676 (1)(4)       W Move: e1         Score: 2676 (1)(4)       
+B Move: c1         Score: 5284 (1)(5)       B Move: c1         Score: 5284 (1)(5)       B Move: a7         Score: 4268 (1)(5)       B Move: a7         Score: 4268 (1)(5)       B Move: a1         Score: 3475 (1)(4)       
+W Move: g4         Score: 1836 (1)(0)       W Move: i1         Score: 3340 (1)(4)       W Move: g4         Score: 201 (1)(0)        W Move: i5         Score: 3015 (1)(0)       W Move: i5         Score: 2222 (1)(-1)      
+B Move: h4         Score: 6116 (1)(5)       B Move: h1         Score: 5284 (1)(9)       B Move: h4         Score: 5100 (1)(5)       B Move: c1         Score: 5000 (1)(1)       B Move: c1         Score: 4830 (1)(0)       
+9  .  b  b  .  b  .  .  w  .                9  .  b  b  .  b  .  .  w  .                9  .  b  b  .  b  .  .  w  .                9  .  b  b  .  b  .  .  w  .                9  .  b  b  .  b  .  .  w  .                
+8  b  b  b  b  w  b  b  w  w                8  b  b  b  b  w  b  b  w  w                8  b  b  b  b  w  b  b  w  w                8  b  b  b  b  w  b  b  w  w                8  b  b  b  b  w  b  b  w  w                
+7  .  .  w  w  w  w  b  w  w                7  .  .  w  w  w  w  b  w  w                7  b  .  w  w  w  w  b  w  w                7  b  .  w  w  w  w  b  w  w                7  .  .  w  w  w  w  b  w  w                
+6  b  .  w  .  w  b  .  b  b                6  b  .  w  .  w  b  .  b  b                6  b  .  w  .  w  b  .  b  b                6  b  .  w  .  w  b  .  b  b                6  b  .  w  .  w  b  .  b  b                
+5  b  w  .  w  w  b  b  .  .                5  b  w  .  w  w  b  b  .  .                5  b  w  .  w  w  b  b  .  .                5  b  w  .  w  w  b  b  .  w                5  b  w  .  w  w  b  b  .  w                
+4  w  w  w  .  w  b  .  b  b                4  w  w  w  .  w  b  .  .  b                4  w  w  w  .  w  b  .  b  b                4  w  w  w  .  w  b  .  .  b                4  w  w  w  .  w  b  .  .  b                
+3  .  b  b  w  w  w  b  b  .                3  .  b  b  w  w  w  b  b  .                3  .  b  b  w  w  w  b  b  .                3  .  b  b  w  w  w  b  b  .                3  .  b  b  w  w  w  b  b  .                
+2  b  .  b  w  .  b  b  w  b                2  b  .  b  w  .  b  b  .  b                2  b  .  b  w  .  b  b  w  b                2  b  .  b  w  .  b  b  w  b                2  b  .  b  w  .  b  b  w  b                
+1  .  b  b  w  w  b  b  .  .                1  .  b  b  w  w  b  b  b  .                1  .  b  .  w  w  b  b  .  .                1  .  b  b  w  w  b  b  .  .                1  b  b  b  w  w  b  b  .  .                
+   A  B  C  D  E  F  G  H  I                   A  B  C  D  E  F  G  H  I                   A  B  C  D  E  F  G  H  I                   A  B  C  D  E  F  G  H  I                   A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 0 Predicted outcome: 0     
+                                            B Move: c1         Score: 12012 (0)(74)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  .  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  .  .  .  .  .                
+                                            6  .  .  .  .  .  .  .  .  .                
+                                            5  .  .  .  .  .  .  .  .  .                
+                                            4  .  .  .  .  .  .  .  .  .                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  .  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 1 Predicted outcome: 0     
+                                            W Move: d5         Score: 36987 (0)(-7)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  .  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  .  .  .  .  .                
+                                            6  .  .  .  .  .  .  .  .  .                
+                                            5  .  .  .  w  .  .  .  .  .                
+                                            4  .  .  .  .  .  .  .  .  .                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  .  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 2 Predicted outcome: 0     
+                                            B Move: d6         Score: 11456 (0)(-6)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  .  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  .  .  .  .  .                
+                                            6  .  .  .  b  .  .  .  .  .                
+                                            5  .  .  .  w  .  .  .  .  .                
+                                            4  .  .  .  .  .  .  .  .  .                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  .  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 3 Predicted outcome: 0     
+                                            W Move: e7         Score: 32441 (0)(-7)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  .  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  .  .  .  .                
+                                            6  .  .  .  b  .  .  .  .  .                
+                                            5  .  .  .  w  .  .  .  .  .                
+                                            4  .  .  .  .  .  .  .  .  .                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  .  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 4 Predicted outcome: 0     
+                                            B Move: i4         Score: 9402 (0)(-6)      
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  .  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  .  .  .  .                
+                                            6  .  .  .  b  .  .  .  .  .                
+                                            5  .  .  .  w  .  .  .  .  .                
+                                            4  .  .  .  .  .  .  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  .  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 5 Predicted outcome: 0     
+                                            W Move: e4         Score: 26395 (0)(-7)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  .  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  .  .  .  .                
+                                            6  .  .  .  b  .  .  .  .  .                
+                                            5  .  .  .  w  .  .  .  .  .                
+                                            4  .  .  .  .  w  .  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  .  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 6 Predicted outcome: 0     
+                                            B Move: b8         Score: 8292 (0)(-6)      
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  .  .  .  .                
+                                            6  .  .  .  b  .  .  .  .  .                
+                                            5  .  .  .  w  .  .  .  .  .                
+                                            4  .  .  .  .  w  .  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  .  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 7 Predicted outcome: 0     
+                                            W Move: f7         Score: 23436 (0)(-7)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  .  .  b  .  .  .  .  .                
+                                            5  .  .  .  w  .  .  .  .  .                
+                                            4  .  .  .  .  w  .  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  .  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 8 Predicted outcome: 0     
+                                            B Move: f4         Score: 6074 (0)(-6)      
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  .  .  b  .  .  .  .  .                
+                                            5  .  .  .  w  .  .  .  .  .                
+                                            4  .  .  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  .  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 9 Predicted outcome: 0     
+                                            W Move: e6         Score: 21259 (0)(-7)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  .  .  b  w  .  .  .  .                
+                                            5  .  .  .  w  .  .  .  .  .                
+                                            4  .  .  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  .  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 10 Predicted outcome: 0     
+                                            B Move: f5         Score: 7805 (0)(-6)      
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  .  .  b  w  .  .  .  .                
+                                            5  .  .  .  w  .  b  .  .  .                
+                                            4  .  .  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  .  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 11 Predicted outcome: 0     
+                                            W Move: f1         Score: 20169 (0)(-7)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  .  .  b  w  .  .  .  .                
+                                            5  .  .  .  w  .  b  .  .  .                
+                                            4  .  .  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  w  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 12 Predicted outcome: 0     
+                                            B Move: g5         Score: 9471 (0)(-6)      
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  .  .  b  w  .  .  .  .                
+                                            5  .  .  .  w  .  b  b  .  .                
+                                            4  .  .  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  w  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 13 Predicted outcome: 0     
+                                            W Move: b6         Score: 22008 (0)(-7)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  .  b  w  .  .  .  .                
+                                            5  .  .  .  w  .  b  b  .  .                
+                                            4  .  .  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  w  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 14 Predicted outcome: 0     
+                                            B Move: b4         Score: 11380 (0)(-6)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  .  b  w  .  .  .  .                
+                                            5  .  .  .  w  .  b  b  .  .                
+                                            4  .  b  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  w  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 15 Predicted outcome: 0     
+                                            W Move: c5         Score: 20076 (0)(-7)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  .  b  w  .  .  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  w  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 16 Predicted outcome: 0     
+                                            B Move: c6         Score: 10103 (0)(-6)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  b  b  w  .  .  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  w  .  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 17 Predicted outcome: 0     
+                                            W Move: g1         Score: 17102 (0)(-7)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  b  b  w  .  .  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  .                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 18 Predicted outcome: 0     
+                                            B Move: i3         Score: 9054 (0)(-6)      
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  b  b  w  .  .  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  .  .  .  b                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 19 Predicted outcome: 0     
+                                            W Move: f3         Score: 17403 (0)(-7)     
+                                            9  .  .  .  .  .  .  .  .  .                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  b  b  w  .  .  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  .  b                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 20 Predicted outcome: 0     
+                                            B Move: i9         Score: 9436 (0)(-6)      
+                                            9  .  .  .  .  .  .  .  .  b                
+                                            8  .  b  .  .  .  .  .  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  b  b  w  .  .  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  .  b                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 21 Predicted outcome: 0     
+                                            W Move: g8         Score: 13358 (0)(-7)     
+                                            9  .  .  .  .  .  .  .  .  b                
+                                            8  .  b  .  .  .  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  b  b  w  .  .  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  .  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  .  b                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 22 Predicted outcome: 0     
+                                            B Move: d4         Score: 7898 (0)(-6)      
+                                            9  .  .  .  .  .  .  .  .  b                
+                                            8  .  b  .  .  .  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  b  b  w  .  .  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  .  b                
+                                            2  .  .  .  .  .  .  .  .  .                
+                                            1  .  .  b  .  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 23 Predicted outcome: 0     
+                                            W Move: e2         Score: 11967 (0)(-7)     
+                                            9  .  .  .  .  .  .  .  .  b                
+                                            8  .  b  .  .  .  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  b  b  w  .  .  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  .  b                
+                                            2  .  .  .  .  w  .  .  .  .                
+                                            1  .  .  b  .  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 24 Predicted outcome: 0     
+                                            B Move: g6         Score: 6519 (0)(-6)      
+                                            9  .  .  .  .  .  .  .  .  b                
+                                            8  .  b  .  .  .  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  b  b  w  .  b  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  .  b                
+                                            2  .  .  .  .  w  .  .  .  .                
+                                            1  .  .  b  .  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 25 Predicted outcome: 0     
+                                            W Move: h3         Score: 9829 (0)(-7)      
+                                            9  .  .  .  .  .  .  .  .  b                
+                                            8  .  b  .  .  .  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  b  b  w  .  b  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  w  b                
+                                            2  .  .  .  .  w  .  .  .  .                
+                                            1  .  .  b  .  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 26 Predicted outcome: 0     
+                                            B Move: f8         Score: 5735 (0)(-6)      
+                                            9  .  .  .  .  .  .  .  .  b                
+                                            8  .  b  .  .  .  b  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  .                
+                                            6  .  w  b  b  w  .  b  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  w  b                
+                                            2  .  .  .  .  w  .  .  .  .                
+                                            1  .  .  b  .  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 27 Predicted outcome: 0     
+                                            W Move: i7         Score: 8963 (0)(-7)      
+                                            9  .  .  .  .  .  .  .  .  b                
+                                            8  .  b  .  .  .  b  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  .  b  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  w  b                
+                                            2  .  .  .  .  w  .  .  .  .                
+                                            1  .  .  b  .  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 28 Predicted outcome: 0     
+                                            B Move: d2         Score: 3822 (0)(-6)      
+                                            9  .  .  .  .  .  .  .  .  b                
+                                            8  .  b  .  .  .  b  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  .  b  .  .                
+                                            5  .  .  w  w  .  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  .  b  .  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 29 Predicted outcome: 0     
+                                            W Move: e5         Score: 6196 (0)(-7)      
+                                            9  .  .  .  .  .  .  .  .  b                
+                                            8  .  b  .  .  .  b  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  .  b  .  .                
+                                            5  .  .  w  w  w  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  .  b  .  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 30 Predicted outcome: 0     
+                                            B Move: d1         Score: 1826 (0)(-6)      
+                                            9  .  .  .  .  .  .  .  .  b                
+                                            8  .  b  .  .  .  b  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  .  b  .  .                
+                                            5  .  .  w  w  w  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  .  b  b  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 31 Predicted outcome: 0     
+                                            W Move: g9         Score: 3915 (0)(-7)      
+                                            9  .  .  .  .  .  .  w  .  b                
+                                            8  .  b  .  .  .  b  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  .  b  .  .                
+                                            5  .  .  w  w  w  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  .  b  b  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 32 Predicted outcome: 0     
+                                            B Move: b1         Score: 1200 (0)(-6)      
+                                            9  .  .  .  .  .  .  w  .  b                
+                                            8  .  b  .  .  .  b  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  .  b  .  .                
+                                            5  .  .  w  w  w  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  .  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 33 Predicted outcome: 0     
+                                            W Move: e1         Score: 3075 (0)(-7)      
+                                            9  .  .  .  .  .  .  w  .  b                
+                                            8  .  b  .  .  .  b  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  .  b  .  .                
+                                            5  .  .  w  w  w  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  .  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 34 Predicted outcome: 0     
+                                            B Move: g3         Score: 870 (0)(-6)       
+                                            9  .  .  .  .  .  .  w  .  b                
+                                            8  .  b  .  .  .  b  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  .  b  .  .                
+                                            5  .  .  w  w  w  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 35 Predicted outcome: 0     
+                                            W Move: f9         Score: 2393 (0)(-7)      
+                                            9  .  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  .  .  b  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  .  b  .  .                
+                                            5  .  .  w  w  w  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 36 Predicted outcome: 0     
+                                            B Move: f6         Score: 337 (0)(-6)       
+                                            9  .  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  .  .  b  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  b  b  .  .                
+                                            5  .  .  w  w  w  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 37 Predicted outcome: 0     
+                                            W Move: e8         Score: 2975 (0)(-9)      
+                                            9  .  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  .  w  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  b  b  .  .                
+                                            5  .  .  w  w  w  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  .  .  .  .  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 38 Predicted outcome: 0     
+                                            B Move: a3         Score: -37 (0)(-8)       
+                                            9  .  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  .  w  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  b  b  .  .                
+                                            5  .  .  w  w  w  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  b  .  .  .  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 39 Predicted outcome: 0     
+                                            W Move: i6         Score: 2853 (0)(-9)      
+                                            9  .  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  .  w  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  b  b  .  w                
+                                            5  .  .  w  w  w  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  b  .  .  .  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 40 Predicted outcome: 1     
+                                            B Move: a9         Score: 1265 (1)(-8)      
+                                            9  b  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  .  w  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  b  b  .  w                
+                                            5  .  .  w  w  w  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  b  .  .  .  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 41 Predicted outcome: 0     
+                                            W Move: d8         Score: 3222 (0)(-9)      
+                                            9  b  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  b  b  .  w                
+                                            5  .  .  w  w  w  b  b  .  .                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  b  .  .  .  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 42 Predicted outcome: 1     
+                                            B Move: i5         Score: 4793 (1)(-8)      
+                                            9  b  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  b  b  .  w                
+                                            5  .  .  w  w  w  b  b  .  b                
+                                            4  .  b  .  b  w  b  .  .  b                
+                                            3  b  .  .  .  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 43 Predicted outcome: 0     
+                                            W Move: c4         Score: 4456 (0)(-9)      
+                                            9  b  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  b  b  .  w                
+                                            5  .  .  w  w  w  b  b  .  b                
+                                            4  .  b  w  b  w  b  .  .  b                
+                                            3  b  .  .  .  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 44 Predicted outcome: 1     
+                                            B Move: h4         Score: 3057 (1)(-7)      
+                                            9  b  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  b  b  .  w                
+                                            5  .  .  w  w  w  b  b  .  b                
+                                            4  .  b  w  b  w  b  .  b  b                
+                                            3  b  .  .  .  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 45 Predicted outcome: 0     
+                                            W Move: d3         Score: 5447 (0)(-11)     
+                                            9  b  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  .  .  w  w  .  .  w                
+                                            6  .  w  b  b  w  b  b  .  w                
+                                            5  .  .  w  w  w  b  b  .  b                
+                                            4  .  b  w  .  w  b  .  b  b                
+                                            3  b  .  .  w  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 46 Predicted outcome: 0     
+                                            B Move: d7         Score: 3154 (0)(-10)     
+                                            9  b  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  .  b  w  w  .  .  w                
+                                            6  .  w  b  b  w  b  b  .  w                
+                                            5  .  .  w  w  w  b  b  .  b                
+                                            4  .  b  w  .  w  b  .  b  b                
+                                            3  b  .  .  w  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 47 Predicted outcome: 0     
+                                            W Move: c7         Score: 10999 (0)(-17)    
+                                            9  b  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  w  .  w  w  .  .  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  .  .  w  w  w  b  b  .  b                
+                                            4  .  b  w  .  w  b  .  b  b                
+                                            3  b  .  .  w  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 48 Predicted outcome: 0     
+                                            B Move: b5         Score: 8635 (0)(-16)     
+                                            9  b  .  .  .  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  w  .  w  w  .  .  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  .  b  w  w  w  b  b  .  b                
+                                            4  .  b  w  .  w  b  .  b  b                
+                                            3  b  .  .  w  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 49 Predicted outcome: 0     
+                                            W Move: d9         Score: 9682 (0)(-18)     
+                                            9  b  .  .  w  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  w  .  w  w  .  .  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  .  b  w  w  w  b  b  .  b                
+                                            4  .  b  w  .  w  b  .  b  b                
+                                            3  b  .  .  w  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 50 Predicted outcome: 0     
+                                            B Move: c3         Score: 7311 (0)(-12)     
+                                            9  b  .  .  w  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  w  .  w  w  .  .  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  .  b  w  w  w  b  b  .  b                
+                                            4  .  b  w  .  w  b  .  b  b                
+                                            3  b  .  b  w  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 51 Predicted outcome: 0     
+                                            W Move: a5         Score: 8019 (0)(-13)     
+                                            9  b  .  .  w  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  w  .  w  w  .  .  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  b  w  w  w  b  b  .  b                
+                                            4  .  b  w  .  w  b  .  b  b                
+                                            3  b  .  b  w  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 52 Predicted outcome: 0     
+                                            B Move: h7         Score: 5633 (0)(-12)     
+                                            9  b  .  .  w  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  b  w  w  w  b  b  .  b                
+                                            4  .  b  w  .  w  b  .  b  b                
+                                            3  b  .  b  w  .  w  b  w  b                
+                                            2  .  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 53 Predicted outcome: 0     
+                                            W Move: a2         Score: 6678 (0)(-18)     
+                                            9  b  .  .  w  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  b  w  w  w  b  b  .  b                
+                                            4  .  b  w  .  w  b  .  b  b                
+                                            3  b  .  b  w  .  w  b  w  b                
+                                            2  w  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 54 Predicted outcome: 0     
+                                            B Move: a4         Score: 4506 (0)(-17)     
+                                            9  b  .  .  w  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  b  w  w  w  b  b  .  b                
+                                            4  b  b  w  .  w  b  .  b  b                
+                                            3  b  .  b  w  .  w  b  w  b                
+                                            2  w  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 55 Predicted outcome: 0     
+                                            W Move: b3         Score: 13895 (0)(-26)    
+                                            9  b  .  .  w  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  .  w  w  w  b  b  .  b                
+                                            4  .  .  w  .  w  b  .  b  b                
+                                            3  .  w  b  w  .  w  b  w  b                
+                                            2  w  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 56 Predicted outcome: 0     
+                                            B Move: a6         Score: 3109 (0)(-15)     
+                                            9  b  .  .  w  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  .  .  w  .  w  w  .  b  w                
+                                            6  b  w  .  .  w  b  b  .  w                
+                                            5  .  b  w  w  w  b  b  .  b                
+                                            4  b  b  w  .  w  b  .  b  b                
+                                            3  b  w  b  w  .  w  b  w  b                
+                                            2  w  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 57 Predicted outcome: 0     
+                                            W Move: a7         Score: 13895 (0)(-28)    
+                                            9  b  .  .  w  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  w  .  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  .  w  w  w  b  b  .  b                
+                                            4  .  .  w  .  w  b  .  b  b                
+                                            3  .  w  b  w  .  w  b  w  b                
+                                            2  w  .  .  b  w  .  .  .  .                
+                                            1  .  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 58 Predicted outcome: 0     
+                                            B Move: a1         Score: 10737 (0)(-27)    
+                                            9  b  .  .  w  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  w  .  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  .  w  w  w  b  b  .  b                
+                                            4  .  .  w  .  w  b  .  b  b                
+                                            3  .  w  b  w  .  w  b  w  b                
+                                            2  w  .  .  b  w  .  .  .  .                
+                                            1  b  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 59 Predicted outcome: 0     
+                                            W Move: c2         Score: 13867 (0)(-30)    
+                                            9  b  .  .  w  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  w  .  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  .  w  w  w  b  b  .  b                
+                                            4  .  .  w  .  w  b  .  b  b                
+                                            3  .  w  .  w  .  w  b  w  b                
+                                            2  w  .  w  b  w  .  .  .  .                
+                                            1  b  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 60 Predicted outcome: 0     
+                                            B Move: c9         Score: 11007 (0)(-28)    
+                                            9  b  .  b  w  .  w  w  .  b                
+                                            8  .  b  .  w  w  .  w  .  .                
+                                            7  w  .  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  .  w  w  w  b  b  .  b                
+                                            4  .  .  w  .  w  b  .  b  b                
+                                            3  .  w  .  w  .  w  b  w  b                
+                                            2  w  .  w  b  w  .  .  .  .                
+                                            1  b  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 61 Predicted outcome: 0     
+                                            W Move: c8         Score: 13690 (0)(-29)    
+                                            9  b  .  b  w  .  w  w  .  b                
+                                            8  .  b  w  w  w  .  w  .  .                
+                                            7  w  .  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  .  w  w  w  b  b  .  b                
+                                            4  .  .  w  .  w  b  .  b  b                
+                                            3  .  w  .  w  .  w  b  w  b                
+                                            2  w  .  w  b  w  .  .  .  .                
+                                            1  b  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 62 Predicted outcome: 0     
+                                            B Move: i2         Score: 12007 (0)(-28)    
+                                            9  b  .  b  w  .  w  w  .  b                
+                                            8  .  b  w  w  w  .  w  .  .                
+                                            7  w  .  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  .  w  w  w  b  b  .  b                
+                                            4  .  .  w  .  w  b  .  b  b                
+                                            3  .  w  .  w  .  w  b  w  b                
+                                            2  w  .  w  b  w  .  .  .  b                
+                                            1  b  b  b  b  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 63 Predicted outcome: 0     
+                                            W Move: b2         Score: 37647 (0)(-39)    
+                                            9  b  .  b  w  .  w  w  .  b                
+                                            8  .  b  w  w  w  .  w  .  .                
+                                            7  w  .  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  .  w  w  w  b  b  .  b                
+                                            4  .  .  w  .  w  b  .  b  b                
+                                            3  .  w  .  w  .  w  b  w  b                
+                                            2  w  w  w  .  w  .  .  .  b                
+                                            1  .  .  .  .  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 64 Predicted outcome: 0     
+                                            B Move: b9         Score: 30934 (0)(-39)    
+                                            9  b  b  b  w  .  w  w  .  b                
+                                            8  .  b  w  w  w  .  w  .  .                
+                                            7  w  .  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  .  w  w  w  b  b  .  b                
+                                            4  .  .  w  .  w  b  .  b  b                
+                                            3  .  w  .  w  .  w  b  w  b                
+                                            2  w  w  w  .  w  .  .  .  b                
+                                            1  .  .  .  .  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 65 Predicted outcome: 0     
+                                            W Move: h9         Score: 32724 (0)(-40)    
+                                            9  b  b  b  w  .  w  w  w  b                
+                                            8  .  b  w  w  w  .  w  .  .                
+                                            7  w  .  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  .  w  w  w  b  b  .  b                
+                                            4  .  .  w  .  w  b  .  b  b                
+                                            3  .  w  .  w  .  w  b  w  b                
+                                            2  w  w  w  .  w  .  .  .  b                
+                                            1  .  .  .  .  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 66 Predicted outcome: 0     
+                                            B Move: b7         Score: 29878 (0)(-39)    
+                                            9  b  b  b  w  .  w  w  w  b                
+                                            8  .  b  w  w  w  .  w  .  .                
+                                            7  w  b  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  .  w  w  w  b  b  .  b                
+                                            4  .  .  w  .  w  b  .  b  b                
+                                            3  .  w  .  w  .  w  b  w  b                
+                                            2  w  w  w  .  w  .  .  .  b                
+                                            1  .  .  .  .  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 67 Predicted outcome: 0     
+                                            W Move: i8         Score: 33868 (0)(-42)    
+                                            9  b  b  b  w  .  w  w  w  .                
+                                            8  .  b  w  w  w  .  w  .  w                
+                                            7  w  b  w  .  w  w  .  b  w                
+                                            6  .  w  .  .  w  b  b  .  w                
+                                            5  w  .  w  w  w  b  b  .  b                
+                                            4  .  .  w  .  w  b  .  b  b                
+                                            3  .  w  .  w  .  w  b  w  b                
+                                            2  w  w  w  .  w  .  .  .  b                
+                                            1  .  .  .  .  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 68 Predicted outcome: 0     
+                                            B Move: a8         Score: 3884 (0)(-19)     
+                                            9  b  b  b  w  .  w  w  w  .                
+                                            8  b  b  w  w  w  .  w  .  w                
+                                            7  .  b  w  b  w  w  .  b  w                
+                                            6  b  .  b  b  w  b  b  .  w                
+                                            5  .  b  w  w  w  b  b  .  b                
+                                            4  b  b  w  .  w  b  .  b  b                
+                                            3  b  w  .  w  .  w  b  w  b                
+                                            2  w  w  w  .  w  .  .  .  b                
+                                            1  .  .  .  .  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                
+                                            -------------------------------------------
+                                            Turn: 69 Predicted outcome: 0     
+                                            W Move: h5         Score: 6024 (0)(-20)     
+                                            9  b  b  b  w  .  w  w  w  .                
+                                            8  b  b  w  w  w  .  w  .  w                
+                                            7  .  b  w  b  w  w  .  b  w                
+                                            6  b  .  b  b  w  b  b  .  w                
+                                            5  .  b  w  w  w  b  b  w  b                
+                                            4  b  b  w  .  w  b  .  b  b                
+                                            3  b  w  .  w  .  w  b  w  b                
+                                            2  w  w  w  .  w  .  .  .  b                
+                                            1  .  .  .  .  w  w  w  .  .                
+                                               A  B  C  D  E  F  G  H  I                

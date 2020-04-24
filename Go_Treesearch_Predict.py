@@ -122,7 +122,7 @@ def findEmpty(table, player,size, width, initResult):
                 tempTable[i] = 1
             else:
                 tempTable[i + 81] = 1
-            outcome, score, go_outcome, lossresult, winresult, drawresult, retTable, retBw = predict.predictSum(tempTable2, initResult)
+            outcome, score, go_outcome, lossresult, winresult, drawresult, retTable, retBw = predict.predictSum(tempTable2, initResult, player)
             #newM = tableCopy(table[2])
             newM = go_outcome
             #newP = tableCopy(table[3])
@@ -307,7 +307,7 @@ def main(sort,moves,width):
     print("Start Time        : %s " % (timestamp))
     numb = "0"
     init(dim,machine,loadfile,numb)
-    predict.init(weights,clauses,m)
+    predict.init(weights,clauses,m,m)
     timestamp2 = stime.strftime("%H:%M:%S")
     print("Init finished Time: %s " % (timestamp2))
     invalid_counter = 0
@@ -369,7 +369,7 @@ def main(sort,moves,width):
             table7 = []
             table8 = []
             table9 = []
-            outcome, score, percentage, losstot,wintot,drawtot, newbit,newbw = predict.predictSum(bwtable, initResult)
+            outcome, score, percentage, losstot,wintot,drawtot, newbit,newbw = predict.predictSum(bwtable, initResult, player)
             bwTable = [initBoard,bwtable, percentage, player, outcome, score]
             tree = recursive(bwTable, player, size, moves,moves, width, initResult)
             fivetable1 = topFive(end_table1,"B", width)

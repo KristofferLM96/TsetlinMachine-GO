@@ -6,11 +6,12 @@ import time as stime
 #will return prediction, score, area_score from go_board:play, loss, win and draw voters positive and negative.
 #and will return a updated bitboard and a updated bwboard.
 
-def init(_weights,_clauses, _tm):
-    global weights,clauses, tm, loss,win,draw,time,clause_count
+def init(_weights,_clauses, _tm,_tm2):
+    global weights,clauses, btm,wtm, loss,win,draw,time,clause_count
     weights = _weights
     clauses = _clauses
-    tm = _tm
+    btm = _tm
+    wtm = _tm2
     loss = weights[0][0]
     win = weights[1][0]
     draw = weights[2][0]
@@ -18,7 +19,7 @@ def init(_weights,_clauses, _tm):
     clause_count = []
     for i in range(12):
         temp = []
-        for j in range(1000):
+        for j in range(clauses):
             temp.append(0)
         clause_count.append(temp)
 
@@ -27,13 +28,16 @@ def getTime():
     return time, time2
 def getClause():
     return clause_count, loss,win,draw
-def predictSum(boards2, initResult):
+def predictSum(boards2, initResult, player):
     global time
     go_correct,nbwtable = go_play.go_calc(boards2)
     seconds = int(round(stime.time()))
     bittable = reform(nbwtable,9)
     newArray = np.array([bittable])
-    result2 = tm.transform(newArray,inverted = False)
+    if player == "W":
+        result2 = wtm.transform(newArray,inverted = False)
+    else:
+        result2 = btm.transform(newArray, inverted=False)
     lossresult = weightedCalc(result2[0][0:clauses],loss,0, initResult)
     winresult = weightedCalc(result2[0][clauses:clauses*2], win,1, initResult)
     drawresult = weightedCalc(result2[0][clauses*2:clauses*3], draw,2, initResult)
