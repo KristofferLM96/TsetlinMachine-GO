@@ -4,6 +4,9 @@ import time as stime
 time = 0
 def getTime():
     return time
+def setTime():
+    global time
+    time =0
 def go_calc(board):
     global time, game_board
     seconds = int(round(stime.time()))

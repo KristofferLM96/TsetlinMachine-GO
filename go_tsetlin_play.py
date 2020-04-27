@@ -6,33 +6,35 @@ import tm_predict as predict
 import go_board_play as go_board
 
 
-machine = "TM"
+
 name = "Trond"
 #name = "Kristoffer"
 #dim = "9x9Natsukaze_"
 #dim = "90_9x9Aya_"
 #loadfile = "0302-1057"
 #loadfile = "0304-1027"
-dim = "90_100T_9x9Aya_"
-#loadfile = "0310-1211"
-loadfile = "0310-1342"
+machine2 = "TM"
+dim2 = "90_100T_9x9Aya_"
+loadfile2 = "0310-1342"
 inndata = "Draw"
-numb = "0"
+machine =  "TM"
+dim = "9x9Aya_"
+loadfile="0203-2319"
 ###################
 #numbboard = 654
 #numbboard = 566
 #numbboard = 868
 numbboard = 91
 depth = 3   #number of moves
-tree_width = 4
+tree_width = 3
 #save_file = "91-5-4"
-save_file = "TM_play"
+save_file = "TM_play-3-3-"
 ##################
 weights = []
 clauses= 0
 global X_train,Y_train,X_test,Y_test,m, loadedstate
-def init(dim, machine, loadfile):
-    global X_train, Y_train, X_test, Y_test, m, loadedstate, weights, clauses
+def init(dim, machine, loadfile, numb):
+    global X_train, Y_train, X_test, Y_test,m, loadedstate, weights, clauses
     inndata = "Draw"
     boost = 1
     with open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + ".csv", 'r') as file:
@@ -75,6 +77,7 @@ def init(dim, machine, loadfile):
     m.fit(X_train, Y_train, epochs=0, incremental=True)
     m.set_state(loadedstate)
     weights = m.get_state()
+    return m, weights,clauses
 
 def transform(table,size):
     black = table[:int(len(table)/2)]
@@ -324,14 +327,17 @@ def sortList(boards,list,iD):
             newList.append(boards[i])
     return newList, list
 
-def main(moves, width,X2):
+def main(moves, width,X2,numb):
+    global end_table
     #moves = 5
     #width= 2
+    end_table = []
     size = 9
     player = "B"
     timestamp = stime.strftime("%H:%M:%S")
-    init(dim,machine,loadfile)
-    predict.init(weights, clauses,m,m)
+    btm, weights,clauses = init(dim,machine,loadfile,"0")
+    wtm, weights2,clauses2 = init(dim2, machine2, loadfile2,numb)
+    predict.init(weights, clauses,btm,weights2, clauses2,wtm)
     timestamp2 = stime.strftime("%H:%M:%S")
     initBoard = X2
     initResult = Y_train[numbboard]
@@ -389,7 +395,7 @@ def playTmGo(tree,turns,moves, width):
     if nplayer == "B":
         tree = recursive(bwTable, nplayer, 9, moves, width, initResult)
     if nplayer == "W":
-        tree = recursive(bwTable, nplayer, 9, moves, 2, initResult)
+        tree = recursive(bwTable, nplayer, 9, moves, width, initResult)
     turns -=1
     seconds2 = int(round(stime.time()))
     print("Time: %s"%(seconds2-seconds))
@@ -418,12 +424,13 @@ def printTop(table, width):
         results.write(tempTxt + "\n")
 
 for i in range(10):
-    results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + save_file+str(i)+".txt", 'w')
+    results = open("Results/" + name + "/" + machine + "/" + machine + dim + loadfile + save_file+"9x9vs90_100T"+str(i)+".txt", 'w')
     X2 = []
-    for i in range(81):
+    for j in range(81):
         X2.append(0)
         X2.append(0)
     b_last_play = 300
     w_last_play = 300
-    main(depth, tree_width,X2)
+    numb = str(i)
+    main(depth, tree_width,X2, numb)
     results.close()
